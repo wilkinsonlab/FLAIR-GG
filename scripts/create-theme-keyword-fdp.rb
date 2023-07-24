@@ -7,7 +7,7 @@ require 'csv'
 
 theme = "dcat:theme "
 keywords = "dcat:keyword "
-CSV.foreach("./output/species-taxid2.csv") do |line|
+CSV.foreach("./output/species-taxid.csv") do |line|
     kw = line[0]
     tid = line[1]
     next unless kw && tid

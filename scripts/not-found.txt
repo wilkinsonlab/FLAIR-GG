@@ -1,22 +1,5802 @@
 
+Sorbus aria
+Rhinanthus major
+Erophila verna
+Arabis muralis
+Arabis petraea
+Hesperis steocurainia
+Draba affinis
+Bivonea lutea
+Hedysarum? flexuosum?
+Crotalaria meana
+Tragopogon pseudocastell.
+Carex fusca
+Leuzea conifera
+Astragalus purpureus
+Onobrychis peduncularis
+Cheirolophus aristatus
+Silene elegans
+Brassica incanaxoleracea
+Trigonella melilotus coeru
+Onobrychis eriophora
+Lotus uleginosus
+Caragana fruticosa
+Acacia gummifera
+Achiranthes aspera
+Aethionema antilibani
+Agrostemma guithago
+Alisma plantago-aquat.
+Allium italicum
+Allium porrum
+Alcea officinalis
+Alyssum alpestre
+Alyssum calycinum
+Alyssum argenteum
+Alyssum corsicum
+Alyssum marginatum
+Alyssum murale
+Alyssum purpureum
+Alyssum tortuosum
+Amaranthus lividus
+Anchusa granatensis
+Arabis albida
+Arabis arcuta
+Arabis celennis
+Arabis minor
+Arabis mollis
+Arabis pendula
+Arabis sicula
+Arabis bellidifolia
+Arabis sparsiflora
+Arabis sagit.xciliata
+Argyranthemum sp.
+Argyranthemum sp
+Aristolochia longa
+Armeria juniperifolia
+Aronia floribunda
+Asphodelus microcarpus
+Atriplex sampa
+Bellotia greixiifolia
+Biscutella chicoriifolia
+Brachypodium ramosum
+Bromus mollis
+Bromus matritensis
+Caesalpinia guillesii
+Capsicum frutensis
+Arabis arenosa
+Cardaminopsis malleri
+Centaurea oultrei
+Chaenorrhinum glareosum
+Chaenorrhinum macropodum
+Chaenorrhinum robustum
+Chrozophora obliqua
+Cirsium lanceolatum
+Citrus nobilis
+Cleome spinosa
+Clypeola ionthlaspi
+Conringia perfoliata
+Consolida
+Thymus capitatus
+Cynoglossum cheirifolium
+Digitalis oscura
+Douepia tortuosa
+Draba muralis
+Dryas dummondii
+Echium decais.xviresc.
+Agropyrum glaucum
+Erigeron cabrerae
+Erigeron bourgati
+Erysimum alpinum
+Erysimum capverdianum
+Erysimum xcheiranthus
+Erysimum helveticum
+Erysimum decumbens
+Erysimum rupestre
+Erysimum ochrol.xperofs.
+Euphorbia obtusifolia
+Evax disciflora
+Festuca duriuscula
+Geranium canariense
+Gerbera aristata
+Helianthemum croceum
+Helianthemum crocceum
+Helianthemum piliferum
+Helichrysum ambiguum
+Helichrysum rupestre
+Heliophila longifolia
+Heliotropum europaeum
+Hieracium castellanum
+Hormatophylla macrocarpa
+Sedum tartarinowii
+Hyosciamus albus
+Andropogon hirtum
+Inula crithmoides
+Ipomoea tuberosa
+Iris pyrenaica
+Isatis alpina
+Lachnoloma lemmanii
+Lavatera phoenicea
+Leontopodium alpinum
+Leucanthemum sinense
+Leucanthemum sinensis
+Linum adpressum
+Scabiosa cretica
+Scabiosa stellata
+Lotus hildebrandii
+Lotus uliginosus
+Lupinus myriophyllus
+Malcolmia crenulata
+Melilotus parviflora
+Mentha sylvestris
+Momordica balsamifera
+Macuna deeringiana
+Muricaria postrata
+Narcissus humilis
+Onopordum acanth.xnervos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lepidium virginicum subsp. menziesii
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lepidium virginicum subsp. menziesii
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sorbus aria
+Rhinanthus major
+Erophila verna
+Arabis muralis
+Arabis petraea
+Hesperis steocurainia
+Draba affinis
+Bivonea lutea
+Hedysarum? flexuosum?
+Crotalaria meana
+Tragopogon pseudocastell.
+Carex fusca
+Leuzea conifera
+Astragalus purpureus
+Onobrychis peduncularis
+Cheirolophus aristatus
+Silene elegans
+Brassica incanaxoleracea
+Trigonella melilotus coeru
+Onobrychis eriophora
+Lotus uleginosus
+Caragana fruticosa
+Acacia gummifera
+Achiranthes aspera
+Aethionema antilibani
+Agrostemma guithago
+Alisma plantago-aquat.
+Allium italicum
+Allium porrum
+Alcea officinalis
+Alyssum alpestre
+Alyssum calycinum
+Alyssum argenteum
+Alyssum corsicum
+Alyssum marginatum
+Alyssum murale
+Alyssum purpureum
+Alyssum tortuosum
+Amaranthus lividus
+Anchusa granatensis
+Arabis albida
+Arabis arcuta
+Arabis celennis
+Arabis minor
+Arabis mollis
+Arabis pendula
+Arabis sicula
+Arabis bellidifolia
+Arabis sparsiflora
+Arabis sagit.xciliata
+Argyranthemum sp.
+Argyranthemum sp
+Aristolochia longa
+Armeria juniperifolia
+Aronia floribunda
+Asphodelus microcarpus
+Atriplex sampa
+Bellotia greixiifolia
+Biscutella chicoriifolia
+Brachypodium ramosum
+Bromus mollis
+Bromus matritensis
+Caesalpinia guillesii
+Capsicum frutensis
+Arabis arenosa
+Cardaminopsis malleri
+Centaurea oultrei
+Chaenorrhinum glareosum
+Chaenorrhinum macropodum
+Chaenorrhinum robustum
+Chrozophora obliqua
+Cirsium lanceolatum
+Citrus nobilis
+Cleome spinosa
+Clypeola ionthlaspi
+Conringia perfoliata
+Consolida
+Thymus capitatus
+Cynoglossum cheirifolium
+Digitalis oscura
+Douepia tortuosa
+Draba muralis
+Dryas dummondii
+Echium decais.xviresc.
+Agropyrum glaucum
+Erigeron cabrerae
+Erigeron bourgati
+Erysimum alpinum
+Erysimum capverdianum
+Erysimum xcheiranthus
+Erysimum helveticum
+Erysimum decumbens
+Erysimum rupestre
+Erysimum ochrol.xperofs.
+Euphorbia obtusifolia
+Evax disciflora
+Festuca duriuscula
+Geranium canariense
+Gerbera aristata
+Helianthemum croceum
+Helianthemum crocceum
+Helianthemum piliferum
+Helichrysum ambiguum
+Helichrysum rupestre
+Heliophila longifolia
+Heliotropum europaeum
+Hieracium castellanum
+Hormatophylla macrocarpa
+Sedum tartarinowii
+Hyosciamus albus
+Andropogon hirtum
+Inula crithmoides
+Ipomoea tuberosa
+Iris pyrenaica
+Isatis alpina
+Lachnoloma lemmanii
+Lavatera phoenicea
+Leontopodium alpinum
+Leucanthemum sinense
+Leucanthemum sinensis
+Linum adpressum
+Scabiosa cretica
+Scabiosa stellata
+Lotus hildebrandii
+Lotus uliginosus
+Lupinus myriophyllus
+Malcolmia crenulata
+Melilotus parviflora
+Mentha sylvestris
+Momordica balsamifera
+Macuna deeringiana
+Muricaria postrata
+Narcissus humilis
+Onopordum acanth.xnervos.
+Euzomodendron bourgaeanum
+
+Teucrium granatense
+Koeleria castellana
+Olea africana
+
+
+Ptilotrichum reverchonii
+Reboudia pinnata
+Brassica narinosa
+Cardaminopsis petraea
+Limonium arborescens
+
+
+Gynandropsis pentaphylla
+
+Aethionema pyrenaicum
+
+Inula helenioides
+
+Vitaliana primuliflora
+Thuja orientalis
+
+
+
+Alyssum gehamense
+
+
+
+Iberis taurica
+
+Erysimum gomez-campoi
+Alyssum minus
+
+
+
+
+Draba argaea
+Alyssum altaicum
+Dentaria enneaphyllos
+Arabis japonica
+
+Draba norica
+Draba imbricata
+
+Cardaminopsis arenosa
+Parrya menziesii
+
+
+Coluteocarpus vesicaria
+Lobularia marginata
+
+
+
+Anthyllis podocephala
+Anthyllis tetraphylla
+Dorycnium hirsutum
+Dorycnium pentaphyllum
+
+Dorycnium rectum
+
+Teline stenopetala
+Tetragonolobus purpureus
+
+Acacia macracantha
+
+
+
+Sedum populifolium
+Argania spinosa
+Crambe abyssinica
+Ophrys castellana
+Orchis coriophora
+Brassica glabrescens
+Lesquerella arctica
+Medicago strasseri
+Rosmarinus officinalis
+Echinochloa hispidula
+Echinochloa oryzicola
+Sedum pilosum
+Linaria lamarckii
+
+Lithodora nitida
+Picris willkommii
+
+Arabis lusitanica
+Malcolmia lacera
+Genista lanuginosa
+Vigna catjang
+
+
+
+Pisum sativum
+Halimodendron halodendron
+Erysimum macradenium
+Tetragonolobus maritimus
+Cytisus purgans
+Teline monspessulana
+Teline canariensis
+Cytisus reverchonii
+Chamaecytisus glaber
+Teline linifolia
+
+Melilotus alba
+Acacia cyanophylla
+Melilotus messanensis
+Onobrychis sennenii
+
+
+Hedysarum coronarium
+Psoralea bituminosa
+
+Abelia mosanensis
+Hibiscus esculentus
+Acacia caven
+Acacia farnesiana
+
+
+
+
+Aegilops lorentii
+
+Aeonium holochrysum
+Aeonium manriqueorum
+Aeonium palmense
+Aeonium longithyrsum
+Aeonium rubrolineatum
+Aeonium subplanum
+Aeonium virgineum
+Aeonium viscatum
+Aethionema cordifolium
+Aethionema edentulum
+Aethionema pulchellum
+Aethionema iberideum
+Aethionema recurvum
+Aethionema creticum
+
+
+Aiphanes caryotaefolia
+
+Allagopappus dichotomus
+
+Allium polyanthum
+Alyssoides graeca
+Alyssum bertolonii
+Alyssum borzaeanum
+Alyssum bracteatum
+Alyssum chalcidicum
+Alyssum chlorocarpum
+Alyssum desertorum
+Alyssum eriophyllum
+Alyssum flahaultianum
+Ptilotrichum halimifolium
+Ptilotrichum macrocarpum
+Alyssum markgrafii
+Alyssum nebrodense
+Alyssum ovirense
+Alyssum pateri
+Alyssum robertianum
+Alyssum scardicum
+
+
+Ammi visnaga
+Ammophila arenaria
+Amomum aromaticum
+Anacyclus alboranensis
+
+Androcymbium europaeum
+Androcymbium wyssianum
+Anemone pavoniana
+Angelica angelicastrum
+
+Anthyllis plumosa
+Antirrhinum barrelieri
+Agrostis interrupta
+Aptenia cordifolia
+
+Aquilegia amaliae
+Aquilegia cazorlensis
+Aquilegia guarensis
+Aquilegia nevadensis
+
+Arabidopsis griffithiana
+Arabis recta
+Arabis corymbiflora
+Arabis collinsii
+Arabis divaricarpa
+Arabis glabra
+Arabis holboellii
+Arabis turrita
+Arachis hypogea
+
+Arenaria valentina
+
+
+
+Artemisia cantabrica
+Artemisia gabriellae
+
+Asparagus plumosus
+Asparagus stipularis
+
+
+Aster sorrentinii
+Taeckholmia pinnata
+Ptilotrichum cyclocarpum
+Alyssum corymbosum
+Babcockia platylepis
+Ballota rupestris
+
+Barbarea arcuata
+Kochia prostrata
+Kochia scoparia
+Berberis garciae
+
+Betula aetnensis
+
+Biscutella leiocarpa
+Biscutella polyclada
+Biscutella megacarpaea
+Boleum asperum
+Borderea chouardii
+Borderea pyrenaica
+Boreava aptera
+Boreava orientalis
+Bosea yervamora
+
+Brachypodium boissieri
+Brassica alboglabra
+Brassica dimorpha
+Brassica chinensis
+Brassica nipposinica
+Brassica pekinensis
+Braya richardsonii
+Briza subaristata
+Bromus unioloides
+Bryonia marmorata
+Bryophyllum tubiflorum
+Buchingera axillaris
+Buchloe dactyloides
+
+Bupleurum spinosum
+Bupleurum aciphyllum
+Caesalpinia echinata
+Cakile harperi
+
+Calendula maritima
+
+
+
+Camelina foetida
+
+Dentaria bulbifera
+Cardaminopsis halleri
+Cardaria draba
+Hymenophysa pubescens
+Carduus assoi
+Carduus granatensis
+Carex calderae
+Carex nevadensis
+
+Caulanthus amplexicaulis
+Carum verticillatum
+
+Caulanthus cooperi
+Caulanthus hallii
+Caulanthus inflatus
+Thelypodium lasiophyllum
+Caulanthus simulans
+Messerschmidia fruticosa
+
+
+Celosia plumosa
+Celtis aetnensis
+
+Centaurea balearica
+Centaurea todari
+
+Centaurium linariifolium
+Centaurium triphyllum
+Centranthus junceus
+
+Cerastium boissieri
+Cercidium floridum
+
+Chaenorrhinum minus
+Chaerophyllum temulentum
+Chalcanthus renifolius
+Chamaecytisus proliferus
+Chamaemelum mixtum
+Chamomilla recutita
+Cheirolophus argutus
+Chenopodium botrys
+Chenopodium coronopus
+Chenopodium multifidum
+
+Chorisia speciosa
+
+Chrysanthemum coronarium
+Cirsium flavispina
+
+Cistus albanicus
+Cistus palhinhae
+Cistus psilosepalus
+Citrullus vulgaris
+
+
+Cochlearia aragonensis
+Cochlearia megalosperma
+
+
+Conopodium ramosum
+Conopodium capillifolium
+Conopodium bourgaei
+Consolida ajacis
+Consolida orientalis
+
+Conyza floribunda
+Thymus cephalotos
+Coris hispanica
+
+Coronopus didymus
+Coronopus navasii
+Coronopus squamatus
+Coronopus violaceus
+
+Cotoneaster splendens
+
+Crambe glabrata
+Cryptotaenia elegans
+Cucumis longipes
+Cucumis leptodermis
+
+
+Cyathea dealbata
+Cyclanthera explodens
+Cymbalaria pubescens
+Cynara alba
+
+
+Cyphomandra betacea
+Cytisus baeticus
+Chronanthus biflorus
+Cytisus tener
+Datura tatula
+
+
+Delphinium bolosii
+Delphinium nevadense
+Delphinium requienii
+Delphinium staphisagria
+Sanguisorba menendezii
+
+Descurainia appendiculata
+Descurainia argentina
+Descurainia bourgeauana
+Dethawia tenuifolia
+
+Dianthus malacitanus
+Dianthus costae
+Dianthus plumosus
+Dianthus subbaeticus
+
+Digitalis dubia
+Distichoselinum tenuifolium
+Dorycnium eriophthalmum
+Dorycnium spectabile
+Draba cantabrica
+Draba aizoon
+Draba dovrensis
+Draba bernensis
+Arabis reptans
+Draba repens
+
+Echium pitardii
+Elaeoselinum asclepium
+Elburzia fenestrata
+Elymus corsicus
+Enterolobium contortisiliqua
+
+Epilobium paniculatum
+
+Erica andevalensis
+
+Astragalus lusitanicus
+Erophila praecox
+
+Reboudia erucarioides
+
+Brassica schimperi
+Eryngium juresianum
+
+Erysimum heritieri
+Syrenia cana
+Erysimum favargeri
+Erysimum suffruticosum
+Erysimum goniocaulon
+Erysimum gorbeanum
+Erysimum mayorii
+Erysimum wahlenbergii
+Erysimum durum
+Erysimum mediohispanicum
+Erysimum merxmuelleri
+Erysimum passgalense
+Erysimum rondae
+
+Eunomia rotundifolia
+
+Euphorbia lambii
+Euphorbia broteri
+
+Farsetia hamiltonii
+
+Ferula linkii
+
+Fibigia eriocarpa
+Fibigia lunarioides
+Fibigia suffruticosa
+Fibigia triquetra
+
+
+Fritillaria hispanica
+Fumana baetica
+
+Galium fruticescens
+Galium tuberculatum
+Genista lucida
+Genista baetica
+
+Gentiana montserratii
+
+Texiera glastifolia
+
+
+Greenovia aizoon
+Greenovia aurea
+Greenovia diplocycla
+Greenovia dodrentalis
+Guillonea scabra
+
+Gypsophila hispanica
+
+Halimium viscosum
+Haloxylon articulatum
+
+Helianthemum urrielense
+
+Helichrysum nebrodense
+Helleborus corsicus
+Picris echioides
+Heracleum granatense
+Hesperis kotschyana
+Hieracium vahlii
+
+Hippocrepis commutata
+Holcus setiglumis
+Ptilotrichum cadevallianum
+Ptilotrichum lapeyrousianum
+Ptilotrichum longicaule
+Ptilotrichum purpureum
+Ptilotrichum spinosum
+
+Hugueninia tanacetifolia
+
+Sedum caucasicum
+Sedum ettyuense
+Sedum ewersii
+Sedum maximum
+Sedum spectabile
+Sedum tatarinowii
+Sedum telephium
+Sedum carpaticum
+Sedum purpureum
+Sedum tsugaruense
+Sedum ussuriense
+Sedum vulgare
+Hymenolobus procumbens
+
+
+Hypericum grandiflorum
+Heywoodiella oligocephala
+Hypochoeris oligocephala
+Iberis jordanii
+Iberis pruitii
+Iberis crenata
+Iberis cinerea
+
+
+Isatis japonica
+Isatis aleppica
+Isatis praecox
+Isatis canescens
+Ischnocarpus novae-zelandiae
+Isomeris arborea
+Isoplexis canariensis
+Isoplexis chalcantha
+Isoplexis isabelliana
+
+Jasione mansanetiana
+Jasione lusitanica
+Jasminum fruticans
+Jasminum odoratissimum
+
+
+
+Kleinia pteroneura
+
+Kochia trichophylla
+Dolichos lablab
+Lactuca graeca
+
+Laserpitium garganicum
+Laserpitium nestleri
+
+
+Lavatera acerifolia
+Lavatera arborea
+Lavatera bryoniifolia
+Lavatera cretica
+Lavatera mauritanica
+Lavatera oblongifolia
+Lens esculenta
+Leontodon microcephalus
+Lepidium cardamines
+Lepidium smithii
+Lepidium hirsutum
+Lepidium humifusum
+Lepidium stylatum
+Peltaria emarginata
+
+Vesicaria gracilis
+Vesicaria grandiflora
+Leucanthemopsis radicans
+
+Leucanthemum arundanum
+Leuzea rhaponticoides
+
+Limonium calaminare
+Limonium salsuginosum
+
+Linaria anticaria
+Linaria filicaulis
+Linaria lilacina
+
+Linum ortegae
+Lithodora oleifolia
+
+Lobularia intermedia
+Lobularia palmensis
+
+Scabiosa pulsatilloides
+
+
+
+Alyssoides cretica
+Lycocarpus fugax
+Lycopersicon esculentum
+
+Malcolmia arenaria
+Malcolmia behboudiana
+Malcolmia bicolor
+Malcolmia littorea
+Malcolmia angulifolia
+Malcolmia scorpioides
+Malcolmia patula
+Sanguisorba moquiniana
+
+Marrubium parnassicum
+Matthiola arborescens
+Matthiola bicornis
+Maytenus canariensis
+Meconopsis cambrica
+
+Merendera pyrenaica
+
+Micropyrum patens
+Minuartia rubra
+Minuartia verna
+
+
+
+
+Muscari comosum
+Myrica faya
+Nananthus orpenii
+Narcissus longispathus
+
+Asteriscus odorus
+Asteriscus stenophyllus
+Nectaroscordum siculum
+Neochamaelea pulverulenta
+
+Torularia torulosa
+
+Nepeta amethystina
+Nepeta beltranii
+Nepeta coerulea
+Nicandra physaloides
+
+
+
+Odontites tenuifolia
+Onopordum nogalesii
 Rhinanthus serotinus subsp. serotinus
+
+
 Anchusa undulata subsp. granatensis
 Asphodelus ramosus subsp. ramosus
+
 Bromus hordeaceus subsp. hordeaceus
 Pardoglossum cheirifolium subsp. cheirifolium
+
 Helianthemum apenninum subsp. croceum
+Hieracium affine
 Leontopodium nivale subsp. alpinum
 Lotus campylocladus subsp. hillebrandii
 Lotus pedunculatus subsp. pedunculatus
 Mentha longifolia subsp. longifolia
 Mucuna pruriens var. utilis
+
 Lunaria annua subsp. pachyrhiza
 Silene foetida subsp. gayana
 Acer tataricum subsp. ginnala
 Andryala ragusina subsp. ragusina
 Bauhinia forficata subsp. pruinosa
+
 Erysimum nevadense subsp. mediohispanicum
 Cytisus scoparius subsp. scoparius
+
 Brassica nivalis subsp. jordanoffii
 Hylotelephium sieboldii var. Ettyuense
 Lepidium virginicum subsp. menziesii
+Rhinanthus serotinussubsp.serotinus
+Crotalaria meana
+Cheirolophus aristatus
+Aethionema antilibani
+Anchusa undulatasubsp.granatensis
+Arabis celennis
+Argyranthemum sp.
+Asphodelus ramosussubsp.ramosus
+Bellotia greixiifolia
+Bromus hordeaceussubsp.hordeaceus
+Cardaminopsis malleri
+Consolida
+Pardoglossum cheirifoliumsubsp.cheirifolium
+Erysimum capverdianum
+Evax disciflora
+Helianthemum apenninumsubsp.croceum
+Hieracium affine
+Leontopodium nivalesubsp.alpinum
+Leucanthemum sinense
+Lotus campylocladussubsp.hillebrandii
+Lotus pedunculatussubsp.pedunculatus
+Mentha longifoliasubsp.longifolia
+Mucuna pruriensvar.utilis
