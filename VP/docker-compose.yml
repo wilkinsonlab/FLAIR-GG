@@ -1,0 +1,23 @@
+version: "2.0"
+services:
+
+  flair-gg-vp-server:
+    image: markw/flair-gg-vp-server:0.0.1
+    container_name: "flair-gg-vp-server"
+    ports:
+      - "4567:4567"
+    command: ruby /server/vp-interface/app/controllers/application_controller.rb -o 0.0.0.0
+    environment:
+      - RUBYOPT=-W0 -KU -E utf-8:utf-8
+#      - HARVESTER=seek.cbgp.upm.es:9000
+
+    depends_on:
+      - swagger
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    container_name: "swagger"
+    ports:
+      - "4566:8080"
+    environment:
+      - SWAGGER_JSON_URL=http://localhost:4567/flair-gg-vp-server

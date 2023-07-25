@@ -1,0 +1,147 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<https://w3id.org/smartcare-fdp>
+    <http://purl.org/dc/terms/accessRights> <https://w3id.org/smartcare-fdp#accessRights> ;
+    <http://purl.org/dc/terms/conformsTo> <https://w3id.org/smartcare-fdp/profile/77aaad6a-0136-4c6e-88b9-07ffccd0ee4c> ;
+    <http://purl.org/dc/terms/description> "SMArtCARE is a joint initiative of neurologists, paediatricians, and patients’ organisations. The aim of SMArtCARE is to collect longitudinal 'real-world data' on all available spinal muscular atrophy (SMA) patients independent of their actual treatment regime as disease-specific SMA registry. For this purpose, an online platform has been developed to collect data on SMA patients from their health-care providers. Data are collected during routine patient visits and items for data collection are aligned with the international consensus for SMA registries. More information on: https://www.smartcare.de" ;
+    <http://purl.org/dc/terms/hasVersion> "1.0" ;
+    <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> ;
+    <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0> ;
+    <http://purl.org/dc/terms/publisher> <https://w3id.org/smartcare-fdp#publisher> ;
+    <http://purl.org/dc/terms/title> "SMArtCARE FAIR Data Point" ;
+    <http://semanticscience.org/resource/SIO_000628> <https://w3id.org/smartcare-fdp/metrics/445c0a70d1e214e545b261559e2842f4>, <https://w3id.org/smartcare-fdp/metrics/5d27e854a9e78eb3f663331cd47cdc13> ;
+    <http://www.re3data.org/schema/3-0#repositoryIdentifier> <https://w3id.org/smartcare-fdp#identifier> ;
+    a <http://www.w3.org/ns/dcat#DataService>, <http://www.w3.org/ns/dcat#Resource>, <https://w3id.org/fdp/fdp-o#FAIRDataPoint>, <https://w3id.org/fdp/fdp-o#MetadataService> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "SMArtCARE FAIR Data Point" ;
+    <http://www.w3.org/ns/dcat#endpointURL> <https://w3id.org/smartcare-fdp> ;
+    <https://w3id.org/fdp/fdp-o#fdpSoftwareVersion> "FDP:v1.15.0~609a912" ;
+    <https://w3id.org/fdp/fdp-o#metadataCatalog> <https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10> ;
+    <https://w3id.org/fdp/fdp-o#metadataIdentifier> <https://w3id.org/smartcare-fdp#identifier> ;
+    <https://w3id.org/fdp/fdp-o#metadataIssued> "2023-02-27T08:44:37.380371277Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <https://w3id.org/fdp/fdp-o#metadataModified> "2023-03-24T10:56:48.814776331Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<https://w3id.org/smartcare-fdp#accessRights>
+    <http://purl.org/dc/terms/description> "This resource has no access restriction" ;
+    a <http://purl.org/dc/terms/RightsStatement> .
+
+<https://w3id.org/smartcare-fdp#identifier>
+    <http://purl.org/dc/terms/identifier> "https://w3id.org/smartcare-fdp" ;
+    a <http://purl.org/spar/datacite/Identifier> .
+
+<https://w3id.org/smartcare-fdp#publisher>
+    a <http://xmlns.com/foaf/0.1/Agent> ;
+    <http://xmlns.com/foaf/0.1/name> "Clinical Trials Unit @University Medical Center Freiburg" .
+
+<https://w3id.org/smartcare-fdp/catalog/>
+    <http://purl.org/dc/terms/title> "Catalogs" ;
+    a <http://www.w3.org/ns/ldp#DirectContainer> ;
+    <http://www.w3.org/ns/ldp#contains> <https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10> ;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <https://w3id.org/fdp/fdp-o#metadataCatalog> ;
+    <http://www.w3.org/ns/ldp#membershipResource> <https://w3id.org/smartcare-fdp> .
+
+<https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10>
+    <http://purl.org/dc/terms/accessRights> <https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10#accessRights> ;
+    <http://purl.org/dc/terms/conformsTo> <https://w3id.org/smartcare-fdp/profile/a0949e72-4466-4d53-8900-9436d1049a4b> ;
+    <http://purl.org/dc/terms/hasVersion> "1" ;
+    <http://purl.org/dc/terms/isPartOf> <https://w3id.org/smartcare-fdp> ;
+    <http://purl.org/dc/terms/issued> "2023-02-27T09:27:49.022983171Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> ;
+    <http://purl.org/dc/terms/license> <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0> ;
+    <http://purl.org/dc/terms/modified> "2023-03-24T10:56:48.659703282Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <http://purl.org/dc/terms/publisher> [
+        a <http://xmlns.com/foaf/0.1/Agent> ;
+        <http://xmlns.com/foaf/0.1/name> "Clinical Trials Unit @University Medical Center Freiburg"
+    ] ;
+    <http://purl.org/dc/terms/title> "SMArtCARE Catalog" ;
+    <http://semanticscience.org/resource/SIO_000628> <https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10/metrics/445c0a70d1e214e545b261559e2842f4>, <https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10/metrics/5d27e854a9e78eb3f663331cd47cdc13> ;
+    a <http://www.w3.org/ns/dcat#Catalog>, <http://www.w3.org/ns/dcat#Resource> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "SMArtCARE Catalog" ;
+    <http://www.w3.org/ns/dcat#dataset> <https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a> ;
+    <http://www.w3.org/ns/dcat#themeTaxonomy> <http://bioregistry.io/ncit:C115789>, <http://bioregistry.io/ncit:C129000>, <http://bioregistry.io/ncit:C156420>, <http://bioregistry.io/ncit:C159705>, <http://bioregistry.io/ncit:C166875>, <http://bioregistry.io/ncit:C167001>, <http://bioregistry.io/ncit:C174715>, <http://bioregistry.io/ncit:C25242>, <http://bioregistry.io/ncit:C28421>, <http://bioregistry.io/ncit:C68615>, <http://bioregistry.io/ncit:C70810>, <http://bioregistry.io/obo:HP_0003674>, <http://bioregistry.io/obo:ICO_0000001>, <http://bioregistry.io/obo:OBI_0000810>, <http://bioregistry.io/omim:600354>, <http://bioregistry.io/omim:601627>, <http://bioregistry.io/orphanet.ordo:70>, <http://bioregistry.io/orphanet.ordo:83330>, <http://bioregistry.io/orphanet.ordo:83418>, <http://bioregistry.io/orphanet.ordo:83419>, <http://bioregistry.io/orphanet.ordo:83420>, <http://bioregistry.io/sio:SIO_001001>, <http://bioregistry.io/sio:SIO_001052>, <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> ;
+    <http://xmlns.com/foaf/0.1/homePage> <https://www.smartcare.de/en/index.html> ;
+    <https://w3id.org/fdp/fdp-o#metadataIdentifier> <https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10#identifier> ;
+    <https://w3id.org/fdp/fdp-o#metadataIssued> "2023-02-27T09:27:49.022983171Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <https://w3id.org/fdp/fdp-o#metadataModified> "2023-03-24T10:56:48.659703282Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10#accessRights>
+    <http://purl.org/dc/terms/description> "This resource has no access restriction" ;
+    a <http://purl.org/dc/terms/RightsStatement> .
+
+<https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10#identifier>
+    <http://purl.org/dc/terms/identifier> "https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10" ;
+    a <http://purl.org/spar/datacite/Identifier> .
+
+<https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10/metrics/445c0a70d1e214e545b261559e2842f4>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.ietf.org/rfc/rfc3986.txt> .
+
+<https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10/metrics/5d27e854a9e78eb3f663331cd47cdc13>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.wikidata.org/wiki/Q8777> .
+
+<https://w3id.org/smartcare-fdp/dataset/>
+    <http://purl.org/dc/terms/title> "Datasets" ;
+    a <http://www.w3.org/ns/ldp#DirectContainer> ;
+    <http://www.w3.org/ns/ldp#contains> <https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a> ;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://www.w3.org/ns/dcat#dataset> ;
+    <http://www.w3.org/ns/ldp#membershipResource> <https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10> .
+
+<https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a>
+    <http://purl.org/dc/terms/accessRights> <https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a#accessRights> ;
+    <http://purl.org/dc/terms/conformsTo> <https://w3id.org/smartcare-fdp/profile/2f08228e-1789-40f8-84cd-28e3288c3604> ;
+    <http://purl.org/dc/terms/hasVersion> "1" ;
+    <http://purl.org/dc/terms/isPartOf> <https://w3id.org/smartcare-fdp/catalog/f453e170-5a9f-4e30-bb35-649e9690be10> ;
+    <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> ;
+    <http://purl.org/dc/terms/license> <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0> ;
+    <http://purl.org/dc/terms/publisher> [
+        a <http://xmlns.com/foaf/0.1/Agent> ;
+        <http://xmlns.com/foaf/0.1/name> "Clinical Trials Unit @University Medical Center Freiburg"
+    ] ;
+    <http://purl.org/dc/terms/title> "SMArtCARE Dataset" ;
+    <http://semanticscience.org/resource/SIO_000628> <https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a/metrics/445c0a70d1e214e545b261559e2842f4>, <https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a/metrics/5d27e854a9e78eb3f663331cd47cdc13> ;
+    a <http://www.w3.org/ns/dcat#Dataset>, <http://www.w3.org/ns/dcat#Resource> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "SMArtCARE Dataset" ;
+    <http://www.w3.org/ns/dcat#theme> <http://bioregistry.io/ncit:C115789>, <http://bioregistry.io/ncit:C129000>, <http://bioregistry.io/ncit:C156420>, <http://bioregistry.io/ncit:C159705>, <http://bioregistry.io/ncit:C166875>, <http://bioregistry.io/ncit:C167001>, <http://bioregistry.io/ncit:C174715>, <http://bioregistry.io/ncit:C25242>, <http://bioregistry.io/ncit:C28421>, <http://bioregistry.io/ncit:C68615>, <http://bioregistry.io/ncit:C70810>, <http://bioregistry.io/obo:HP_0003674>, <http://bioregistry.io/obo:ICO_0000001>, <http://bioregistry.io/obo:OBI_0000810>, <http://bioregistry.io/omim:600354>, <http://bioregistry.io/omim:601627>, <http://bioregistry.io/orphanet.ordo:70>, <http://bioregistry.io/orphanet.ordo:83330>, <http://bioregistry.io/orphanet.ordo:83418>, <http://bioregistry.io/orphanet.ordo:83419>, <http://bioregistry.io/orphanet.ordo:83420>, <http://bioregistry.io/sio:SIO_001001>, <http://bioregistry.io/sio:SIO_001052>, <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> ;
+    <https://w3id.org/fdp/fdp-o#metadataIdentifier> <https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a#identifier> ;
+    <https://w3id.org/fdp/fdp-o#metadataIssued> "2023-02-27T09:28:31.480358843Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <https://w3id.org/fdp/fdp-o#metadataModified> "2023-03-24T09:32:12.489714015Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a#accessRights>
+    <http://purl.org/dc/terms/description> "This resource has no access restriction" ;
+    a <http://purl.org/dc/terms/RightsStatement> .
+
+<https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a#identifier>
+    <http://purl.org/dc/terms/identifier> "https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a" ;
+    a <http://purl.org/spar/datacite/Identifier> .
+
+<https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a/metrics/445c0a70d1e214e545b261559e2842f4>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.ietf.org/rfc/rfc3986.txt> .
+
+<https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a/metrics/5d27e854a9e78eb3f663331cd47cdc13>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.wikidata.org/wiki/Q8777> .
+
+<https://w3id.org/smartcare-fdp/distribution/>
+    <http://purl.org/dc/terms/title> "Distributions" ;
+    a <http://www.w3.org/ns/ldp#DirectContainer> ;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://www.w3.org/ns/dcat#distribution> ;
+    <http://www.w3.org/ns/ldp#membershipResource> <https://w3id.org/smartcare-fdp/dataset/587f30b1-1775-4d25-a073-682c1f3f547a> .
+
+<https://w3id.org/smartcare-fdp/metrics/445c0a70d1e214e545b261559e2842f4>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.ietf.org/rfc/rfc3986.txt> .
+
+<https://w3id.org/smartcare-fdp/metrics/5d27e854a9e78eb3f663331cd47cdc13>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.wikidata.org/wiki/Q8777> .
+
+<https://w3id.org/smartcare-fdp/profile/2f08228e-1789-40f8-84cd-28e3288c3604>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Dataset Profile" .
+
+<https://w3id.org/smartcare-fdp/profile/77aaad6a-0136-4c6e-88b9-07ffccd0ee4c>
+    <http://www.w3.org/2000/01/rdf-schema#label> "FAIR Data Point Profile" .
+
+<https://w3id.org/smartcare-fdp/profile/a0949e72-4466-4d53-8900-9436d1049a4b>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Catalog Profile" .
+

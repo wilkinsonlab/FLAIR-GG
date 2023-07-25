@@ -64,25 +64,33 @@ class FDP
   end
 
   def find_discoverables
-    discoverables = []
-    vpd = SPARQL.parse("SELECT ?s ?t WHERE 
-    { ?s <http://purl.org/ejp-rd/vocabulary/vpConnection> <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> . 
-    ?s a ?t }")
-    theme = SPARQL.parse("SELECT ?s ?t WHERE 
-    { ?s <http://www.w3.org/ns/dcat#theme> <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> .
-    ?s a ?t }")
-    theme2 = SPARQL.parse("SELECT ?s ?t WHERE 
-    { ?s <http://www.w3.org/ns/dcat#themeTaxonomy> <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> .
-    ?s a ?t }")
+    discoverables = Hash.new
+    vpd = SPARQL.parse("SELECT ?s ?t ?title WHERE 
+    { ?s <http://purl.org/ejp-rd/vocabulary/vpConnection> <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> ;
+    <http://purl.org/dc/terms/title> ?title ;
+    a ?t }")
+    theme = SPARQL.parse("SELECT ?s ?t  ?title WHERE 
+    { ?s <http://www.w3.org/ns/dcat#theme> <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> ;
+    <http://purl.org/dc/terms/title> ?title ;
+    a ?t }")
+    theme2 = SPARQL.parse("SELECT ?s ?t  ?title WHERE 
+    { ?s <http://www.w3.org/ns/dcat#themeTaxonomy> <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> ;
+    <http://purl.org/dc/terms/title> ?title ;
+    a ?t }")
     @graph.query(vpd) do |result|
-      discoverables << [result[:s].to_s, result[:t].to_s]
+      next if result[:t].to_s =~ /\#Resource/
+      discoverables[result[:s].to_s] = {title: result[:title].to_s, type: result[:t].to_s}
     end
     @graph.query(theme) do |result|
-      discoverables <<  [result[:s].to_s, result[:t].to_s]
+      next if result[:t].to_s =~ /\#Resource/
+      discoverables[result[:s].to_s] = {title: result[:title].to_s, type: result[:t].to_s}
     end
     @graph.query(theme2) do |result|
-      discoverables <<  [result[:s].to_s, result[:t].to_s]
+      next if result[:t].to_s =~ /\#Resource/
+      discoverables[result[:s].to_s] = {title: result[:title].to_s, type: result[:t].to_s}
     end
+    warn discoverables
+    discoverables = discoverables.sort_by {|k,v| v[:type]}.to_h
     discoverables
   end
 
