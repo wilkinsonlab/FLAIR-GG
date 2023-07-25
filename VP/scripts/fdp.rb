@@ -5,21 +5,38 @@ require "restclient"
 class FDP
   attr_accessor :graph, :address, :called
 
-  def initialize(address:)
+  def initialize(address:, refresh:)
     @address = address
     @graph = RDF::Graph.new
     @called = []
-    load(address: address)
-    freeze
+    if refresh
+      load(address: address)
+      freeze
+    else
+      thaw
+    end
+  end
+
+  def thaw
+    address = Digest::SHA256.hexdigest @address
+    begin
+      RDF::Reader.open("./cache/#{address}.ttl") do |reader|
+        reader.each_statement do |statement|
+          @graph << statement
+        end
+      end
+    rescue StandardError
+      nil
+    end
   end
 
   def freeze
-    
     address = Digest::SHA256.hexdigest @address
     f = open("./cache/#{address}.ttl", "w")
     f.puts @graph.to_ttl
     f.close
   end
+
   def load(address:)
     return if called.include? address
 

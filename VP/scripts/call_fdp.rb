@@ -7,7 +7,7 @@ require "./scripts/fdp"
 fdps = %w[https://zks-docker.ukl.uni-freiburg.de/fairdatapoint-euronmd/ https://fairdata.services:7070/]
 
 fdps.each do |fdp_address|
-  fdp = FDP.new(address: fdp_address)
+  fdp = FDP.new(address: fdp_address, refresh: false)
   puts fdp
   puts fdp.find_discoverables
 end
