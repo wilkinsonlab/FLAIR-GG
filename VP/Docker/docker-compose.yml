@@ -1,0 +1,8 @@
+vp:
+  image: markw/flair-gg-vp:0.0.1
+  volumes:
+    - $PWD/lighttpd_conf:/etc/lighttpd
+    - $PWD/htdocs:/var/www/html
+  ports:
+    - "8080:80"
+  tty: true
