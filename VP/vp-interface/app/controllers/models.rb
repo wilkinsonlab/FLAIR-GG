@@ -45,16 +45,16 @@ class OntologySearchResponse
   swagger_path '/ontology-search' do
     operation :get do
       key :summary, 'Ontology Search'
-      key :description, 'Retrieve the matching VP Resources from an ontology search against the dcat:theme'
+      key :description, 'Retrieve the matching VP Resources from an ontology search against the dcat:theme and dcat:themeTaxonomy'
       key :operationId, 'ontology_search'
       key :tags, ['retrieve_ontology_search_results']
       key :produces, [
-        'application/ld+json'
+        'text/html'
       ]
       parameter do
-        key :name, :guid
+        key :name, :uri
         key :in, :query
-        key :description, 'GUID to process'
+        key :description, 'URI of the ontology term'
         key :required, true
         key :type, :string
       end
@@ -75,12 +75,12 @@ class KeywordSearchResponse
       key :operationId, 'keyword_search'
       key :tags, ['retrieve_keyword_search_results']
       key :produces, [
-        'application/ld+json'
+        'text/html'
       ]
       parameter do
-        key :name, :guid
+        key :name, :keyword
         key :in, :query
-        key :description, 'GUID to process'
+        key :description, 'keyword to search with (case insensitive)'
         key :required, true
         key :type, :string
       end

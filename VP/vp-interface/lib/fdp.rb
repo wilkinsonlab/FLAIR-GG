@@ -65,34 +65,91 @@ class FDP
 
   def find_discoverables
     discoverables = Hash.new
-    vpd = SPARQL.parse("SELECT ?s ?t ?title WHERE 
-    { ?s <http://purl.org/ejp-rd/vocabulary/vpConnection> <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> ;
-    <http://purl.org/dc/terms/title> ?title ;
-    a ?t }")
-    theme = SPARQL.parse("SELECT ?s ?t  ?title WHERE 
-    { ?s <http://www.w3.org/ns/dcat#theme> <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> ;
-    <http://purl.org/dc/terms/title> ?title ;
-    a ?t }")
-    theme2 = SPARQL.parse("SELECT ?s ?t  ?title WHERE 
-    { ?s <http://www.w3.org/ns/dcat#themeTaxonomy> <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> ;
-    <http://purl.org/dc/terms/title> ?title ;
-    a ?t }")
+    vpd = SPARQL.parse("
+    PREFIX ejp: <http://purl.org/ejp-rd/vocabulary/>
+    PREFIX dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX dc: <http://purl.org/dc/terms/>
+
+    SELECT ?s ?t ?title WHERE 
+    { VALUES ?connection { ejp:vpConnection dcat:theme dcat:themeTaxonomy }
+
+      ?s  ?connection ejp:VPDiscoverable ;
+          dc:title ?title ;
+          a ?t .}")
     @graph.query(vpd) do |result|
       next if result[:t].to_s =~ /\#Resource/
       discoverables[result[:s].to_s] = {title: result[:title].to_s, type: result[:t].to_s}
     end
-    @graph.query(theme) do |result|
-      next if result[:t].to_s =~ /\#Resource/
-      discoverables[result[:s].to_s] = {title: result[:title].to_s, type: result[:t].to_s}
-    end
-    @graph.query(theme2) do |result|
+    warn discoverables
+    discoverables
+  end
+
+
+  def keyword_search(keyword: "")
+    discoverables = Hash.new
+    vpd = SPARQL.parse("
+    PREFIX ejp: <http://purl.org/ejp-rd/vocabulary/>
+    PREFIX dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX dc: <http://purl.org/dc/terms/>
+
+    SELECT ?s ?t ?title WHERE 
+    { VALUES ?connection { ejp:vpConnection dcat:theme dcat:themeTaxonomy }
+
+      ?s  ?connection ejp:VPDiscoverable ;
+          dc:title ?title ;
+          a ?t .
+
+      ?s dcat:keyword ?kw .
+      FILTER(CONTAINS(lcase(?kw), lcase('#{keyword}')))
+      }"
+      )
+    @graph.query(vpd) do |result|
       next if result[:t].to_s =~ /\#Resource/
       discoverables[result[:s].to_s] = {title: result[:title].to_s, type: result[:t].to_s}
     end
     warn discoverables
-    discoverables = discoverables.sort_by {|k,v| v[:type]}.to_h
     discoverables
   end
 
-  def grab_contains; end
+  def ontology_search(uri: "")
+    discoverables = Hash.new
+    warn "definitel in ontology search"
+    vpd = SPARQL.parse("
+    PREFIX ejp: <http://purl.org/ejp-rd/vocabulary/>
+    PREFIX dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX dc: <http://purl.org/dc/terms/>
+
+    SELECT ?s ?t ?title WHERE 
+    { VALUES ?connection { ejp:vpConnection dcat:theme dcat:themeTaxonomy }
+      VALUES ?annotation { dcat:theme dcat:themeTaxonomy }
+
+      ?s  ?connection ejp:VPDiscoverable ;
+          dc:title ?title ;
+          a ?t .
+
+      ?s ?annotation <#{uri}> .
+      }"
+      )
+    warn "QUERY: PREFIX ejp: <http://purl.org/ejp-rd/vocabulary/>
+    PREFIX dcat: <http://www.w3.org/ns/dcat#>
+    PREFIX dc: <http://purl.org/dc/terms/>
+
+    SELECT ?s ?t ?title WHERE 
+    { VALUES ?connection { ejp:vpConnection dcat:theme dcat:themeTaxonomy }
+      VALUES ?annotation { dcat:theme dcat:themeTaxonomy }
+
+      ?s  ?connection ejp:VPDiscoverable ;
+          dc:title ?title ;
+          a ?t .
+
+      ?s ?annotation <#{uri}> .
+      }"
+    @graph.query(vpd) do |result|
+      next if result[:t].to_s =~ /\#Resource/
+      discoverables[result[:s].to_s] = {title: result[:title].to_s, type: result[:t].to_s}
+    end
+    warn discoverables
+    discoverables
+  end
+
 end

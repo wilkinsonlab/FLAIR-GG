@@ -16,17 +16,32 @@
   </head>
   <body>
     <div class="wrapper">
-    <h2>Discovered VP Resources</h2>
-    <ol>
+      <h2>FLAIR-GG Virtual Platform<h2>
 
-    <% @discoverables.each_key do |url| %>
-      <% type = @discoverables[url][:type] %>
-      <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
-      <li><img src="../images/<%= type %>.svg" width=35/> &nbsp;&nbsp;Resource:
-      <a href="<%= url %>" > <%= @discoverables[url][:title] %> </a>
-      Type <%= type.capitalize %></li>
-    <% end %>
+
+      <div class="sidebar">
+      Keyword Search: <form action="/flair-gg-vp-server/keyword-search"><input type="text" name="keyword" width="30"><input type="submit"></form>
+      </div>
+      <div class="sidebar" style="clear: both;">
+      Ontology URI: <form action="/flair-gg-vp-server/ontology-search"><input type="text" name="uri" width="30"><input type="submit"></form>
+      </div>
+
+
+      <h2>Discovered VP Resources</h2>
+      
+      
+      <ol>
+          <% @discoverables.each_key do |url| %>
+            <% type = @discoverables[url][:type] %>
+            <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
+            <% title = @discoverables[url][:title] %>
+            <li><img src="../images/<%= type %>.svg" width=35 height=35/> &nbsp;&nbsp;
+            Resource: <a href="<%= url %>" > <%= title %> </a>(<%= type.capitalize %>)
+            </li>
+          <% end %>
       </ol>
+
+
       <footer class="branding">
         <small>&copy; 2023 <strong>Mark D Wilkinson</strong></small>
       </footer>
