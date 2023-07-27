@@ -16,7 +16,8 @@
   </head>
   <body>
     <div class="wrapper">
-      <h2>FLAIR-GG Virtual Platform<h2>
+      <h2><a href="https://vp.bgv.cbgp.upm.es/flair-gg-vp-server/resources">FLAIR-GG Virtual Platform</a><h2>
+
 
 
       <div class="sidebar">
@@ -35,7 +36,7 @@
             <% type = @discoverables[url][:type] %>
             <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
             <% title = @discoverables[url][:title] %>
-            <li><img src="../images/<%= type %>.svg" width=35 height=35/> &nbsp;&nbsp;
+            <li><img src="../images/<%= @discoverables[url][:icon] %>" width=35 height=35/> &nbsp;&nbsp;
             Resource: <a href="<%= url %>" > <%= title %> </a>(<%= type.capitalize %>)
             </li>
           <% end %>

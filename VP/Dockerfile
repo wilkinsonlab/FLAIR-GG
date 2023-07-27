@@ -6,6 +6,7 @@ RUN chmod a+r /etc/resolv.conf
 
 USER root
 RUN apt-get -y update && apt-get -y upgrade 
+RUN apt-get install -y libraptor2-0 
 # RUN apk update && apk upgrade && apk add --update alpine-sdk && \
     # apk add --no-cache bash make cmake
 

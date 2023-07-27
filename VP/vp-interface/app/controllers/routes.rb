@@ -9,7 +9,7 @@ def set_routes(classes: allclasses) # $th is the test configuration hash
 
   get '/flair-gg-vp-server/force-refresh' do
     @discoverables = Hash.new
-    fdps = %w[https://zks-docker.ukl.uni-freiburg.de/fairdatapoint-euronmd/ https://fairdata.services:7070/ https://fair.ciroco.org https://w3id.org/simpathic/fdp https://w3id.org/fairvasc-fdp/ https://w3id.org/ctsr-fdp https://w3id.org/smartcare-fdp ]
+    fdps = FDP::FDPSITES
     fdps.each do |fdp_address|
       fdp = FDP.new(address: fdp_address, refresh: true)
       hash = fdp.find_discoverables
@@ -21,7 +21,7 @@ def set_routes(classes: allclasses) # $th is the test configuration hash
   get '/flair-gg-vp-server/resources' do
     guid = params['guid']
     @discoverables = Hash.new
-    fdps = %w[https://zks-docker.ukl.uni-freiburg.de/fairdatapoint-euronmd/ https://fairdata.services:7070/ https://fair.ciroco.org https://w3id.org/simpathic/fdp https://w3id.org/fairvasc-fdp/ https://w3id.org/ctsr-fdp https://w3id.org/smartcare-fdp ]
+    fdps = FDP::FDPSITES
     fdps.each do |fdp_address|
       fdp = FDP.new(address: fdp_address, refresh: false)
       hash = fdp.find_discoverables
@@ -35,7 +35,7 @@ def set_routes(classes: allclasses) # $th is the test configuration hash
     warn "in keyword search now\n\n\n"
     keyword = params['keyword']
     @discoverables = Hash.new
-    fdps = %w[https://zks-docker.ukl.uni-freiburg.de/fairdatapoint-euronmd/ https://fairdata.services:7070/ https://fair.ciroco.org https://w3id.org/simpathic/fdp https://w3id.org/fairvasc-fdp/ https://w3id.org/ctsr-fdp https://w3id.org/smartcare-fdp ]
+    fdps = FDP::FDPSITES
     fdps.each do |fdp_address|
       fdp = FDP.new(address: fdp_address, refresh: false)
       hash = fdp.keyword_search(keyword: keyword)
@@ -53,7 +53,7 @@ def set_routes(classes: allclasses) # $th is the test configuration hash
     warn "in ontology search now\n\n\n"
     term = params['uri']
     @discoverables = Hash.new
-    fdps = %w[https://zks-docker.ukl.uni-freiburg.de/fairdatapoint-euronmd/ https://fairdata.services:7070/ https://fair.ciroco.org https://w3id.org/simpathic/fdp https://w3id.org/fairvasc-fdp/ https://w3id.org/ctsr-fdp https://w3id.org/smartcare-fdp ]
+    fdps = FDP::FDPSITES
     fdps.each do |fdp_address|
       fdp = FDP.new(address: fdp_address, refresh: false)
       hash = fdp.ontology_search(uri: term)
@@ -65,5 +65,12 @@ def set_routes(classes: allclasses) # $th is the test configuration hash
     # guid = params['guid']
     # response = @metadata.hash.to_json || '{}'
     # response
+  end
+
+  get '/flair-gg-vp-server/wordcloud' do
+    @discoverables = Hash.new
+    wc = Wordcloud.new
+    @words = wc.count_words
+    erb :wordcloud
   end
 end

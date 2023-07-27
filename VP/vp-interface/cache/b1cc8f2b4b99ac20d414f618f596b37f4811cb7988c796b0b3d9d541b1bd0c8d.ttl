@@ -105,11 +105,11 @@
     <http://purl.org/dc/terms/title> "a tool that will create Box Whisker plots" ;
     <http://purl.org/ejp-rd/vocabulary/vpConnection> <http://purl.org/ejp-rd/vocabulary/VPDiscoverable> ;
     <http://semanticscience.org/resource/SIO_000628> <https://fair.ciroco.org/dataservice2/6789c310-9938-4b73-a3f3-f7c90b372b10/metrics/445c0a70d1e214e545b261559e2842f4>, <https://fair.ciroco.org/dataservice2/6789c310-9938-4b73-a3f3-f7c90b372b10/metrics/5d27e854a9e78eb3f663331cd47cdc13> ;
-    a <http://www.w3.org/ns/dcat#DataService>, <http://www.w3.org/ns/dcat#Resource> ;
+    a <http://www.w3.org/ns/dcat#NotARealType>, <http://www.w3.org/ns/dcat#Resource> ;
     <http://www.w3.org/2000/01/rdf-schema#label> "a tool that will create Box Whisker plots" ;
     <http://www.w3.org/ns/dcat#landingPage> <http://my-cool-tools.com/box-whisker-plotter.html> ;
     <http://www.w3.org/ns/dcat#theme> <http://edamontology.org/operation_2943> ;
-    <https://w3id.org/fdp/fdp-o#metadataIdentifier> <https://fair.ciroco.org/dataservice2/6789c310-9938-4b73-a3f3-f7c90b372b10#identifier> ;
+    <https://w3id.org/fdp/fdp-o#metadataIdentifier>  <https://fair.ciroco.org/dataservice2/6789c310-9938-4b73-a3f3-f7c90b372b10#identifier> ;
     <https://w3id.org/fdp/fdp-o#metadataIssued> "2023-07-20T11:30:38.016442171Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
     <https://w3id.org/fdp/fdp-o#metadataModified> "2023-07-20T11:31:47.417289884Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 

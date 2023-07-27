@@ -342,6 +342,7 @@ GEM
     unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
     unicode-types (1.8.0)
+    uri (0.11.0)
     xml-simple (1.1.9)
       rexml
     xpath (3.2.0)
@@ -360,6 +361,7 @@ DEPENDENCIES
   bcrypt
   capybara
   debase!
+  json
   linkeddata (~> 3.2.0)
   metainspector (~> 5.pre.11.pre.2)
   parseconfig (~> 1.1.2)
@@ -378,6 +380,7 @@ DEPENDENCIES
   swagger-blocks (~> 3.0.0)
   thin
   tux
+  uri
   vp-interface!
   xml-simple (~> 1.1.8)
 
