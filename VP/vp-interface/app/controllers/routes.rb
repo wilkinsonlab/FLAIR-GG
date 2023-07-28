@@ -69,6 +69,7 @@ def set_routes(classes: allclasses) # $th is the test configuration hash
 
   get '/flair-gg-vp-server/wordcloud' do
     refresh = params['refresh']
+    refresh = "false" unless refresh
     @discoverables = Hash.new
     wc = Wordcloud.new(refresh: refresh)
     @words = wc.count_words

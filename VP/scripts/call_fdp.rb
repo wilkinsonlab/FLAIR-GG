@@ -1,4 +1,4 @@
-require "./scripts/fdp"
+require_relative "./fdp.rb"
 
 # frozen_string_literal: false
 # warn `pwd`

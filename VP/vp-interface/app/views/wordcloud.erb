@@ -39,13 +39,18 @@
     <div class="wrapper">
       <h2><a href="https://vp.bgv.cbgp.upm.es/flair-gg-vp-server/resources">FLAIR-GG Virtual Platform</a><h2>
 
-
-      <div id="cloud" style="width: 550px; height: 350px;"></div>
-
+      <div class="sidebar">
+      Keyword Search: <form action="/flair-gg-vp-server/keyword-search"><input type="text" name="keyword" width="30"><input type="submit"></form>
+      </div>
       <div class="sidebar" style="clear: both;">
-      <input type="button" value="Display Wordcloud" onclick=" display();">
+      Ontology URI: <form action="/flair-gg-vp-server/ontology-search"><input type="text" name="uri" width="30"><input type="submit"></form>
+      </div>
+      <div class="sidebar" style="clear: both;">
+      <a href="/flair-gg-vp-server/wordcloud"><input type="button" value="Display Wordcloud"></a>
       </div>
 
+
+      <div id="cloud" style="width: 550px; height: 350px;"></div>
 
 
       <footer class="branding">
