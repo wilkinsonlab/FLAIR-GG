@@ -8,8 +8,10 @@ require "uri"
 class FDP
   attr_accessor :graph, :address, :called
 
-  FDPSITES = %w[https://zks-docker.ukl.uni-freiburg.de/fairdatapoint-euronmd/ https://fairdata.services:7070/
-                https://fair.ciroco.org https://w3id.org/simpathic/fdp https://w3id.org/fairvasc-fdp/ https://w3id.org/ctsr-fdp https://w3id.org/smartcare-fdp]
+  FDPSITES = get_active_sites(index: 'https://index.vp.ejprarediseases.org/index/entries/all')
+
+  # %w[https://zks-docker.ukl.uni-freiburg.de/fairdatapoint-euronmd/ https://fairdata.services:7070/
+  #               https://fair.ciroco.org https://w3id.org/simpathic/fdp https://w3id.org/fairvasc-fdp/ https://w3id.org/ctsr-fdp https://w3id.org/smartcare-fdp]
 
   def initialize(address:, refresh: false)
     @address = address
@@ -21,6 +23,19 @@ class FDP
     else
       thaw
     end
+  end
+
+  def get_active_sites(index:)
+    r = RestClient.get(index, headers: {accept: "application/json"})
+    # {
+    #   "uuid": "48a1f752-8a60-4e40-a4bf-fc5e158f28f9",
+    #   "clientUrl": "https://fdp.wikipathways.org/",
+    #   "state": "ACTIVE",
+    #   "registrationTime": "2023-07-04T14:36:52.885Z",
+    #   "modificationTime": "2023-08-08T00:40:37.410Z"
+    # },
+    active_sites = JSON.parse(r.body).select {|s| s['state']=="ACTIVE"}
+    active_sites
   end
 
   def thaw
@@ -170,73 +185,10 @@ class FDP
     results = @graph.query(vpd)
     results.each do |res|
       uri = res[:annot].to_s
-      root = "https://www.ebi.ac.uk/ols4/api/ontologies/XXXXX/terms/"
-      url = ""
-
-      if uri =~ /bioregistry/
-        # e.g. http://bioregistry.io/edam:data_1153
-        uri = traverse_bioregistry(uri: uri)
-      end
-
-      next unless uri
-
-      encoded = URI.encode_www_form_component uri
-      encoded = URI.encode_www_form_component encoded
-
-      if uri =~ /NCIT_/
-        url = root.gsub("XXXXX", "ncit") + encoded
-      elsif uri =~ /HP_/
-        url = root.gsub("XXXXX", "hp") + encoded
-      elsif uri =~ /GO_/
-        url = root.gsub("XXXXX", "go") + encoded
-      elsif uri =~ /SIO_/
-        url = root.gsub("XXXXX", "sio") + encoded
-      elsif uri =~ /UBERON_/
-        url = root.gsub("XXXXX", "uberon") + encoded
-      elsif uri =~ /ORDO/
-        url = root.gsub("XXXXX", "ordo") + encoded
-      elsif uri =~ /CMO_/
-        url = root.gsub("XXXXX", "cmo") + encoded
-      elsif uri =~ /ols\/ontologies/
-        url = uri.gsub("ols/ontologies", "ols/api/ontologies")
-      end
-      warn "url is #{url}"
-      if url.empty?
-        warn "found no match for #{uri}"
-        next
-      end
-      begin
-        res = RestClient.get(url)
-      rescue StandardError
-        warn "HTTP CALL FAILED FOR #{url}"
-        next
-      end
-      unless res
-        warn "didn't resolve #{url}"
-        next
-      end
-      begin
-        j = JSON.parse(res.body)
-      rescue
-      end
-      next unless j.is_a? Hash
-      if j["_embedded"]
-        warn "OLD STYLE OLS"
-        warn "found word is #{j["_embedded"]["terms"][0]["label"].to_s}"
-        words << j["_embedded"]["terms"][0]["label"].to_s
-      elsif j["label"]
-        warn "NEW STYLE OLS"
-        warn "found word is #{j["label"].to_s}"
-        words << j["label"].to_s 
-      elsif j["annotation"]
-        warn "OTHER NEW STYLE OLS"
-        warn "found word is #{j["annotation"]["label"].to_s}"
-        words << j["annotation"]["label"].to_s 
-      else
-        warn "CAN'T UNDERSTAND RESPONSE BODY"
-      end
-      warn "end of taxonomy parser"
-    end # end of taxonomy parser
+      word = ontology_annotations(uri: uri)
+      words << word if word
+    end 
+    # end of taxonomy parser
 
     warn "\n\nSWITCH TO KEYWORDS\n\n"
     vpd = SPARQL.parse("
@@ -256,46 +208,31 @@ class FDP
     words
   end
 
-  def traverse_bioregistry(uri:)
-    # e.g. http://bioregistry.io/edam:data_1153
-    # https://bioregistry.io/api/reference/orphanet.ordo:83419
-    # {
-    #   "query": {
-    #     "prefix": "ncit",
-    #     "identifier": "C28421"
-    #   },
-    #   "providers": {
-    #     "default": "http://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI%20Thesaurus&code=C28421",
-    #     "bioregistry": "https://bioregistry.io/ncit:C28421",
-    #     "miriam": "https://identifiers.org/ncit:C28421",
-    #     "obofoundry": "http://purl.obolibrary.org/obo/NCIT_C28421",
-    #     "ols": "https://www.ebi.ac.uk/ols4/ontologies/ncit/terms?iri=http://purl.obolibrary.org/obo/NCIT_C28421",
-    #     "n2t": "https://n2t.net/ncit:C28421",
-    #     "bioportal": "https://bioportal.bioontology.org/ontologies/NCIT/?p=classes&conceptid=http://purl.obolibrary.org/obo/NCIT_C28421",
-    #     "bio2rdf": "http://bio2rdf.org/ncit:C28421",
-    #     "evs": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C28421"
-    #   }
-    # }# }
-    term = uri.match(%r{.*/(\S+?)$})[1] # edam:data_1153
-    bioreg = "https://bioregistry.io/api/reference/#{term}"
-    warn "BIOREG #{bioreg}"
-    resp = nil
-    begin
-      resp = RestClient.get(bioreg)
-    rescue StandardError
-      warn "\t\t\t\t\tRESCUING!!!!!!!!!!!!!!!!!!!!!!!!!"
-      resp = nil
+  def ontology_annotations(uri:)
+    if uri =~ /bioregistry/
+      br = BioRegistry.new(uri: uri)
+      # e.g. http://bioregistry.io/edam:data_1153
+      term = br.lookup
+    elsif uri =~ /NCIT_|HP_|GO_|SIO_|UBERON_|ORDO|CMO_|/
+      ebi = EBITerm.new(uri: uri)
+      term = ebi.lookup
+    elsif uri =~ /ols\/ontologies/
+      uri = uri.gsub("ols/ontologies", "ols/api/ontologies")
+      ebi = EBITerm.new(uri: uri)
+      term = ebi.lookup
+    elsif uri =~ /identifiers\.org/
+      ido = IDsOrg.new(uri: uri)
+      term = ido.lookup
     end
-    unless resp
-      warn "NOTHING FOUND IN BIOREG"
-      return nil
+
+    unless term
+      warn "found no match for #{uri}"
+      next
     end
-    warn "BIOREG RESPONDED"
-    j = JSON.parse(resp.body)
-    url = j["providers"]["obofoundry"] || j["providers"]["default"]
-    warn "DEFAULT provider #{url}"
-    url
+    return term
+
   end
+
 end
 
 class Wordcloud
