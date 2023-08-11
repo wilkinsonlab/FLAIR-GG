@@ -2,7 +2,7 @@ version: "2.0"
 services:
 
   flair-gg-vp-server:
-    image: markw/flair-gg-vp-server:0.0.2
+    image: markw/flair-gg-vp-server:0.0.8
     container_name: "flair-gg-vp-server"
     ports:
       - "4567:4567"

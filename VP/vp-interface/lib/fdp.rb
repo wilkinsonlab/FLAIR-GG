@@ -3,21 +3,23 @@ require "digest"
 require "restclient"
 require "json"
 require "uri"
+require_relative "bioregistry"
+require_relative  "identifiers"
+require_relative  "metadata_functions"
+require_relative  "wordcloud"
+require_relative  "ebi_ontology"
 
 # frozen_string_literal: false
 class FDP
   attr_accessor :graph, :address, :called
 
-  FDPSITES = get_active_sites(index: 'https://index.vp.ejprarediseases.org/index/entries/all')
-
-  # %w[https://zks-docker.ukl.uni-freiburg.de/fairdatapoint-euronmd/ https://fairdata.services:7070/
-  #               https://fair.ciroco.org https://w3id.org/simpathic/fdp https://w3id.org/fairvasc-fdp/ https://w3id.org/ctsr-fdp https://w3id.org/smartcare-fdp]
 
   def initialize(address:, refresh: false)
     @address = address
     @graph = RDF::Graph.new
     @called = []
-    if refresh
+
+    if refresh 
       load(address: address)
       freeze
     else
@@ -25,18 +27,6 @@ class FDP
     end
   end
 
-  def get_active_sites(index:)
-    r = RestClient.get(index, headers: {accept: "application/json"})
-    # {
-    #   "uuid": "48a1f752-8a60-4e40-a4bf-fc5e158f28f9",
-    #   "clientUrl": "https://fdp.wikipathways.org/",
-    #   "state": "ACTIVE",
-    #   "registrationTime": "2023-07-04T14:36:52.885Z",
-    #   "modificationTime": "2023-08-08T00:40:37.410Z"
-    # },
-    active_sites = JSON.parse(r.body).select {|s| s['state']=="ACTIVE"}
-    active_sites
-  end
 
   def thaw
     address = Digest::SHA256.hexdigest @address
@@ -187,7 +177,7 @@ class FDP
       uri = res[:annot].to_s
       word = ontology_annotations(uri: uri)
       words << word if word
-    end 
+    end
     # end of taxonomy parser
 
     warn "\n\nSWITCH TO KEYWORDS\n\n"
@@ -209,82 +199,23 @@ class FDP
   end
 
   def ontology_annotations(uri:)
+    term = nil
     if uri =~ /bioregistry/
       br = BioRegistry.new(uri: uri)
-      # e.g. http://bioregistry.io/edam:data_1153
-      term = br.lookup
+      term = lookup_title(synonym_urls: br.synonym_urls)
     elsif uri =~ /NCIT_|HP_|GO_|SIO_|UBERON_|ORDO|CMO_|/
       ebi = EBITerm.new(uri: uri)
-      term = ebi.lookup
-    elsif uri =~ /ols\/ontologies/
+      term = ebi.lookup_title(synonym_urls: ebi.synonym_urls) # specific for EBI
+    elsif uri =~ %r{ols/ontologies}
       uri = uri.gsub("ols/ontologies", "ols/api/ontologies")
       ebi = EBITerm.new(uri: uri)
-      term = ebi.lookup
+      term = ebi.lookup_title(synonym_urls: ebi.synonym_urls)  # specific for EBI
     elsif uri =~ /identifiers\.org/
       ido = IDsOrg.new(uri: uri)
-      term = ido.lookup
+      term = lookup_title(synonym_urls: ido.synonym_urls)
     end
 
-    unless term
-      warn "found no match for #{uri}"
-      next
-    end
-    return term
-
-  end
-
-end
-
-class Wordcloud
-  attr_accessor :words
-
-  def initialize(refresh: false)
-    return if File.exist?("./cache/REFRESHING") # multiple browser calls are a problem!
-
-    if File.exist?("./cache/keywords.json") && (refresh == "false")
-      thaw
-    else
-      f = open("./cache/REFRESHING", "w")  # multiple browser calls are a problem!
-      f.puts "REFRESHING"
-      f.close
-      
-      fdps = FDP::FDPSITES
-      @words = []
-      fdps.each do |fdp|
-        warn "\n\n\nQUERYING #{fdp}\n\n\n"
-        site = FDP.new(address: fdp)
-        @words << site.get_verbose_annotations
-      end
-      warn "flattening"
-      @words = @words.flatten
-      warn "\n\nWORDS\n\n#{@words}"
-      freeze
-
-      File.delete("./cache/REFRESHING")
-    end
-  end
-
-  def count_words
-    freqs = {}
-    @words.each do |w|
-      freq = @words.count(w)
-      freqs[w] = freq
-    end
-    warn freqs
-    freqs
-  end
-
-  def thaw
-    kwf = File.open("./cache/keywords.json", "r")
-    kw = kwf.read
-    @words = JSON.parse(kw)
-  rescue StandardError
-    nil
-  end
-
-  def freeze
-    f = open("./cache/keywords.json", "w")
-    f.puts @words.to_json
-    f.close
+    warn "found no match for #{uri}" unless term
+    term
   end
 end

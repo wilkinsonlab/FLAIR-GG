@@ -18,7 +18,7 @@
     <https://w3id.org/fdp/fdp-o#metadataCatalog> <https://w3id.org/ctsr-fdp/catalog/87acc8da-4885-4b73-85f4-7caaa062600b> ;
     <https://w3id.org/fdp/fdp-o#metadataIdentifier> <https://w3id.org/ctsr-fdp#identifier> ;
     <https://w3id.org/fdp/fdp-o#metadataIssued> "2023-02-15T12:31:44.297197647Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-    <https://w3id.org/fdp/fdp-o#metadataModified> "2023-06-29T15:07:06.46290936Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <https://w3id.org/fdp/fdp-o#metadataModified> "2023-08-10T07:56:41.87881473Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 
 <https://w3id.org/ctsr-fdp#accessRights>
     <http://purl.org/dc/terms/description> "This resource has no access restriction" ;
@@ -69,7 +69,7 @@
     <http://xmlns.com/foaf/0.1/homePage> <https://ctsr.uniklinik-freiburg.de/ctsr/> ;
     <https://w3id.org/fdp/fdp-o#metadataIdentifier> <https://w3id.org/ctsr-fdp/catalog/87acc8da-4885-4b73-85f4-7caaa062600b#identifier> ;
     <https://w3id.org/fdp/fdp-o#metadataIssued> "2023-02-15T17:07:05.730719227Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-    <https://w3id.org/fdp/fdp-o#metadataModified> "2023-06-29T15:07:06.35790564Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <https://w3id.org/fdp/fdp-o#metadataModified> "2023-08-10T07:56:41.723754753Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
 
 <https://w3id.org/ctsr-fdp/catalog/87acc8da-4885-4b73-85f4-7caaa062600b#accessRights>
     <http://purl.org/dc/terms/description> "This resource has no access restriction" ;

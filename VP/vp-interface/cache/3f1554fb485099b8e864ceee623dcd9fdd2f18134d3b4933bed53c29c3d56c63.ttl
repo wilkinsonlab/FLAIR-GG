@@ -1,0 +1,66 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://fdp.wikipathways.org/catalogs/>
+    <http://purl.org/dc/terms/title> "WikiPathways Catalogs" ;
+    a <http://www.w3.org/ns/ldp#DirectContainer> ;
+    <http://www.w3.org/ns/ldp#contains> <https://fdp.wikipathways.org/catalog/> ;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <https://w3id.org/fdp/fdpo#metadataCatalog> ;
+    <http://www.w3.org/ns/ldp#membershipResource> <https://fdp.wikipathways.org/> .
+
+<https://fdp.wikipathways.org/>
+    <http://purl.org/dc/terms/accessRights> <https://fdp.wikipathways.org/#accessRights> ;
+    <http://purl.org/dc/terms/conformsTo> <https://www.purl.org/fairtools/fdp/schema/0.1/fdpMetadata>, [
+        <http://www.w3.org/2000/01/rdf-schema#label> "FAIR Data Point Profile"
+    ] ;
+    <http://purl.org/dc/terms/description> "This FAIR Data Point deployment is used to describe WikiPathways." ;
+    <http://purl.org/dc/terms/hasVersion> "1.0" ;
+    <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> ;
+    <http://purl.org/dc/terms/license> <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd4.0> ;
+    <http://purl.org/dc/terms/publisher> <https://wikipathways.org/> ;
+    <http://purl.org/dc/terms/title> "WikiPathways FAIR Data Point" ;
+    a <http://www.w3.org/ns/dcat#DataService>, <http://www.w3.org/ns/dcat#Resource>, <https://w3id.org/fdp/fdp-o#FairDataPoint>, <https://w3id.org/fdp/fdp-o#MetadataService> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "WikiPathways FAIR Data Point" ;
+    <https://w3id.org/fdp/fdp-o#metadataCatalog> <https://fdp.wikipathways.org/catalog> ;
+    <https://w3id.org/fdp/fdp-o#metadataIssued> "2023-03-10T07:42:08.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <https://w3id.org/fdp/fdp-o#metadataModified> "2023-06-25T07:42:00.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<https://fdp.wikipathways.org/#accessRights>
+    <http://purl.org/dc/terms/description> "This resource has no access restriction" ;
+    a <http://purl.org/dc/terms/RightsStatement> .
+
+<https://fdp.wikipathways.org/catalog/>
+    <http://purl.org/dc/terms/conformsTo> [
+        <http://www.w3.org/2000/01/rdf-schema#label> "Catalog Profile"
+    ], [
+        <http://www.w3.org/2000/01/rdf-schema#label> "Catalog Profile"
+    ] ;
+    <http://purl.org/dc/terms/isPartOf> <http://fdp.wikipathways.org/> ;
+    <http://purl.org/dc/terms/issued> "2023-03-10T07:42:08.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <http://purl.org/dc/terms/modified> "2023-06-10T08:55:00.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>, "2023-06-25T08:56:00.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <http://purl.org/dc/terms/title> "WikiPathways Catalog" ;
+    <http://purl.org/fdp/fdp-o#metadataIssued> "2023-03-10T07:42:08.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <http://purl.org/fdp/fdp-o#metadataModified> "2023-06-25T08:56:00.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    a <http://www.w3.org/ns/dcat#Catalog> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "WikiPathways Catalog" ;
+    <http://www.w3.org/ns/dcat#dataset> <https://wikipathways.github.io/fdp/dataset/20230610/> ;
+    <http://xmlns.com/foaf/0.1/homePage> <https://data.wikipathways.org/> ;
+    <https://w3id.org/fdp/fdp-o#metadataIssued> "2023-03-10T07:42:08.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <https://w3id.org/fdp/fdp-o#metadataModified> "2023-06-10T08:55:00.000Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<https://fdp.wikipathways.org/dataset/20230610/>
+    <http://purl.org/dc/terms/title> "WikiPathways 20230610" ;
+    a <http://www.w3.org/ns/dcat#Dataset> ;
+    <http://www.w3.org/ns/dcat#distribution> <https://wikipathways.github.io/fdp/dataset/20230610/gmt>, <https://wikipathways.github.io/fdp/dataset/20230610/gpml> .
+
+<https://fdp.wikipathways.org/dataset/20230610/gmt>
+    <http://purl.org/dc/terms/title> "WikiPathways 20230610, GMT files" ;
+    a <http://www.w3.org/ns/dcat#Distribution> .
+
+<https://fdp.wikipathways.org/dataset/20230610/gpml>
+    <http://purl.org/dc/terms/title> "WikiPathways 20230610, GPML files" ;
+    a <http://www.w3.org/ns/dcat#Distribution> .
+
+<https://wikipathways.org/>
+    a <http://xmlns.com/foaf/0.1/Agent> ;
+    <http://xmlns.com/foaf/0.1/name> "WikiPathways" .
+

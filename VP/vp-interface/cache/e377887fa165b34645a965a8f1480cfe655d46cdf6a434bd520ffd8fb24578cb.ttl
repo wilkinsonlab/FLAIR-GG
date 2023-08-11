@@ -1,0 +1,145 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://w3id.org/ern-euro-nmd-fdp>
+    <http://purl.org/dc/terms/accessRights> <http://w3id.org/ern-euro-nmd-fdp#accessRights> ;
+    <http://purl.org/dc/terms/conformsTo> <http://w3id.org/ern-euro-nmd-fdp/profile/77aaad6a-0136-4c6e-88b9-07ffccd0ee4c> ;
+    <http://purl.org/dc/terms/description> "EURO-NMD is a European reference network for the thematic grouping of rare neuromuscular diseases (NMDs), a broad group of related disorders that represent a major cause of mortality and lifelong disability in children and adults." ;
+    <http://purl.org/dc/terms/hasVersion> "1.0" ;
+    <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> ;
+    <http://purl.org/dc/terms/publisher> <http://w3id.org/ern-euro-nmd-fdp#publisher> ;
+    <http://purl.org/dc/terms/title> "ERN EURO-NMD FAIR Data Point" ;
+    <http://semanticscience.org/resource/SIO_000628> <http://w3id.org/ern-euro-nmd-fdp/metrics/445c0a70d1e214e545b261559e2842f4>, <http://w3id.org/ern-euro-nmd-fdp/metrics/5d27e854a9e78eb3f663331cd47cdc13> ;
+    <http://www.re3data.org/schema/3-0#repositoryIdentifier> <http://w3id.org/ern-euro-nmd-fdp#identifier> ;
+    a <http://www.w3.org/ns/dcat#DataService>, <http://www.w3.org/ns/dcat#Resource>, <https://w3id.org/fdp/fdp-o#FAIRDataPoint>, <https://w3id.org/fdp/fdp-o#MetadataService> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "ERN EURO-NMD FAIR Data Point" ;
+    <http://www.w3.org/ns/dcat#endpointURL> <http://w3id.org/ern-euro-nmd-fdp> ;
+    <https://w3id.org/fdp/fdp-o#fdpSoftwareVersion> "FDP:v1.13.1~a55fcf5", "FDP:v1.15.0~609a912" ;
+    <https://w3id.org/fdp/fdp-o#metadataCatalog> <http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443> ;
+    <https://w3id.org/fdp/fdp-o#metadataIdentifier> <http://w3id.org/ern-euro-nmd-fdp#identifier> ;
+    <https://w3id.org/fdp/fdp-o#metadataIssued> "2022-10-13T11:04:05.0405219Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <https://w3id.org/fdp/fdp-o#metadataModified> "2022-10-13T13:39:06.590032117Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<http://w3id.org/ern-euro-nmd-fdp#accessRights>
+    <http://purl.org/dc/terms/description> "This resource has no access restriction" ;
+    a <http://purl.org/dc/terms/RightsStatement> .
+
+<http://w3id.org/ern-euro-nmd-fdp#identifier>
+    <http://purl.org/dc/terms/identifier> "http://w3id.org/ern-euro-nmd-fdp" ;
+    a <http://purl.org/spar/datacite/Identifier> .
+
+<http://w3id.org/ern-euro-nmd-fdp#publisher>
+    a <http://xmlns.com/foaf/0.1/Agent> ;
+    <http://xmlns.com/foaf/0.1/name> "Clinical Trials Unit @University Medical Center Freiburg" .
+
+<http://w3id.org/ern-euro-nmd-fdp/catalog/>
+    <http://purl.org/dc/terms/title> "Catalogs" ;
+    a <http://www.w3.org/ns/ldp#DirectContainer> ;
+    <http://www.w3.org/ns/ldp#contains> <http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443> ;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <https://w3id.org/fdp/fdp-o#metadataCatalog> ;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://w3id.org/ern-euro-nmd-fdp> .
+
+<http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443>
+    <http://purl.org/dc/terms/accessRights> <http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443#accessRights> ;
+    <http://purl.org/dc/terms/conformsTo> <http://w3id.org/ern-euro-nmd-fdp/profile/a0949e72-4466-4d53-8900-9436d1049a4b> ;
+    <http://purl.org/dc/terms/hasVersion> "1" ;
+    <http://purl.org/dc/terms/isPartOf> <http://w3id.org/ern-euro-nmd-fdp> ;
+    <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> ;
+    <http://purl.org/dc/terms/license> <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0> ;
+    <http://purl.org/dc/terms/publisher> [
+        a <http://xmlns.com/foaf/0.1/Agent> ;
+        <http://xmlns.com/foaf/0.1/name> "ERN EURO-NMD"
+    ] ;
+    <http://purl.org/dc/terms/title> "EURO-NMD Registry Catalog" ;
+    <http://semanticscience.org/resource/SIO_000628> <http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443/metrics/445c0a70d1e214e545b261559e2842f4>, <http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443/metrics/5d27e854a9e78eb3f663331cd47cdc13> ;
+    a <http://www.w3.org/ns/dcat#Catalog>, <http://www.w3.org/ns/dcat#Resource> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "EURO-NMD Registry Catalog" ;
+    <http://www.w3.org/ns/dcat#dataset> <http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5> ;
+    <http://www.w3.org/ns/dcat#themeTaxonomy> <http://bioregistry.io/edam:data_1153>, <http://bioregistry.io/ncit:C101216>, <http://bioregistry.io/ncit:C102741>, <http://bioregistry.io/ncit:C129000>, <http://bioregistry.io/ncit:C156420>, <http://bioregistry.io/ncit:C15709>, <http://bioregistry.io/ncit:C159705>, <http://bioregistry.io/ncit:C16205>, <http://bioregistry.io/ncit:C18020>, <http://bioregistry.io/ncit:C25242>, <http://bioregistry.io/ncit:C28421>, <http://bioregistry.io/ncit:C4731>, <http://bioregistry.io/ncit:C68615>, <http://bioregistry.io/ncit:C70810>, <http://bioregistry.io/ncit:C84910>, <http://bioregistry.io/obo:DUO_0000001>, <http://bioregistry.io/obo:HP_0003674>, <http://bioregistry.io/obo:ICO_0000001>, <http://bioregistry.io/obo:OBIB_0000488>, <http://bioregistry.io/obo:OBI_0000810>, <http://bioregistry.io/obo:OBI_0001546>, <http://bioregistry.io/sio:SIO_001001>, <http://bioregistry.io/sio:SIO_001052>, <http://bioregistry.io/sio:SIO_001381>, <http://bioregistry.io/sio:SIO_001389>, <http://bioregistry.io/sio:SIO_010056>, <http://purl.bioontology.org/ontology/LNC/MTHU854719>, <http://purl.org/ejp-rd/vocabulary/PatientRegistry>, <http://purl.org/ejp-rd/vocabulary/VPDiscoverable>, <http://purl.org/ejp-rd/vocabulary/VPQueryable>, <http://www.orpha.net/ORDO/Orphanet_68380>, <http://www.orpha.net/ORDO/Orphanet_68381>, <http://www.orpha.net/ORDO/Orphanet_98491>, <http://www.orpha.net/ORDO/Orphanet_98503> ;
+    <http://xmlns.com/foaf/0.1/homePage> <https://registry.ern-euro-nmd.eu/> ;
+    <https://w3id.org/fdp/fdp-o#metadataIdentifier> <http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443#identifier> ;
+    <https://w3id.org/fdp/fdp-o#metadataIssued> "2022-10-13T12:52:19.878251963Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <https://w3id.org/fdp/fdp-o#metadataModified> "2022-10-13T13:39:06.516966965Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443#accessRights>
+    <http://purl.org/dc/terms/description> "This resource has no access restriction" ;
+    a <http://purl.org/dc/terms/RightsStatement> .
+
+<http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443#identifier>
+    <http://purl.org/dc/terms/identifier> "http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443" ;
+    a <http://purl.org/spar/datacite/Identifier> .
+
+<http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443/metrics/445c0a70d1e214e545b261559e2842f4>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.ietf.org/rfc/rfc3986.txt> .
+
+<http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443/metrics/5d27e854a9e78eb3f663331cd47cdc13>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.wikidata.org/wiki/Q8777> .
+
+<http://w3id.org/ern-euro-nmd-fdp/dataset/>
+    <http://purl.org/dc/terms/title> "Datasets" ;
+    a <http://www.w3.org/ns/ldp#DirectContainer> ;
+    <http://www.w3.org/ns/ldp#contains> <http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5> ;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://www.w3.org/ns/dcat#dataset> ;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443> .
+
+<http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5>
+    <http://purl.org/dc/terms/accessRights> <http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5#accessRights> ;
+    <http://purl.org/dc/terms/conformsTo> <http://w3id.org/ern-euro-nmd-fdp/profile/2f08228e-1789-40f8-84cd-28e3288c3604> ;
+    <http://purl.org/dc/terms/hasVersion> "1" ;
+    <http://purl.org/dc/terms/isPartOf> <http://w3id.org/ern-euro-nmd-fdp/catalog/9e38450d-89cb-4f78-ac50-0f048a633443> ;
+    <http://purl.org/dc/terms/language> <http://id.loc.gov/vocabulary/iso639-1/en> ;
+    <http://purl.org/dc/terms/license> <http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0> ;
+    <http://purl.org/dc/terms/publisher> [
+        a <http://xmlns.com/foaf/0.1/Agent> ;
+        <http://xmlns.com/foaf/0.1/name> "ERN EURO-NMD"
+    ] ;
+    <http://purl.org/dc/terms/title> "EURO-NMD Registry Dataset" ;
+    <http://semanticscience.org/resource/SIO_000628> <http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5/metrics/445c0a70d1e214e545b261559e2842f4>, <http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5/metrics/5d27e854a9e78eb3f663331cd47cdc13> ;
+    a <http://www.w3.org/ns/dcat#Dataset>, <http://www.w3.org/ns/dcat#Resource> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "EURO-NMD Registry Dataset" ;
+    <http://www.w3.org/ns/dcat#contactPoint> <https://registry.ern-euro-nmd.eu/> ;
+    <http://www.w3.org/ns/dcat#theme> <http://bioregistry.io/edam:data_1153>, <http://bioregistry.io/ncit:C101216>, <http://bioregistry.io/ncit:C102741>, <http://bioregistry.io/ncit:C129000>, <http://bioregistry.io/ncit:C156420>, <http://bioregistry.io/ncit:C15709>, <http://bioregistry.io/ncit:C159705>, <http://bioregistry.io/ncit:C16205>, <http://bioregistry.io/ncit:C18020>, <http://bioregistry.io/ncit:C25242>, <http://bioregistry.io/ncit:C28421>, <http://bioregistry.io/ncit:C4731>, <http://bioregistry.io/ncit:C68615>, <http://bioregistry.io/ncit:C70810>, <http://bioregistry.io/ncit:C84910>, <http://bioregistry.io/obo:DUO_0000001>, <http://bioregistry.io/obo:HP_0003674>, <http://bioregistry.io/obo:ICO_0000001>, <http://bioregistry.io/obo:OBIB_0000488>, <http://bioregistry.io/obo:OBI_0000810>, <http://bioregistry.io/obo:OBI_0001546>, <http://bioregistry.io/sio:SIO_001001>, <http://bioregistry.io/sio:SIO_001052>, <http://bioregistry.io/sio:SIO_001381>, <http://bioregistry.io/sio:SIO_001389>, <http://bioregistry.io/sio:SIO_010056>, <http://purl.bioontology.org/ontology/LNC/MTHU854719>, <http://purl.org/ejp-rd/vocabulary/PatientRegistry>, <http://www.orpha.net/ORDO/Orphanet_68380>, <http://www.orpha.net/ORDO/Orphanet_68381>, <http://www.orpha.net/ORDO/Orphanet_98491>, <http://www.orpha.net/ORDO/Orphanet_98503> ;
+    <https://w3id.org/fdp/fdp-o#metadataIdentifier> <http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5#identifier> ;
+    <https://w3id.org/fdp/fdp-o#metadataIssued> "2022-10-13T12:54:33.685320852Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    <https://w3id.org/fdp/fdp-o#metadataModified> "2022-10-13T13:39:06.401087322Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5#accessRights>
+    <http://purl.org/dc/terms/description> "This resource has no access restriction" ;
+    a <http://purl.org/dc/terms/RightsStatement> .
+
+<http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5#identifier>
+    <http://purl.org/dc/terms/identifier> "http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5" ;
+    a <http://purl.org/spar/datacite/Identifier> .
+
+<http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5/metrics/445c0a70d1e214e545b261559e2842f4>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.ietf.org/rfc/rfc3986.txt> .
+
+<http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5/metrics/5d27e854a9e78eb3f663331cd47cdc13>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.wikidata.org/wiki/Q8777> .
+
+<http://w3id.org/ern-euro-nmd-fdp/distribution/>
+    <http://purl.org/dc/terms/title> "Distributions" ;
+    a <http://www.w3.org/ns/ldp#DirectContainer> ;
+    <http://www.w3.org/ns/ldp#hasMemberRelation> <http://www.w3.org/ns/dcat#distribution> ;
+    <http://www.w3.org/ns/ldp#membershipResource> <http://w3id.org/ern-euro-nmd-fdp/dataset/5d6f2a12-4d8d-4f3a-ad83-b6e8f0fe9dc5> .
+
+<http://w3id.org/ern-euro-nmd-fdp/metrics/445c0a70d1e214e545b261559e2842f4>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.ietf.org/rfc/rfc3986.txt> .
+
+<http://w3id.org/ern-euro-nmd-fdp/metrics/5d27e854a9e78eb3f663331cd47cdc13>
+    <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777> ;
+    <http://semanticscience.org/resource/SIO_000628> <https://www.wikidata.org/wiki/Q8777> .
+
+<http://w3id.org/ern-euro-nmd-fdp/profile/2f08228e-1789-40f8-84cd-28e3288c3604>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Dataset Profile" .
+
+<http://w3id.org/ern-euro-nmd-fdp/profile/77aaad6a-0136-4c6e-88b9-07ffccd0ee4c>
+    <http://www.w3.org/2000/01/rdf-schema#label> "FAIR Data Point Profile" .
+
+<http://w3id.org/ern-euro-nmd-fdp/profile/a0949e72-4466-4d53-8900-9436d1049a4b>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Catalog Profile" .
+
