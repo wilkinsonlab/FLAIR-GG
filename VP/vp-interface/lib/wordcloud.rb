@@ -1,18 +1,19 @@
-
 class Wordcloud
   attr_accessor :words
 
   def initialize(refresh: false)
     @words = []
-    return if File.exist?("./cache/REFRESHING") # multiple browser calls are a problem!
 
     if File.exist?("./cache/keywords.json") && (refresh == "false")
       thaw
     else
-      f = open("./cache/REFRESHING", "w")  # multiple browser calls are a problem!
-      f.puts "REFRESHING"
-      f.close
-      
+      begin
+        f = open("./cache/WCREFRESHING", "w")  # multiple browser calls are a problem!
+        f.puts "WCREFRESHING"
+        f.close
+      rescue StandardError
+        warn "WCREfreshing file exists... continue"
+      end
       fdps = FDPConfig::FDPSITES
       @words = []
       fdps.each do |fdp|
@@ -22,10 +23,11 @@ class Wordcloud
       end
       warn "flattening"
       @words = @words.flatten
+      @words.compact!
       warn "\n\nWORDS\n\n#{@words}"
       freeze
 
-      File.delete("./cache/REFRESHING")
+      FileUtils.rm_f("./cache/WCREFRESHING")
     end
   end
 

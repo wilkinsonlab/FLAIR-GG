@@ -1,18 +1,29 @@
 require "json"
 require "linkeddata"
 
-QUERY1 = "select ?title where {?s ?p ?title . FILTER(CONTAINS(lcase(str(?p)), 'title'))}"
-QUERY2 = "select ?title where {?s ?p1 ?o . ?o ?p2 ?title .
+QUERY1 = "select ?title where {|||SUBJECT||| ?p ?title . FILTER(CONTAINS(lcase(str(?p)), 'title'))}"
+QUERY2 = "select ?title where {|||SUBJECT||| ?p1 ?o . ?o ?p2 ?title .
           FILTER(CONTAINS(lcase(str(?p1)), 'name')) .
           FILTER(CONTAINS(lcase(str(?p2)), 'textvalue'))}"
+QUERY3 = "select ?title where {|||SUBJECT||| <http://www.w3.org/2000/01/rdf-schema#label> ?title }"
+QUERY4 = "select ?title where {|||SUBJECT||| ?p1 ?title .
+          FILTER(CONTAINS(lcase(str(?p1)), 'name')) }"
+QUERY5 = "select ?title where {|||SUBJECT||| <http://www.w3.org/2000/01/rdf-schema#label> ?title .}"
+
+
+TYPEHASH = {
+  "text/turtle" => :turtle,
+  "application/ld+json" => :jsonld,
+  "application/rdf+xml" => :rdfxml,
+  "text/html" => :rdfa
+}
 
 def resolve_url_to_jsonld(url:)
   graph = RDF::Graph.new
   begin
     r = RestClient.get(url)
-  # headers: {accept: "text/turtle, application/ld+json, application/rdf+xml"}
   rescue StandardError
-    warn "#{url} didn't resolve to HTML #{r}"
+    warn "#{url} didn't resolve to HTML when trying for jsonld in HTML #{r}"
     return nil
   end
   # <script type="application/ld+json">
@@ -30,50 +41,112 @@ def resolve_url_to_jsonld(url:)
   graph
 end
 
-def resolve_url_to_embedded_metadata(url:)
-  begin
-    r = RestClient.get(url,
-                       headers: { accept: "text/turtle, application/ld+json, application/rdf+xml" })
-  rescue StandardError
-    warn "#{url} didn't resolve using content type headers #{r}"
-    return nil
-  end
-  # formattype = RDF::Format.for({:sample => r.body[0..3000]})
+def resolve_url_to_json(url:, accept: "application/json")
   graph = RDF::Graph.new
-  b = r.body
-  b = b.encode(Encoding.find("UTF-8"), invalid: :replace, undef: :replace, replace: "")
-  data = StringIO.new(b.encode("UTF-8"))
-  RDF::Reader.for(:rdfa).new(data) do |reader|
-    reader.each_statement do |statement|
-      graph << statement
-    end
+  type = TYPEHASH[accept] # e.g. :turtle  for the RDF reader
+
+  begin
+    r = RestClient::Request.execute(
+      method: :get,
+      url: url,
+      headers: { accept: accept }
+    )
+  rescue StandardError
+    warn "#{url} didn't resolve when trying for #{accept} #{r}"
+    r = RestClient::Request.execute(
+      method: :get,
+      url: url,
+      headers: { accept: accept }
+    )
   end
+
+  body = r.body
+  body = body.encode(Encoding.find("UTF-8"), invalid: :replace, undef: :replace, replace: "")
+  JSON.parse(body)
+end
+
+def resolve_url_to_rdf(url:, accept: "text/turtle")
+  graph = RDF::Graph.new
+  type = TYPEHASH[accept] # e.g. :turtle  for the RDF reader
+
+  warn "retrieving type: #{type}"
+  begin
+    r = RestClient::Request.execute(
+      method: :get,
+      url: url,
+      headers: { accept: accept }
+    )
+  rescue StandardError
+    warn "#{url} didn't resolve when trying for #{accept} #{r}"
+    return graph
+  end
+
+  body = r.body
+  # warn "RETURNED BODY:  #{body}\n\n"
+  body = body.encode(Encoding.find("UTF-8"), invalid: :replace, undef: :replace, replace: "")
+  data = StringIO.new(body.encode("UTF-8"))
+  # warn "READING DATA:  #{data}\n\n"
+  begin
+    RDF::Reader.for(type).new(data) do |reader|
+      reader.each_statement do |statement|
+        graph << statement
+      end
+    end
+  rescue StandardError
+    warn "This failed to parse as  #{accept} ... moving on"
+  end
+  warn "GRAPHSIZE:  #{graph.size}\n\n"
   graph
 end
 
-def lookup_title(synonym_urls:)
-  title = nil
-  synonym_urls.each do |url|
-    if (graph = resolve_url_to_jsonld(url: url)) # for orphanet, the more accurate title is in the jsonld
-      title = find_title_in_graph(graph: graph)
-    end
-
-    unless title
-      graph = resolve_url_to_embedded_metadata(url: url) # the rdfa contains a title, but it is prefixed with "Orphanet"
-      title = find_title_in_graph(graph: graph)
-    end
+def refresh_cache
+  f = open("./cache/REFRESHING", "w") # multiple browser calls are a problem!
+  f.puts "REFRESHING"
+  f.close
+  FDPConfig.new  # initialize
+  fdps = FDPConfig::FDPSITES
+  fdps.each do |fdp_address|
+    warn "working with #{fdp_address}"
+    fdp = FDP.new(address: fdp_address, refresh: true)
+    hash = fdp.find_discoverables
+    @discoverables.merge!(hash)
   end
-  title
+  FileUtils.rm_f("./cache/REFRESHING")
 end
 
-def find_title_in_graph(graph:)
-  title = nil
-  [QUERY1, QUERY2].each do |query|
-    query = SPARQL.parse(query)
-    graph.query(query) do |result|
-      warn "found title #{result[:title]}"
-      title = result[:title] if result[:title]
-    end
+def get_resources
+  discoverables = {}
+  FDPConfig.new  # initialize
+  fdps = FDPConfig::FDPSITES
+  fdps.each do |fdp_address|
+    fdp = FDP.new(address: fdp_address, refresh: false)
+    hash = fdp.find_discoverables
+    discoverables.merge!(hash)
   end
-  title.to_s
+  discoverables
+end
+
+def keyword_search_shell(keyword:)
+  warn "in keyword search now\n\n\n"
+  discoverables = {}
+  FDPConfig.new  # initialize
+  fdps = FDPConfig::FDPSITES
+  fdps.each do |fdp_address|
+    fdp = FDP.new(address: fdp_address, refresh: false)
+    hash = fdp.keyword_search(keyword: keyword)
+    discoverables.merge!(hash)
+  end
+  discoverables
+end
+
+def ontology_search_shell(term:)
+  discoverables = {}
+  FDPConfig.new # initialize
+  fdps = FDPConfig::FDPSITES
+  fdps.each do |fdp_address|
+    fdp = FDP.new(address: fdp_address, refresh: false)
+    hash = fdp.ontology_search(uri: term)
+    discoverables.merge!(hash)
+  end
+  discoverables
 end
