@@ -52,6 +52,15 @@
 
 **uniqid**: string (used to create context node)
 
-**comment**: string
+**org_name**: string
+
+**org_id**:  web page or ROR entry.  MUST BE A UNIQUE URL!
+
+**member_unique_id**:  any kind of unique identifier for that member.  Must be consistently used across all entries
+
+**member_name**: Persons full name
+
+**member_role**: SIO_000886 (author role); SIO_000885 (publisher role); SIO_000881 (investigational role)
+
 
 

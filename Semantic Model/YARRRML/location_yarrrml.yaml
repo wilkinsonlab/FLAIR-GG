@@ -78,7 +78,7 @@ mapping:
 
     - objects:
         type: string
-        value: Germplasm
+        value: Collection Activity
       predicate: rdfs:label
 
     - objects:
