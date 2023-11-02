@@ -1,0 +1,22 @@
+<http://my_example.com/bgv123#Collection> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sio.semanticscience.org/resource/SIO> <http://my_example.com/1234567_Context>.
+<http://my_example.com/bgv123#Collection> <http://www.w3.org/2000/01/rdf-schema#label> "Collection Activity" <http://my_example.com/1234567_Context>.
+<http://my_example.com/bgv123#Collection> <http://www.w3.org/ns/prov#wasAssociatedWith> <http://www.bancodegermoplasma.upm.es/> <http://my_example.com/1234567_Context>.
+<nullhttp%3A%2F%2Fwww.bancodegermoplasma.upm.es%2F#OrganizationID> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sio.semanticscience.org/resource/SIO_000115> <http://my_example.com/1234567_Context>.
+<nullhttp%3A%2F%2Fwww.bancodegermoplasma.upm.es%2F#OrganizationID> <http://www.w3.org/2000/01/rdf-schema#label> "http://www.bancodegermoplasma.upm.es/" <http://my_example.com/1234567_Context>.
+<nullhttp%3A%2F%2Fwww.bancodegermoplasma.upm.es%2F#OrganizationID> <https://schema.org/url> <http://www.bancodegermoplasma.upm.es/> <http://my_example.com/1234567_Context>.
+<nullhttp%3A%2F%2Fwww.bancodegermoplasma.upm.es%2F#OrganizationID> <http://sio.semanticscience.org/resource/SIO_000300> "http://www.bancodegermoplasma.upm.es/" <http://my_example.com/1234567_Context>.
+<http://my_example.com/bgv123#OrgMember_163483> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Agent> <http://my_example.com/1234567_Context>.
+<http://my_example.com/bgv123#OrgMember_163483> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/org#Membership> <http://my_example.com/1234567_Context>.
+<http://my_example.com/bgv123#OrgMember_163483> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://sio.semanticscience.org/resource/SIO_000498> <http://my_example.com/1234567_Context>.
+<http://my_example.com/bgv123#OrgMember_163483> <http://xmlns.com/foaf/0.1/name> "Santiago Moreno" <http://my_example.com/1234567_Context>.
+<http://my_example.com/bgv123#OrgMember_163483> <http://www.w3.org/ns/org#role> <http://my_example.com/bgv123#OrgMemberRole_163483> <http://my_example.com/1234567_Context>.
+<http://my_example.com/bgv123#OrgMember_163483> <http://sio.semanticscience.org/resource/SIO_000228> <http://my_example.com/bgv123#OrgMemberRole_163483> <http://my_example.com/1234567_Context>.
+<http://www.bancodegermoplasma.upm.es/> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Agent> <http://my_example.com/1234567_Context>.
+<http://www.bancodegermoplasma.upm.es/> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/org#Organization> <http://my_example.com/1234567_Context>.
+<http://www.bancodegermoplasma.upm.es/> <http://sio.semanticscience.org/resource/SIO_000012> <http://www.w3.org/ns/prov#Agent> <http://my_example.com/1234567_Context>.
+<http://www.bancodegermoplasma.upm.es/> <http://www.w3.org/2000/01/rdf-schema#label> "UPM BGV" <http://my_example.com/1234567_Context>.
+<http://www.bancodegermoplasma.upm.es/> <http://sio.semanticscience.org/resource/SIO_000671> <nullhttp%3A%2F%2Fwww.bancodegermoplasma.upm.es%2F#OrganizationID> <http://my_example.com/1234567_Context>.
+<http://www.bancodegermoplasma.upm.es/> <http://www.w3.org/ns/org#hasMember> <http://my_example.com/bgv123#OrgMember_163483> <http://my_example.com/1234567_Context>.
+<http://www.bancodegermoplasma.upm.es/> <http://sio.semanticscience.org/resource/SIO_000059> <http://my_example.com/bgv123#OrgMember_163483> <http://my_example.com/1234567_Context>.
+<http://my_example.com/bgv123#OrgMember_163483> <http://www.w3.org/ns/org#Role> <http://www.w3.org/ns/prov#Agent> <http://my_example.com/1234567_Context>.
+<http://my_example.com/bgv123#OrgMember_163483> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://semanticscience.org/resource/SIO_000886> <http://my_example.com/1234567_Context>.
