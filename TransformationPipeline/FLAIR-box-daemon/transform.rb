@@ -2,9 +2,14 @@ require "sinatra"
 require "rest-client"
 require "./http_utils"
 require "open3"
+require "sinatra"
+require "rest-client"
+require "./http_utils"
+require "open3"
 
 include HTTPUtils
 
+get "/" do
 get "/" do
   update
   yarrrml_substitute
@@ -29,7 +34,13 @@ def yarrrml_substitute
   baseURI = "http://example.org/" if baseURI.empty?
   template_list = Dir["/conf/*.pre-yaml"]
   template_list.each do |t|
+  baseURI = ENV.fetch("baseURI", "http://example.org/")
+  baseURI = "http://example.org/" if baseURI.empty?
+  template_list = Dir["/conf/*.pre-yaml"]
+  template_list.each do |t|
     content = File.read(t)
+    content.gsub!("|||baseURI|||", baseURI)
+    newfile = t.gsub!(".pre-yaml", "yaml")
     content.gsub!("|||baseURI|||", baseURI)
     newfile = t.gsub!(".pre-yaml", "yaml")
     warn "writing #{newfile}"
@@ -44,7 +55,9 @@ def execute
   warn "executing transform"
   purge_nq
   @datatype_list = Dir["/data/*.csv"]
+  @datatype_list = Dir["/data/*.csv"]
   @datatype_list.each do |d|
+    datatype = d.match(%r{.+/([^.]+)\.csv})[1]
     datatype = d.match(%r{.+/([^.]+)\.csv})[1]
     next unless datatype
 
@@ -70,17 +83,25 @@ def write_to_graphdb(concatenated, reponame)
   pass = ENV.fetch("GraphDB_Pass", nil)
   network = ENV["networkname"] || "graphdb"
   #  reponame = ENV.fetch('GRAPHDB_REPONAME')
+  user = ENV.fetch("GraphDB_User", nil)
+  pass = ENV.fetch("GraphDB_Pass", nil)
+  network = ENV["networkname"] || "graphdb"
+  #  reponame = ENV.fetch('GRAPHDB_REPONAME')
   url = "http://#{network}:7200/repositories/#{reponame}/statements"
   #  headers = { content_type: 'application/n-triples' }
+  headers = { content_type: "application/n-quads" }
   headers = { content_type: "application/n-quads" }
   HTTPUtils.put(url, headers, concatenated, user, pass)
 end
 
 def purge_nq
   File.delete("/data/triples/*.nq")
+  File.delete("/data/triples/*.nq")
 rescue StandardError
   warn "Deleting the exisiting .nq files failed!"
+  warn "Deleting the exisiting .nq files failed!"
 ensure
+  warn "looks like it is already clean in here!"
   warn "looks like it is already clean in here!"
 end
 
@@ -89,7 +110,9 @@ def metadata_update
   return if ENV["DIST_RECORDID"].empty? || ENV["DATASET_RECORDID"].empty? || ENV["DATA_SPARQL_ENDPOINT"].empty?
 
   warn "calling metadata updater image"
+  warn "calling metadata updater image"
   begin
+    resp = RestClient.get("http://updater:4567/update")
     resp = RestClient.get("http://updater:4567/update")
   rescue StandardError
     warn "\n\n\ncall to http://updater:4567/update FAILED"
@@ -99,6 +122,8 @@ def metadata_update
 end
 
 def cleanup
+  warn "closing cleanup open3"
+  _o, _s = Open3.capture2("rm -rf /data/triplesstats.csv")
   warn "closing cleanup open3"
   _o, _s = Open3.capture2("rm -rf /data/triplesstats.csv")
 end
