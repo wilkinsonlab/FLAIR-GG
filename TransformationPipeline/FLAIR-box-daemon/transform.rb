@@ -48,9 +48,10 @@ def execute
     datatype = d.match(%r{.+/([^.]+)\.csv})[1]
     next unless datatype
 
+    warn "starting transform of #{datatype}: http://yarrrml-rdfizer:4567/#{datatype}"
     _resp = RestClient.get("http://yarrrml-rdfizer:4567/#{datatype}")
+    warn "completed transform of #{datatype}: http://yarrrml-rdfizer:4567/#{datatype}"
   end
-  warn "done transform"
 end
 
 def load_flair
