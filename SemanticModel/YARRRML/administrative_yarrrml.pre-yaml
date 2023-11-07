@@ -17,7 +17,6 @@ prefixes:
 sources:
   source_location:
     access: /mnt/data/administrative.csv
-#    access: administrative.csv
     iterator: $
     referenceFormulation: csv
 
