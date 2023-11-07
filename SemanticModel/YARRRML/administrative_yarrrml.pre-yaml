@@ -71,7 +71,7 @@ mapping:
 
     - objects:
         type: iri
-        value: $(org_id)#OrganizationID
+        value: $(org_id)
       predicate: sio:SIO_000671
 
 
@@ -81,7 +81,7 @@ mapping:
     graph: this:$(uniqid)_Context
     sources:
     - source_location
-    subjects: $(org_id)#OrganizationID
+    subjects: $(org_id)
     predicateobject:
     - objects:
         type: iri
