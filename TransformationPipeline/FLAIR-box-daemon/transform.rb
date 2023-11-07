@@ -19,7 +19,7 @@ def update
   warn "first open3 git pull"
   o, e, _s = Open3.capture3("cd FLAIR-GG && git pull")
   warn "second open3 copy yarrrml #{o}  #{e}"
-  o, e, _s = Open3.capture3("cp -rf ./SemanticModel/YARRRML/*.yaml  /data") # CDE V2
+  o, e, _s = Open3.capture3("cp -rf ./FLAIR-GG/SemanticModel/YARRRML/*.pre-yaml  /data") # CDE V2
   warn "second open3 complete #{o} #{e}"
 end
 
