@@ -57,7 +57,7 @@ def load_flair
   files = Dir["/data/triples/*.nq"]
   files.each do |f|
     warn "Processing file #{f}"
-    datatype = d.match(%r{.+/([^.]+)\.nq})[1]
+    datatype = f.match(%r{.+/([^.]+)\.nq})[1]
     content = File.read(f)
     content.gsub!(/<\s+/, "<")
     write_to_graphdb(content, datatype)
@@ -76,7 +76,7 @@ end
 
 def purge_nq
   begin
-    File.delete("/data/triples/*.nq")
+    `rm -rf /data/triples/*.nq`
   rescue StandardError
     warn "Deleting the exisiting .nq files failed!"
   ensure
