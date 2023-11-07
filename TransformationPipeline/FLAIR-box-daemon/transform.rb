@@ -31,12 +31,10 @@ def yarrrml_substitute
   template_list.each do |t|
     content = File.read(t)
     content.gsub!("|||baseURI|||", base_uri)
-    newfile = t.gsub!(".pre-yaml", ".yaml")
+    newfile = t.gsub(".pre-yaml", ".yaml")
     warn "writing #{newfile}"
-    warn "writing content #{content}"
-    f = File.open(newfile, "w")
-    f.puts content
-    f.close
+    # warn "writing content #{content}"
+    File.write(newfile, content)
     warn "deleting #{t}"
     File.delete(t)
     warn "deleted #{t}"
