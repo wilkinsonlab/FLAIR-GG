@@ -19,7 +19,7 @@ def update
   warn "first open3 git pull"
   o, e, _s = Open3.capture3("cd FLAIR-GG && git pull")
   warn "second open3 copy yarrrml #{o}  #{e}"
-  o, e, _s = Open3.capture3("cp -rf ./FLAIR-GG/SemanticModel/YARRRML/*.pre-yaml  /data") # CDE V2
+  o, e, _s = Open3.capture3("cp -rf ./FLAIR-GG/Semantic\ Model/YARRRML/*.pre-yaml  /data") # CDE V2
   warn "second open3 complete #{o} #{e}"
 end
 
@@ -27,7 +27,7 @@ def yarrrml_substitute
   warn "starting yarrrml substitution"
   base_uri = ENV.fetch("baseURI", "http://example.org/")
   base_uri = "http://example.org/" if base_uri.empty?
-  template_list = Dir["/conf/*.pre-yaml"]
+  template_list = Dir["/data/*.pre-yaml"]
   template_list.each do |t|
     content = File.read(t)
     content.gsub!("|||baseURI|||", base_uri)
@@ -36,6 +36,7 @@ def yarrrml_substitute
     f = File.open(newfile, "w")
     f.puts content
     f.close
+    File.delete(t)
   end
   warn "finished yarrrml substitution"
 end
