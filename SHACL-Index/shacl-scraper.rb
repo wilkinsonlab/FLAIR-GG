@@ -14,10 +14,19 @@ fdps.each do |fdp|
     dsets = get_datasets(cat: cat, token: token)
     warn dsets
     dsets.each do |dset|
-      dists = get_distributions(dset: dset, token: token)
-      warn dists
+      graph = RDF::Graph.load("#{dset}.ttl")
+      query = "PREFIX : <http://bigdata.com/>
+      PREFIX dct: <http://purl.org/dc/terms/>      
+      SELECT ?shacl WHERE {
+         ?s dct:conformsTo ?shacl .
+      }"
+      sparql = SPARQL.parse(query)
+      qgraph.query(sparql) do |result|
+        shacluri = result[:shacl]
+        write_to_repo(shacl: shacluri, catalog: cat)
+      end
+      # dists = get_distributions(dset: dset, token: token)
+      # warn dists
     end
   end
 end
-
-

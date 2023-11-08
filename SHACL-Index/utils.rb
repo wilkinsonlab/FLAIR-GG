@@ -1,6 +1,7 @@
 require "rest-client"
 require "linkeddata"
 require "json"
+require "rdf/raptor"
 
 def get_fdps(index: "http://138.4.139.18:9090/index/entries?page=0&size=1000&sort=string")
   r = RestClient::Request.execute(
@@ -27,11 +28,11 @@ def get_token(fdp:)
   fdp.gsub(%r{/$}, "") # strip tailing slash
   fdp += "/tokens" unless fdp.match(/tokens$/)
   warn "FDP:  #{fdp} pass #{ARGV[0]}"
-  r = fetch(url: fdp, 
-          method: :post, 
-          data: { "email": "mark.wilkinson@upm.es", "password": ARGV[0] },
-          headers: { accept: "application/json", 
-          content_type: "application/json" })
+  r = fetch(url: fdp,
+            method: :post,
+            data: { email: "mark.wilkinson@upm.es", password: ARGV[0] },
+            headers: { accept: "application/json",
+                       content_type: "application/json" })
   # r = RestClient::Request.execute(
   #   method: :post,
   #   url: fdp,
@@ -66,7 +67,6 @@ def get_distributions(dset:, token:)
   dists.compact
 end
 
-
 def get_catalogs(fdp:, token:)
   #  curl -L -X GET http://localhost:7070/meta -H "accept: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzOWUwZmE0Ny0wYmZkLTRhNTYtYjA5ZS0xMjU2ODVlNmE1NDUiLCJpYXQiOjE2OTkwMjA5NDQsImV4cCI6MTcwMDIzMDU0NH0.6adtdWMlQWUz8R506tDlJsRHB3fIlOS8tQIjHs-Jeom_8oyv8ionK0yS81OfJT6CpVz2mrpHjujcFnizbmuQBQ"
   fdp.gsub(%r{/$}, "") # strip tailing slash
@@ -95,8 +95,33 @@ def get_catalogs(fdp:, token:)
   # }
 end
 
+def write_to_repo(shacl:, catalog:)
+  shacl = RestClient.get(shacl)
+  response = RestClient.execute(
+    method: :post,
+    # url: "http://138.4.139.18:8890/DAV/home/LDP/ShaclIndex/",
+    url: "http://localhost:8890/DAV/home/LDP/ShaclIndex/",
+    headers: { content_type: "text/turtle", accept: "text/turtle" },
+    payload: "@prefix ldp:	<http://www.w3.org/ns/ldp#> . <>    rdf:type   ldp:Container ."
+  )
+  newcontainer = response.headers[:location]
+  url = newcontainer.gsub(/http:\/\//, "http://ldp:ldp@")
+  _response = RestClient.execute(
+    method: :put,
+    url: url,
+    headers: { content_type: "text/turtle", accept: "text/turtle", slug: "shacl"},
+    payload: shacl
+  )
+  _response = RestClient.execute(
+    method: :post,
+    url: url,
+    headers: { content_type: "text/plain", accept: "text/turtle", slug: "url"},
+    payload: catalog
+  )
+end
+
 def fetch(url:, method:, headers:, data:)
-  begin    
+  begin
     warn "trying #{url}"
     r = RestClient::Request.execute(
       method: method,

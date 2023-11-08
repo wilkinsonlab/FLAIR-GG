@@ -104,6 +104,4 @@ end
 def cleanup
   warn "closing cleanup open3"
   _o, _s = Open3.capture2("rm -rf /data/triplesstats.csv")
-  warn "closing cleanup open3"
-  _o, _s = Open3.capture2("rm -rf /data/triplesstats.csv")
 end
