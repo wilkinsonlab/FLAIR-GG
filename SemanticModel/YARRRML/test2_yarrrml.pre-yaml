@@ -29,5 +29,5 @@ mapping:
     predicateobject:
     - objects:
         type: iri
-        value: $(org_id)
+        value: $(org_id)#Organization
       predicate: prov:wasAssociatedWith
