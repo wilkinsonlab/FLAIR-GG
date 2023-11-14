@@ -1,0 +1,18 @@
+%html
+  %body
+    :css
+      body {background-color: pink} 
+
+    -@queue.each do |k|
+      %strong
+        = "REQUEST #{k.to_s}"
+      %br
+      %a{:href=> "./review/#{k}"} Review
+      %br
+      %a{:href=> "./accept/#{k}"} Accept
+      %br
+      %a{:href=> "./reject/#{k}"} Reject
+      %br
+      %br
+
+  

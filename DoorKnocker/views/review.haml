@@ -1,0 +1,27 @@
+%html
+  %body
+    :css
+      body {background-color: pink} 
+    %strong= @error
+    
+    - @req.keys.each do |k|
+      %strong
+        REQUEST
+        %a{href: "https://orcid.org/#{k.to_s}"}
+          = k.to_s
+      %br
+      %br
+      %br
+    
+      %strong QUERY:
+      %br
+      %br
+      %pre
+        = Rack::Utils.escape_html  @req[k][1]
+      %br
+      %br
+      
+      %a{:href=> "../accept/#{@req[k][0]}"} Accept
+      %br
+      %br
+      %a{:href=> "../reject/#{@req[k][0]}"} Reject

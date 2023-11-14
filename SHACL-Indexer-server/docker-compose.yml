@@ -1,0 +1,10 @@
+version: "3"
+services:
+
+  shaclindexer:
+    image: markw/shacl-indexer-server:0.0.1
+    container_name: indexer
+    network_mode: host
+    restart: always
+    volumes:
+      - /tmp:/tmp

@@ -1,0 +1,518 @@
+XX
+XX
+EU	https://rdf.metanetx.org/sparql
+XX
+SH	<https://rdf.metanetx.org/schema/REACShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <https://rdf.metanetx.org/schema/REAC> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#comment> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/reacInMNXref> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/classification> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/isBalanced> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/left> ;
+SH			sh:class <https://rdf.metanetx.org/schema/PART> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/reacRefer> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/reacSource> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/right> ;
+SH			sh:class <https://rdf.metanetx.org/schema/PART> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/mnxr> ;
+SH			sh:class <https://rdf.metanetx.org/schema/REAC> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/reacReplacedBy> ;
+SH			sh:class <https://rdf.metanetx.org/schema/REAC> ;
+SH		] .
+XX
+SH	<https://rdf.metanetx.org/schema/GPRShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <https://rdf.metanetx.org/schema/GPR> ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/reac> ;
+SH			sh:class <https://rdf.metanetx.org/schema/REAC> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/cata> ;
+SH			sh:class <https://rdf.metanetx.org/schema/CATA> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#comment> ;
+SH		] .
+XX
+SH	<https://rdf.metanetx.org/schema/CHEMShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <https://rdf.metanetx.org/schema/CHEM> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#comment> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/chemInMNXref> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/chemSource> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/chemXref> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/mass> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/chemRefer> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/smiles> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/inchikey> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/chemReplacedBy> ;
+SH			sh:class <https://rdf.metanetx.org/schema/CHEM> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/hasIsomericChild> ;
+SH			sh:class <https://rdf.metanetx.org/schema/CHEM> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/chemSource> ;
+SH			sh:class <https://rdf.metanetx.org/schema/CHEM> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/chemXref> ;
+SH			sh:class <https://rdf.metanetx.org/schema/CHEM> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/chemRefer> ;
+SH			sh:class <https://rdf.metanetx.org/schema/CHEM> ;
+SH		] .
+XX
+SH	<https://rdf.metanetx.org/schema/PARTShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <https://rdf.metanetx.org/schema/PART> ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/chem> ;
+SH			sh:class <https://rdf.metanetx.org/schema/CHEM> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/comp> ;
+SH			sh:class <https://rdf.metanetx.org/schema/COMP> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/coef> ;
+SH		] .
+XX
+SH	<https://rdf.metanetx.org/schema/MNETShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <https://rdf.metanetx.org/schema/MNET> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/canGrow> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/chemCount> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/gpr> ;
+SH			sh:class <https://rdf.metanetx.org/schema/GPR> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/compCount> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/default_LB> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/default_UB> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/lineage> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/organism> ;
+SH		] .
+XX
+SH	<https://rdf.metanetx.org/schema/COMPShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <https://rdf.metanetx.org/schema/COMP> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#comment> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/compInMNXref> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/compRefer> ;
+SH			sh:class <https://rdf.metanetx.org/schema/COMP> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/compSource> ;
+SH			sh:class <https://rdf.metanetx.org/schema/COMP> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/compRefer> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/compSource> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/compXref> ;
+SH			sh:class <https://rdf.metanetx.org/schema/COMP> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/compXref> ;
+SH		] .
+XX
+SH	<https://rdf.metanetx.org/schema/PEPTShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <https://rdf.metanetx.org/schema/PEPT> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#comment> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/geneName> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/peptXref> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/peptRefer> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/peptSource> ;
+SH		] .
+XX
+SH	<https://rdf.metanetx.org/schema/CATAShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <https://rdf.metanetx.org/schema/CATA> ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/pept> ;
+SH			sh:class <https://rdf.metanetx.org/schema/PEPT> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/cplx> ;
+SH			sh:class <https://rdf.metanetx.org/schema/CPLX> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/dir> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/lb> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/ub> ;
+SH		] .
+XX
+SH	<https://rdf.metanetx.org/schema/CPLXShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <https://rdf.metanetx.org/schema/CPLX> ;
+SH		sh:property [
+SH			sh:path <https://rdf.metanetx.org/schema/subu> ;
+SH			sh:class <https://rdf.metanetx.org/schema/PEPT> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] .
+XX
+XX
+XX
+EU	http://fairdata.systems:7777/sparql
+XX
+SH	<http://rdfs.org/sioc/services#ServicesShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://rdfs.org/sioc/services#Services> ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#services_of> ;
+SH			sh:class <http://xmlns.com/foaf/0.1/Person> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#has_service> ;
+SH			sh:class <http://rdfs.org/sioc/services#Service> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://purl.org/dc/elements/1.1/title> ;
+SH		] .
+XX
+SH	<http://xmlns.com/foaf/0.1/PersonShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://xmlns.com/foaf/0.1/Person> ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#has_services> ;
+SH			sh:class <http://rdfs.org/sioc/services#Services> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://xmlns.com/foaf/0.1/account> ;
+SH			sh:class <http://rdfs.org/sioc/ns#User> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2002/07/owl#sameAs> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://xmlns.com/foaf/0.1/name> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://xmlns.com/foaf/0.1/mbox> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.openlinksw.com/schema/attribution#isDescribedUsing> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://xmlns.com/foaf/0.1/nick> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://xmlns.com/foaf/0.1/mbox_sha1sum> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://xmlns.com/foaf/0.1/openid> ;
+SH		] .
+XX
+SH	<http://rdfs.org/sioc/services#ServiceShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://rdfs.org/sioc/services#Service> ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#service_of> ;
+SH			sh:class <http://rdfs.org/sioc/services#Services> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#service_of> ;
+SH			sh:class <http://rdfs.org/sioc/ns#Space> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#service_of> ;
+SH			sh:class <http://rdfs.org/sioc/ns#User> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#service_endpoint> ;
+SH			sh:class <http://rdfs.org/sioc/services#Service> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#service_endpoint> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#service_protocol> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://purl.org/dc/elements/1.1/identifier> ;
+SH		] .
+XX
+SH	<http://rdfs.org/sioc/ns#SpaceShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://rdfs.org/sioc/ns#Space> ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#has_service> ;
+SH			sh:class <http://rdfs.org/sioc/services#Service> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://purl.org/dc/elements/1.1/title> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/ns#link> ;
+SH		] .
+XX
+SH	<http://rdfs.org/sioc/ns#UserShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://rdfs.org/sioc/ns#User> ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/services#has_service> ;
+SH			sh:class <http://rdfs.org/sioc/services#Service> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/ns#account_of> ;
+SH			sh:class <http://xmlns.com/foaf/0.1/Person> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/ns#link> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/ns#id> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.openlinksw.com/schema/attribution#isDescribedUsing> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/ns#name> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/ns#email_sha1> ;
+SH		] .
+XX
+SH	<http://rdfs.org/sioc/ns#UsergroupShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://rdfs.org/sioc/ns#Usergroup> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://rdfs.org/sioc/ns#id> ;
+SH		] .
+XX
+SH	<http://semanticscience.org/resource/hostShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://semanticscience.org/resource/host> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] .
+XX
+SH	<http://www.ebi.ac.uk/efo/efo.owl#EFO_0001067Shape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://www.ebi.ac.uk/efo/efo.owl#EFO_0001067> ;
+SH		sh:property [
+SH			sh:path <http://semanticscience.org/resource/has-participant> ;
+SH			sh:class <http://semanticscience.org/resource/host> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://semanticscience.org/resource/has-participant> ;
+SH			sh:class <http://semanticscience.org/resource/pathogen> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] .
+XX
+SH	<http://semanticscience.org/resource/measuringShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://semanticscience.org/resource/measuring> ;
+SH		sh:property [
+SH			sh:path <http://semanticscience.org/resource/has-participant> ;
+SH			sh:class <http://www.ebi.ac.uk/efo/efo.owl#EFO_0001067> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://semanticscience.org/resource/is-located-in> ;
+SH			sh:class <http://semanticscience.org/resource/country> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://semanticscience.org/resource/measured-at> ;
+SH			sh:class <http://semanticscience.org/resource/time-interval> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] .
+XX
+SH	<http://www.w3.org/2003/01/geo/wgs84_pos#PointShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://www.w3.org/2003/01/geo/wgs84_pos#Point> ;
+SH		sh:property [
+SH			sh:path <http://semanticscience.org/resource/is-location-of> ;
+SH			sh:class <http://semanticscience.org/resource/measuring> ;
+SH		] .
+XX
+SH	<http://semanticscience.org/resource/time-intervalShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://semanticscience.org/resource/time-interval> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://semanticscience.org/resource/has-unit> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://semanticscience.org/resource/has-value> ;
+SH		] .
+XX
+SH	<http://semanticscience.org/resource/pathogenShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://semanticscience.org/resource/pathogen> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] .
+XX
+SH	<http://semanticscience.org/resource/countryShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://semanticscience.org/resource/country> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] .
+XX
+XX
+XX
+EU	http://fairdata.systems:7778/sparql
+XX
+SH	<http://semanticscience.org/resource/pathogenShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://semanticscience.org/resource/pathogen> ;
+SH		sh:property [
+SH			sh:path <http://semanticscience.org/resource/has-identifier> ;
+SH			sh:class <http://semanticscience.org/resource/identifier> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] .
+XX
+SH	<http://semanticscience.org/resource/identifierShape>
+SH		a sh:NodeShape ;
+SH		sh:targetClass <http://semanticscience.org/resource/identifier> ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ;
+SH		] ;
+SH		sh:property [
+SH			sh:path <http://www.w3.org/2000/01/rdf-schema#label> ;
+SH		] .
+XX

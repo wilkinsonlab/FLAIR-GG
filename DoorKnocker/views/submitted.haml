@@ -1,0 +1,24 @@
+%html
+  %body
+    :css
+      body {background-color: pink} 
+
+    %strong= @results["valid"]
+    %br
+    %br
+    Submitted query:
+    %pre
+      = @results["query"]
+    %br
+    %br
+    - if @results["id"]
+      Click here to monitor review status:
+      %a{href: "/status/#{@results['id']}"}
+        = @results['id']
+    
+    
+    
+  
+    
+
+  
