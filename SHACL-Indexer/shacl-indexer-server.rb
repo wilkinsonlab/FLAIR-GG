@@ -23,8 +23,9 @@ post "/index/" do
   url = JSON.parse(request.body.read)["url"]
   @shacl = index(url: url)
   content_type "text/turtle"
+  @shacl
 
-  haml :result
+  #haml :result
 end
 
 # --------------------------- logic here

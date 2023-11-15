@@ -8,3 +8,4 @@ services:
     restart: always
     volumes:
       - /tmp:/tmp
+# NOTE this will run on host network, port 6000

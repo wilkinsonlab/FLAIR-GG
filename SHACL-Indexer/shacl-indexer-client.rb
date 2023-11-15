@@ -5,7 +5,8 @@
 
 require_relative "utils"
 
-fdps = get_fdps
+fdps = get_fdps  # call to FDP index
+
 fdps.each do |fdp|
   token = get_token fdp: fdp
   catalogs = get_catalogs(fdp: fdp, token: token)
@@ -14,19 +15,23 @@ fdps.each do |fdp|
     dsets = get_datasets(cat: cat, token: token)
     warn dsets
     dsets.each do |dset|
-      graph = RDF::Graph.load("#{dset}.ttl")
-      query = "PREFIX : <http://bigdata.com/>
-      PREFIX dct: <http://purl.org/dc/terms/>      
-      SELECT ?shacl WHERE {
-         ?s dct:conformsTo ?shacl .
-      }"
-      sparql = SPARQL.parse(query)
-      qgraph.query(sparql) do |result|
-        shacluri = result[:shacl]
-        write_to_repo(shacl: shacluri, catalog: cat)
+      dists = get_distributions(dset: dset, token: token)
+      warn dists
+      dists.each do |dist|
+        servs = get_data_services(dist: dist, token: token)
+        warn servs
+        servs.each do |serv|
+          sparql_endpoints = get_sparql_endpoints(serv: serv)
+          sparql_endpoints.each do |dset, endpoint|
+            puts "#{dset} : #{endpoint}"
+            resp = RestClient.post('http://138.4.139.18:6000/index/', "{\"url\": \"#{endpoint}\"}")
+            shacl = resp.body
+            puts shacl  
+            write_to_repo(shacl: shacl, dataset: dset, catalog: cat, endpoint: endpoint)
+          end
+        end
       end
-      # dists = get_distributions(dset: dset, token: token)
-      # warn dists
     end
   end
 end
+

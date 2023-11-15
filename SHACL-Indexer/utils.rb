@@ -41,32 +41,6 @@ def get_token(fdp:)
   JSON.parse(r.body)["token"]
 end
 
-def get_datasets(cat:, token:)
-  #  curl -L -X GET http://localhost:7070/meta -H "accept: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzOWUwZmE0Ny0wYmZkLTRhNTYtYjA5ZS0xMjU2ODVlNmE1NDUiLCJpYXQiOjE2OTkwMjA5NDQsImV4cCI6MTcwMDIzMDU0NH0.6adtdWMlQWUz8R506tDlJsRHB3fIlOS8tQIjHs-Jeom_8oyv8ionK0yS81OfJT6CpVz2mrpHjujcFnizbmuQBQ"
-  cat.gsub(%r{/$}, "") # strip tailing slash
-  cat += "/meta" unless cat.match(/meta$/)
-  r = RestClient::Request.execute(
-    method: :get,
-    url: cat,
-    headers: { accept: "application/json", authorization: "Bearer #{token}" }
-  )
-  dsets = JSON.parse(r.body)["state"]["children"].map { |c| c[0] if c[1] == "PUBLISHED" }
-  dsets.compact
-end
-
-def get_distributions(dset:, token:)
-  #  curl -L -X GET http://localhost:7070/meta -H "accept: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzOWUwZmE0Ny0wYmZkLTRhNTYtYjA5ZS0xMjU2ODVlNmE1NDUiLCJpYXQiOjE2OTkwMjA5NDQsImV4cCI6MTcwMDIzMDU0NH0.6adtdWMlQWUz8R506tDlJsRHB3fIlOS8tQIjHs-Jeom_8oyv8ionK0yS81OfJT6CpVz2mrpHjujcFnizbmuQBQ"
-  dset.gsub(%r{/$}, "") # strip tailing slash
-  dset += "/meta" unless dset.match(/meta$/)
-  r = RestClient::Request.execute(
-    method: :get,
-    url: dset,
-    headers: { accept: "application/json", authorization: "Bearer #{token}" }
-  )
-  dists = JSON.parse(r.body)["state"]["children"].map { |c| c[0] if c[1] == "PUBLISHED" }
-  dists.compact
-end
-
 def get_catalogs(fdp:, token:)
   #  curl -L -X GET http://localhost:7070/meta -H "accept: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzOWUwZmE0Ny0wYmZkLTRhNTYtYjA5ZS0xMjU2ODVlNmE1NDUiLCJpYXQiOjE2OTkwMjA5NDQsImV4cCI6MTcwMDIzMDU0NH0.6adtdWMlQWUz8R506tDlJsRHB3fIlOS8tQIjHs-Jeom_8oyv8ionK0yS81OfJT6CpVz2mrpHjujcFnizbmuQBQ"
   fdp.gsub(%r{/$}, "") # strip tailing slash
@@ -95,28 +69,93 @@ def get_catalogs(fdp:, token:)
   # }
 end
 
-def write_to_repo(shacl:, catalog:)
-  shacl = RestClient.get(shacl)
-  response = RestClient.execute(
+def get_datasets(cat:, token:)
+  #  curl -L -X GET http://localhost:7070/meta -H "accept: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzOWUwZmE0Ny0wYmZkLTRhNTYtYjA5ZS0xMjU2ODVlNmE1NDUiLCJpYXQiOjE2OTkwMjA5NDQsImV4cCI6MTcwMDIzMDU0NH0.6adtdWMlQWUz8R506tDlJsRHB3fIlOS8tQIjHs-Jeom_8oyv8ionK0yS81OfJT6CpVz2mrpHjujcFnizbmuQBQ"
+  cat.gsub(%r{/$}, "") # strip tailing slash
+  cat += "/meta" unless cat.match(/meta$/)
+  r = RestClient::Request.execute(
+    method: :get,
+    url: cat,
+    headers: { accept: "application/json", authorization: "Bearer #{token}" }
+  )
+  dsets = JSON.parse(r.body)["state"]["children"].map { |c| c[0] if c[1] == "PUBLISHED" }
+  dsets.compact
+end
+
+def get_distributions(dset:, token:)
+  #  curl -L -X GET http://localhost:7070/meta -H "accept: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzOWUwZmE0Ny0wYmZkLTRhNTYtYjA5ZS0xMjU2ODVlNmE1NDUiLCJpYXQiOjE2OTkwMjA5NDQsImV4cCI6MTcwMDIzMDU0NH0.6adtdWMlQWUz8R506tDlJsRHB3fIlOS8tQIjHs-Jeom_8oyv8ionK0yS81OfJT6CpVz2mrpHjujcFnizbmuQBQ"
+  dset.gsub(%r{/$}, "") # strip tailing slash
+  dset += "/meta" unless dset.match(/meta$/)
+  r = RestClient::Request.execute(
+    method: :get,
+    url: dset,
+    headers: { accept: "application/json", authorization: "Bearer #{token}" }
+  )
+  dists = JSON.parse(r.body)["state"]["children"].map { |c| c[0] if c[1] == "PUBLISHED" }
+  dists.compact
+end
+
+def get_data_services(dist:, token:)
+  #  curl -L -X GET http://localhost:7070/meta -H "accept: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzOWUwZmE0Ny0wYmZkLTRhNTYtYjA5ZS0xMjU2ODVlNmE1NDUiLCJpYXQiOjE2OTkwMjA5NDQsImV4cCI6MTcwMDIzMDU0NH0.6adtdWMlQWUz8R506tDlJsRHB3fIlOS8tQIjHs-Jeom_8oyv8ionK0yS81OfJT6CpVz2mrpHjujcFnizbmuQBQ"
+  dist.gsub(%r{/$}, "") # strip tailing slash
+  dist += "/meta" unless dist.match(/meta$/)
+  r = RestClient::Request.execute(
+    method: :get,
+    url: dist,
+    headers: { accept: "application/json", authorization: "Bearer #{token}" }
+  )
+  servs = JSON.parse(r.body)["state"]["children"].map { |c| c[0] if c[1] == "PUBLISHED" }
+  servs.compact
+end
+
+def get_sparql_endpoints(serv:)
+  results = Hash.new
+  graph = RDF::Graph.load("#{serv}?format=ttl")
+  query = SPARQL.parse("SELECT ?dset ?endpoint WHERE { 
+    ?s <http://www.w3.org/ns/dcat#endpointURL> ?endpoint .
+    ?s <http://www.w3.org/ns/dcat#servesDataset> ?dset}")
+  query.execute(graph) do |result|
+    dset = result[:dset].to_s
+    endpoint = result[:endpoint].to_s
+    results[dset] = endpoint
+  end
+  results
+end
+
+def write_to_repo(shacl:, dataset:, catalog:, endpoint:)
+
+  response = RestClient::Request.execute(
     method: :post,
-    # url: "http://138.4.139.18:8890/DAV/home/LDP/ShaclIndex/",
-    url: "http://localhost:8890/DAV/home/LDP/ShaclIndex/",
-    headers: { content_type: "text/turtle", accept: "text/turtle" },
+    url: "http://ldp:ldp@138.4.139.18:8890/DAV/home/LDP/ShaclIndex/",
+    # url: "http://ldp:ldp@localhost:8890/DAV/home/LDP/ShaclIndex/",
+    headers: { content_type: "text/turtle", accept: "text/turtle"},
     payload: "@prefix ldp:	<http://www.w3.org/ns/ldp#> . <>    rdf:type   ldp:Container ."
   )
   newcontainer = response.headers[:location]
   url = newcontainer.gsub(/http:\/\//, "http://ldp:ldp@")
-  _response = RestClient.execute(
-    method: :put,
+  _response = RestClient::Request.execute(
+    method: :post,
     url: url,
     headers: { content_type: "text/turtle", accept: "text/turtle", slug: "shacl"},
     payload: shacl
   )
-  _response = RestClient.execute(
+  _response = RestClient::Request.execute(
     method: :post,
     url: url,
-    headers: { content_type: "text/plain", accept: "text/turtle", slug: "url"},
+    headers: { content_type: "text/plain", accept: "text/turtle", slug: "catalog"},
     payload: catalog
+  )
+  _response = RestClient::Request.execute(
+    method: :post,
+    url: url,
+    headers: { content_type: "text/plain", accept: "text/turtle", slug: "dataset"},
+    payload: dataset
+  )
+  _response = RestClient::Request.execute(
+    method: :post,
+    url: url,
+    headers: { content_type: "text/plain", accept: "text/turtle", slug: "endpoint"},
+    payload: endpoint
   )
 end
 
