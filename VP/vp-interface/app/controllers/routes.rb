@@ -17,25 +17,25 @@ def set_routes(classes: allclasses)
 
   get "/flair-gg-vp-server/resources" do
     guid = params["guid"]
-    @discoverables = get_resources.sort_by { |_k, v| v[:type] }.to_h
+    @discoverables = get_resources.sort_by { |_k, v| v[:type] }.to_h  # "./lib/fdp"
     erb :discovered_layout
   end
 
   get "/flair-gg-vp-server/keyword-search" do
     keyword = params["keyword"]
-    @discoverables = keyword_search_shell(keyword: keyword).sort_by { |_k, v| v[:type] }.to_h
+    @discoverables = keyword_search_shell(keyword: keyword).sort_by { |_k, v| v[:type] }.to_h  # "./lib/fdp"
     erb :discovered_layout
   end
 
   get "/flair-gg-vp-server/ontology-search" do
     term = params["uri"]
-    @discoverables = ontology_search_shell(term: term).sort_by { |_k, v| v[:type] }.to_h
+    @discoverables = ontology_search_shell(term: term).sort_by { |_k, v| v[:type] }.to_h  # "./lib/fdp"
     erb :discovered_layout
   end
 
   get "/flair-gg-vp-server/wordcloud" do
     FDPConfig.new # initialize
-    @words = Wordcloud.new.count_words
+    @words = Wordcloud.new.count_words  # "./lib/wordcloud"
     erb :wordcloud
   end
 

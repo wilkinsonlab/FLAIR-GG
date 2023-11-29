@@ -5,4 +5,6 @@ vp:
     - $PWD/htdocs:/var/www/html
   ports:
     - "8080:80"
+  environment:
+    - FDPINDEX="https://index.bgv.cbgp.upm.es/"
   tty: true
