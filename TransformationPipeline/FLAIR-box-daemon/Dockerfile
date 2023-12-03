@@ -11,6 +11,6 @@ WORKDIR /app
 
 RUN bundle install
 
-RUN git clone <https://github.com/wilkinsonlab/FLAIR-GG.git
+RUN git clone https://github.com/wilkinsonlab/FLAIR-GG.git
 
 ENTRYPOINT ["sh", "entrypoint.sh"]

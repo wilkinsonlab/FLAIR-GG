@@ -1,5 +1,5 @@
 GIT
-  remote: <https://github.com/ruby-debug/debase.git
+  remote: https://github.com/ruby-debug/debase.git
   revision: a90f2270351ae0f48370d60809ecd82d6110c85c
   tag: v0.2.5.beta2
   specs:
@@ -12,7 +12,7 @@ PATH
     vp-interface (1)
 
 GEM
-  remote: <https://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
