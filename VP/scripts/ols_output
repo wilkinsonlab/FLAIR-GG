@@ -1,4 +1,4 @@
-// https://www.ebi.ac.uk/ols/api/ontologies/ordo/terms?iri=http://www.orpha.net/ORDO/Orphanet_98895
+// <https://www.ebi.ac.uk/ols/api/ontologies/ordo/terms?iri=http://www.orpha.net/ORDO/Orphanet_98895
 {
   "iri" : "http://purl.obolibrary.org/obo/GO_0098743",
   "lang" : "en",

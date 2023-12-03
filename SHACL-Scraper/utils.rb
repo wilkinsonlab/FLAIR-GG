@@ -114,7 +114,7 @@ def get_sparql_endpoints(serv:)
   query = SPARQL.parse("SELECT ?dset ?endpoint WHERE { 
     ?s <http://www.w3.org/ns/dcat#endpointURL> ?endpoint .
     ?s <http://www.w3.org/ns/dcat#servesDataset> ?dset}")
-  query.execute(queryable) do |result|
+  query.execute(graph) do |result|
     dset = result[:dset]
     endpoint = result[:endpoint]
     results[dset] = endpoint

@@ -72,7 +72,7 @@ flag = 0
     end
     accepted_result = thisresult.first
     gbif = accepted_result["taxonID"] # gbif:5370217
-    # https://www.gbif.org/species/5370217
+    # <https://www.gbif.org/species/5370217
     gbif.gsub!("gbif:", "https://www.gbif.org/species/")
     File.open("./output/species-taxid.csv", "a") { |f| f.puts "#{species},#{gbif}" }
   end

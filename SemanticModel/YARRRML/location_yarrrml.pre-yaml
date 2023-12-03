@@ -130,7 +130,7 @@ mapping:
       # is located in
     - objects:
         type: iri
-        value: https://en.wikipedia.org/wiki/ISO_3166-1:$(country_code)
+        value: <https://en.wikipedia.org/wiki/ISO_3166-1:$(country_code)
       predicate: sio:SIO_000061
 
 
@@ -154,7 +154,7 @@ mapping:
     graph: this:$(uniqid)_Context
     sources:
     - source_location
-    subjects: https://en.wikipedia.org/wiki/ISO_3166-1:$(country_code)
+    subjects: <https://en.wikipedia.org/wiki/ISO_3166-1:$(country_code)
     predicateobject:
     - objects:
         type: iri

@@ -4,8 +4,8 @@ class FDPConfig
   def initialize(index: "https://index.vp.ejprarediseases.org/index/entries/all" )
     index = ENV['FDPINDEX'] if ENV['FDPINDEX']
     FDPSITES.replace get_active_sites(index: index)
-  # %w[https://zks-docker.ukl.uni-freiburg.de/fairdatapoint-euronmd/ https://fairdata.services:7070/
-  #               https://fair.ciroco.org https://w3id.org/simpathic/fdp https://w3id.org/fairvasc-fdp/ https://w3id.org/ctsr-fdp https://w3id.org/smartcare-fdp]
+  # %w[https://zks-docker.ukl.uni-freiburg.de/fairdatapoint-euronmd/ <https://fairdata.services:7070/
+  #               <https://fair.ciroco.org <https://w3id.org/simpathic/fdp <https://w3id.org/fairvasc-fdp/ <https://w3id.org/ctsr-fdp <https://w3id.org/smartcare-fdp]
   end
   def get_active_sites(index:)
     r = RestClient.get(index, headers: { accept: "application/json" })

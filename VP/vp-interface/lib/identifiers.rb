@@ -12,7 +12,7 @@ class IDsOrg
     warn "This isn't an Identifiers.org URI, don't expect this to work!" unless @uri =~ %r{/identifiers\.org/}
     # from http://identifiers.org/orphanet:156152
     # to
-    # https://resolver.api.identifiers.org/orphanet:156152
+    # <https://resolver.api.identifiers.org/orphanet:156152
     @uri = @uri.gsub("/identifiers.org/", "/resolver.api.identifiers.org/")
 
     begin

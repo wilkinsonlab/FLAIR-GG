@@ -124,7 +124,7 @@ def reject(id)
 end
 def knockknock(json = nil)
   # we should look into how ORCIS does OAuth.
-  # https://info.orcid.org/documentation/api-tutorials/api-tutorial-get-and-authenticated-orcid-id/#easy-faq-2537
+  # <https://info.orcid.org/documentation/api-tutorials/api-tutorial-get-and-authenticated-orcid-id/#easy-faq-2537
   # we may have time to implement this before the defense.
   unless json
     json = JSON.parse(request.body.read)

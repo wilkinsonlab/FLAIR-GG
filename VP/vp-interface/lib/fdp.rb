@@ -34,7 +34,7 @@ class FDP
 
   def ontology_annotations(uri:)
     # THE ONES WE CAN'T HANDLE ARE:
-    # https://bioregistry.io/api/reference/sio:SIO_001052 - doesn't generate usable URLs from bioregistry
+    # <https://bioregistry.io/api/reference/sio:SIO_001052 - doesn't generate usable URLs from bioregistry
 
     term = nil
     urls = pre_process_uri(uri: uri)
@@ -52,7 +52,7 @@ class FDP
         # |GO_|SIO_|UBERON_|ORDO|CMO_|/
         ebi = EBITerm.new(uri: uri)
         term = ebi.lookup_title # specific for EBI
-      elsif (uri =~ /ols\/ontologies\/[^\/]+\/terms\?iri\=(\S+)/) # e.g. https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http://edamontology.org/data_1153
+      elsif (uri =~ /ols\/ontologies\/[^\/]+\/terms\?iri\=(\S+)/) # e.g. <https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http://edamontology.org/data_1153
         warn "EBIOLS"
         uri = $1  # http://edamontology.org/data_1153
         ebi3 = EBITerm.new(uri: uri)

@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: <https://rubygems.org/
   specs:
     bcp47_spec (0.2.1)
     builder (3.2.4)

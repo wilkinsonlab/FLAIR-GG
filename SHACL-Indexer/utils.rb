@@ -23,7 +23,7 @@ end
 # curl -X POST -H "Accept: application/json" \
 #     -H "Content-Type: application/json" \
 #     -d '{ "email": "user@example.com", "password": "secret" }' \
-#     https://fdp.example.com/tokens
+#     <https://fdp.example.com/tokens
 def get_token(fdp:)
   fdp.gsub(%r{/$}, "") # strip tailing slash
   fdp += "/tokens" unless fdp.match(/tokens$/)
