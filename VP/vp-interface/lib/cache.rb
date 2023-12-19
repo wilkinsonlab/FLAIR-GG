@@ -44,8 +44,7 @@ def freeze_keywords
 end
 
 def getfolder
-  ENV["FDPINDEX"] = "https://index.vp.ejprarediseases.org/"
-  f = ENV["FDPINDEX"].gsub(%r{https?://}, "").gsub(%r{/.*}, "")
+  f = FDPConfig::FDPINDEX.gsub(%r{https?://}, "").gsub(%r{/.*}, "")
   FileUtils.mkdir_p "./cache/#{f}"
   "./cache/#{f}"
 end

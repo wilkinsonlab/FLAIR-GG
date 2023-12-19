@@ -1,7 +1,10 @@
 class FDPConfig
   FDPSITES = []
-  def initialize(index: "https://index.vp.ejprarediseases.org/")
-    index = ENV["FDPINDEX"] if ENV["FDPINDEX"]
+  FDPINDEX = ""
+#  def initialize(index: "https://index.vp.ejprarediseases.org/")
+  def initialize(index: ENV["FDPINDEX"])
+    abort "no FDP index provided" unless index =~ /^http/
+    FDPINDEX.replace index
     index = index.gsub(%r{/\s*$}, "")
     index += "/index/entries/all"
 
