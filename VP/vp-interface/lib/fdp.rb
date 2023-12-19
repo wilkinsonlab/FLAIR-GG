@@ -164,15 +164,19 @@ class FDP
     { 
       VALUES ?connection { #{VPCONNECTION} }
       VALUES ?discoverable { #{VPDISCOVERABLE} }
-      VALUES ?searchfields { dc:title dc:description dc:keyword }
-
       ?s  ?connection ?discoverable ;
           dc:title ?title ;
           a ?t .
+    {
+        SELECT distinct ?s  WHERE {
+        VALUES ?searchfields { dc:title dc:description dc:keyword }
 
-      ?s ?searchfields ?kw .
-      FILTER(CONTAINS(lcase(?kw), lcase('#{keyword}')))
-      }")
+    ?s ?searchfields ?kw 
+    FILTER(CONTAINS(lcase(?kw), '#{keyword}'))
+	}
+    }
+}"
+)
     warn "keyword search query #{vpd.to_sparql}"
     warn "graph is #{@graph.size}"
     warn "results of query #{@graph.query(vpd)}"
