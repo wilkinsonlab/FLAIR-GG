@@ -3,7 +3,7 @@ services:
 
   flair-gg-vp-server:
 #    image: markw/flair-gg-vp-server:0.0.9
-    image: markw/flair-gg-vp-server:0.0.10
+    image: markw/flair-gg-vp-server:0.0.11
     container_name: "flair-gg-vp-server"
     hostname: "flairgg"
     ports:

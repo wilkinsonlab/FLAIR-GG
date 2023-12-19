@@ -143,7 +143,7 @@ class FDP
     SELECT ?s ?t ?title WHERE
     { 
       VALUES ?connection { #{VPCONNECTION} }
-      VALUES ?discoverable { #{VPDISCOVERSBLE} }
+      VALUES ?discoverable { #{VPDISCOVERABLE} }
 
       ?s  ?connection ?discoverable ;
           dc:title ?title ;
@@ -160,7 +160,7 @@ class FDP
     SELECT ?s ?t ?title WHERE
     { 
       VALUES ?connection { #{VPCONNECTION} }
-      VALUES ?discoverable { #{VPDISCOVERSBLE} }
+      VALUES ?discoverable { #{VPDISCOVERABLE} }
 
       ?s  ?connection ?discoverable ;
           dc:title ?title ;
@@ -183,7 +183,7 @@ class FDP
     SELECT ?s ?t ?title WHERE
     { 
       VALUES ?connection { #{VPCONNECTION} }
-      VALUES ?discoverable { #{VPDISCOVERSBLE} }
+      VALUES ?discoverable { #{VPDISCOVERABLE} }
 
       ?s  ?connection ?discoverable ;
           dc:title ?title ;

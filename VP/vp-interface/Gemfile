@@ -20,7 +20,8 @@ gem "shotgun"
 gem "sinatra", "~> 2.2"
 # gem 'sinatra-json'
 # gem 'sinatra-activerecord', require: 'sinatra/activerecord'
-gem "json"
+gem "json", "~> 2.7.1"
+gem "json-canonicalization", "~> 1.0.0"
 gem "sinatra-cross_origin"
 gem "swagger-blocks", "~> 3.0.0"
 gem "thin"
