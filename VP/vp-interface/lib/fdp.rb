@@ -32,12 +32,62 @@ class FDP
     @called = []
 
     if refresh
-      load(address: address)
+      warn "refreshing"
+      load(address: address)  # THIS IS A RECURSIVE FUNCTION THAT FOLLOWS ldp:contains 
       freeze_fdp
     else
       thaw_fdp
     end
   end
+
+
+  def load(address:)
+    return if called.include? address
+
+    called << address
+    address = address.gsub(%r{/$}, "")
+    address += "?format=ttl"
+    warn "getting #{address}"
+    begin
+      r = RestClient.get(address)
+    rescue e
+      warn "#{address} didn't resolve"
+    end
+
+    parse(message: r.body) if r&.body
+  end
+
+  def parse(message:)
+    data = StringIO.new(message)
+    RDF::Reader.for(:turtle).new(data) do |reader|
+      reader.each_statement do |statement|
+        @graph << statement
+        if statement.predicate.to_s == "http://www.w3.org/ns/ldp#contains"
+          contained_thing = statement.object.to_s
+          self.load(address: contained_thing) # this ends up being recursive... careful!
+        end
+        # warn @graph.size
+      end
+    end
+  end
+
+  def find_discoverables
+    vpd = SPARQL.parse("
+
+    #{NAMESPACES}
+    SELECT ?s ?t ?title WHERE
+    { 
+      VALUES ?connection { #{VPCONNECTION} }
+      VALUES ?discoverable { #{VPDISCOVERABLE} }
+
+      ?s  ?connection ?discoverable ;
+          dc:title ?title ;
+          a ?t .}")
+    discoverables = build_from_results(results: @graph.query(vpd))
+    warn discoverables
+    discoverables
+  end
+
 
   def ontology_annotations(uri:)
     # THE ONES WE CAN'T HANDLE ARE:
@@ -105,62 +155,16 @@ class FDP
     synonym_urls
   end
 
-  def load(address:)
-    return if called.include? address
-
-    called << address
-    address = address.gsub(%r{/$}, "")
-    address += "/?format=ttl"
-    warn "getting #{address}"
-    begin
-      r = RestClient.get(address)
-    rescue e
-      warn "#{addres} didn't resolve"
-    end
-    if r 
-      parse(message: r.body)
-    end
-  end
-
-  def parse(message:)
-    data = StringIO.new(message)
-    RDF::Reader.for(:turtle).new(data) do |reader|
-      reader.each_statement do |statement|
-        @graph << statement
-        if statement.predicate.to_s == "http://www.w3.org/ns/ldp#contains"
-          contained_thing = statement.object.to_s
-          self.load(address: contained_thing) # this ends up being recursive... careful!
-        end
-        # warn @graph.size
-      end
-    end
-  end
-
-  def find_discoverables
-    vpd = SPARQL.parse("
-
-    #{NAMESPACES}
-    SELECT ?s ?t ?title WHERE
-    { 
-      VALUES ?connection { #{VPCONNECTION} }
-      VALUES ?discoverable { #{VPDISCOVERABLE} }
-
-      ?s  ?connection ?discoverable ;
-          dc:title ?title ;
-          a ?t .}")
-    discoverables = build_from_results(results: @graph.query(vpd))
-    warn discoverables
-    discoverables
-  end
 
   def keyword_search(keyword: "")
     vpd = SPARQL.parse("
     #{NAMESPACES}
 
-    SELECT ?s ?t ?title WHERE
+    SELECT DISTINCT ?s ?t ?title WHERE
     { 
       VALUES ?connection { #{VPCONNECTION} }
       VALUES ?discoverable { #{VPDISCOVERABLE} }
+      VALUES ?searchfields { dc:title dc:description dc:keyword }
 
       ?s  ?connection ?discoverable ;
           dc:title ?title ;
@@ -169,6 +173,9 @@ class FDP
       ?s ?searchfields ?kw .
       FILTER(CONTAINS(lcase(?kw), lcase('#{keyword}')))
       }")
+    warn "keyword search query #{vpd.to_sparql}"
+    warn "graph is #{@graph.size}"
+    warn "results of query #{@graph.query(vpd)}"
     discoverables = build_from_results(results: @graph.query(vpd))
     warn discoverables
     discoverables
@@ -213,6 +220,7 @@ class FDP
 
   def build_from_results(results:)
     discoverables = {}
+    warn "results are #{results}"
     results.each do |result|
       next if result[:t].to_s =~ /\#Resource/
 

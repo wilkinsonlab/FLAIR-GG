@@ -8,10 +8,12 @@ def set_routes(classes: allclasses)
   end
 
   get "/flair-gg-vp-server/force-refresh" do
+    warn "initializing refresh in routes"
     @discoverables = {}
     unless File.exist?("./cache/REFRESHING") # multiple browser calls are a problem!
       refresh_cache
-    end
+    end    
+    @discoverables = @discoverables.sort_by { |_k, v| v[:type] }.to_h  # "./lib/metadata_functions"
     erb :discovered_layout
   end
 

@@ -132,7 +132,9 @@ def keyword_search_shell(keyword:)
   FDPConfig.new  # initialize
   fdps = FDPConfig::FDPSITES
   fdps.each do |fdp_address|
+    warn "searching #{fdp_address}"
     fdp = FDP.new(address: fdp_address, refresh: false)
+    warn "starting keyword search #{keyword}"
     hash = fdp.keyword_search(keyword: keyword)
     discoverables.merge!(hash)
   end

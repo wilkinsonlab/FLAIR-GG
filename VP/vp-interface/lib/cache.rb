@@ -4,8 +4,10 @@ require "fileutils"
 def thaw_fdp
   address = Digest::SHA256.hexdigest @address
   folder = getfolder
+  warn "thawing folder #{folder}"
 
   begin
+    warn "thawing file #{folder}/#{address}.ttl"
     RDF::Reader.open("#{folder}/#{address}.ttl") do |reader|
       reader.each_statement do |statement|
         @graph << statement
@@ -14,6 +16,7 @@ def thaw_fdp
   rescue StandardError
     nil
   end
+  warn "graph #{@graph.size}"
 end
 
 def freeze_fdp
