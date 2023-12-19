@@ -13,11 +13,18 @@ require_relative  "ontobee"
 require_relative  "etsi"
 require_relative  "bio2rdf"
 require_relative  "ncbo"
-
+require_relative  "cache"
 # frozen_string_literal: false
 class FDP
   attr_accessor :graph, :address, :called
+  NAMESPACES = "PREFIX ejpold: <http://purl.org/ejp-rd/vocabulary/>
+  PREFIX ejpnew: <https://w3id.org/ejp-rd/vocabulary#>
+  PREFIX dcat: <http://www.w3.org/ns/dcat#>
+  PREFIX dc: <http://purl.org/dc/terms/>
+  "
 
+  VPCONNECTION = "ejpold:vpConnection ejpnew:vpConnection dcat:theme dcat:themeTaxonomy"
+  VPDISCOVERABLE = "ejpold:VPDiscoverable ejpnew:VPDiscoverable"
 
   def initialize(address:, refresh: false)
     @address = address
@@ -26,9 +33,9 @@ class FDP
 
     if refresh
       load(address: address)
-      freeze
+      freeze_fdp
     else
-      thaw
+      thaw_fdp
     end
   end
 
@@ -98,26 +105,6 @@ class FDP
     synonym_urls
   end
 
-  def thaw
-    address = Digest::SHA256.hexdigest @address
-    begin
-      RDF::Reader.open("./cache/#{address}.ttl") do |reader|
-        reader.each_statement do |statement|
-          @graph << statement
-        end
-      end
-    rescue StandardError
-      nil
-    end
-  end
-
-  def freeze
-    address = Digest::SHA256.hexdigest @address
-    f = open("./cache/#{address}.ttl", "w")
-    f.puts @graph.to_ttl
-    f.close
-  end
-
   def load(address:)
     return if called.include? address
 
@@ -127,7 +114,7 @@ class FDP
     warn "getting #{address}"
     begin
       r = RestClient.get(address)
-    rescue
+    rescue e
       warn "#{addres} didn't resolve"
     end
     if r 
@@ -151,14 +138,14 @@ class FDP
 
   def find_discoverables
     vpd = SPARQL.parse("
-    PREFIX ejp: <http://purl.org/ejp-rd/vocabulary/>
-    PREFIX dcat: <http://www.w3.org/ns/dcat#>
-    PREFIX dc: <http://purl.org/dc/terms/>
 
+    #{NAMESPACES}
     SELECT ?s ?t ?title WHERE
-    { VALUES ?connection { ejp:vpConnection dcat:theme dcat:themeTaxonomy }
+    { 
+      VALUES ?connection { #{VPCONNECTION} }
+      VALUES ?discoverable { #{VPDISCOVERSBLE} }
 
-      ?s  ?connection ejp:VPDiscoverable ;
+      ?s  ?connection ?discoverable ;
           dc:title ?title ;
           a ?t .}")
     discoverables = build_from_results(results: @graph.query(vpd))
@@ -168,15 +155,14 @@ class FDP
 
   def keyword_search(keyword: "")
     vpd = SPARQL.parse("
-    PREFIX ejp: <http://purl.org/ejp-rd/vocabulary/>
-    PREFIX dcat: <http://www.w3.org/ns/dcat#>
-    PREFIX dc: <http://purl.org/dc/terms/>
+    #{NAMESPACES}
 
     SELECT ?s ?t ?title WHERE
-    { VALUES ?connection { ejp:vpConnection dcat:theme dcat:themeTaxonomy }
-      VALUES ?searchfields { dcat:keyword dc:title dc:description }
+    { 
+      VALUES ?connection { #{VPCONNECTION} }
+      VALUES ?discoverable { #{VPDISCOVERSBLE} }
 
-      ?s  ?connection ejp:VPDiscoverable ;
+      ?s  ?connection ?discoverable ;
           dc:title ?title ;
           a ?t .
 
@@ -191,15 +177,15 @@ class FDP
   def ontology_search(uri: "")
     warn "definitel in ontology search"
     vpd = SPARQL.parse("
-    PREFIX ejp: <http://purl.org/ejp-rd/vocabulary/>
-    PREFIX dcat: <http://www.w3.org/ns/dcat#>
-    PREFIX dc: <http://purl.org/dc/terms/>
+
+    #{NAMESPACES}
 
     SELECT ?s ?t ?title WHERE
-    { VALUES ?connection { ejp:vpConnection dcat:theme dcat:themeTaxonomy }
-      VALUES ?annotation { dcat:theme dcat:themeTaxonomy }
+    { 
+      VALUES ?connection { #{VPCONNECTION} }
+      VALUES ?discoverable { #{VPDISCOVERSBLE} }
 
-      ?s  ?connection ejp:VPDiscoverable ;
+      ?s  ?connection ?discoverable ;
           dc:title ?title ;
           a ?t .
 
@@ -239,10 +225,7 @@ class FDP
   def get_verbose_annotations
     words = []
     vpd = SPARQL.parse("
-    PREFIX ejp: <http://purl.org/ejp-rd/vocabulary/>
-    PREFIX dcat: <http://www.w3.org/ns/dcat#>
-    PREFIX dc: <http://purl.org/dc/terms/>
-
+    #{NAMESPACES}
     SELECT ?annot WHERE
     { VALUES ?annotation { dcat:theme dcat:themeTaxonomy }
       ?s  ?annotation ?annot .
@@ -257,10 +240,7 @@ class FDP
 
     warn "\n\nSWITCH TO KEYWORDS\n\n"
     vpd = SPARQL.parse("
-    PREFIX ejp: <http://purl.org/ejp-rd/vocabulary/>
-    PREFIX dcat: <http://www.w3.org/ns/dcat#>
-    PREFIX dc: <http://purl.org/dc/terms/>
-
+    #{NAMESPACES}
     select ?kw WHERE
     { VALUES ?searchfields { dcat:keyword }
     ?s ?searchfields ?kw .

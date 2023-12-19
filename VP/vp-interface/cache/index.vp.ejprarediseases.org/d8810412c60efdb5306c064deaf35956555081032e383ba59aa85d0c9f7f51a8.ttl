@@ -1,0 +1,21 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<https://ctsr.uniklinik-freiburg.de/ctsr/metadata/dataservice>
+    <http://purl.archive.org/ejp-rd/vocabulary/personalData> false ;
+    <http://purl.org/dc/terms/description> "The Care and Trial Site Registry (CTSR) is an online database of specialised sites that see patients with neuromuscular and neurodegenerative diseases. It holds site-level information relevant to clinical studies, including facilities, equipment, personnel, and trial experience, as well aggregate data about their patient population. It does not contain identifiable patient data. The CTSR supports organisations such as EURO-NMD, the European Network of Excellence for Rare Neuromuscular Disorders, to provide data on their partnering health care providers for reporting, bench-marking and communication." ;
+    <http://purl.org/dc/terms/hasVersion> "1" ;
+    <http://purl.org/dc/terms/language> <http://www.wikidata.org/entity/Q1860> ;
+    <http://purl.org/dc/terms/license> <https://w3id.org/ejp-rd/resources/licenses/v1.0/> ;
+    <http://purl.org/dc/terms/publisher> "Universitätsklinikum Freiburg, Klinik für Neuropädiatrie und Muskelerkrankungen" ;
+    <http://purl.org/dc/terms/title> "Care and Trial Site Registry" ;
+    a <http://www.w3.org/ns/dcat#DataService>, <http://www.w3.org/ns/dcat#Resource>, <https://w3id.org/fdp/fdp-o#FAIRDataPoint>, <https://w3id.org/fdp/fdp-o#MetadataService> ;
+    <http://www.w3.org/ns/dcat#servesDataset> <https://ctsr.uniklinik-freiburg.de/ctsr/data> ;
+    <http://www.w3.org/ns/dcat#theme> <http://www.orpha.net/ORDO/Orphanet_166>, <http://www.orpha.net/ORDO/Orphanet_182086>, <http://www.orpha.net/ORDO/Orphanet_206634>, <http://www.orpha.net/ORDO/Orphanet_206638>, <http://www.orpha.net/ORDO/Orphanet_206966>, <http://www.orpha.net/ORDO/Orphanet_206973>, <http://www.orpha.net/ORDO/Orphanet_211062>, <http://www.orpha.net/ORDO/Orphanet_263>, <http://www.orpha.net/ORDO/Orphanet_269>, <http://www.orpha.net/ORDO/Orphanet_273>, <http://www.orpha.net/ORDO/Orphanet_371433>, <http://www.orpha.net/ORDO/Orphanet_590>, <http://www.orpha.net/ORDO/Orphanet_593>, <http://www.orpha.net/ORDO/Orphanet_606>, <http://www.orpha.net/ORDO/Orphanet_70>, <http://www.orpha.net/ORDO/Orphanet_71864>, <http://www.orpha.net/ORDO/Orphanet_83330>, <http://www.orpha.net/ORDO/Orphanet_83418>, <http://www.orpha.net/ORDO/Orphanet_83419>, <http://www.orpha.net/ORDO/Orphanet_97242>, <http://www.orpha.net/ORDO/Orphanet_97245>, <http://www.orpha.net/ORDO/Orphanet_98494>, <http://www.orpha.net/ORDO/Orphanet_98505>, <http://www.orpha.net/ORDO/Orphanet_98506>, <http://www.orpha.net/ORDO/Orphanet_98895> ;
+    <https://purl.archive.org/ejp-rd/vocabulary/vpConnection> <https://purl.archive.org/ejp-rd/vocabulary/VPContentDiscovery>, <https://purl.archive.org/ejp-rd/vocabulary/VPDiscoverable> .
+
+<https://ctsr.uniklinik-freiburg.de/ctsr/metadata/organization>
+    <http://purl.org/dc/terms/Location> "Universitätsklinikum Freiburg" ;
+    <http://purl.org/dc/terms/title> "Universitätsklinikum Freiburg, Klinik für Neuropädiatrie und Muskelerkrankungen" ;
+    a <http://xmlns.com/foaf/0.1/Organization> ;
+    <http://xmlns.com/foaf/0.1/page> "https://www.uniklinik-freiburg.de/kinderklinik/die-kliniken-im-zkj/klinik-fuer-neuropaediatrie-und-muskelerkrankungen.html" .
+

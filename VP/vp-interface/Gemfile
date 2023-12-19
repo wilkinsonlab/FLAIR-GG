@@ -25,8 +25,9 @@ gem "sinatra-cross_origin"
 gem "swagger-blocks", "~> 3.0.0"
 gem "thin"
 gem "tux"
-gem "uri"
+gem "uri", "~>0.12.2"
 gem "xml-simple", "~>1.1.8"
+gem "fileutils", "~>1.5.0"
 
 group :test do
   gem "capybara"

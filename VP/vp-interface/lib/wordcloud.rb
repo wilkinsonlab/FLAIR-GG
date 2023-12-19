@@ -1,3 +1,6 @@
+
+require_relative "cache"
+
 class Wordcloud
   attr_accessor :words
 
@@ -5,7 +8,7 @@ class Wordcloud
     @words = []
 
     if File.exist?("./cache/keywords.json") && (refresh == "false")
-      thaw
+      thaw_keywords
     else
       begin
         f = open("./cache/WCREFRESHING", "w")  # multiple browser calls are a problem!
@@ -25,7 +28,7 @@ class Wordcloud
       @words = @words.flatten
       @words.compact!
       warn "\n\nWORDS\n\n#{@words}"
-      freeze
+      freeze_keywords
 
       FileUtils.rm_f("./cache/WCREFRESHING")
     end
@@ -42,20 +45,4 @@ class Wordcloud
     freqs
   end
 
-  def thaw
-    warn "thawing keyword cache"
-    kwf = File.open("./cache/keywords.json", "r")
-    kw = kwf.read
-    @words = JSON.parse(kw)
-    warn "keyword cache thawed #{@words}"
-  rescue StandardError
-    nil
-  end
-
-  def freeze
-    warn "freezing keyword cache"
-    f = open("./cache/keywords.json", "w")
-    f.puts @words.to_json
-    f.close
-  end
 end

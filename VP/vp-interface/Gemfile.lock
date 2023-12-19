@@ -66,6 +66,7 @@ GEM
       faraday (~> 2.0)
     fastimage (2.2.7)
     ffi (1.15.5)
+    fileutils (1.5.0)
     haml (6.1.1)
       temple (>= 0.8.2)
       thor
@@ -342,7 +343,7 @@ GEM
     unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
     unicode-types (1.8.0)
-    uri (0.11.0)
+    uri (0.12.2)
     xml-simple (1.1.9)
       rexml
     xpath (3.2.0)
@@ -361,6 +362,7 @@ DEPENDENCIES
   bcrypt
   capybara
   debase!
+  fileutils (~> 1.5.0)
   json
   linkeddata (~> 3.2.0)
   metainspector (~> 5.pre.11.pre.2)
@@ -380,7 +382,7 @@ DEPENDENCIES
   swagger-blocks (~> 3.0.0)
   thin
   tux
-  uri
+  uri (~> 0.12.2)
   vp-interface!
   xml-simple (~> 1.1.8)
 

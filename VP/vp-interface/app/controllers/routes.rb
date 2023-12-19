@@ -17,7 +17,7 @@ def set_routes(classes: allclasses)
 
   get "/flair-gg-vp-server/resources" do
     guid = params["guid"]
-    @discoverables = get_resources.sort_by { |_k, v| v[:type] }.to_h  # "./lib/fdp"
+    @discoverables = get_resources.sort_by { |_k, v| v[:type] }.to_h  # "./lib/metadata_functions"
     erb :discovered_layout
   end
 
