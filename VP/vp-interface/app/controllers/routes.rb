@@ -2,6 +2,8 @@ require "./lib/fdp"
 
 def set_routes(classes: allclasses)
 
+  set :server_settings, :timeout => 180
+
   get "/flair-gg-vp-server" do
     content_type :json
     response.body = JSON.dump(Swagger::Blocks.build_root_json(classes))
@@ -31,6 +33,7 @@ def set_routes(classes: allclasses)
 
   get "/flair-gg-vp-server/ontology-search" do
     term = params["uri"]
+    term = term.gsub(/\S+\:/, "") unless term =~ /^http/
     @discoverables = ontology_search_shell(term: term).sort_by { |_k, v| v[:type] }.to_h  # "./lib/fdp"
     erb :discovered_layout
   end

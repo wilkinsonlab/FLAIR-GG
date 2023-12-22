@@ -25,6 +25,7 @@ class FDP
 
   VPCONNECTION = "ejpold:vpConnection ejpnew:vpConnection dcat:theme dcat:themeTaxonomy"
   VPDISCOVERABLE = "ejpold:VPDiscoverable ejpnew:VPDiscoverable"
+  VPANNOTATION = "dcat:theme"
 
   def initialize(address:, refresh: false)
     @address = address
@@ -167,15 +168,14 @@ class FDP
       ?s  ?connection ?discoverable ;
           dc:title ?title ;
           a ?t .
-    {
-        SELECT distinct ?s  WHERE {
-        VALUES ?searchfields { dc:title dc:description dc:keyword }
-
-    ?s ?searchfields ?kw 
-    FILTER(CONTAINS(lcase(?kw), '#{keyword}'))
-	}
-    }
-}"
+          {
+#            SELECT distinct ?s  WHERE {
+              VALUES ?searchfields { dc:title dc:description dc:keyword }
+              ?s ?searchfields ?kw 
+              FILTER(CONTAINS(lcase(?kw), '#{keyword}'))
+#            }
+          }
+    }"
 )
     warn "keyword search query #{vpd.to_sparql}"
     warn "graph is #{@graph.size}"
@@ -186,23 +186,34 @@ class FDP
   end
 
   def ontology_search(uri: "")
-    warn "definitel in ontology search"
+    warn "in ontology search"
+    warn "parse start"
     vpd = SPARQL.parse("
 
     #{NAMESPACES}
 
     SELECT ?s ?t ?title WHERE
-    { 
+    {
       VALUES ?connection { #{VPCONNECTION} }
       VALUES ?discoverable { #{VPDISCOVERABLE} }
 
       ?s  ?connection ?discoverable ;
           dc:title ?title ;
           a ?t .
+          {
+#            SELECT DISTINCT ?s WHERE {
+              ?s dcat:theme ?theme .
+              FILTER(CONTAINS(str(?theme), '#{uri}'))
+#            }
+          }
+    }"
+)
+      warn "parse end"
+      warn "query start"
+      results = @graph.query(vpd)
+      warn "query end"
 
-      ?s ?annotation <#{uri}> .
-      }")
-    discoverables = build_from_results(results: @graph.query(vpd))
+      discoverables = build_from_results(results: results)
     warn discoverables
     discoverables
   end

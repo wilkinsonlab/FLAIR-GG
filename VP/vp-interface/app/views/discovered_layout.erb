@@ -16,23 +16,25 @@
   </head>
   <body>
     <div class="wrapper">
-      <h2><a href="/flair-gg-vp-server/resources">FLAIR-GG Virtual Platform</a><h2>
+    <div><a href="/flair-gg-vp-server/resources"><img src="/images/flair-gg-logo.png" width="400px"/></a></div>
 
 
 
-      <div class="sidebar">
+      <div class="sidebar" style="clear: both;">
       Keyword Search: <form action="/flair-gg-vp-server/keyword-search"><input type="text" name="keyword" width="30"><input type="submit"></form>
       </div>
+
       <div class="sidebar" style="clear: both;">
       Ontology URI: <form action="/flair-gg-vp-server/ontology-search"><input type="text" name="uri" width="30"><input type="submit"></form>
       </div>
+
       <div class="sidebar" style="clear: both;">
       <a href="/flair-gg-vp-server/wordcloud"><input type="button" value="Display Wordcloud"></a>
       </div>
 
 
 
-      <h2>Discovered VP Resources</h2>
+      <h2>Virtual Platform Resources</h2>
       
       
       <ol>
@@ -40,7 +42,7 @@
             <% type = @discoverables[url][:type] %>
             <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
             <% title = @discoverables[url][:title] %>
-            <li><img src="../images/<%= @discoverables[url][:icon] %>" width=35 height=35/> &nbsp;&nbsp;
+            <li><img src="/images/<%= @discoverables[url][:icon] %>" width=35 height=35/> &nbsp;&nbsp;
             Resource: <a href="<%= url %>" > <%= title %> </a>(<%= type.capitalize %>)
             </li>
           <% end %>
@@ -48,7 +50,7 @@
 
 
       <footer class="branding">
-        <small>&copy; 2023 <strong>Mark D Wilkinson</strong></small>
+        <small>&copy; 2023/2024 <strong>Mark D Wilkinson</strong></small>
       </footer>
     </div>
 
