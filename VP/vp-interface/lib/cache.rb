@@ -2,29 +2,29 @@ require "fileutils"
 
 # class FDP
 def thaw_fdp
-  address = Digest::SHA256.hexdigest @address
-  folder = getfolder
-  warn "thawing folder #{folder}"
+  # address = Digest::SHA256.hexdigest @address
+  # folder = getfolder
+  # warn "thawing folder #{folder}"
 
-  begin
-    warn "thawing file #{folder}/#{address}.ttl"
-    RDF::Reader.open("#{folder}/#{address}.ttl") do |reader|
-      reader.each_statement do |statement|
-        @graph << statement
-      end
-    end
-  rescue StandardError
-    nil
-  end
-  warn "graph #{@graph.size}"
+  # begin
+  #   warn "thawing file #{folder}/#{address}.ttl"
+  #   RDF::Reader.open("#{folder}/#{address}.ttl") do |reader|
+  #     reader.each_statement do |statement|
+  #       @graph << statement
+  #     end
+  #   end
+  # rescue StandardError
+  #   nil
+  # end
+  # warn "graph #{@graph.size}"
 end
 
 def freeze_fdp
-  address = Digest::SHA256.hexdigest @address
-  folder = getfolder
-  f = open("#{folder}/#{address}.ttl", "w")
-  f.puts @graph.to_ttl
-  f.close
+  # address = Digest::SHA256.hexdigest @address
+  # folder = getfolder
+  # f = open("#{folder}/#{address}.ttl", "w")
+  # f.puts @graph.to_ttl
+  # f.close
 end
 
 def thaw_keywords

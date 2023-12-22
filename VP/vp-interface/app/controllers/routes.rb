@@ -14,13 +14,13 @@ def set_routes(classes: allclasses)
     @discoverables = {}
     unless File.exist?("./cache/REFRESHING") # multiple browser calls are a problem!
       refresh_cache
-    end    
+    end
     @discoverables = @discoverables.sort_by { |_k, v| v[:type] }.to_h  # "./lib/metadata_functions"
     erb :discovered_layout
   end
 
   get "/flair-gg-vp-server/resources" do
-    guid = params["guid"]
+    # guid = params["guid"]
     @discoverables = get_resources.sort_by { |_k, v| v[:type] }.to_h  # "./lib/metadata_functions"
     erb :discovered_layout
   end
@@ -39,7 +39,7 @@ def set_routes(classes: allclasses)
   end
 
   get "/flair-gg-vp-server/wordcloud" do
-    FDPConfig.new # initialize
+    # FDPConfig.new # initialize
     @words = Wordcloud.new.count_words  # "./lib/wordcloud"
     erb :wordcloud
   end
@@ -56,7 +56,7 @@ def set_routes(classes: allclasses)
 
       warn "forced refresh"
       refresh = "true"
-      FDPConfig.new # initialize
+      # FDPConfig.new # initialize
       @discoverables = {}
       wc = Wordcloud.new(refresh: refresh)
       @words = wc.count_words

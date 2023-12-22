@@ -1,10 +1,15 @@
 class FDPConfig
   FDPSITES = []
   FDPINDEX = ""
+  FDPDOMAIN = ""
 #  def initialize(index: "https://index.vp.ejprarediseases.org/")
+
   def initialize(index: ENV["FDPINDEX"])
     abort "no FDP index provided" unless index =~ /^http/
+    warn "running FDP Config"
     FDPINDEX.replace index
+    FDPDOMAIN.replace FDPConfig::FDPINDEX.gsub(%r{https?://}, "").gsub(%r{/.*}, "")
+
     index = index.gsub(%r{/\s*$}, "")
     index += "/index/entries/all"
 

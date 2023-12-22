@@ -17,6 +17,26 @@ require_relative  "cache"
 # frozen_string_literal: false
 class FDP
   attr_accessor :graph, :address, :called
+
+
+  FDPConfig.new if FDPConfig::FDPDOMAIN.empty?
+  graph = RDF::Graph.new
+  Dir["./cache/#{FDPConfig::FDPDOMAIN}/*.ttl"].select { |f| !File.directory? File.join("./cache/#{FDPConfig::FDPDOMAIN}", f) }.each do |ttl|
+    begin
+      warn "thawing file #{ttl}"
+      RDF::Reader.open("#{ttl}") do |reader|
+        reader.each_statement do |statement|
+          graph << statement
+        end
+      end
+    rescue StandardError
+      nil
+    end
+  end
+
+  warn "cachegraph graph #{graph.size}"
+  CACHE = graph
+
   NAMESPACES = "PREFIX ejpold: <http://purl.org/ejp-rd/vocabulary/>
   PREFIX ejpnew: <https://w3id.org/ejp-rd/vocabulary#>
   PREFIX dcat: <http://www.w3.org/ns/dcat#>
@@ -27,18 +47,20 @@ class FDP
   VPDISCOVERABLE = "ejpold:VPDiscoverable ejpnew:VPDiscoverable"
   VPANNOTATION = "dcat:theme"
 
+
+
   def initialize(address:, refresh: false)
     @address = address
-    @graph = RDF::Graph.new
+#    @graph = RDF::Graph.new
     @called = []
 
-    if refresh
-      warn "refreshing"
-      load(address: address)  # THIS IS A RECURSIVE FUNCTION THAT FOLLOWS ldp:contains 
-      freeze_fdp
-    else
-      thaw_fdp
-    end
+    # if refresh
+    #   warn "refreshing"
+    #   load(address: address)  # THIS IS A RECURSIVE FUNCTION THAT FOLLOWS ldp:contains 
+    #   freeze_fdp
+    # else
+    #   thaw_fdp
+    # end
   end
 
 
@@ -73,6 +95,8 @@ class FDP
   end
 
   def find_discoverables
+    @graph = FDP::CACHE
+
     vpd = SPARQL.parse("
 
     #{NAMESPACES}
@@ -158,6 +182,7 @@ class FDP
 
 
   def keyword_search(keyword: "")
+    @graph = FDP::CACHE
     vpd = SPARQL.parse("
     #{NAMESPACES}
 
@@ -186,6 +211,7 @@ class FDP
   end
 
   def ontology_search(uri: "")
+    @graph = FDP::CACHE
     warn "in ontology search"
     warn "parse start"
     vpd = SPARQL.parse("
@@ -246,6 +272,7 @@ class FDP
   end
 
   def get_verbose_annotations
+    @graph = FDP::CACHE
     words = []
     vpd = SPARQL.parse("
     #{NAMESPACES}

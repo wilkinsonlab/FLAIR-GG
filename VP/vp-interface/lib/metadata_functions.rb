@@ -42,8 +42,8 @@ def resolve_url_to_jsonld(url:)
 end
 
 def resolve_url_to_json(url:, accept: "application/json")
-  graph = RDF::Graph.new
-  type = TYPEHASH[accept] # e.g. :turtle  for the RDF reader
+  # graph = RDF::Graph.new
+  # type = TYPEHASH[accept] # e.g. :turtle  for the RDF reader
 
   begin
     r = RestClient::Request.execute(
@@ -103,7 +103,6 @@ def refresh_cache
   f = open("./cache/REFRESHING", "w") # multiple browser calls are a problem!
   f.puts "REFRESHING"
   f.close
-  FDPConfig.new  # initialize
   fdps = FDPConfig::FDPSITES
   fdps.each do |fdp_address|
     warn "working with #{fdp_address}"
@@ -116,7 +115,7 @@ end
 
 def get_resources
   discoverables = {}
-  FDPConfig.new  # initialize
+  # FDPConfig.new  # initialize
   fdps = FDPConfig::FDPSITES
   fdps.each do |fdp_address|
     fdp = FDP.new(address: fdp_address, refresh: false)
@@ -129,7 +128,7 @@ end
 def keyword_search_shell(keyword:)
   warn "in keyword search now\n\n\n"
   discoverables = {}
-  FDPConfig.new  # initialize
+  # FDPConfig.new  # initialize
   fdps = FDPConfig::FDPSITES
   fdps.each do |fdp_address|
     warn "searching #{fdp_address}"
@@ -143,7 +142,7 @@ end
 
 def ontology_search_shell(term:)
   discoverables = {}
-  FDPConfig.new # initialize
+  # FDPConfig.new # initialize
   fdps = FDPConfig::FDPSITES
   fdps.each do |fdp_address|
     fdp = FDP.new(address: fdp_address, refresh: false)
