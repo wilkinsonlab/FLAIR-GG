@@ -43,7 +43,7 @@
             <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
             <% title = @discoverables[url][:title] %>
             <li><img src="/images/<%= @discoverables[url][:icon] %>" width=35 height=35/> &nbsp;&nbsp;
-            Resource: <a href="<%= url %>" > <%= title %> </a>(<%= type.capitalize %>)
+            Resource: <a href="<%= url %>" _target="_blank"> <%= title %> </a>(<%= type.capitalize %>)
             </li>
           <% end %>
       </ol>

@@ -1,6 +1,5 @@
 require "json"
 require "linkeddata"
-require_relative "metadata_functions"
 
 class BioRegistry
   attr_accessor :uri, :synonym_urls

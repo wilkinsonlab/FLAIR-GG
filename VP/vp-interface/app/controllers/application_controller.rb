@@ -5,9 +5,15 @@ require "sinatra"
 require "sinatra/base"
 require "json"
 # DO NOT change the order of loading below.  The files contain executable code that builds the overall configuration before this module starts
-require_relative "configuration"
+require_relative "configuration"  # VPConfig and FDPConfig
 require_relative "models"
 require_relative "routes"
+require_relative "../../lib/cache"
+require_relative "../../lib/fdp"
+require_relative "../../lib/vp"
+require_relative "../../lib/metadata_functions"
+require_relative "../../lib/wordcloud"
+
 
 class ApplicationController < Sinatra::Application
   include Swagger::Blocks
@@ -64,6 +70,8 @@ class ApplicationController < Sinatra::Application
   SWAGGERED_CLASSES = [ErrorModel, AllResourcesResponse, OntologySearchResponse, KeywordSearchResponse, self].freeze
 
   set_routes(classes: SWAGGERED_CLASSES)
+  
+  VP.new(config: VPConfig.new)  # set up index and active sites)
 
   run! # if app_file == $PROGRAM_NAME
 end

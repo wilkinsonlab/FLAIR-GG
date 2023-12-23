@@ -7,8 +7,8 @@ class Wordcloud
   def initialize(refresh: false)
     @words = []
 
-    if File.exist?("./cache/keywords.json") && (refresh == "false")
-      thaw_keywords
+    if File.exist?("./cache/keywords.json") && !refresh
+      @words = thaw_keywords
     else
       begin
         f = open("./cache/WCREFRESHING", "w")  # multiple browser calls are a problem!
@@ -17,13 +17,8 @@ class Wordcloud
       rescue StandardError
         warn "WCREfreshing file exists... continue"
       end
-      fdps = FDPConfig::FDPSITES
-      @words = []
-      fdps.each do |fdp|
-        warn "\n\n\nQUERYING #{fdp}\n\n\n"
-        site = FDP.new(address: fdp)
-        @words << site.get_verbose_annotations
-      end
+
+      @words << VP.current_vp.verbose_annotations
       warn "flattening"
       @words = @words.flatten
       @words.compact!
@@ -42,7 +37,6 @@ class Wordcloud
       freqs[w] = freq
     end
     warn freqs
-    freqs
+    return freqs
   end
-
 end

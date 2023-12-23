@@ -1,6 +1,5 @@
 require "json"
 require "linkeddata"
-require_relative "metadata_functions"
 
 class Etsi
   attr_accessor :uri

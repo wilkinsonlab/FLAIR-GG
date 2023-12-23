@@ -30,8 +30,8 @@
        */
 
       var word_array = [
-        <% @words.each_key do |key| %>
-          {text: "<%= key %>", weight: <%= @words[key] %>},
+        <% @freqs.each_key do |key| %>
+          {text: "<%= key %>", weight: <%= @freqs[key] %>},
         <% end %>
       ];
 
@@ -45,18 +45,20 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/jqcloud.css" />
   </head>
   <body>
-    <div class="wrapper">
-      <h2><a href="https://vp.bgv.cbgp.upm.es/flair-gg-vp-server/resources">FLAIR-GG Virtual Platform</a><h2>
+  <div class="wrapper">
+  <div><a href="/flair-gg-vp-server/resources"><img src="/images/flair-gg-logo.png" width="400px"/></a></div>
 
-      <div class="sidebar">
-      Keyword Search: <form action="/flair-gg-vp-server/keyword-search"><input type="text" name="keyword" width="30"><input type="submit"></form>
-      </div>
-      <div class="sidebar" style="clear: both;">
-      Ontology URI: <form action="/flair-gg-vp-server/ontology-search"><input type="text" name="uri" width="30"><input type="submit"></form>
-      </div>
-      <div class="sidebar" style="clear: both;">
-      <a href="/flair-gg-vp-server/wordcloud"><input type="button" value="Display Wordcloud"></a>
-      </div>
+    <div class="sidebar" style="clear: both;">
+    Keyword Search: <form action="/flair-gg-vp-server/keyword-search"><input type="text" name="keyword" width="30"><input type="submit"></form>
+    </div>
+
+    <div class="sidebar" style="clear: both;">
+    Ontology URI: <form action="/flair-gg-vp-server/ontology-search"><input type="text" name="uri" width="30"><input type="submit"></form>
+    </div>
+
+    <div class="sidebar" style="clear: both;">
+    <a href="/flair-gg-vp-server/wordcloud"><input type="button" value="Display Wordcloud"></a>
+    </div>
 
 
       <div id="cloud" style="width: 952px; height: 652px;"></div>

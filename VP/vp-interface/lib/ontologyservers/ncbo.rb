@@ -1,6 +1,5 @@
 require "json"
 require "linkeddata"
-require_relative "metadata_functions"
 
 PARAMS = "?apikey=74027bd8-6be0-4329-be22-aa3717f97243&format=json"
 
