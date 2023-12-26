@@ -72,15 +72,20 @@ class VP
 
     vpd = SPARQL.parse("
 
-    #{NAMESPACES}
-    SELECT ?s ?t ?title WHERE
-    { 
-      VALUES ?connection { #{VPCONNECTION} }
-      VALUES ?discoverable { #{VPDISCOVERABLE} }
+      #{NAMESPACES}
+      SELECT DISTINCT ?s ?t ?title ?contact WHERE
+      { 
+        VALUES ?connection { #{VPCONNECTION} }
+        VALUES ?discoverable { #{VPDISCOVERABLE} }
 
-      ?s  ?connection ?discoverable ;
-          dc:title ?title ;
-          a ?t .}")
+        ?s  ?connection ?discoverable ;
+            dc:title ?title ;
+            a ?t .
+
+        OPTIONAL{?s dcat:contactPoint ?c .
+                 ?c <http://www.w3.org/2006/vcard/ns#url> ?contact }.
+      }
+      ")
     discoverables = build_from_results(results: @graph.query(vpd))
     warn discoverables
     discoverables
@@ -103,19 +108,19 @@ class VP
     vpd = SPARQL.parse("
     #{NAMESPACES}
 
-    SELECT DISTINCT ?s ?t ?title WHERE
+    SELECT DISTINCT ?s ?t ?title ?contact WHERE
     { 
       VALUES ?connection { #{VPCONNECTION} }
       VALUES ?discoverable { #{VPDISCOVERABLE} }
       ?s  ?connection ?discoverable ;
           dc:title ?title ;
           a ?t .
+      OPTIONAL{?s dcat:contactPoint ?c .
+               ?c <http://www.w3.org/2006/vcard/ns#url> ?contact } .
           {
-#            SELECT distinct ?s  WHERE {
               VALUES ?searchfields { dc:title dc:description dc:keyword }
               ?s ?searchfields ?kw 
               FILTER(CONTAINS(lcase(?kw), '#{keyword}'))
-#            }
           }
     }"
     )
@@ -135,7 +140,7 @@ class VP
 
     #{NAMESPACES}
 
-    SELECT ?s ?t ?title WHERE
+    SELECT DISTINCT ?s ?t ?title ?contact WHERE
     {
       VALUES ?connection { #{VPCONNECTION} }
       VALUES ?discoverable { #{VPDISCOVERABLE} }
@@ -143,11 +148,11 @@ class VP
       ?s  ?connection ?discoverable ;
           dc:title ?title ;
           a ?t .
+      OPTIONAL{?s dcat:contactPoint ?c .
+               ?c <http://www.w3.org/2006/vcard/ns#url> ?contact } .
           {
-#            SELECT DISTINCT ?s WHERE {
               ?s dcat:theme ?theme .
               FILTER(CONTAINS(str(?theme), '#{uri}'))
-#            }
           }
     }"
     )
@@ -166,7 +171,7 @@ class VP
     words = []
     vpd = SPARQL.parse("
     #{NAMESPACES}
-    SELECT ?annot WHERE
+    SELECT DISTINCT ?annot WHERE
     { VALUES ?annotation { dcat:theme dcat:themeTaxonomy }
       ?s  ?annotation ?annot .
       }")
@@ -183,7 +188,7 @@ class VP
     warn "\n\nSWITCH TO KEYWORDS\n\n"
     vpd = SPARQL.parse("
     #{NAMESPACES}
-    select ?kw WHERE
+    select DISTINCT ?kw WHERE
     { VALUES ?searchfields { dcat:keyword }
     ?s ?searchfields ?kw .
     }")
@@ -214,14 +219,27 @@ class VP
 
   def build_from_results(results:)
     discoverables = {}
-    warn "results are #{results}"
+    counter = 1
     results.each do |result|
+      warn "result is #{result.inspect}"
+
       next if result[:t].to_s =~ /\#Resource/
 
       icon = match_type_to_icon(type: result[:t].to_s)
-      discoverables[result[:s].to_s] = { title: result[:title].to_s, type: result[:t].to_s, icon: icon }
+      contact = result[:contact].to_s
+      contact = "No Contact Provided (#{counter})" and counter += 1 unless contact
+      contact = contact.gsub(/\/\s*$/, "")  # no diference between http://my.org/  and http://my.org
+      discoverables[contact] = [] unless discoverables[contact]
+      discoverables[contact] << { resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon }
+    end
+    sort_discoverables(discoverables: discoverables)
+  end
+
+  def sort_discoverables(discoverables:)
+    discoverables.each_key do |provider|  # discoverables["banco"] = [{resource: http,  title: "hello", type: "dataset", icon: ico, contact: "banco"}, {resource: http ...}]
+      sorted = discoverables[provider].sort_by { |s| s[:type] }
+      discoverables[provider] = sorted
     end
     discoverables
   end
-
 end

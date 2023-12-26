@@ -11,25 +11,25 @@ def set_routes(classes: allclasses)
   get "/flair-gg-vp-server/force-refresh" do
     warn "initializing refresh in routes"
     VP.restart unless File.exist?("./cache/REFRESHING") # multiple browser calls are a problem!
-    @discoverables = VP.current_vp.get_resources.sort_by { |_k, v| v[:type] }.to_h  # "./lib/metadata_functions"
+    @discoverables = VP.current_vp.get_resources  # "./lib/metadata_functions"
     erb :discovered_layout
   end
 
   get "/flair-gg-vp-server/resources" do
-    @discoverables = VP.current_vp.get_resources.sort_by { |_k, v| v[:type] }.to_h  # "./lib/metadata_functions"
+    @discoverables = VP.current_vp.get_resources  # "./lib/metadata_functions"
     erb :discovered_layout
   end
 
   get "/flair-gg-vp-server/keyword-search" do
     keyword = params["keyword"]
-    @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword).sort_by { |_k, v| v[:type] }.to_h  # "./lib/fdp"
+    @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword) # "./lib/fdp"
     erb :discovered_layout
   end
 
   get "/flair-gg-vp-server/ontology-search" do
     term = params["uri"]
     term = term.gsub(/\S+\:/, "") unless term =~ /^http/
-    @discoverables = VP.current_vp.ontology_search_shell(term: term).sort_by { |_k, v| v[:type] }.to_h  # "./lib/fdp"
+    @discoverables = VP.current_vp.ontology_search_shell(term: term)  # "./lib/fdp"
     erb :discovered_layout
   end
 
