@@ -5,12 +5,14 @@ info:
   description: |
     This is a heavily trimmed copy of the RDF4J REST API that includes only the SPARQL endpoint GET and POST definitions
 
+    From this endpoint we serve the BGV Administrative Collection information (collecting group, date, etc.)
+
 externalDocs:
   url: https://rdf4j.org/documentation/reference/rest-api/
 
 servers:
   - url: https://bgv.cbgp.upm.es
-    description: SPARQL server for BGV Location information
+    description: SPARQL server for the BANCO DE GERMOPLASMA VEGETAL-UPM
 
 tags:
   - name: SPARQL
