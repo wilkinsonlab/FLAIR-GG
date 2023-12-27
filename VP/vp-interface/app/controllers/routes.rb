@@ -2,6 +2,7 @@
 def set_routes(classes: allclasses)
 
   set :server_settings, :timeout => 180
+  set :public_folder, 'public'
 
   get "/flair-gg-vp-server" do
     content_type :json
