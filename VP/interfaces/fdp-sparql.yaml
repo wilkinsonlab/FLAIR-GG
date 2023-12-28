@@ -127,7 +127,7 @@ paths:
         - name: repositoryID
           in: path
           description: The repository ID
-          required: true
+          required: false
           schema:
             type: string
       requestBody:

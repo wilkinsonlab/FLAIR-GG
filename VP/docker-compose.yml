@@ -2,8 +2,8 @@ version: "3.0"
 services:
 
   flair-gg-vp-server:
-#    image: markw/flair-gg-vp-server:0.0.9
-    image: markw/flair-gg-vp-server:0.0.12
+    image: markw/flair-gg-vp-server:0.0.17
+    restart: always
     container_name: "flair-gg-vp-server-bgv"
     hostname: "flairgg"
     ports:
@@ -12,15 +12,19 @@ services:
     volumes:
       - ./cache:/server/vp-interface/cache/
     environment:
-      - RUBYOPT=-W0 -KU -E utf-8:utf-8
+      - RUBYOPT=-W0 -KU
       - FDPINDEX=https://index.bgv.cbgp.upm.es/
+#      - RUBYOPT=-W0 -KU -E utf-8:utf-8
     depends_on:
       - swagger
 
   swagger:
-    image: swaggerapi/swagger-ui
-    container_name: "swagger-flair"
+    image: swaggerapi/swagger-ui:latest
+    restart: always
+    container_name: "swagger"
     ports:
       - "4566:8080"
     environment:
-      - SWAGGER_JSON_URL=https://vp.bgv.cbgp.upm.es/flair-gg-vp-server
+      - SUPPORTED_SUBMIT_METHODS=${SUPPORTED_SUBMIT_METHODS}
+      - URLS=${URLS}
+      - BASE_URL='/swagger'   # for our reverse proxy

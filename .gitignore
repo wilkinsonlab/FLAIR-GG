@@ -1,6 +1,7 @@
 *.gem
 *.rbc
 *.zip
+/.env
 /.config
 /coverage/
 /InstalledFiles
