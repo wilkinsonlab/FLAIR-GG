@@ -69,8 +69,6 @@ components:
           examples:
             SelectQueryResult:
               $ref: "#/components/examples/SparqlJsonBindings"
-            AskQueryResult:
-              $ref: "#/components/examples/SparqlJsonBoolean"
   examples:
     SparqlJsonBindings:
       value:

@@ -1,0 +1,14 @@
+      <div class="sidebar" style="clear: both;">
+      Data Services:
+        <form action="/flair-gg-vp-server/retrieve-services">
+          <label for="services" style="font-size: .75em;">Please select a service type from the menu below</label><br/>
+          <select name="services" id="services" width="30">
+            <%  @services.each do |serv, label| %>
+              <option value="<%= serv %>"><%= label %></option>
+            <% end %>
+          </select>
+          <input type="submit" value="submit"/>
+        </form>
+      </div>
+
+

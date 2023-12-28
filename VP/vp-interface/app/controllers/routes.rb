@@ -34,6 +34,12 @@ def set_routes(classes: allclasses)
     erb :discovered_layout
   end
 
+  get "/flair-gg-vp-server/retrieve-services" do
+    term = params["services"]
+    @discoverables = VP.current_vp.retrieve_sevices(term: term)  # "./lib/fdp"
+    erb :services_layout
+  end
+
   get "/flair-gg-vp-server/wordcloud" do
     @freqs = Wordcloud.new.count_words  # "./lib/wordcloud"
     erb :wordcloud
@@ -53,8 +59,14 @@ def set_routes(classes: allclasses)
       wc = Wordcloud.new(refresh: true)
       @freqs = wc.count_words
       warn "received #{@freqs.length}"
-      File.delete("./cache/WCREFRESHING") if File.exist?("./cache/WCREFRESHING")
+      FileUtils.rm_f("./cache/WCREFRESHING")
     end
     erb :wordcloud
   end
+
+  before do
+    @services = VP.current_vp.collect_data_services
+
+  end
+
 end

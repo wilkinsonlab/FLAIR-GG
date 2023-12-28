@@ -32,7 +32,6 @@ class VP
   end
 
   def load_fdps_from_cache()
-#    Dir["./cache/#{FDPConfig::FDPDOMAIN}/*.ttl"].select { |f| !File.directory? File.join("./cache/#{FDPConfig::FDPDOMAIN}", f) }.each do |ttl|
     Dir["./cache/*.marsh"].select { |f| !File.directory? File.join("./cache/", f) }.each do |marsh|
       fdp = FDP.load_from_cache(vp: self, marshalled: marsh)
       add_fdp(fdp: fdp)
@@ -201,6 +200,60 @@ class VP
     warn "PROVIDER WORDS:  #{words}"
     words
   end
+
+  def collect_data_services
+    @graph = self.networkgraph
+    warn "in collect data services"
+    vpd = SPARQL.parse("
+
+    #{NAMESPACES}
+
+    SELECT DISTINCT ?kw ?type WHERE
+    {
+      VALUES ?connection { #{VPCONNECTION} }
+      VALUES ?discoverable { #{VPDISCOVERABLE} }
+
+      ?s  ?connection ?discoverable ;
+          a dcat:DataService .
+          {
+              ?s dc:type ?type .
+              ?s dc:keyword ?kw
+          }
+    }"
+    )
+    results = @graph.query(vpd)
+    prehash = {}
+    results.each do |r|
+      type = r[:type]; kw = r[:kw]
+      prehash[type] = "" unless prehash[type]
+      prehash[type] += "#{kw}, "
+    end
+    services = prehash.map {|k,v| v.gsub!(/\,\s$/, ""); [k,v] } # remove trailing space and turn into array
+    services
+  end
+
+  def retrieve_sevices(term:)
+    @graph = self.networkgraph
+    warn "in collect data services"
+    vpd = SPARQL.parse("
+    #{NAMESPACES}
+    SELECT DISTINCT ?s ?title ?openapi ?endpoint WHERE
+    {
+      VALUES ?connection { #{VPCONNECTION} }
+      VALUES ?discoverable { #{VPDISCOVERABLE} }
+
+      ?s  ?connection ?discoverable ;
+        a dcat:DataService ;
+        dc:title ?title ;
+        dcat:endpointURL ?endpoint ;
+        dcat:endpointDescription ?openapi ;
+        dc:type <#{term}> .
+    }"
+    )
+    results = @graph.query(vpd)
+
+  end
+
 
   def match_type_to_icon(type:)
     t = type.match(%r{[\#/](\w+?)$})[1].downcase.to_sym
