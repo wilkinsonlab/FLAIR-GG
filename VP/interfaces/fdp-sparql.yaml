@@ -95,12 +95,6 @@ paths:
       description: |
         Execute a SPARQL query on the repository. The result format is based on the type of result (boolean, variable bindings, or RDF data) and the negotiated acceptable content-type. Note that RDF4J supports executing SPARQL queries with either a GET or a POST request. POST is supported for queries that are too large to be encoded as a query parameter.
       parameters:
-        - name: repositoryID
-          in: path
-          description: The repository ID
-          required: true
-          schema:
-            type: string
         - name: query
           in: query
           description: The query to evaluate
@@ -123,13 +117,6 @@ paths:
       summary: Execute SPARQL query
       description: |
         Execute a SPARQL query on the repository. The result format is based on the type of result (boolean, variable bindings, or RDF data) and the negotiated acceptable content-type. Note that RDF4J supports executing SPARQL queries with either a GET or a POST request. POST is supported for queries that are too large to be encoded as a query parameter.
-      parameters:
-        - name: repositoryID
-          in: path
-          description: The repository ID
-          required: false
-          schema:
-            type: string
       requestBody:
         description: the SPARQL query to execute
         required: true
