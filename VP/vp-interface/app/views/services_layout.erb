@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  
+  <%= erb :_head %>
+
+  <body>
+    <div class="wrapper">
+      <div><a href="/flair-gg-vp-server/resources"><img src="/images/flair-gg-logo.png" width="400px"/></a></div>
+
+
+      <%= erb :_sidebar %>
+
+        <h2>Common Parameters</h2>
+
+<%
+=begin
+
+class ServiceCollection  @servicecollection
+  attr_accessor :vpgraph, :servicetype, :allservices, :warnings
+class Service  (from allservices)
+  attr_accessor :contact, :title, :openapi, :endpoint, :apiobject, :base, :paths
+  retrieve_parameters:  params[param.name] = param  # responds to "in", "name", "description", "schema.example", "schema.type"
+
+@commonparameters  (shared by all services) commonparams[paramname] = params[paramname], 
+every param  responds to "in", "name", "description", "schema.example", "schema.type"
+
+=end
+%>
+
+        <form action = "/flair-gg-vp-server/execute-data-services">
+
+        <% @commonparams.each do |paramname, param| %>
+          <label for="<%= paramname %>" style="font-size: .75em;"><%= paramname %></label>
+          <input type="text" name="<%= paramname %>" id="<%= paramname %>"><br/><br/>
+        <% end %>
+
+
+        
+        
+
+
+      <%= erb :_footer %>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <!--[if lt IE 7]>
+      <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+      <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+    <![endif]-->
+  </body>
+</html>

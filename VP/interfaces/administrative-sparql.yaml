@@ -101,12 +101,6 @@ paths:
           schema:
             type: string
             example: select * where {?s ?p ?o} limit 10
-        - name: $<varname>
-          in: query
-          required: false
-          description: Specifies variable bindings. Variables appearing in the query can be bound to a specific value outside the actual query using this option. The value should be an N-Triples encoded RDF value.
-          schema:
-            type: string
       responses:
         '200':
           $ref: "#/components/responses/200SparqlResult"

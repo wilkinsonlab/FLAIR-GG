@@ -12,6 +12,7 @@ require_relative "../../lib/cache"
 require_relative "../../lib/fdp"
 require_relative "../../lib/vp"
 require_relative "../../lib/metadata_functions"
+require_relative "../../lib/services"
 require_relative "../../lib/wordcloud"
 
 

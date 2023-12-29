@@ -23,20 +23,20 @@ def set_routes(classes: allclasses)
 
   get "/flair-gg-vp-server/keyword-search" do
     keyword = params["keyword"]
-    @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword) # "./lib/fdp"
+    @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword) # "./lib/vp"
     erb :discovered_layout
   end
 
   get "/flair-gg-vp-server/ontology-search" do
     term = params["uri"]
     term = term.gsub(/\S+\:/, "") unless term =~ /^http/
-    @discoverables = VP.current_vp.ontology_search_shell(term: term)  # "./lib/fdp"
+    @discoverables = VP.current_vp.ontology_search_shell(term: term)  # "./lib/vp"
     erb :discovered_layout
   end
 
   get "/flair-gg-vp-server/retrieve-services" do
     term = params["services"]
-    @discoverables = VP.current_vp.retrieve_sevices(term: term)  # "./lib/fdp"
+    @servicecollection, @commonparams = VP.current_vp.retrieve_sevices(term: term)  # "./lib/vp"
     erb :services_layout
   end
 

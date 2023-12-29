@@ -56,14 +56,6 @@ class FDP
     data = StringIO.new(message)
     RDF::Reader.for(:turtle).new(data) do |reader|
       reader.each_statement do |statement|
-        obj = statement.object
-        if obj.literal?
-          val = obj.value
-          val = val.dup  # unfreeze!
-          val = val.force_encoding('UTF-8')
-          statement = RDF::Statement.new(statement.subject, statement.predicate, RDF::Literal.new(val))
-        end
-
         @graph << statement
         if statement.predicate.to_s == "http://www.w3.org/ns/ldp#contains"
           contained_thing = statement.object.to_s

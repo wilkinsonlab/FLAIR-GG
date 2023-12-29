@@ -49,10 +49,19 @@ class VP
     f = open("./cache/REFRESHING", "w") # multiple browser calls are a problem!
     f.puts "REFRESHING"
     f.close
-    vp = VP.new(config: VPConfig.new)  # refresh from index
-    fdpsites = VPConfig::FDPSITES
+
+    fdpsites = VPConfig::FDPSITES   # current sites
     fdpsites.each do |fdp_address|   # one for every active FDP site
-      warn "working with #{fdp_address}"
+      warn "deleting #{fdp_address}"      
+      hexaddress = Digest::SHA256.hexdigest fdp_address
+      FileUtils.rm_f("./cache/#{hexaddress}.marsh")  # clear existing cache
+    end
+
+    vp = VP.new(config: VPConfig.new)  # refresh from index
+
+    fdpsites = VPConfig::FDPSITES   # new set of sites
+    fdpsites.each do |fdp_address|   # one for every active FDP site
+      warn "working with #{fdp_address}"      
       fdp = FDP.new(address: fdp_address)
       fdp.freezeme
       vp.add_fdp(fdp: fdp)
@@ -224,7 +233,8 @@ class VP
     results = @graph.query(vpd)
     prehash = {}
     results.each do |r|
-      type = r[:type]; kw = r[:kw]
+      type = r[:type]; kw = r[:kw]; s = r[:s]
+      warn "subject #{s} type #{type} kw #{kw}"
       prehash[type] = "" unless prehash[type]
       prehash[type] += "#{kw}, "
     end
@@ -233,25 +243,10 @@ class VP
   end
 
   def retrieve_sevices(term:)
-    @graph = self.networkgraph
-    warn "in collect data services"
-    vpd = SPARQL.parse("
-    #{NAMESPACES}
-    SELECT DISTINCT ?s ?title ?openapi ?endpoint WHERE
-    {
-      VALUES ?connection { #{VPCONNECTION} }
-      VALUES ?discoverable { #{VPDISCOVERABLE} }
-
-      ?s  ?connection ?discoverable ;
-        a dcat:DataService ;
-        dc:title ?title ;
-        dcat:endpointURL ?endpoint ;
-        dcat:endpointDescription ?openapi ;
-        dc:type <#{term}> .
-    }"
-    )
-    results = @graph.query(vpd)
-
+    # hand off to services_functions
+    servicecollection = ServiceCollection.new(vpgraph: self.networkgraph, servicetype: term)
+    commonparams = servicecollection.gather_common_parameters
+    [servicecollection, commonparams]
   end
 
 

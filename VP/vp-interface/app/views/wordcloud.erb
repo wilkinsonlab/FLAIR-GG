@@ -48,25 +48,13 @@
   <div class="wrapper">
   <div><a href="/flair-gg-vp-server/resources"><img src="/images/flair-gg-logo.png" width="400px"/></a></div>
 
-    <div class="sidebar" style="clear: both;">
-    Keyword Search: <form action="/flair-gg-vp-server/keyword-search"><input type="text" name="keyword" width="30"><input type="submit"></form>
-    </div>
-
-    <div class="sidebar" style="clear: both;">
-    Ontology URI: <form action="/flair-gg-vp-server/ontology-search"><input type="text" name="uri" width="30"><input type="submit"></form>
-    </div>
-
-    <div class="sidebar" style="clear: both;">
-    <a href="/flair-gg-vp-server/wordcloud"><input type="button" value="Display Wordcloud"></a>
-    </div>
+    <%= erb :_sidebar %>
 
 
-      <div id="cloud" style="width: 952px; height: 652px;"></div>
+    <div id="cloud" style="width: 952px; height: 652px;"></div>
 
 
-      <footer class="branding">
-        <small>&copy; 2023 <strong>Mark D Wilkinson</strong></small>
-      </footer>
+    <%= erb :_footer %>
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
