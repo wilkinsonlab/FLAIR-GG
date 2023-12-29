@@ -64,6 +64,13 @@ def set_routes(classes: allclasses)
     erb :wordcloud
   end
 
+  post "/flair-gg-vp-server/execute-data-services" do
+    
+    @results = VP.current_vp.execute_data_services(params: params)
+    erb :execution_results_layout
+
+  end
+
   before do
     @services = VP.current_vp.collect_data_services
 

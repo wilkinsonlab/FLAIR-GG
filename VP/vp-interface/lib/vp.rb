@@ -233,8 +233,8 @@ class VP
     results = @graph.query(vpd)
     prehash = {}
     results.each do |r|
-      type = r[:type]; kw = r[:kw]; s = r[:s]
-      warn "subject #{s} type #{type} kw #{kw}"
+      type = r[:type]; kw = r[:kw];
+      warn "subject type #{type} kw #{kw}"
       prehash[type] = "" unless prehash[type]
       prehash[type] += "#{kw}, "
     end
@@ -249,6 +249,17 @@ class VP
     [servicecollection, commonparams]
   end
 
+  def execute_data_services(params:)
+    endpoints = params.delete("endpoint")
+    results = {}
+    endpoints.each do |ep|
+      endpoint = CGI.unescape(ep)
+      result = RestClient.get(endpoint, {params: params})
+      warn result.inspect
+      results[endpoint] = result.body
+    end
+    results
+  end
 
   def match_type_to_icon(type:)
     t = type.match(%r{[\#/](\w+?)$})[1].downcase.to_sym

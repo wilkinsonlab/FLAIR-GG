@@ -100,31 +100,7 @@ paths:
           required: true
           schema:
             type: string
-            example: select * where {?s ?p ?o} limit 10
+            example: SELECT DISTINCT ?type WHERE {?s a ?type}
       responses:
         '200':
           $ref: "#/components/responses/200SparqlResult"
-    post:
-      tags:
-        - SPARQL
-      summary: Execute SPARQL query
-      description: |
-        Execute a SPARQL query on the repository. The result format is based on the type of result (boolean, variable bindings, or RDF data) and the negotiated acceptable content-type. Note that RDF4J supports executing SPARQL queries with either a GET or a POST request. POST is supported for queries that are too large to be encoded as a query parameter.
-      requestBody:
-        description: the SPARQL query to execute
-        required: true
-        content:
-          application/sparql-query:
-            schema:
-              type: string
-            example:
-              "SELECT * WHERE {?S ?P ?O } LIMIT 10"
-          application/x-www-form-urlencoded:
-            schema:
-              type: string
-            example:
-              query=SELECT%20%2A%20WHERE%20%7B%3FS%20%3FP%20%3FO%20%7D%20LIMIT%2010
-      responses:
-        '200':
-          $ref: "#/components/responses/200SparqlResult"
-

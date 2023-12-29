@@ -4,6 +4,7 @@ require "swagger/blocks"
 require "sinatra"
 require "sinatra/base"
 require "json"
+require "erb"
 # DO NOT change the order of loading below.  The files contain executable code that builds the overall configuration before this module starts
 require_relative "configuration"  # VPConfig and FDPConfig
 require_relative "models"

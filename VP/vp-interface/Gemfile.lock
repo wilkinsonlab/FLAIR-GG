@@ -32,6 +32,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    cgi (0.4.1)
     coderay (1.1.3)
     commonmarker (0.23.10)
     concurrent-ruby (1.2.2)
@@ -366,6 +367,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   capybara
+  cgi (~> 0.4.1)
   debase!
   fileutils (~> 1.5.0)
   json (~> 2.7.1)
