@@ -1,0 +1,6 @@
+# AN EXAMPLE .env (DOT env) file for docker-compose
+# what the data transform will use as the base for all URLs it genereates
+baseURI=http://germplasm.for.sure/data/
+# user and password with write-permissions on the CDE database
+GraphDB_User=admin
+GraphDB_Pass=root
