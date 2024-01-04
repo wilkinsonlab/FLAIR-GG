@@ -1,4 +1,5 @@
-# require './config/environment'
+# frozen_string_literal: false
+
 require_relative "../../config/environment" # for docker
 require "swagger/blocks"
 require "sinatra"

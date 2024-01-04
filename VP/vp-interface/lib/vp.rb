@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 require "linkeddata"
 require "digest"
 require "restclient"
@@ -19,8 +21,8 @@ class VP
   @@thisvp = ""
 
   def initialize(config: vpconfig)
-    @vpconfig = vpconfig  # my configuration
-    @networkgraph = RDF::Graph.new  # the full network of FDP triples
+    @vpconfig = config # my configuration
+    @networkgraph = RDF::Graph.new # the full network of FDP triples
     @fdps = []  # the FDPs that I know
     @aboutme = []  # the list of keywords for the word cloud
     load_fdps_from_cache
@@ -52,7 +54,7 @@ class VP
 
     fdpsites = VPConfig::FDPSITES   # current sites
     fdpsites.each do |fdp_address|   # one for every active FDP site
-      warn "deleting #{fdp_address}"      
+      warn "deleting #{fdp_address}"
       hexaddress = Digest::SHA256.hexdigest fdp_address
       FileUtils.rm_f("./cache/#{hexaddress}.marsh")  # clear existing cache
     end
@@ -61,7 +63,7 @@ class VP
 
     fdpsites = VPConfig::FDPSITES   # new set of sites
     fdpsites.each do |fdp_address|   # one for every active FDP site
-      warn "working with #{fdp_address}"      
+      warn "working with #{fdp_address}"
       fdp = FDP.new(address: fdp_address)
       fdp.freezeme
       vp.add_fdp(fdp: fdp)
@@ -104,13 +106,13 @@ class VP
     discoverables = keyword_search(keyword: keyword)
     discoverables
   end
-  
+
   def ontology_search_shell(term:)
     warn "in ontology search shell"
     discoverables = ontology_search(uri: term)
     discoverables
   end
-  
+
   def keyword_search(keyword: "")
     @graph = self.networkgraph
     vpd = SPARQL.parse("

@@ -13,7 +13,6 @@ prefixes:
   foaf: http://xmlns.com/foaf/0.1/
   schema: https://schema.org/
 
-
 sources:
   source_location:
     access: /mnt/data/administrative.csv
@@ -70,8 +69,12 @@ mapping:
       predicate: rdfs:label
 
     - objects:
+      - function : idlab-fn:concat
+        parameters: 
+          - [idlab-fn:str, $(org_id)]
+          - [idlab-fn:otherStr, 'Organization']
+          - [idlab-fn:delimiter, '#']
         type: iri
-        value: $(org_id)#OrganizationID
       predicate: sio:SIO_000671
 
 
@@ -81,7 +84,14 @@ mapping:
     graph: this:$(uniqid)_Context
     sources:
     - source_location
-    subjects: $(org_id)#OrganizationID
+    subjects: 
+      - function : idlab-fn:concat
+        parameters: 
+          - [idlab-fn:str, $(org_id)]
+          - [idlab-fn:otherStr, 'Organization']
+          - [idlab-fn:delimiter, '#']
+        type: iri
+
     predicateobject:
     - objects:
         type: iri
