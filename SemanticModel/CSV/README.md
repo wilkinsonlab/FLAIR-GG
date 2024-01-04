@@ -3,7 +3,7 @@
 ## Location:
 
 - filename:  location.csv
-- yarrrml:  location_yarrrml.yaml
+- yarrrml:  location_yarrrml.pre-yaml
 
 **bgvid**: string
 
@@ -34,7 +34,7 @@
 ## Germplasm:
 
 - filename:  germplasm.csv
-- yarrrml:  germplasm.yaml
+- yarrrml:  germplasm.pre-yaml
 
 **bgvid**: string
 
