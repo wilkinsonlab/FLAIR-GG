@@ -8,7 +8,7 @@ The FLAIR-GG Semantic Model is broken into 3 parts:
 
 ## Location
 
-[YARRRML Here](./YARRRML/location_yarrrml.yaml)
+[YARRRML Here](./YARRRML/location_yarrrml.pre-yaml)
 <img src="./Images/Location%20Data%20Model.png"/>
 
 
@@ -19,5 +19,5 @@ The FLAIR-GG Semantic Model is broken into 3 parts:
 ## Administrative
 
 
-[YARRRML Here](./YARRRML/administrative_yarrrml.yaml)
+[YARRRML Here](./YARRRML/administrative_yarrrml.pre-yaml)
 <img src="./Images/Administrative%20Data%20Model.png"/>
