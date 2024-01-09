@@ -37,9 +37,9 @@ data = {
     ["this:$(uniqid)#GeoLocation","rdf:type","$(longitude)","xsd:float"],
     ["this:$(uniqid)#soil_type","sio:SIO_000300","$(soil_label)","iri"],
     ["this:$(uniqid)#soil_type","rdf:type","$(soil_type)","iri"],
-    ["$(country_name)", "rdf:type", "sio:SIO_000664"],
-    ["$(country_name)", "rdfs:label", "$(country_name)"],
-    ["$(country_name)", "rdfs:label", "$(country_code)"],
+    ["$(country_name)", "rdf:type", "sio:SIO_000664", "iri"],
+    ["$(country_name)", "rdfs:label", "$(country_name)","string"],
+    ["$(country_name)", "rdfs:label", "$(country_code)","string"],
     
   ],
 
