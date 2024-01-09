@@ -12,21 +12,35 @@ data = {
    
 
   "triplets" : [
-    ["this:$(uniqid)#Collection","sio:has-output","this:$(uniqid)#Germplasm","iri"], 
-    ["this:$(uniqid)#Collection","sio:measured-at","this:$(uniqid)#Colecction_date","iri"],
-    ["this:$(uniqid)#Collection_date","sio:SIO_000680","this:$(uniqid)#Collection_Start","iri"],
-    ["this:$(uniqid)#Collection_date","sio:SIO_000681","this:$(uniqid)#Collection_End","iri"],
-    ["this:$(uniqid)#Geolocation","sio:if-location-of","this:$(uniqid)#Collection","iri"],
-    ["this:$(uniqid)#Geolocation", "sio:is-located-in", "https://en.wikipedia.org/wiki/ISO_3166-1:$(country_code)", "iri"]
-    ["this:$(uniqid)#Geolocation"," ","this:$(uniqid)#Soil_type","iri"],
+    ["this:$(uniqid)#Collection","sio:SIO_000229","this:$(uniqid)#Germplasm","iri"], 
+    ["this:$(uniqid)#Collection","sio:SIO_000793","this:$(uniqid)#timeofobservation","iri"],
+    ["this:$(uniqid)#Germplasm","sio:SIO_000671","this:$(uniqid)#identifier","iri"],
+    ["this:$(uniqid)#timeofobservation","sio:SIO_000680","this:$(uniqid)#start","iri"],
+    ["this:$(uniqid)#timeofobservation","sio:SIO_000681","this:$(uniqid)#end","iri"],
+    ["this:$(uniqid)#GeoLocation","sio:SIO_000145","this:$(uniqid)#Collection","iri"],
+    ["this:$(uniqid)#GeoLocation", "sio:SIO_000061", "$(country_name)", "iri"],
+    ["this:$(uniqid)#GeoLocation","http://some.ontology.term/soiltype","this:$(uniqid)#soil_type","iri"],
 
 
     ["this:$(uniqid)#Collection","rdf:type","sio:SIO_001049","iri"], 
-    ["this:$(uniqid)#Collection","rdf:type","","iri"],
-
-
-  
-
+    ["this:$(uniqid)#Collection","rdfs:label","$(comment)","xsd:string"],
+    ["this:$(uniqid)#Germplasm","rdf:type","efo:EFO_0007059","iri"],
+    ["this:$(uniqid)#identifier","sio:SIO_000300","$(bgvid)","xsd:string"],
+    ["this:$(uniqid)#timeofobservation","sio:SIO_000300","$(collection_date)","xsd:date"],
+    ["this:$(uniqid)#timeofobservation","rdf:type","sio:SIO_000391","iri"], 
+    ["this:$(uniqid)#timeofobservation","rdf:type","sio:SIO_000417","iri"],
+    ["this:$(uniqid)#start","rdf:type","sio:SIO_000669","iri"],
+    ["this:$(uniqid)#start","sio:SIO_000300","$(collection_start)","xsd:date"],
+    ["this:$(uniqid)#end","sio:SIO_000300","$(collection_end)","xsd:date"], 
+    ["this:$(uniqid)#end","rdf:type","sio:SIO_000670","iri"],  
+    ["this:$(uniqid)#GeoLocation","rdf:type","$(latitude)","xsd:float"],
+    ["this:$(uniqid)#GeoLocation","rdf:type","$(longitude)","xsd:float"],
+    ["this:$(uniqid)#soil_type","sio:SIO_000300","$(soil_label)","iri"],
+    ["this:$(uniqid)#soil_type","rdf:type","$(soil_type)","iri"],
+    ["$(country_name)", "rdf:type", "sio:SIO_000664"],
+    ["$(country_name)", "rdfs:label", "$(country_name)"],
+    ["$(country_name)", "rdfs:label", "$(country_code)"],
+    
   ],
 
   "config" : {

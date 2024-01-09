@@ -13,22 +13,22 @@ data = {
     
 
   "triplets" : [
-    ["this:$(bgvid)_$(uniqid)#Collection","prov:wasAssociatedWith","$(org_id)","iri"], #Organization?
-    ["$(org_id)","sio:000671","this:$(uniqid)#Identifier","iri"],
-    ["$(org_id)","sio:000059","this:$(uniqid)#Individual","iri"],
-    ["this:$(uniqid)#Individual","sio:000228","this:$(uniqid)#Role","iri"],
+    ["this:$(bgvid)_$(uniqid)#Collection","prov:wasAssociatedWith","$(org_id)","iri"], 
+    ["$(org_id)","sio:SIO_000671","this:$(uniqid)#identifier","iri"],
+    ["$(org_id)","sio:SIO_000059","this:$(uniqid)#individual","iri"],
+    ["this:$(uniqid)#individual","sio:SIO_000228","this:$(uniqid)#Role","iri"],
     
-    ["this:$(bgvid)_$(uniqid)#Collection","rdf:type","sio:001049","iri"], 
+    ["this:$(bgvid)_$(uniqid)#Collection","rdf:type","sio:SIO_001049","iri"], 
     ["this:$(bgvid)_$(uniqid)#Collection","rdf:type","prov:activity","iri"],
     ["$(org_id)","rdf:type","prov:Agent","iri"],
-    ["$(org_id)","rdfs:label","$(org_name)","string"], #Value
+    ["$(org_id)","rdfs:label","$(org_name)","string"], 
     ["$(org_id)","rdf:type","org:Organization","iri"],
-    ["$(org_id)","rdf:type","sio:000012","iri"],
-    ["this:$(uniqid)#Identifier","sio:000300","$(org_id)","xsd:string"], #url?
-    ["this:$(uniqid)#Individual","foaf:name","$(member_name)","xsd:string"], #value
-    ["this:$(uniqid)#Individual","rdf:type","prov:Agent","iri"],
-    ["this:$(uniqid)#Individual","rdf:type","org:Membership","iri"],
-    ["this:$(uniqid)#Individual","rdf:type","sio:SIO_000498","iri"],
+    ["$(org_id)","rdf:type","sio:SIO_000012","iri"],
+    ["this:$(uniqid)#identifier","sio:SIO_000300","$(org_id)","xsd:string"], 
+    ["this:$(uniqid)#individual","foaf:name","$(member_name)","xsd:string"], 
+    ["this:$(uniqid)#individual","rdf:type","prov:Agent","iri"],
+    ["this:$(uniqid)#individual","rdf:type","org:Membership","iri"],
+    ["this:$(uniqid)#individual","rdf:type","sio:SIO_000498","iri"],
     ["this:$(uniqid)#Role","rdf:type","org:role","iri"],
     ["this:$(uniqid)#Role","rdf:type","$(member_role)","iri"], 
   ],
@@ -36,7 +36,7 @@ data = {
   "config" : {
     "source_name" : "source_cde_test",
     "configuration" : "default",    
-    "csv_name" : "atributos BANSEM_c_etl_smv_6",
+    "csv_name" : "administrative.csv",
     "basicURI" : "this"
     }
 }
@@ -51,3 +51,6 @@ test_obda = yarrrml.transform_OBDA()
 print(test_obda)
 test_sparql = yarrrml.transform_SPARQL()
 print(test_sparql)
+
+
+
