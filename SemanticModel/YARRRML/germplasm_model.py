@@ -38,7 +38,10 @@ data = {
     ["this:$(uniqid)#Plant_identification", "rdf:type", "$(Vernacular_name)", "iri"],
     ["this:$(uniqid)#Plant_identification", "dwc:sientificName", "$(Scientific_name)", "iri"],
     ["this:$(uniqid)#Plant_identification", "dwc:sientificNameAuthorship", "$(Vernacular_name_authorship)", "iri"],
-
+    ["this:$(uniqid)#Endangerment_assesment_process", "rdf:type", "sio:SIO_000006", "iri"],
+    ["this:$(uniqid)#Endangerment_assesment_process", "rdf:type", "prov:activity", "iri"],
+    ["this:$(uniqid)#Endangerment_category", "rdf:type", "", "iri"],
+    ["this:$(uniqid)#Endangerment_category", "sio:SIO_000300", "", "iri"],
 
 
 
