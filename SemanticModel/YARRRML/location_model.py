@@ -8,6 +8,7 @@ data = {
     "sio" : "http://semanticscience.org/resource/" ,
     "geo" : "http://www.w3.org/2003/01/geo/wgs84_pos#" , 
     "efo" : "https://www.ebi.ac.uk/efo/" , 
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
     "this" : "http://my_example.com/"},
    
 

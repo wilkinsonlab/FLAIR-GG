@@ -8,7 +8,8 @@ data = {
     "sio" : "http://semanticscience.org/resource/" ,
     "foaf" : "http://xmlns.com/foaf/0.1/" , 
     "prov" : "https://www.w3.org/ns/prov#" , 
-    "org" : "https://www.w3.org/ns/org#", 
+    "org" : "https://www.w3.org/ns/org#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",  
     "this" : "http://my_example.com/"},
     
 
