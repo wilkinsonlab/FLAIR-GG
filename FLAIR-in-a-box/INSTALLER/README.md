@@ -319,9 +319,9 @@ FLAIR-GG has created a customized version of the yarrrml-rmlmapper docker image 
 
 ## Connect to the FLAIR-GG Virtual Platform
 
-__Full instructions for modifying your default FLAIR-in-a-box to match the requirements for the FLAIR-GG Virtual Platform can be found here:  https://github.com/ejp-rd-vp/FDP-Configuration__
+__Full instructions for modifying your default FLAIR-in-a-box to match the requirements for the FLAIR-GG Virtual Platform [can be found here](../../FDP-Configuration/)__  
 
-To connect to the VP Index, you need to add the indexer "ping" function to your FAIR Data Point.  To do this:
+To connect to the [FLAIR-GG Virtual Platform](https://vp.bgv.cbgp.upm.es), you first need to register yourself in the [VP Index](https://index.bgv.cbgp.upm.es), which is accomplished by adding the indexer "ping" function to your FAIR Data Point.  To do this:
 
 - Login to your FDP via the Web page
 - Go to "settings"
