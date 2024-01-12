@@ -8,7 +8,7 @@ data = {
     "sio" : "http://semanticscience.org/resource/" ,
     "geo" : "http://www.w3.org/2003/01/geo/wgs84_pos#" , 
     "efo" : "https://www.ebi.ac.uk/efo/" ,
-    "dwc" : "http://rs.tdwg.org/dwc/terms" ,
+    "dwc" : "http://rs.tdwg.org/dwc/terms/" ,
     "prov" :  "http://www.w3.org/ns/prov#" ,
     "this" : "http://my_example.com/"},
    

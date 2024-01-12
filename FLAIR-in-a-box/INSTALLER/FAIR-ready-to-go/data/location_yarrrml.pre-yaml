@@ -1,0 +1,315 @@
+prefixes:
+  obo: http://purl.obolibrary.org/obo/
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  sio: http://sio.semanticscience.org/resource/
+  this: |||baseURI|||
+  xsd: http://www.w3.org/2001/XMLSchema#
+  grel: http://users.ugent.be/~bjdmeest/function/grel.ttl#
+  idlab-fn: http://example.com/idlab/function/
+  geo: http://www.w3.org/2003/01/geo/wgs84_pos#
+  efo: http://www.ebi.ac.uk/efo/
+
+
+sources:
+  source_location:
+    access: /mnt/data/location.csv
+    iterator: $
+    referenceFormulation: csv
+
+mapping:
+  identifier_has_value:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#ID
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:SIO_000115
+      predicate: rdf:type
+
+    - objects:
+        datatype: xsd:string
+        value: Identifier
+      predicate: rdfs:label
+
+    - objects:
+        datatype: xsd:string
+        value: $(bgvid)
+      predicate: sio:SIO_000300
+
+
+  germplasm_has_identifier_identifier:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#Germplasm
+    predicateobject:
+    - objects:
+        type: iri
+        value: efo:EFO_0007059
+      predicate: rdf:type
+
+    - objects:
+        type: string
+        value: Germplasm
+      predicate: rdfs:label
+
+    - objects:
+        type: iri
+        value: this:$(bgvid)#ID
+      predicate: sio:SIO_000671
+
+
+
+
+  collection_output_germplasm:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#Collection
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:SIO:001049
+      predicate: rdf:type
+
+    - objects:
+        type: string
+        value: Collection Activity
+      predicate: rdfs:label
+
+    - objects:
+        type: string
+        value: $(comment)
+      predicate: rdfs:label
+
+    - objects:
+        type: iri
+        value: this:$(bgvid)#Germplasm
+      predicate: sio:SIO_000229
+
+
+
+
+
+
+  location_location_of_collection:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#Geolocation
+    predicateobject:
+    - objects:
+        type: iri
+        value: geo:Point
+      predicate: rdf:type
+
+    - objects:
+        type: string
+        value: Location
+      predicate: rdfs:label
+
+      # is location of
+    - objects:
+        type: iri
+        value: this:$(bgvid)#Collection
+      predicate: sio:SIO_000145 
+
+    - objects:
+        datatype: xsd:float
+        value: $(latitude)
+      predicate: geo:lat
+
+    - objects:
+        datatype: xsd:float
+        value: $(longitude)
+      predicate: geo:long
+
+      # is located in
+    - objects:
+        type: iri
+        value: https://en.wikipedia.org/wiki/ISO_3166-1:$(country_code)
+      predicate: sio:SIO_000061
+
+
+
+
+  location_soil_type_soil:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#Geolocation
+    predicateobject:
+    - objects:
+        type: iri
+        value: this:$(bgvid)#Soil
+      predicate: http://some.ontology.term/soiltype
+
+
+
+
+  country_annotations:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: https://en.wikipedia.org/wiki/ISO_3166-1:$(country_code)
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:SIO_000664
+      predicate: rdf:type
+ 
+    - objects:
+        type: string
+        value: $(country_code)
+      predicate: rdfs:label
+
+    - objects:
+        type: string
+        value: $(country_name)
+      predicate: rdfs:label
+
+
+
+
+  soil_type_soil_value:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#Soil
+    predicateobject:
+    - objects:
+        type: iri
+        value: $(soil_type)
+      predicate: rdf:type
+
+    - objects:
+        type: string
+        value: $(soil_label)
+      predicate: rdfs:label
+
+
+
+
+  collection_measured_at_time:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#Collection
+    predicateobject:
+    - objects:
+        datatype: xsd:date
+        value: this:$(bgvid)#CollectionTime
+      predicate: sio:SIO_000793
+
+
+
+
+
+  # when it is a specific date, different rdf:type
+  time_has_value_time:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#CollectionTime
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:SIO_000391
+      predicate: rdf:type
+
+    - objects:
+        datatype: xsd:date
+        value: $(collection_date)
+      predicate: sio:SIO_000300
+
+
+
+
+
+
+
+  time_has_start_start:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#CollectionTime
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:SIO_000417
+      predicate: rdf:type
+
+# has start time
+    - objects:
+        type: iri
+        value: this:$(bgvid)#CollectionStart
+      predicate: sio:SIO_000680
+# has end time
+    - objects:
+        type: iri
+        value: this:$(bgvid)#CollectionEnd
+      predicate: sio:SIO_000681
+
+
+  start_has_value_time:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#CollectionStart
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:SIO_000669
+      predicate: rdf:type
+
+    - objects:
+        datatype: xsd:date
+        value: $(collection_start)
+      predicate: sio:SIO_000300
+
+
+
+
+  end_has_value_time:
+    graph: this:$(uniqid)_Context
+    sources:
+    - source_location
+    subjects: this:$(bgvid)#CollectionEnd
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:SIO_000670
+      predicate: rdf:type
+
+    - objects:
+        datatype: xsd:date
+        value: $(collection_end)
+      predicate: sio:SIO_000300
+
+
+
+
+  # related_to_time:
+  #   graph: this:$(uniqid)_Context
+  #   sources:
+  #   - source_location
+  #   subjects: this:$(bgvid)_$(uniqid)_Process
+
+  #   predicateobject:
+  #     predicate: sio:SIO_000230
+  #   - objects:
+  #       function: grel:controls_if
+  #       parameters:
+  #         - parameter: grel:bool_b
+  #           value:
+  #             function: idlab-fn:isNull
+  #             parameters:
+  #               - [idlab-fn:str, $(value_id)]
+  #         - parameter: grel:any_true
+  #           value: this:$(bgvid)_$(uniqid)_Output
+  #         - parameter: grel:any_false
+  #           value: $(value_id)
+  #       type: iri

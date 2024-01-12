@@ -14,6 +14,8 @@ The FLAIR-GG Semantic Model is broken into 3 parts:
 
 ## Germplasm Information
 
+[YARRRML Here](./YARRRML/germplasm_yarrrml.pre-yaml)
+<img src="./Images/Germplasm%20Data%20Model.png"/>
 
 
 ## Administrative

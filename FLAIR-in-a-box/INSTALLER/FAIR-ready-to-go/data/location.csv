@@ -1,0 +1,2 @@
+bgvid,uniqid,comment,collection_date,collection_start,collection_end,country_code,country_name,latitude,longitude,soil_type,soil_label
+bgv123,123456,"this is some cool data",2023-01-01,2023-01-01,2023-01-01,ES,Spain,12.74,120.23,http://some.ontology.term/soiltype,loam
