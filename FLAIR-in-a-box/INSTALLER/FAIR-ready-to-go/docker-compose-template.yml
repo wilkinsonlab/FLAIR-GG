@@ -1,17 +1,6 @@
 version: "3"
 services:
 
-  # hitch:
-  #   image: markw/hitch-f-i-a-b:0.0.1
-  #   hostname: "hitch"
-  #   restart: always
-  #   volumes:
-  #   - $PWD/proxy.conf:/etc/hitch/hitch.conf
-  #   - $PWD/combined.pem:/etc/hitch/cert.pem  # this is YOUR cert + key pem file
-  #   ports:
-  #    - {FDP_PORT}:8443 # the left is what is exposed to the web.  The right must match the "frontend" port in proxy.comf
-  #   networks:
-  #     - {PREFIX}-default
 
   # FAIR Data Point client	
   fdp_client:
@@ -27,10 +16,9 @@ services:
     depends_on:
       - fdp
     ports:
-      - {FDP_PORT}:80  # You should/must close this port, if you are using hitch
+      - {FDP_PORT}:80
     networks:
       - {PREFIX}-default
-
 
   graphdb:
     image: ontotext/graphdb:10.1.2
@@ -68,7 +56,7 @@ services:
       - {PREFIX}-default
 
   flair-box-daemon: 
-    image: markw/flair-box-daemon:0.0.1    # to use the version 2 CDE models with Hefesto
+    image: markw/flair-box-daemon:0.0.1
     container_name: flair-box-daemon
     environment:
       GraphDB_User: ${GraphDB_User}

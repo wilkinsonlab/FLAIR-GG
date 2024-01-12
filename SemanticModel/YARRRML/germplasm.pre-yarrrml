@@ -1,0 +1,155 @@
+mapping:
+  20240112124128895398_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Germplasm
+      predicate: sio:SIO_000229
+    - objects:
+        type: iri
+        value: prov:Activity
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: sio:SIO_1049
+      predicate: rdf:type
+    - objects:
+        datatype: xsd:string
+        value: $(comment)
+      predicate: rdfs:label
+    sources:
+    - source_cde_test
+    subjects: this:$(bgvid)_$(uniqid)#Collection
+  20240112124128895450_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: this:$(bgvid)_$(uniqid)#Collection
+      predicate: prov:wasgeneratedby
+    - objects:
+        type: iri
+        value: this:$(uniqid)#identifier
+      predicate: sio:SIO_000671
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Plant_identification_process
+      predicate: prov:wasUsedBy
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Plant_identification_process
+      predicate: sio:SIO_000231
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Endangerment_assesment_process
+      predicate: prov:wasUsedBy
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Endangerment_assesment_process
+      predicate: sio:SIO_000231
+    - objects:
+        type: iri
+        value: sio:SIO_000000
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: efo:EFO_007059
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: prov:Entity
+      predicate: rdf:type
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Germplasm
+  20240112124128895466_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Plant_identification
+      predicate: sio:SIO_000229
+    - objects:
+        type: iri
+        value: prov:activity
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: sio:SIO_000006
+      predicate: rdf:type
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Plant_identification_process
+  20240112124128895474_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Endangerment_category
+      predicate: sio:SIO_000229
+    - objects:
+        type: iri
+        value: sio:SIO_000006
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: prov:activity
+      predicate: rdf:type
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Endangerment_assesment_process
+  20240112124128895477_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(bgvid)
+      predicate: sio:SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#identifier
+  20240112124128895481_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:SIO_000116
+      predicate: dwc:vernacularName
+    - objects:
+        type: iri
+        value: $(Vernacular_name)
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: $(Scientific_name)
+      predicate: dwc:sientificName
+    - objects:
+        type: iri
+        value: $(Vernacular_name_authorship)
+      predicate: dwc:sientificNameAuthorship
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Plant_identification
+  20240112124128895488_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: ''
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: ''
+      predicate: sio:SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Endangerment_category
+prefixes:
+  dwc: http://rs.tdwg.org/dwc/terms/
+  efo: https://www.ebi.ac.uk/efo/
+  geo: http://www.w3.org/2003/01/geo/wgs84_pos#
+  prov: http://www.w3.org/ns/prov#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  sio: http://semanticscience.org/resource/
+  this: |||baseURI|||
+sources:
+  source_cde_test:
+    access: germplasm.csv.csv
+    iterator: $
+    referenceFormulation: csv
+

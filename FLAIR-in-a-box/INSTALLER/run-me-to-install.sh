@@ -191,7 +191,7 @@ echo -e  "${GREEN}      it is likely because GraphDB hasn't finished setting its
 echo -e  "${GREEN}      wait until you are able to connect to http://localhost:7200 and then try again!"
 echo -e  "${GREEN}      It can take up to a minute after GraphDB comes alive before the FDP completes its initialization..."
 echo ""
-echo -e  "${GREEN}For further instructions and tests, read the documentation on the FAIR-in-a-box GitHub page${NC}"
+echo -e  "${GREEN}For further instructions and tests, read the documentation on the FLAIR-in-a-box GitHub page${NC}"
 echo ""
 echo -e  "${GREEN}You can stop this test phase at any time with CTRL-C, then wait for the docker images to shut down cleanly before continuing${NC}"
 if [ $production = "true" ]; then
