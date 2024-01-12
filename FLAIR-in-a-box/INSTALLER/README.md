@@ -82,7 +82,6 @@ If you say "no", the installer will install your FDP onto localhost using defaul
    - port 7070 for the FDP
    - port 7200 for the GraphDB
    - port 4567 for the RDFization trigger
-   - port 8000 for Beacon2
 
 If you say "yes", you will need to answer these questions yourself.   
 
