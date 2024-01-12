@@ -1,16 +1,16 @@
 # FDP-Configuration
-A record of the process for configuring the Reference Implementation of the FAIR Data Point (the one that is included in FAIR-in-a-box) for use on the EJP-RD Virtual Platform
+A record of the process for configuring the Reference Implementation of the FAIR Data Point (the one that is included in FLAIR-in-a-box) for use on the FLAIR-GG Virtual Platform
 
-## Tutorial for running FAIR in a Box (FiaB)
+## Tutorial for running FLAIR in a Box (FiaB)
 
-If you don't yet have a FAIR Data Point, you could consider installing one using the FAIR in a Box (FiaB) installer here: https://github.com/ejp-rd-vp/FiaB
+If you don't yet have a FAIR Data Point, you could consider installing one using the [FLAIR in a Box (FiaB) installer here](../FLAIR-in-a-box/INSTALLER/)
 
 Now continue with the configuration below...
 
 
 ## Setting the default license
 
-NOTE: The EJP-RD "non-license" can be set as the default license:  https://w3id.org/ejp-rd/resources/licenses/v1.0 and various other defaults can be configured to more useful values.
+NOTE: It is a good idea to set a default license (cc-by-4 is the default for FDP), and other defaults for the FDP.
 
 To do this: 
 
@@ -74,32 +74,13 @@ The SHACL also needs to be edited.  the correct SHACL for a Data Service is foun
 
 Save and give it a version.
 
-## Create a new schema for Patient registry
-
-Back in the Metadata Schema page, select the "create new" and follow the guidelines in the image below:
-
-![](./images/create-patient-registry.png)
-
-the shacl file is here: [patient-registry.shacl](./shacl/patient-registry.shacl)
-
-
 
 # Switch to Main Manu - Resource Definitions
 
 
-## Create a new Resource Definition for Patient Registry
-
-Back in the main menu, select "Resource Definitions", then click the "Create Resource Definition" button:
-
-![](images/create-resource-definition.png)
-
-Follow the guidelines in the image below to fill the fields, then save:
-![](images/create-registry-resource.png)
-
-
 ## Create TWO new Resource Definition for Data Services
 
-**NOTE:**  In EJP there are two "kinds" of Data Service - services that serve a dataset, and services that do algorithmic operations or plotting, but do not access a registry or biobank.  We are going to call these **_"DataService"_** and **_"DataService2"_**
+**NOTE:**  In FLAIR-GG there are two "kinds" of Data Service - services that serve a dataset, and services that do algorithmic operations or plotting, but do not access a germplasm bank.  We are going to call these **_"DataService"_** and **_"DataService2"_**
 
 
 Click the "Create Resource Definition" button again.
@@ -135,20 +116,6 @@ For services that execute algorithmic operations (DataService2), they:
 
 Go back to the Resource Definitions (main menu)
 
-We need to **make Patient Registry a child of Catalog**
-
-This is what "Catalog" looks like at the beginning:
-
-![](./images/edit-catalog-resource.png)
-
-The red arrow is where we create a new child - in this case, we are going to make Patient Registry a child of Catalog.  Note that the property that the Metadata team decided to use is "hasPart"
-
-![](./images/add-child-registry.png)
-
-
-Save!
-
-
 ### We need to **make _DataService_ a child of Distribution**
 
 Same process as above.  DCAT has defined the predicate:  **"dcat:accessService"**
@@ -166,24 +133,27 @@ Save!
 
 Done!!
 
-## Create a new record - a Data Service that does visualization (Box-whisker plot)
+## Create an exemplar new record - a Data Service that does visualization (Box-whisker plot)
 
 Now we will create a record for a Data Service to make sure everything is working as-expected.  Data Service is a child of catalog, so we need to first create a Catalog.  (go ahead and do this now!).  Once created, that catalog has three kinds of "children", indicated by the tabs:  Datasets, Data Services, and Patient Registries.
 
 Click on the "Data Services" tab, then "+Create"
 
-I'm creating a hypothetical Box-Whisker plot tool.  The _**"theme"**_ is the concept of a box-whisker plot (from EDAM:  **operation_2943**).  **Note that, because this tool is NOT serving a dataset, I am only require to include a landing page.  (endpointURL and endpointDescription are allowed to be empty)**
+I'm creating a hypothetical Box-Whisker plot tool.  The _**"type"**_ is the concept of a box-whisker plot (from EDAM:  **operation_2943**).  **Note that, because this tool is NOT serving a dataset, I am only require to include a landing page.  (endpointURL and endpointDescription are allowed to be empty)**
+
+In this image, I have also selected the EDAM ontology term for the "theme" - theme is used to ontologically annotate the data service, and may contain any valid ontology term that helps interpret "what the service is about" (versus "type", which is the specific operation that the service does)
+
 
 ![](images/boxwhisker-dataservice.png)
 
-Further down the page there are additional fields that I would like to fill-out.  For example, I am going to declare that this service does not utilize personal information (in the GDPR sense).  The allowed values are "true" and "false"  (lower case!).  I am not sure if this is enforced or not
+Further down the page there are additional fields that I would like to fill-out.  For example, I am going to declare that this service does not utilize personal information (in the GDPR sense).  The allowed values are "true" and "false"  (lower case!).
 
 I also want to tell the VP that the service exists, so I need to make it **VPDiscoverable**.  Find the section called "Vp Connection" and click "add".  The result is a dropdown menu, where you are allowed to select:
 
-* https://w3id.org/ejp-rd/vocabulary#VPDiscoverable
+* VPDiscoverable  (or nothing at all)
 
 
-VPDiscoverable is required to get a Resource (i.e. any child of dcat:Resource) into the FDP Index.  VPContentDiscovery indicates that the Resource has implemented Beacon2 for content-level discovery.
+VPDiscoverable is required to get a Resource (i.e. any child of dcat:Resource) into the [FLAIR GG Virtual Platform](https://vp.bgv.cbgp.upm.es).
 
 ![](images/boxwhisker-dataservice2.png)
 

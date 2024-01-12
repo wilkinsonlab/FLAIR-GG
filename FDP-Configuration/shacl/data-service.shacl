@@ -36,7 +36,7 @@
     sh:nodeKind sh:IRI ;
     dash:editor dash:URIEditor ;
     dash:viewer dash:LabelViewer ;
-  ] , [
+] , [
     sh:path dcat:servesDataset ;
     sh:nodeKind sh:IRI ;
     sh:minCount 0 ; 
