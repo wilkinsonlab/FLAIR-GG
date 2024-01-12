@@ -46,7 +46,7 @@
 ## Administrative:
 
 - filename:  administrative.csv
-- yarrrml:  administrative.yaml
+- yarrrml:  administrative.pre-yaml
 
 **bgvid**: string
 
