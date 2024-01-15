@@ -112,6 +112,10 @@ def ontology_annotations(uri:)
       warn "ETSI"
       etsi = Etsi.new(uri: uri)
       term = etsi.lookup_title
+    elsif uri =~ /edamontology/   
+      warn "EDAM"
+      edam = EDAM.new(uri: uri)
+      term = edam.lookup_title 
     elsif uri =~ /HP_|ORDO|UBERON_|CHEMINF|DUO_/   
       # HPO terms redirect to JAX using ontobee, so they have to be treated separately
       # DUO terms redirect from ontobee to EBI

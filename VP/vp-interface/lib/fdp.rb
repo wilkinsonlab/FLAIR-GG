@@ -7,6 +7,7 @@ require_relative  "ontologyservers/etsi"
 require_relative  "ontologyservers/bio2rdf"
 require_relative  "ontologyservers/ncbo"
 require_relative  "ontologyservers/schema"
+require_relative  "ontologyservers/edam"
 
 require_relative  "wordcloud"
 require_relative  "cache"

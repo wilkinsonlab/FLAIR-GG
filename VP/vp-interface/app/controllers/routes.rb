@@ -4,6 +4,10 @@ def set_routes(classes: allclasses)
   set :server_settings, timeout: 180
   set :public_folder, "public"
 
+  get "/" do
+    redirect '/flair-gg-vp-server/resources'
+  end
+
   get "/flair-gg-vp-server" do
     content_type :json
     response.body = JSON.dump(Swagger::Blocks.build_root_json(classes))

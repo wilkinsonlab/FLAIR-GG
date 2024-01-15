@@ -219,7 +219,7 @@ class VP
 
     #{NAMESPACES}
 
-    SELECT DISTINCT ?kw ?type WHERE
+    SELECT DISTINCT ?type WHERE
     {
       VALUES ?connection { #{VPCONNECTION} }
       VALUES ?discoverable { #{VPDISCOVERABLE} }
@@ -228,19 +228,19 @@ class VP
           a dcat:DataService .
           {
               ?s dc:type ?type .
-              ?s dc:keyword ?kw
           }
     }"
     )
     results = @graph.query(vpd)
     prehash = {}
     results.each do |r|
-      type = r[:type]; kw = r[:kw];
-      warn "subject type #{type} kw #{kw}"
-      prehash[type] = "" unless prehash[type]
-      prehash[type] += "#{kw}, "
+      type = r[:type].to_s;
+      next if prehash[type]  # already known
+      warn "subject type #{type}"
+      kw = ontology_annotations(uri: type)
+      prehash[type] = kw
     end
-    services = prehash.map {|k,v| v.gsub!(/\,\s$/, ""); [k,v] } # remove trailing space and turn into array
+    services = prehash.map {|k,v| [k,v] } # remove trailing space and turn into array
     services
   end
 
