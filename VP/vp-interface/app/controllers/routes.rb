@@ -68,6 +68,11 @@ def set_routes(classes: allclasses)
     erb :wordcloud
   end
 
+  get "/flair-gg-vp-server/refresh-servicetypes" do
+    FileUtils.rm_f("./cache/serevicetypes.json")  # remove the cache
+    redirect '/flair-gg-vp-server/resources'  # before do collect_data_services will be called, and this will refresh
+  end
+
   post "/flair-gg-vp-server/execute-data-services" do
     @results = VP.current_vp.execute_data_services(params: params)
     erb :execution_results_layout

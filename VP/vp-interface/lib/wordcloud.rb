@@ -23,7 +23,7 @@ class Wordcloud
       @words = @words.flatten
       @words.compact!
       warn "\n\nWORDS\n\n#{@words}"
-      freeze_keywords
+      freeze_keywords(words: @words)
 
       FileUtils.rm_f("./cache/WCREFRESHING")
     end
