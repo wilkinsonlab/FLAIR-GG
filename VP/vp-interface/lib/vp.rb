@@ -5,6 +5,7 @@ require "digest"
 require "restclient"
 require "json"
 require "uri"
+require "fileutils"
 
 class VP
   attr_accessor :networkgraph, :vpconfig, :fdps, :aboutme
@@ -14,8 +15,11 @@ class VP
   PREFIX dcat: <http://www.w3.org/ns/dcat#>
   PREFIX dc: <http://purl.org/dc/terms/>
   ".freeze
-  VPCONNECTION = "ejpold:vpConnection ejpnew:vpConnection dcat:theme dcat:themeTaxonomy".freeze
-  VPDISCOVERABLE = "ejpold:VPDiscoverable ejpnew:VPDiscoverable".freeze
+  # VPCONNECTION = "ejpold:vpConnection ejpnew:vpConnection dcat:theme dcat:themeTaxonomy".freeze
+  # VPDISCOVERABLE = "ejpold:VPDiscoverable ejpnew:VPDiscoverable".freeze
+  # VPANNOTATION = "dcat:theme".freeze
+  VPCONNECTION = "ejpnew:vpConnection".freeze
+  VPDISCOVERABLE = "ejpnew:VPDiscoverable".freeze
   VPANNOTATION = "dcat:theme".freeze
 
   @@thisvp = ""
@@ -213,34 +217,40 @@ class VP
   end
 
   def collect_data_services
-    @graph = self.networkgraph
-    warn "in collect data services"
-    vpd = SPARQL.parse("
+    if File.exist?("./cache/servicetypes.json")
+      services = thaw_servicetypes
+    else
+      graph = self.networkgraph
+      warn "in collect data services"
+      vpd = SPARQL.parse("
 
-    #{NAMESPACES}
+      #{NAMESPACES}
 
-    SELECT DISTINCT ?type WHERE
-    {
-      VALUES ?connection { #{VPCONNECTION} }
-      VALUES ?discoverable { #{VPDISCOVERABLE} }
+      SELECT DISTINCT ?type WHERE
+      {
+        VALUES ?connection { #{VPCONNECTION} }
+        VALUES ?discoverable { #{VPDISCOVERABLE} }
 
-      ?s  ?connection ?discoverable ;
-          a dcat:DataService .
-          {
-              ?s dc:type ?type .
-          }
-    }"
-    )
-    results = @graph.query(vpd)
-    prehash = {}
-    results.each do |r|
-      type = r[:type].to_s;
-      next if prehash[type]  # already known
-      warn "subject type #{type}"
-      kw = ontology_annotations(uri: type)
-      prehash[type] = kw
+        ?s  ?connection ?discoverable ;
+            a dcat:DataService .
+            {
+                ?s dc:type ?type .
+            }
+      }"
+      )
+      results = graph.query(vpd)
+      prehash = {}
+      results.each do |r|
+        type = r[:type].to_s;
+        next if prehash[type]  # already known
+
+        warn "subject type #{type}"
+        kw = ontology_annotations(uri: type)
+        prehash[type] = kw
+      end
+      services = prehash.map {|k,v| [k,v] } # remove trailing space and turn into array
+      freeze_servicetypes(types: services)
     end
-    services = prehash.map {|k,v| [k,v] } # remove trailing space and turn into array
     services
   end
 
