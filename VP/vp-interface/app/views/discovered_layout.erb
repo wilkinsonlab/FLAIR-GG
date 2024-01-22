@@ -14,7 +14,7 @@
     <%= erb :_sidebar %>
 
       <h2>Virtual Platform Resources</h2>
-      
+          <% layout = [["tab1","tab-content-1","icon-bolt"],["tab2","tab-content-2","icon-picture"],["tab4","tab-content-4","icon-picture"],["tab5","tab-content-5","icon-picture"]] %>
       
           <% @discoverables.each_key do |site| %>
             <table>
