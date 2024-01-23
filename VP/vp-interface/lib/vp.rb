@@ -303,6 +303,7 @@ class VP
       discoverables[contact] = [] unless discoverables[contact]
       discoverables[contact] << { resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon }
     end
+    # discoverables[http://wilkinsonlab.info] = [[resource: http://w.l/cat, title: "my cat", type: "http://dcat#Dataset", icon: "dataset.svg"], [...], [...]]
     sort_discoverables(discoverables: discoverables)
   end
 
