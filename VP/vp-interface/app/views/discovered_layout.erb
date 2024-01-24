@@ -13,20 +13,32 @@
 
     <%= erb :_sidebar %>
 
-      <h2>Virtual Platform Resources</h2>
+      <h2>Virtual Platform Resources: <%= @message %></h2>
+
+      <% catno = dsno = distno = datsno = 0 %>
+      <% @discoverables.each_key do |site| %>
+        <% @discoverables[site].each do |resourcehash| %>
+          <% type = resourcehash[:type] %>
+          <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
+          <% catno += 1 if type == "catalog" %>
+          <% dsno += 1 if type == "dataset" %>
+          <% distno += 1 if type == "distribution" %>
+          <% datsno += 1 if type == "dataservice" %>
+        <% end %>
+      <% end %>      
 
 			<div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
 				<input type="radio" name="pcss3t" checked  id="catalog" class="tab-content-first">
-				<label for="catalog"><i class="fa-solid fa-book"></i>Catalogs</label>
+				<label for="catalog"><i class="fa-solid fa-book"></i>Catalogs (<%= catno %>}</label>
 				
 				<input type="radio" name="pcss3t" id="dataset" class="tab-content-2">
-				<label for="dataset"><i class="fa-solid fa-database"></i>Datasets</label>
+				<label for="dataset"><i class="fa-solid fa-database"></i>Datasets (<%= dsno %>}</label>
 				
 				<input type="radio" name="pcss3t" id="distribution" class="tab-content-3">
-				<label for="distribution"><i class="fa-solid fa-table"></i>Distributions</label>
+				<label for="distribution"><i class="fa-solid fa-table"></i>Distributions (<%= distno %>}</label>
 				
 				<input type="radio" name="pcss3t" id="dataservice" class="tab-content-last">
-				<label for="dataservice"><i class="fa-solid fa-gears"></i>Services</label>
+				<label for="dataservice"><i class="fa-solid fa-gears"></i>Services (<%= datsno %>}</label>
 
         <ul>
           <% [["catalog", "tab-content-first"], ["dataset", "tab-content-2"], ["distribution", "tab-content-3"], ["dataservice", "tab-content-last"]].each do |restypefilter, contenttab| %>
