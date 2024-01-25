@@ -98,8 +98,9 @@
 
     <!-- https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#Servicetypes -->
 
-    <owl:Class rdf:about="https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#Servicetypes">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <owl:Class rdf:about="https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#CollectionsInArea">
+        <rdfs:subClassOf rdf:resource="http://edamontology.org/operation_0224"/>
+        <rdfs:label>Collections In Area</rdfs:label>
     </owl:Class>
 </rdf:RDF>
 
