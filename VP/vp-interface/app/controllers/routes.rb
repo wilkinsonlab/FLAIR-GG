@@ -27,14 +27,14 @@ def set_routes(classes: allclasses)
   end
 
   get "/flair-gg-vp-server/keyword-search" do
-    keyword = params["keyword"]
+    keyword = params["keyword"].strip
     @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword) # "./lib/vp"
     @message = "Keyword Search Results"
     erb :discovered_layout
   end
 
   get "/flair-gg-vp-server/ontology-search" do
-    term = params["uri"]
+    term = params["uri"].strip
     term = term.gsub(/\S+:/, "") unless term =~ /^http/
     @discoverables = VP.current_vp.ontology_search_shell(term: term) # "./lib/vp"
     @message = "Ontology Search Results"
