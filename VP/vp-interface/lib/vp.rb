@@ -283,7 +283,7 @@ class VP
       dataservice: "dataservice.svg",
       distribution: "distribution.svg",
       dataset: "dataset.svg",
-      registry: "registry.svg"
+      patientregistry: "registry.svg"
     }
     return hash[t] if hash[t]
 
@@ -307,8 +307,8 @@ class VP
     end
     # discoverables[http://wilkinsonlab.info] =
     # [
-    #  [resource: http://w.l/cat, title: "my cat", type: "http://dcat#Dataset", icon: "dataset.svg"],
-    #  [...], [...]
+    #  {resource: http://w.l/cat, title: "my cat", type: "http://dcat#Dataset", icon: "dataset.svg"},
+    #  {...}, {...}
     # ]
     sort_discoverables(discoverables: discoverables)
   end
