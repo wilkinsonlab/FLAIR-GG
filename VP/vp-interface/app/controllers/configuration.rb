@@ -14,7 +14,13 @@ class VPConfig
   end
 
   def get_active_sites(api:)
-    r = RestClient.get(api, headers: { accept: "application/json" })
+    warn "getting from index #{api}"
+    r =  RestClient::Request.execute(
+      :url => api, 
+      :method => :get, 
+      :headers => { accept: "application/json" },
+      :verify_ssl => false
+    )
     sites = JSON.parse(r.body).map { |s| s["clientUrl"] if s["state"] == "ACTIVE" }
     sites.compact!
     sites

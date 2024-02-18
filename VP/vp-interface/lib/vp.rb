@@ -274,12 +274,14 @@ class VP
   end
 
   def match_type_to_icon(type:)
-    t = type.match(%r{[\#/](\w+?)$})[1].downcase.to_sym
+
+    t = type.match(%r{[\#/](\w+?)$})[1].downcase.to_sym  # anchor to end to capture last / or #
     warn "matching #{t}\n\n"
     hash = {
       biobank: "biobank.svg",
       catalog: "catalog.svg",
       dataservice: "dataservice.svg",
+      distribution: "distribution.svg",
       dataset: "dataset.svg",
       registry: "registry.svg"
     }
@@ -303,7 +305,11 @@ class VP
       discoverables[contact] = [] unless discoverables[contact]
       discoverables[contact] << { resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon }
     end
-    # discoverables[http://wilkinsonlab.info] = [[resource: http://w.l/cat, title: "my cat", type: "http://dcat#Dataset", icon: "dataset.svg"], [...], [...]]
+    # discoverables[http://wilkinsonlab.info] =
+    # [
+    #  [resource: http://w.l/cat, title: "my cat", type: "http://dcat#Dataset", icon: "dataset.svg"],
+    #  [...], [...]
+    # ]
     sort_discoverables(discoverables: discoverables)
   end
 

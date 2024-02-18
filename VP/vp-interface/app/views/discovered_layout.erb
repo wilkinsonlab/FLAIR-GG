@@ -15,15 +15,23 @@
 
       <h2>Virtual Platform Resources: <%= @message %></h2>
 
-      <% catno = dsno = distno = datsno = 0 %>
+      <% catno = dsno = distno = datsno = otherno = 0 %>
       <% @discoverables.each_key do |site| %>
         <% @discoverables[site].each do |resourcehash| %>
           <% type = resourcehash[:type] %>
           <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
-          <% catno += 1 if type == "catalog" %>
-          <% dsno += 1 if type == "dataset" %>
-          <% distno += 1 if type == "distribution" %>
-          <% datsno += 1 if type == "dataservice" %>
+          <% case type 
+             when "catalog" %>
+          <%  catno += 1 %>
+          <% when "dataset"  %>
+          <%  dsno += 1 %>
+          <% when "distribution" %>
+          <%  distno += 1 %>
+          <% when "dataservice"  %>
+          <%  datsno += 1 %>
+          <% else  %>
+          <%  otherno += 1 %>
+          <% end %>
         <% end %>
       <% end %>      
 
@@ -37,11 +45,13 @@
 				<input type="radio" name="pcss3t" id="distribution" class="tab-content-3">
 				<label for="distribution"><i class="fa-solid fa-table"></i>Distributions (<%= distno %>}</label>
 				
-				<input type="radio" name="pcss3t" id="dataservice" class="tab-content-last">
+				<input type="radio" name="pcss3t" id="dataservice" class="tab-content-4">
 				<label for="dataservice"><i class="fa-solid fa-gears"></i>Services (<%= datsno %>}</label>
 
+				<input type="radio" name="pcss3t" id="other" class="tab-content-last">
+				<label for="other"><i class="fa-solid fa-circle-question"></i>Other (<%= otherno %>}</label>
         <ul>
-          <% [["catalog", "tab-content-first"], ["dataset", "tab-content-2"], ["distribution", "tab-content-3"], ["dataservice", "tab-content-last"]].each do |restypefilter, contenttab| %>
+          <% [["catalog", "tab-content-first"], ["dataset", "tab-content-2"], ["distribution", "tab-content-3"], ["dataservice", "tab-content-4"], ["other", "tab-content-last"]].each do |restypefilter, contenttab| %>
             <li class="<%= contenttab %>"> 
               <% @discoverables.each_key do |site| %>
                 <h4>SOURCE: <a href="https://<%= site %>" _target="_blank"><%= site %></a></h4>

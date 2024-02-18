@@ -45,7 +45,11 @@ class FDP
     address += "?format=ttl"
     warn "getting #{address}"
     begin
-      r = RestClient.get(address)
+      r = RestClient::Request.execute(
+        :url => address, 
+        :method => :get, 
+        :verify_ssl => false
+      )
     rescue e
       warn "#{address} didn't resolve"
     end
