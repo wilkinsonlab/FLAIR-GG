@@ -1,0 +1,16 @@
+version: '2'
+services:
+  mysql:
+    ports:
+      - "3306:3306"
+    hostname: mysqlserver
+    restart: always
+    image: mysql/mysql-server:8.0.32
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
+      MYSQL_USER: 'test'
+      MYSQL_PASS: 'pass'
+    volumes:
+      - mysql:/var/lib/mysql
+volumes:
+  mysql:

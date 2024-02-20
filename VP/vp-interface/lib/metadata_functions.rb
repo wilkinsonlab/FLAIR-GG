@@ -152,6 +152,11 @@ def ontology_annotations(uri:)
     end
     break if term =~ /\w+/
   end
+  unless term 
+    uri =~ /[\#\/](\w+)\s*$/
+    warn "just a URL"
+    term = $1
+  end
   warn "term: #{term}"
   warn "found no match for #{uri}" unless term
   term

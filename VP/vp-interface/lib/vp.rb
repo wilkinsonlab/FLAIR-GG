@@ -183,6 +183,8 @@ class VP
   def verbose_annotations
     @graph = self.networkgraph
     words = []
+
+    # TODO  This does not respect vpdiscoverable...
     vpd = SPARQL.parse("
     #{NAMESPACES}
     SELECT DISTINCT ?annot WHERE
@@ -203,7 +205,7 @@ class VP
     vpd = SPARQL.parse("
     #{NAMESPACES}
     select DISTINCT ?kw WHERE
-    { VALUES ?searchfields { dcat:keyword }
+    { VALUES ?searchfields { dc:keyword }
     ?s ?searchfields ?kw .
     }")
     results = @graph.query(vpd)
