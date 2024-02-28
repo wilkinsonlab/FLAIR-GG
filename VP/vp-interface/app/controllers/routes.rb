@@ -15,9 +15,13 @@ def set_routes(classes: allclasses)
 
   get "/flair-gg-vp-server/force-refresh" do
     warn "initializing refresh in routes"
-    VP.restart unless File.exist?("./cache/REFRESHING") # multiple browser calls are a problem!
-    @discoverables = VP.current_vp.get_resources  # "./lib/metadata_functions"
-    erb :discovered_layout
+    unless File.exist?("./cache/REFRESHING") # multiple browser calls are a problem!
+      VP.restart 
+      @discoverables = VP.current_vp.get_resources  # "./lib/metadata_functions"
+      FileUtils.rm_f("./cache/servicetypes.json")  # remove the cache
+      @services = VP.current_vp.collect_data_services
+    end
+    redirect '/flair-gg-vp-server/resources'  # before do collect_data_services will be called, and this will refresh
   end
 
   get "/flair-gg-vp-server/resources" do
@@ -44,7 +48,7 @@ def set_routes(classes: allclasses)
 
   get "/flair-gg-vp-server/retrieve-services" do
     term = params["services"]
-    @servicecollection, @commonparams = VP.current_vp.retrieve_sevices(term: term) # "./lib/vp"
+    @servicecollection, @commongetparams, @commonpostparams = VP.current_vp.retrieve_sevices(term: term) # "./lib/vp"
     erb :services_layout
   end
 
@@ -73,7 +77,8 @@ def set_routes(classes: allclasses)
   end
 
   get "/flair-gg-vp-server/refresh-servicetypes" do
-    FileUtils.rm_f("./cache/serevicetypes.json")  # remove the cache
+    FileUtils.rm_f("./cache/servicetypes.json")  # remove the cache
+    @services = VP.current_vp.collect_data_services # refresh
     redirect '/flair-gg-vp-server/resources'  # before do collect_data_services will be called, and this will refresh
   end
 

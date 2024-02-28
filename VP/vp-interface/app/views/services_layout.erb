@@ -32,10 +32,15 @@ every param  responds to "in", "name", "description", "schema.example", "schema.
 
         <form action = "/flair-gg-vp-server/execute-data-services" method="post">
         <input type="hidden" name="servicetype" value="<%= @servicecollection.escapedtype %>">
+        <input type="hidden" name="servicemethod" value="GET">
 
-        <% @commonparams.each do |paramname, param| %>
+        <% @commongetparams.each do |paramname, param| %>
           <label for="<%= paramname %>" style="font-size: .75em;"><%= paramname %></label><br/>
-          <input type="text" size="70" name="<%= paramname %>" id="<%= paramname %>" value="<%= param.schema.example %>"><br/><br/>
+          <textarea style="resize: both;" rows="1" cols="100" name="<%= paramname %>" id="<%= paramname %>" value="<%= param.schema.example %>"><%= param.schema.example %></textarea><br/><br/>
+        <% end %>
+        <% @commonpostparams.each do |paramname, param| %>
+          <label for="<%= paramname %>" style="font-size: .75em;"><%= paramname %></label><br/>
+          <textarea style="resize: both;" rows="1" cols="100" name="<%= paramname %>" id="<%= paramname %>">Put your JSON here</textarea><br/><br/>
         <% end %>
 
         <hr>

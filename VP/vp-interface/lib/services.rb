@@ -8,8 +8,7 @@ class ServiceCollection
 
   def initialize(vpgraph:, servicetype:)
     @vpgraph = vpgraph
-    @servicetype = servicetype
-    # @escapedtype = ERB::Util.url_encode(servicetype)
+    @servicetype = servicetype  # this is the label of the service type "a swat service"
     @escapedtype = CGI.escape(servicetype)
     @allservices = []
     @warnings = []
@@ -48,11 +47,11 @@ class ServiceCollection
     end
   end
 
-  def gather_common_parameters
+  def gather_common_parameters(method:)
     commonparams = {}
     @allservices.each do |service|
       service.paths.each_key do |fullpath|
-        params = service.retrieve_parameters(fullpath: fullpath, operation: "get")  # only get for the moment
+        params = service.retrieve_parameters(fullpath: fullpath, operation: method)  # only get for the moment
         params.each_key do |paramname|
           warn "found #{paramname}"
           if commonparams[paramname]
@@ -98,26 +97,32 @@ class Service
       end
 
       @paths[fullpath] = {} unless @paths[fullpath]  # initialize
+      warn "\n\ninitializing with get: #{get}  and post #{post}\n"
       @paths[fullpath] = { get: get, post: post }
-      if fullpath == @endpoint # there can be only one match!  Match with the dcat record
-        @successful = true
-        break
-      end
+      self.successful = true
+      break  
     end
     api
   end
 
   def retrieve_parameters(fullpath:, operation:)
-    abort if operation == "post"
     warn "retrieving fullpath #{fullpath} operation #{operation} from #{@paths.inspect}"
     params = {}
     service = @paths[fullpath][operation.to_sym]
+    return params unless service  # if there's no match, return nothing
+
+    warn "PATHS:  #{@paths.inspect}\nFULLPATH: #{fullpath}\nOPERATION: #{operation}\n"
     # leave post for later
-    # params["_request_body"] = service.request_body
+    if operation == "post"
+      params["_request_body"] = service.request_body
+    end
+    warn "\nparameters for #{fullpath} are #{service.parameters}\n"
     service.parameters.each do |param|
       warn "loading #{param.name} #{param}"
       params[param.name] = param  # responds to "in", "name", "description", "schema.example", "schema.type"
     end
+    warn "\n\nFINAL #{params.inspect}\n\n"
+
     params
   end
 end

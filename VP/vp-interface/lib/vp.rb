@@ -119,6 +119,7 @@ class VP
 
   def keyword_search(keyword: "")
     @graph = self.networkgraph
+    keyword = keyword.downcase
     vpd = SPARQL.parse("
     #{NAMESPACES}
 
@@ -256,11 +257,12 @@ class VP
     services
   end
 
-  def retrieve_sevices(term:)
+  def retrieve_sevices(term:)  # term is the label of the service type
     # hand off to services_functions
     servicecollection = ServiceCollection.new(vpgraph: self.networkgraph, servicetype: term)
-    commonparams = servicecollection.gather_common_parameters
-    [servicecollection, commonparams]
+    commongetparams = servicecollection.gather_common_parameters(method: "get")
+    commonpostparams = servicecollection.gather_common_parameters(method: "post")
+    [servicecollection, commongetparams, commonpostparams]
   end
 
   def execute_data_services(params:)
@@ -268,7 +270,12 @@ class VP
     results = {}
     endpoints.each do |ep|
       endpoint = CGI.unescape(ep)
-      result = RestClient.get(endpoint, {params: params})
+      if params["_request_body"]
+        warn "POSTING: #{params["_request_body"]}"
+        result = RestClient.post(endpoint, params["_request_body"], {content_type: :json, accept: :json} )
+      else
+        result = RestClient.get(endpoint, {params: params})
+      end
       warn result.inspect
       results[endpoint] = result.body
     end
