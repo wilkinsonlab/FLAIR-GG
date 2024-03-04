@@ -28,3 +28,10 @@ services:
       - SUPPORTED_SUBMIT_METHODS=${SUPPORTED_SUBMIT_METHODS}
       - URLS=${URLS}
       - BASE_URL='/swagger'   # for our reverse proxy
+
+  ldp:
+    image: markw/ldp_server:latest
+    hostname: flair-ldp
+    ports:
+      - 1111:1111
+      - 8890:8890

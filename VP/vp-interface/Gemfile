@@ -33,6 +33,9 @@ gem "thin"
 gem "tux"
 gem "uri", "~>0.12.2"
 gem "xml-simple", "~>1.1.8"
+gem "csv"
+gem "tempfile"
+gem "securerandom"
 
 group :test do
   gem "capybara"

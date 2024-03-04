@@ -6,6 +6,11 @@ require "restclient"
 require "json"
 require "uri"
 require "fileutils"
+require "require_all"
+
+require_all 'ontologyservers'
+require_all 'serviceoutput_processers'
+
 
 class VP
   attr_accessor :networkgraph, :vpconfig, :fdps, :aboutme
@@ -266,8 +271,9 @@ class VP
   end
 
   def execute_data_services(params:)
-    endpoints = params.delete("endpoint")
+    endpoints = params.delete("endpoint") # returns an array of endpoints from the checkboxes
     results = {}
+    servicetype = params["servicetype"].downcase
     endpoints.each do |ep|
       endpoint = CGI.unescape(ep)
       if params["_request_body"]
@@ -279,7 +285,8 @@ class VP
       warn result.inspect
       results[endpoint] = result.body
     end
-    results
+    location = process_and_upload_sparql_output(results: results)
+    [location, servicetype, results]
   end
 
   def match_type_to_icon(type:)
