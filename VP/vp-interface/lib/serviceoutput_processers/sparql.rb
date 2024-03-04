@@ -1,6 +1,7 @@
 require "csv"
 require "rest-client"
 require 'securerandom'
+require 'json'
 
 def process_and_upload_sparql_output(results: )  # results[provuder] = csv
 
@@ -31,9 +32,9 @@ def process_and_upload_sparql_output(results: )  # results[provuder] = csv
 
     resp = RestClient::Request.execute(
         method: :put,
-        url: "http://bgv.cbgp.upm.es:8890/DAV/home/LDP/#{location}",
-        headers: {content_type: "application/json"},
-        payload: results, 
+        url: "https://bgv.cbgp.upm.es/DAV/home/LDP/#{location}",
+        content_type: :json,
+        payload: results.to_json, 
         user: "ldp",
         password: "ldp"
     )
