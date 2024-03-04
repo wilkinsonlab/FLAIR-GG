@@ -37,6 +37,7 @@ GEM
     commonmarker (0.23.10)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
+    csv (3.2.8)
     daemons (1.4.1)
     debase-ruby_core_source (3.2.1)
     diff-lcs (1.5.0)
@@ -293,6 +294,7 @@ GEM
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     scanf (1.0.0)
+    securerandom (0.3.1)
     shacl (0.3.0)
       json-ld (~> 3.2)
       rdf (~> 3.2, >= 3.2.8)
@@ -332,6 +334,7 @@ GEM
     sxp (1.2.4)
       matrix (~> 0.4)
       rdf (~> 3.2)
+    tempfile (0.2.1)
     temple (0.10.2)
     thin (1.8.2)
       daemons (~> 1.0, >= 1.0.9)
@@ -368,6 +371,7 @@ DEPENDENCIES
   bcrypt
   capybara
   cgi (~> 0.4.1)
+  csv
   debase!
   fileutils (~> 1.5.0)
   json (~> 2.7.1)
@@ -385,10 +389,12 @@ DEPENDENCIES
   rspec (~> 3.11.0)
   rubocop
   ruby-debug-ide
+  securerandom
   shotgun
   sinatra (~> 2.2)
   sinatra-cross_origin
   swagger-blocks (~> 3.0.0)
+  tempfile
   thin
   tux
   uri (~> 0.12.2)

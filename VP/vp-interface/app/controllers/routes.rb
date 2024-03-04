@@ -47,8 +47,8 @@ def set_routes(classes: allclasses)
   end
 
   get "/flair-gg-vp-server/retrieve-services" do
-    term = params["services"]
-    @servicecollection, @commongetparams, @commonpostparams = VP.current_vp.retrieve_sevices(term: term) # "./lib/vp"
+    termuri = params["services"]
+    @servicecollection, @commongetparams, @commonpostparams = VP.current_vp.retrieve_sevices(termuri: termuri) # "./lib/vp"
     erb :services_layout
   end
 
@@ -83,7 +83,8 @@ def set_routes(classes: allclasses)
   end
 
   post "/flair-gg-vp-server/execute-data-services" do
-    @location, @servicetype, @results = VP.current_vp.execute_data_services(params: params)
+    @location, @servicelabel, @results = VP.current_vp.execute_data_services(params: params)
+    @servicelabel = @servicelabel.gsub(/\s+/, "_")  # no spaces in service filenames - label leads to jupyter file
     erb :execution_results_layout
   end
 

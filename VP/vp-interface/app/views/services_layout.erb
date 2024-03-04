@@ -32,6 +32,7 @@ every param  responds to "in", "name", "description", "schema.example", "schema.
 
         <form action = "/flair-gg-vp-server/execute-data-services" method="post">
         <input type="hidden" name="servicetype" value="<%= @servicecollection.escapedtype %>">
+        <input type="hidden" name="servicelabel" value="<%= @servicecollection.servicelabel %>">
         <input type="hidden" name="servicemethod" value="GET">
 
         <% @commongetparams.each do |paramname, param| %>

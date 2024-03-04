@@ -8,8 +8,8 @@ require "uri"
 require "fileutils"
 require "require_all"
 
-require_all 'ontologyservers'
-require_all 'serviceoutput_processers'
+require_rel 'ontologyservers'
+require_rel 'serviceoutput_processers'
 
 
 class VP
@@ -262,9 +262,9 @@ class VP
     services
   end
 
-  def retrieve_sevices(term:)  # term is the label of the service type
+  def retrieve_sevices(termuri:)  #  the URI of the service type
     # hand off to services_functions
-    servicecollection = ServiceCollection.new(vpgraph: self.networkgraph, servicetype: term)
+    servicecollection = ServiceCollection.new(vpgraph: self.networkgraph, servicetype: termuri)
     commongetparams = servicecollection.gather_common_parameters(method: "get")
     commonpostparams = servicecollection.gather_common_parameters(method: "post")
     [servicecollection, commongetparams, commonpostparams]
@@ -273,7 +273,7 @@ class VP
   def execute_data_services(params:)
     endpoints = params.delete("endpoint") # returns an array of endpoints from the checkboxes
     results = {}
-    servicetype = params["servicetype"].downcase
+    servicelabel = params["servicelabel"].downcase
     endpoints.each do |ep|
       endpoint = CGI.unescape(ep)
       if params["_request_body"]
@@ -286,7 +286,7 @@ class VP
       results[endpoint] = result.body
     end
     location = process_and_upload_sparql_output(results: results)
-    [location, servicetype, results]
+    [location, servicelabel, results]
   end
 
   def match_type_to_icon(type:)

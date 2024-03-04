@@ -4,11 +4,12 @@ require "openapi3_parser"
 require "cgi"
 
 class ServiceCollection
-  attr_accessor :vpgraph, :servicetype, :allservices, :warnings, :escapedtype
+  attr_accessor :vpgraph, :servicetype, :servicelabel, :allservices, :warnings, :escapedtype
 
   def initialize(vpgraph:, servicetype:)
     @vpgraph = vpgraph
-    @servicetype = servicetype  # this is the label of the service type "a swat service"
+    @servicetype = servicetype  # this is the URI of the service type "a swat service"
+    @servicelabel = ontology_annotations uri: servicetype
     @escapedtype = CGI.escape(servicetype)
     @allservices = []
     @warnings = []
