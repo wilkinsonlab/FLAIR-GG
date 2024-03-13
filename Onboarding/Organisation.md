@@ -2,13 +2,13 @@
 This sheet describes an organisation that provides access to 1 or more germplasm related resources.
 
 ### Legend:
-- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **REQUIRED**
-- ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) This column is **HEAVILY RECOMMENDED**
+- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **MANDATORY**
+- ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) This column is **RECOMMENDED**
 - ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) This column is **OPTIONAL**
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Title
-The name of the Organisation. This is a required
-field and needs to be unique.
+The name of the Organisation. This
+field needs to be unique.
 
 *Example:*
 César Gómez Campo Banco de Germoplasma Vegetal de la UPM
@@ -54,7 +54,7 @@ Av. Puerta de Hierro, 2, Moncloa - Aravaca, 28040 Madrid, Spain
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Identifier
 An identification of your organisation. We recommend using the
-ROR standard to identify your organisation.
+ROR standard to identify your organisation, or the link to your FAIR Data Point.
 
 *Example:* 
 https://w3id.org/bgv-fdp

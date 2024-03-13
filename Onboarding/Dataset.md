@@ -2,8 +2,8 @@
 This sheet describes any germplasm-related dataset.
 
 ### Legend:
-- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **Mandatory**
-- ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) This column is **HEAVILY RECOMMENDED**
+- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **MANDATORY**
+- ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) This column is **RECOMMENDED**
 - ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) This column is **OPTIONAL**
 
 
@@ -93,12 +93,16 @@ This a URL to a web page with more
 information regarding the dataset. Any URL
 must start with http:// or https://.
 
+*Example:*
+https://fdb.bgv.cbgp.upm.es/
+
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Distribution
 
-The distribution (from the distribution sheet; a dropdown list will appear) for this dataset.
+Pointer to the distribution (from the distribution sheet; a dropdown list will appear) for this dataset.
 
 *Example:*
-SPARQL distribution of Administrative data
+BGV Germplasm SPARQL distribution
+
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) VPConnection
 This property is attached to every
@@ -131,12 +135,12 @@ Identifier of this resource. It can be
 a link.
 
 *Example:*
-https://w3id.org/bgv-fdp/dataset/f7600b9f-cd18-4122-86c6-b6f5a75ecc03
+https://w3id.org/bgv-fdp/dataset/65ffbf3d-bed1-4a9a-abf9-0116cc35b40a
 
 
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Issued
-This resource publication date, in the format YYYY-MM-DDTHH:MM:SS
+This resource's publication date, in the format YYYY-MM-DDTHH:MM:SS
 
 
 *Example:*
@@ -145,7 +149,7 @@ This resource publication date, in the format YYYY-MM-DDTHH:MM:SS
 > **Warning** This field should be in a specific format (YYYY-MM-DDTHH:MM:SS)
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Modified
-This resource last revision date, in the format YYYY-MM-DDTHH:MM:SS
+This resource's last revision date, in the format YYYY-MM-DDTHH:MM:SS
 
 
 *Example:*

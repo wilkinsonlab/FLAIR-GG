@@ -1,102 +1,128 @@
 # Catalog
-Describes a catalog of datasets, data services, biobanks, patient registries and guidelines. It is possible that a 
-catalog can consist of catalogs as well. To be meaningful a catalog must consist of at least 1 dataset, data service,
-biobank, patient registry or guideline, or otherwise 1 or more catalogs. 
+Describes a catalog of datasets and data services. It is possible that a 
+catalog can consist of catalogs as well. To be meaningful a catalog must consist of at least 1 dataset, data service, or otherwise 1 or more catalogs. 
 
-## License
+### Legend:
+- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **MANDATORY**
+- ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) This column is **RECOMMENDED**
+- ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) This column is **OPTIONAL**
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) License
 This should contain a URL that provides details regarding the license that is applicable to this resource.
 If no suitable license can be provided, then the default license should be used:
-[https://w3id.org/ejp-rd/resources/licenses/v1.0/](https://w3id.org/ejp-rd/resources/licenses/v1.0/). Other licenses are:   
-[https://creativecommons.org/licenses/](https://creativecommons.org/licenses/),
+[https://w3id.org/ejp-rd/resources/licenses/](https://w3id.org/ejp-rd/resources/licenses/). This basically says to contat the resource owner to get information about the license information.
+
+ Examples of other licenses: 
+Any subtype of [https://creativecommons.org/licenses/](https://creativecommons.org/licenses/),
 e.g. [http://creativecommons.org/licenses/by-nc-nd/4.0](http://creativecommons.org/licenses/by-nc-nd/4.0).
 
-> **Warning** This field is `required`
 
 
-## Title
-The name of the catalog. This is a required field and needs to be unique in this spreadsheet.
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Title
+The name of the catalog. This field needs to be unique in this spreadsheet.
 
-> **Warning** This field is `required`, and should be `unique`
+*Example:*
+Germplasm Bank Collections
 
-## Publisher
+> **Warning** This field should be `unique`
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Publisher
 Pointer to the Organisation that published the
-resource. The range is foaf:Organisation.
+resource (from the Organisation sheet; a dropdown list will appear).
 
-> **Warning** This field is `required`
+*Example:*
+César Gómez Campo Banco de Germoplasma Vegetal de la UPM
 
-## Personal Data
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Personal Data
 Set to "true" if the resource onboarded to
 the Virtual Platform contains personal
 data, personal data meaning data
 related to identified or identifiable
 persons (as per GDPR definition),
-otherwise "false". The range is string.
+otherwise "false".
 
-> **Warning** This field is `required`
 
-## Description
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Description
 A description of the Catalog.
 
-> **Warning** This field is `required`
+*Example:*
+Descriptions of the collections of germplasm available at the BGV
 
-## Theme
-Points to an URL that specifies relevant ontology concepts that classify the Biobank. Typically, these can be looked
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Theme
+Points to an URL that specifies relevant concepts that classify the resource. They must be ontological terms, and typically, these can be looked
 up using the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/index)  or [Bioportal](https://bioportal.bioontology.org/).
 
-> **Warning** This field is `required`
+In most cases, this will be https://schema.org/catalog (Catalog)
 
-## Contact Point
-Pointer to a Contact Point, Range, vCard
 
-> **Warning** This field is `required`
 
-## Language
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Contact Point
+Pointer to a Contact Point (from the Contact Point sheet; a dropdown list will appear)
+
+*Example:*
+http://www.bancodegermoplasma.upm.es/
+
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Language
 An ISO 639-1 two-letter code for the
 languages this patient registry is provided
 in. Example: en indicates that this patient
 registry is available in English. The range is
 an xsd:string. The ISO language codes
 can be found at:
-[https://id.loc.gov/vocabulary/iso639-1.html](https://id.loc.gov/vocabulary/iso639-1.html) and an example:
-[en](http://id.loc.gov/vocabulary/iso639-1/en).
+[https://id.loc.gov/vocabulary/iso639-1.html](https://id.loc.gov/vocabulary/iso639-1.html)
 
-> **Warning** This field is `required`
+*Example:*
+en
 
-## Access Rights
+
+
+
+## ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Access Rights
 Information about who can access the
 resource or an indication of its security status.
 This should point to a URL where this
-information can be found. We strongly
-recommend that access rights are described
-as [DUC CCE profile](https://duc.le.ac.uk/).
+information can be found. 
 
-> **Recommendation** This field is `recommended`
+In most cases, it will be "Contact the owner/curator of this resource to determine your access rights"
 
 
-## Landing Page
+
+## ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Landing Page
 This a URL to a web page with more
 information regarding the Catalog. Any URL
 must start with http:// or https://.
 
-> **Recommendation** This field is `recommended`
 
-## Dataset
-Pointer to a dataset. Range: dcat:Dataset or any
-of its sub classes (Patient registries or Biobanks)
 
-> **Note** This field is `optional
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Dataset
+Pointer to the dataset(s) (from the dataset sheet) contained within this catalog. If multiple datasets are contained within, they have to be separated by commas.
 
-## Theme Taxonomy
-Range skos:conceptScheme
+*Example:*
+https://fdp.bgv.cbgp.upm.es/dataset/f7600b9f-cd18-4122-86c6-b6f5a75ecc03, https://fdp.bgv.cbgp.upm.es/dataset/65ffbf3d-bed1-4a9a-abf9-0116cc35b40a, https://fdp.bgv.cbgp.upm.es/dataset/03a8b103-a408-4c1d-88c0-5c4e4417f499
 
-> **Note** This field is `optional
+> **Warning** If this field contains more than one dataset, they must be separated by commas (see example above)
 
-## Homepage 
-Range xsd:AnyURI
 
-> **Note** This field is `optional
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Theme Taxonomy
+Points to an URL that specifies relevant concepts that classify the **contents of the catalog**. They must be ontological terms, and typically, these can be looked
+up using the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/index)  or [Bioportal](https://bioportal.bioontology.org/). In the case of species names, we recommend using the [World Flora Online Taxonomy](https://www.worldfloraonline.org/search?query=)
 
-## VPConnection
+*Example:*
+https://www.worldfloraonline.org/taxon/wfo-0000659225, https://www.worldfloraonline.org/taxon/wfo-0000729203, https://www.worldfloraonline.org/taxon/wfo-0000729205, https://www.worldfloraonline.org/taxon/wfo-4000000074
+
+> **Warning** If this field contains more than one dataset, they must be separated by commas (see example above)
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Homepage 
+This a URL to a web page with more
+information regarding the catalog. Any URL
+must start with http:// or https://.
+
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) VPConnection
 This property is attached to every
 portion of your Metadata record
 that you wish the VP to explore
@@ -105,73 +131,78 @@ NOT Dataset Z). If you do not add
 this tag to at least the description of
 your resource, you will not be
 onboarded.
-The range is [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable).
+The value is [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable) (a dropdown list will appear)
 
-> **Note** This field is `optional`
 
-## ODRL Policy
-An ODRL conformant policy
-document (https://www.w3.org/TR/
-odrl-model/) expressing the rights
-and/or responsibilities associated
-with access to and/or use of the
-resource. This should point to a URL
-where this conformant document
-has been published.
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Keyword
+Keywords applicable to this catalog
 
-> **Note** This field is `optional`
+*Example:*
+Germplasm
 
-## Keyword
-Keywords applicable to this
-Biobank
 
-> **Note** This field is `optional`
 
-## Logo
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Logo
 A link to the graphic representation
 of this resource.
 
-> **Note** This field is `optional`
 
 
-## Distribution
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Distribution
 Use this property to point to the distribution of this
-dataset when a distribution is available. Range is
-dcat:Distribution.
+catalog when a distribution is available (from the Distribution sheet; a dropdown list will appear)
 
-> **Note** This field is `optional`
+*Example:*
+SPARQL distribution of Administrative data
 
 
-## Identifier
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Identifier
 Identifier of this resource. It can be
-a link. Range is an xsd:string
+a link.
 
-> **Note** This field is `optional`
+*Example:*
+https://w3id.org/bgv-fdp/catalog/3e699f66-6b8a-4c6a-9d06-d8685718cc33
 
-## Issued
-This resource publication date. The
-range is xsd:date.
 
-> **Note** This field is `optional`
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Issued
+This resource's publication date, in the format YYYY-MM-DDTHH:MM:SS
 
-## Modified
-This resource last revision date. The
-range is xsd:date.
 
-> **Note** This field is `optional`
+*Example:*
+2023-11-03T14:07:46
 
-## Version
+> **Warning** This field should be in a specific format (YYYY-MM-DDTHH:MM:SS)
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Modified
+This resource's last revision date, in the format YYYY-MM-DDTHH:MM:SS
+
+
+*Example:*
+2023-11-03T14:07:46
+
+> **Warning** This field should be in a specific format (YYYY-MM-DDTHH:MM:SS)
+
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Version
 The version indicator (name or
-identifier) of a resource. The range
-is a rdfs:literal
+identifier) of a resource.
 
-> **Note** This field is `optional`
+*Example:*
+4.11.2
 
-## Conforms To
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Conforms To
 If applicable, it should point to the
 URL, an established standard to
 which the data within the
 described resource conforms (e.g.
 MAGE-ML for Microarray data).
 
-> **Note** This field is `optional`
+*Example:*
+https://w3id.org/bgv-fdp/profile/a0949e72-4466-4d53-8900-9436d1049a4b
+
+

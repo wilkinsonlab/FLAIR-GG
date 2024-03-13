@@ -3,8 +3,8 @@ A distribution is a representation of your data. You can have as many distributi
 needed of a dataset. For example, one distribution in .csv, another one in .json, etc.
 
 ### Legend:
-- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **Mandatory**
-- ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) This column is **HEAVILY RECOMMENDED**
+- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **MANDATORY**
+- ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) This column is **RECOMMENDED**
 - ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) This column is **OPTIONAL**
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) License
@@ -21,7 +21,7 @@ e.g. [http://creativecommons.org/licenses/by-nc-nd/4.0](http://creativecommons.o
 The name of the Distribution. This field needs to be unique in this spreadsheet.
 
 *Example:*
-SPARQL distribution of Administrative data
+BGV Germplasm SPARQL distribution
 
 > **Warning** This field should be `unique`
 
@@ -32,7 +32,7 @@ SPARQL distribution of Administrative data
 A description of the Distribution.
 
 *Example:*
-Administrative data distributed via a public SPARQL endpoint
+The SPARQL distribution of the BGV Germplasm data
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Publisher

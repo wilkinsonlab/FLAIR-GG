@@ -1,7 +1,7 @@
 # Contact Point
 Provides contact information for a metadata resource. 
 ### Legend:
-- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **REQUIRED**
+- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **MANDATORY**
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) URL
