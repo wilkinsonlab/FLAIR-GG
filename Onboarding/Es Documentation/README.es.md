@@ -13,7 +13,7 @@ Descarga la [plantilla en formato Excel](FLAIR-GG%20Resource%20Metadata%20templa
 
 Rellena las diferentes hojas dentro de la hoja de cálculo según lo apropiado para tu organizacion u organizaciones y los recursos que proveen.
 
-<img src="./StepsToAddResourceMetadata.png"/>
+<img src="../StepsToAddResourceMetadata.png"/>
 
 >**Nota** La plantilla tiene una línea con ejemplos en cada hoja, que contienen los metadatos reales del Banco de Germoplasma Vegetal César Gómez Campo para ayudar a tomar decisiones a la hora de rellenar la plantilla.
 
