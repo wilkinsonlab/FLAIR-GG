@@ -1,20 +1,14 @@
-# Data Service
-Data services are resources that provide access to data or analytical tools via some
-interface. The interface may be machine-readable (I.e., an Application Programming
-Interface – API) or via a Web page for humans to interact manually. There are different
-conventions for data services on the VP Portal, depending on the “nature” of the service.
-Resources that serve via a Web page, must have a landingPage property. On the
-FLAIR-GG Virtual Platform, a data service that serves a Dataset must be connected to a Distribution
-of that Dataset. A service not serving a dataset (e.g.,
-a statistical analysis service, or an ontology lookup service) must be connected to the
-top-level Catalog.
+[![Static Badge](https://img.shields.io/badge/lang-es-yellow?style=plastic)](../Es%20Documentation/Dataset.es.md)
+# Dataset
+This sheet describes any germplasm-related dataset.
 
 ### Legend:
 - ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **MANDATORY**
 - ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) This column is **RECOMMENDED**
 - ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) This column is **OPTIONAL**
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) License
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) License 
 This should contain a URL that provides details regarding the license that is applicable to this resource.
 If no suitable license can be provided, then the default license should be used:
 [https://w3id.org/ejp-rd/resources/licenses/](https://w3id.org/ejp-rd/resources/licenses/). This basically says to contat the resource owner to get information about the license information.
@@ -24,44 +18,31 @@ Any subtype of [https://creativecommons.org/licenses/](https://creativecommons.o
 e.g. [http://creativecommons.org/licenses/by-nc-nd/4.0](http://creativecommons.org/licenses/by-nc-nd/4.0).
 
 
-
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Type 
-In the context of a Data Service, use one of the children of [EDAM Operation](http://edamontology.org/operation_0004). 
-
-In most cases, this will be http://edamontology.org/format_3790  (SPARQL)
-
-
-
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Title
-The name of the Data Service. This is a
-required field and needs to be unique.
+The name **of the dataset**. This needs to be unique in this spreadsheet.
 
 *Example:*
-SPARQL distribution of Administrative data
+BGV June 2023
 
-
-> **Warning** This field should be `unique`.
-
+> **Warning** This field should be `unique`
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Description
-A description of the Data Service.
+A description of the Dataset.
 
 *Example:*
-Administrative data distributed via a public SPARQL endpoint
+Metadata snapshot of BGV taken in June 2023
 
 
 
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Theme
+Points to an URL that specifies relevant concepts that classify the resource. They must be ontological terms, and typically, these can be looked
+up using the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/index)  or [Bioportal](https://bioportal.bioontology.org/). In the case of species names, we recommend using the [World Flora Online Taxonomy](https://www.worldfloraonline.org/search?query=)
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Personal Data
-Set to "true" if the resource onboarded to
-the Virtual Platform contains personal
-data, personal data meaning data
-related to identified or identifiable
-persons (as per GDPR definition),
-otherwise "false".
+*Example:*
+https://www.worldfloraonline.org/taxon/wfo-0000481006
 
->
+
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Publisher
 Pointer to the Organisation that published the
@@ -71,13 +52,16 @@ resource (from the Organisation sheet; a dropdown list will appear).
 César Gómez Campo Banco de Germoplasma Vegetal de la UPM
 
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Theme
-Points to an URL that specifies relevant concepts that classify the resource. They must be ontological terms, and typically, these can be looked
-up using the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/index)  or [Bioportal](https://bioportal.bioontology.org/). 
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Contact Point
+Pointer to a Contact Point (from the Contact Point sheet; a dropdown list will appear)
 
-In most cases, this will be http://edamontology.org/format_3790 (SPARQL)
+*Example:*
+http://www.bancodegermoplasma.upm.es/
 
 
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) PersonalData
+Set to "true" if the resource onboarded to the Virtual Platform contains personal data, personal data
+meaning data related to indentified or identifiable persons (as per GDPR definition), otherwise "false".
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Language
@@ -95,12 +79,6 @@ en
 
 
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Contact Point
-Pointer to a Contact Point (from the Contact Point sheet; a dropdown list will appear)
-
-*Example:*
-http://www.bancodegermoplasma.upm.es/
-
 
 ## ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Access Rights
 Information about who can access the
@@ -111,21 +89,20 @@ information can be found.
 In most cases, it will be "Contact the owner/curator of this resource to determine your access rights"
 
 
-## ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Conforms To
-If applicable, it should point to the
-URL, an established standard to
-which the data within the
-described resource conforms (e.g.
-MAGE-ML for Microarray data).
+## ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Landing Page
+This a URL to a web page with more
+information regarding the dataset. Any URL
+must start with http:// or https://.
 
 *Example:*
-https://w3id.org/bgv-fdp/profile/02c649de-c579-43bb-b470-306abdc808c7
+https://fdb.bgv.cbgp.upm.es/
 
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Distribution
 
-## ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Landing Page
-The URL to the web page that serves
-the data service. **This field is required
-for services that do not have an API.**
+Pointer to the distribution (from the distribution sheet; a dropdown list will appear) for this dataset.
+
+*Example:*
+BGV Germplasm SPARQL distribution
 
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) VPConnection
@@ -141,31 +118,16 @@ The value is [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.or
 
 
 
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Keyword
+Keywords applicable to this Dataset
+
+*Example:*
+Papaver rhoeas
+
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Logo
-A link to the graphic
-representation of this resource.
-
-
-
-## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Serves Dataset
-Used to indicate which dataset
-a DataService is serving data
-from (from the Dataset sheet; a dropdown list will appear)
-
-*Example:*
-BGV June 2023
-
-
-
-
-
-## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Keyword
-Keywords applicable to this
-data service
-
-*Example:*
-Germplasm, SPARQL
+A link to the graphic representation
+of this dataset.
 
 
 
@@ -174,7 +136,7 @@ Identifier of this resource. It can be
 a link.
 
 *Example:*
-https://w3id.org/bgv-fdp/dataservice/8d6afe17-a1d4-4df3-b2f5-4c7310f9060d
+https://w3id.org/bgv-fdp/dataset/65ffbf3d-bed1-4a9a-abf9-0116cc35b40a
 
 
 
@@ -186,7 +148,6 @@ This resource's publication date, in the format YYYY-MM-DDTHH:MM:SS
 2023-11-03T14:07:46
 
 > **Warning** This field should be in a specific format (YYYY-MM-DDTHH:MM:SS)
-
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Modified
 This resource's last revision date, in the format YYYY-MM-DDTHH:MM:SS
@@ -206,4 +167,15 @@ identifier) of a resource.
 *Example:*
 4.11.2
 
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Conforms To
+If applicable, it should point to the
+URL, an established standard to
+which the data within the
+described resource conforms (e.g.
+MAGE-ML for Microarray data).
+
+*Example:*
+https://fdp.bgv.cbgp.upm.es/profile/2f08228e-1789-40f8-84cd-28e3288c3604
 

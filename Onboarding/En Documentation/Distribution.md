@@ -1,3 +1,4 @@
+[![Static Badge](https://img.shields.io/badge/lang-es-yellow?style=plastic)](../Es%20Documentation/Distribution.es.md)
 # Distribution
 A distribution is a representation of your data. You can have as many distributions as
 needed of a dataset. For example, one distribution in .csv, another one in .json, etc.

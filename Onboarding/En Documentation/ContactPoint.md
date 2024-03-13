@@ -1,3 +1,4 @@
+[![Static Badge](https://img.shields.io/badge/lang-es-yellow?style=plastic)](../Es%20Documentation/ContactPoint.es.md)
 # Contact Point
 Provides contact information for a metadata resource. 
 ### Legend:

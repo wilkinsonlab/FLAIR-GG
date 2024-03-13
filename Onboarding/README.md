@@ -1,3 +1,8 @@
+[![Static Badge](https://img.shields.io/badge/lang-es-yellow?style=plastic)](./Es%20Documentation/README.es.md)
+
+
+> **Nota** Hay disponibles versiones en español de cualquiera de las secciones de esta documentación, a las que puedes acceder haciendo click en el botón que se encuentra en la parte superior izquierda de cada pantalla
+
 # How to describe a resource
 Here we list the steps to describe the metadata for a FLAIR-GG resource.
 
@@ -26,8 +31,7 @@ data services) or data services (with no specific dataset), provided by the orga
    2. [Data Service](DataService.md) - If your organisation provides a service for its dataset to browse or search the 
    dataset across different versions of the dataset, this sheet needs to be filled in. The [contact point](ContactPoint.md) for
    this data service needs to be added if it has not already been added.
-2. [Catalog](Catalog.md) - If your organisation wants to bundle numerous datasets, data services, biobanks, patient registries
-or guidelines together under a single title, you need to fill in this sheet. The [contact point](ContactPoint.md) for this 
+2. [Catalog](Catalog.md) - If your organisation wants to bundle numerous datasets or data services together under a single title, you need to fill in this sheet. The [contact point](ContactPoint.md) for this 
 catalog needs to be added if it has not already been added.
 
 

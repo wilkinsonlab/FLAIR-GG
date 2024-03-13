@@ -1,0 +1,174 @@
+[![Static Badge](https://img.shields.io/badge/lang-en-blue?style=plastic)](../En%20Documentation/Dataset.md)
+# Dataset
+Esta hoja describe cualquier conjunto de datos relacionado con el germoplasma.
+
+### Leyenda:
+- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Esta columna es **OBLIGATORIA**
+- ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Esta columna es **RECOMENDADA**
+- ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Esta columna es **OPCIONAL**
+
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) License  
+Esto debería contener una URL que proporcione detalles sobre la licencia que es aplicable a este recurso.
+Si no se puede proporcionar una licencia adecuada, entonces debería usarse la licencia por defecto:
+[https://w3id.org/ejp-rd/resources/licenses/](https://w3id.org/ejp-rd/resources/licenses/). Básicamente, esto dice que se debe contactar al propietario del recurso para obtener información sobre la licencia.
+
+ Ejemplos de otras licencias: 
+Cualquier subtipo de [https://creativecommons.org/licenses/](https://creativecommons.org/licenses/),
+por ejemplo, [http://creativecommons.org/licenses/by-nc-nd/4.0](http://creativecommons.org/licenses/by-nc-nd/4.0).
+
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Title
+El nombre **del conjunto de datos**. Este debe ser único en esta hoja de cálculo.
+
+*Ejemplo:*
+BGV junio 2023
+
+> **Advertencia** Este campo debe ser `único`
+
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Description
+Una descripción del conjunto de datos.
+
+*Ejemplo:*
+Instantánea de metadatos de BGV tomada en junio de 2023
+
+
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Theme
+Apunta a una URL que especifica conceptos relevantes que clasifican el recurso. Deben ser términos ontológicos, y típicamente, estos pueden buscarse
+utilizando el [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/index)  o [Bioportal](https://bioportal.bioontology.org/). En el caso de los nombres de especies, recomendamos utilizar la [Taxonomía en Línea de la Flora Mundial](https://www.worldfloraonline.org/search?query=)
+
+*Ejemplo:*
+https://www.worldfloraonline.org/taxon/wfo-0000481006
+
+
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Publisher
+Puntero a la Organización que publicó el recurso (desde la hoja de Organización; aparecerá una lista desplegable).
+
+*Ejemplo:*
+César Gómez Campo Banco de Germoplasma Vegetal de la UPM
+
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Contact Point
+Puntero a un Punto de contacto (desde la hoja de Punto de contacto; aparecerá una lista desplegable)
+
+*Ejemplo:*
+http://www.bancodegermoplasma.upm.es/
+
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) PersonalData
+Establecido en "verdadero" si el recurso incorporado a la Plataforma Virtual contiene datos personales, datos personales
+significando datos relacionados con personas identificadas o identificables (según la definición del GDPR), de lo contrario "falso".
+
+
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Language
+Un código de dos letras ISO 639-1 para los idiomas en los que se proporciona este registro de pacientes. Ejemplo: en indica que este registro de pacientes está disponible en inglés. El rango es
+un xsd:string. Los códigos de idioma ISO se pueden encontrar en:
+[https://id.loc.gov/vocabulary/iso639-1.html](https://id.loc.gov/vocabulary/iso639-1.html)
+
+*Ejemplo:*
+en
+
+
+
+
+
+## ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Access Rights
+Información sobre quién puede acceder al recurso o una indicación de su estado de seguridad.
+Esto debería apuntar a una URL donde se pueda encontrar esta información. 
+
+En la mayoría de los casos, será "Contactar al propietario/curador de este recurso para determinar sus derechos de acceso"
+
+
+## ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Landing Page
+Esta es una URL a una página web con más
+información sobre el conjunto de datos. Cualquier URL
+debe comenzar con http:// o https://.
+
+*Ejemplo:*
+https://fdb.bgv.cbgp.upm.es/
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Distribution
+
+Puntero a la distribución (desde la hoja de distribución; aparecerá una lista desplegable) de este conjunto de datos.
+
+*Ejemplo:*
+Distribución SPARQL de BGV Germoplasma
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) VPConnection
+Esta propiedad está adjunta a cada
+parte de su registro de metadatos
+que desee que explore el VP
+(por ejemplo, Conjunto de datos X, Servicio de datos Y, pero
+NO Conjunto de datos Z). Si no agrega
+esta etiqueta al menos a la descripción de
+su recurso, no será
+embarcado.
+El valor es [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable) (aparecerá una lista desplegable)
+
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Keyword
+Palabras clave aplicables a este Conjunto de datos
+
+*Ejemplo:*
+Papaver rhoeas
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Logo
+Un enlace a la representación gráfica
+de este conjunto de datos.
+
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Identifier
+Identificador de este recurso. Puede ser
+un enlace.
+
+*Ejemplo:*
+https://w3id.org/bgv-fdp/dataset/65ffbf3d-bed1-4a9a-abf9-0116cc35b40a
+
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Issued
+La fecha de publicación de este recurso, en el formato AAAA-MM-DDTHH:MM:SS
+
+
+*Ejemplo:*
+2023-11-03T14:07:46
+
+> **Advertencia** Este campo debe estar en un formato específico (AAAA-MM-DDTHH:MM:SS)
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Modified
+La fecha de la última revisión de este recurso, en el formato AAAA-MM-DDTHH:MM:SS
+
+
+*Ejemplo:*
+2023-11-03T14:07:46
+
+> **Advertencia** Este campo debe estar en un formato específico (AAAA-MM-DDTHH:MM:SS)
+
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Version
+El indicador de versión (nombre o
+identificador) de un recurso.
+
+*Ejemplo:*
+4.11.2
+
+
+
+## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Conforms To
+Si corresponde, debería apuntar al
+URL, un estándar establecido al
+cual los datos dentro del
+recurso descrito se ajustan (por ejemplo,
+MAGE-ML para datos de microarrays).
+
+*Ejemplo:*
+https://fdp.bgv.cbgp.upm.es/profile/2f08228e-1789-40f8-84cd-28e3288c3604
+
