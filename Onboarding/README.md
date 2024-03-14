@@ -13,8 +13,6 @@ Download the [Excel spreadsheet](./FLAIR-GG%20Resource%20Metadata%20Template.xls
 ## Step 2
 Fill in the different sheets in the spreadsheet as is appropriate for your organisation or organisations and the resources
 they provide.
-<img src="./StepsToAddResourceMetadata.png"/>
-
 > **Note** The template has an example line in each sheet that contains the real metadata from the Banco de Germoplasma Vegetal César Gómez Campo so you can use it to guide your decisions.
 
 
