@@ -13,12 +13,9 @@ Descarga la [plantilla en formato Excel](../FLAIR-GG%20Resource%20Metadata%20Tem
 
 Rellena las diferentes hojas dentro de la hoja de cálculo según lo apropiado para tu organizacion u organizaciones y los recursos que proveen.
 
-<img src="../StepsToAddResourceMetadata.png"/>
-
 >**Nota** La plantilla tiene una línea con ejemplos en cada hoja, que contienen los metadatos reales del Banco de Germoplasma Vegetal César Gómez Campo para ayudar a tomar decisiones a la hora de rellenar la plantilla.
 
  
-
 1. [Organisation](./Organisation.es.md) - Para añadir recursos a la Plataforma Virtual del proyecto FLAIR-GG, es necesario registar las organizaciones que los proporcionan. Para añadir una organización u organizaciones, la hoja Organisation ha de rellenarse. Para cada organización, los conjuntos de datos -datasets en inglés- (que pueden tener servicios de datos -data services en inglés- asociados) o servicios de datos (no vinculados a ningún set de datos específico) proporcionados por la organización deben ser añadidos.
    1. [Dataset](./Dataset.es.md) - Esta hoja debe rellenarse únicamente si tu organización proporciona acceso a uno o más sets de datos. Esta hoja captura los detalles de tu(s) conjunto(s) de datos. Sin embargo, un único conjunto de datos puede tener varias formas en las que se hace disponible a los potenciales usuarios. La(s) manera(s) en las que se puede acceder a un conjunto de datos se definen en la hoja de Distribución -Distribution en inglés-
       1. [Distribution](./Distribution.es.md) - Un único conjunto de datos puede estar disponible de distintas formas. P.ej. puede ser descargado, o accedido en línea.
