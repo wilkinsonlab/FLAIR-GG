@@ -34,8 +34,7 @@ In most cases, this will be http://edamontology.org/format_3790  (SPARQL)
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Title
-The name of the Data Service. This is a
-required field and needs to be unique.
+The name of the Data Service. This field needs to be unique.
 
 *Example:*
 SPARQL distribution of Administrative data
@@ -55,8 +54,7 @@ Administrative data distributed via a public SPARQL endpoint
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Personal Data
-Set to "true" if the resource onboarded to
-the Virtual Platform contains personal
+Set to "true" if this resource contains personal
 data, personal data meaning data
 related to identified or identifiable
 persons (as per GDPR definition),
@@ -66,14 +64,15 @@ otherwise "false".
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Publisher
 Pointer to the Organisation that published the
-resource (from the Organisation sheet; a dropdown list will appear).
+resource (from the Organisation sheet; a dropdown list will appear, allowing you to select from pre-established options).
 
 *Example:*
 César Gómez Campo Banco de Germoplasma Vegetal de la UPM
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Theme
-Points to an URL that specifies relevant concepts that classify the resource. They must be ontological terms, and typically, these can be looked
+
+Points to an URL that specifies relevant concepts that classify the Data Service (they are basically Keywords for computers). The best concepts to include here are what you think make your resource unique, what the users might find most interesting about your resource. They must be ontological terms, and typically, these can be looked
 up using the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/index)  or [Bioportal](https://bioportal.bioontology.org/). 
 
 In most cases, this will be http://edamontology.org/format_3790 (SPARQL)
@@ -84,9 +83,7 @@ In most cases, this will be http://edamontology.org/format_3790 (SPARQL)
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Language
 An ISO 639-1 two-letter code for the
 languages this patient registry is provided
-in. Example: en indicates that this patient
-registry is available in English. The range is
-an xsd:string. The ISO language codes
+in. The ISO language codes
 can be found at:
 [https://id.loc.gov/vocabulary/iso639-1.html](https://id.loc.gov/vocabulary/iso639-1.html)
 
@@ -96,8 +93,9 @@ en
 
 
 
+
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Contact Point
-Pointer to a Contact Point (from the Contact Point sheet; a dropdown list will appear)
+Pointer to a Contact Point (from the Contact Point sheet; a dropdown list will appear, allowing you to select from pre-established options)
 
 *Example:*
 http://www.bancodegermoplasma.upm.es/
@@ -137,8 +135,8 @@ that you wish the VP to explore
 NOT Dataset Z). If you do not add
 this tag to at least the description of
 your resource, you will not be
-onboarded.
-The value is [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable) (a dropdown list will appear)
+onboarded to the virtual platform.
+The value is [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable) (a dropdown list will appear, allowing you to select from pre-established options)
 
 
 
@@ -152,7 +150,7 @@ representation of this resource.
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Serves Dataset
 Used to indicate which dataset
 a DataService is serving data
-from (from the Dataset sheet; a dropdown list will appear)
+from (from the Dataset sheet; a dropdown list will appear, allowing you to select from pre-established options)
 
 *Example:*
 BGV June 2023
@@ -163,7 +161,8 @@ BGV June 2023
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Keyword
 Keywords applicable to this
-data service
+data service. The best keywords to include here are what you think make your resource unique, what the users might find most interesting about your resource.
+
 
 *Example:*
 Germplasm, SPARQL

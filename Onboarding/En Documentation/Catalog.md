@@ -1,8 +1,6 @@
 [![Static Badge](https://img.shields.io/badge/lang-es-yellow?style=plastic)](../Es%20Documentation/Catalog.es.md)
 # Catalog
-Describes a catalog of datasets and data services. It is possible that a 
-catalog can consist of catalogs as well. To be meaningful a catalog must consist of at least 1 dataset, data service, or otherwise 1 or more catalogs. 
-
+Describes a catalog of datasets and data services. To be meaningful a catalog must consist of at least 1 dataset or data service.
 ### Legend:
 - ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) This column is **MANDATORY**
 - ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) This column is **RECOMMENDED**
@@ -29,15 +27,14 @@ Germplasm Bank Collections
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Publisher
 Pointer to the Organisation that published the
-resource (from the Organisation sheet; a dropdown list will appear).
+resource (from the Organisation sheet; a dropdown list will appear, allowing you to select from pre-established options).
 
 *Example:*
 César Gómez Campo Banco de Germoplasma Vegetal de la UPM
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Personal Data
-Set to "true" if the resource onboarded to
-the Virtual Platform contains personal
+Set to "true" if this resource contains personal
 data, personal data meaning data
 related to identified or identifiable
 persons (as per GDPR definition),
@@ -60,7 +57,7 @@ In most cases, this will be https://schema.org/catalog (Catalog)
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Contact Point
-Pointer to a Contact Point (from the Contact Point sheet; a dropdown list will appear)
+Pointer to a Contact Point (from the Contact Point sheet; a dropdown list will appear, allowing you to select from pre-established options)
 
 *Example:*
 http://www.bancodegermoplasma.upm.es/
@@ -69,9 +66,7 @@ http://www.bancodegermoplasma.upm.es/
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Language
 An ISO 639-1 two-letter code for the
 languages this patient registry is provided
-in. Example: en indicates that this patient
-registry is available in English. The range is
-an xsd:string. The ISO language codes
+in. The ISO language codes
 can be found at:
 [https://id.loc.gov/vocabulary/iso639-1.html](https://id.loc.gov/vocabulary/iso639-1.html)
 
@@ -108,8 +103,7 @@ https://fdp.bgv.cbgp.upm.es/dataset/f7600b9f-cd18-4122-86c6-b6f5a75ecc03, https:
 
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Theme Taxonomy
-Points to an URL that specifies relevant concepts that classify the **contents of the catalog**. They must be ontological terms, and typically, these can be looked
-up using the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/index)  or [Bioportal](https://bioportal.bioontology.org/). In the case of species names, we recommend using the [World Flora Online Taxonomy](https://www.worldfloraonline.org/search?query=)
+Points to an URL that specifies relevant concepts that classify the **contents of the catalog** (they are basically Keywords for computers). The best concepts to include here are what you think make your resource unique, what the users might find most interesting about your resource. They must be ontological terms, and typically, these can be looked up using the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/index)  or [Bioportal](https://bioportal.bioontology.org/). In the case of species names, we recommend using the [World Flora Online Taxonomy](https://www.worldfloraonline.org/search?query=).
 
 *Example:*
 https://www.worldfloraonline.org/taxon/wfo-0000659225, https://www.worldfloraonline.org/taxon/wfo-0000729203, https://www.worldfloraonline.org/taxon/wfo-0000729205, https://www.worldfloraonline.org/taxon/wfo-4000000074
@@ -131,12 +125,13 @@ that you wish the VP to explore
 NOT Dataset Z). If you do not add
 this tag to at least the description of
 your resource, you will not be
-onboarded.
-The value is [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable) (a dropdown list will appear)
+onboarded to the virtual platform.
+The value is [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable) (a dropdown list will appear, allowing you to select from pre-established options)
 
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Keyword
-Keywords applicable to this catalog
+Keywords applicable to this catalog.  The best concepts to include here are what you think make your resource unique, what the users might find most interesting about your resource.
+
 
 *Example:*
 Germplasm
@@ -152,7 +147,7 @@ of this resource.
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Distribution
 Use this property to point to the distribution of this
-catalog when a distribution is available (from the Distribution sheet; a dropdown list will appear)
+catalog when a distribution is available (from the Distribution sheet; a dropdown list will appear, allowing you to select from pre-established options)
 
 *Example:*
 SPARQL distribution of Administrative data

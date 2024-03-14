@@ -3,12 +3,12 @@
 Esta hoja describe cualquier conjunto de datos relacionado con el germoplasma.
 
 ### Leyenda:
-- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Esta columna es **OBLIGATORIA**
+- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Esta columna es **IMPRESCINDIBLE**
 - ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Esta columna es **RECOMENDADA**
 - ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Esta columna es **OPCIONAL**
 
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) License  
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) License  
 Esto debería contener una URL que proporcione detalles sobre la licencia que es aplicable a este recurso.
 Si no se puede proporcionar una licencia adecuada, entonces debería usarse la licencia por defecto:
 [https://w3id.org/ejp-rd/resources/licenses/](https://w3id.org/ejp-rd/resources/licenses/). Básicamente, esto dice que se debe contactar al propietario del recurso para obtener información sobre la licencia.
@@ -18,7 +18,7 @@ Cualquier subtipo de [https://creativecommons.org/licenses/](https://creativecom
 por ejemplo, [http://creativecommons.org/licenses/by-nc-nd/4.0](http://creativecommons.org/licenses/by-nc-nd/4.0).
 
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Title
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Title
 El nombre **del conjunto de datos**. Este debe ser único en esta hoja de cálculo.
 
 *Ejemplo:*
@@ -27,7 +27,7 @@ BGV junio 2023
 > **Advertencia** Este campo debe ser `único`
 
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Description
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Description
 Una descripción del conjunto de datos.
 
 *Ejemplo:*
@@ -35,8 +35,8 @@ Instantánea de metadatos de BGV tomada en junio de 2023
 
 
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Theme
-Apunta a una URL que especifica conceptos relevantes que clasifican el recurso. Deben ser términos ontológicos, y típicamente, estos pueden buscarse
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Theme
+Indica una URL que especifique conceptos relevantes que clasifiquen el recurso (son básicamente palabras clave para ordenadores). Los mejores conceptos para añadir aquí son aquellos que describan lo que hacen tu recurso único, en lo que los usuarios podrían estar interesados sobre tu recurso que lo diferencie de los demás. Deben ser términos ontológicos, y típicamente, estos pueden buscarse
 utilizando el [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/index)  o [Bioportal](https://bioportal.bioontology.org/). En el caso de los nombres de especies, recomendamos utilizar la [Taxonomía en Línea de la Flora Mundial](https://www.worldfloraonline.org/search?query=)
 
 *Ejemplo:*
@@ -44,28 +44,25 @@ https://www.worldfloraonline.org/taxon/wfo-0000481006
 
 
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Publisher
-Puntero a la Organización que publicó el recurso (desde la hoja de Organización; aparecerá una lista desplegable).
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Publisher
+Indica la Organización que publicó el recurso (desde la hoja Organisation; aparecerá una lista desplegable, en la que podrá seleccionar de una lista de valores preestablecidos).
 
 *Ejemplo:*
 César Gómez Campo Banco de Germoplasma Vegetal de la UPM
 
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Contact Point
-Puntero a un Punto de contacto (desde la hoja de Punto de contacto; aparecerá una lista desplegable)
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Contact Point
+Indica un Punto de contacto (desde la hoja Contact point; aparecerá una lista desplegable, en la que podrá seleccionar de una lista de valores preestablecidos)
 
 *Ejemplo:*
 http://www.bancodegermoplasma.upm.es/
 
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) PersonalData
-Establecido en "verdadero" si el recurso incorporado a la Plataforma Virtual contiene datos personales, datos personales
-significando datos relacionados con personas identificadas o identificables (según la definición del GDPR), de lo contrario "falso".
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) PersonalData
+Establezca "true" si este recurso contiene datos personales, siendo datos personales aquellos relacionados con personas identificadas o identificables (según la definición del GDPR), de lo contrario "false".
 
-
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Language
-Un código de dos letras ISO 639-1 para los idiomas en los que se proporciona este registro de pacientes. Ejemplo: en indica que este registro de pacientes está disponible en inglés. El rango es
-un xsd:string. Los códigos de idioma ISO se pueden encontrar en:
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Language
+Un código de dos letras ISO 639-1 para los idiomas en los que se proporciona este recurso de germoplasma.  Los códigos de idioma ISO se pueden encontrar en:
 [https://id.loc.gov/vocabulary/iso639-1.html](https://id.loc.gov/vocabulary/iso639-1.html)
 
 *Ejemplo:*
@@ -92,7 +89,7 @@ https://fdb.bgv.cbgp.upm.es/
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Distribution
 
-Puntero a la distribución (desde la hoja de distribución; aparecerá una lista desplegable) de este conjunto de datos.
+Indica la distribución (desde la hoja Distribution; aparecerá una lista desplegable, en la que podrá seleccionar de una lista de valores preestablecidos) de este conjunto de datos.
 
 *Ejemplo:*
 Distribución SPARQL de BGV Germoplasma
@@ -105,14 +102,14 @@ que desee que explore el VP
 (por ejemplo, Conjunto de datos X, Servicio de datos Y, pero
 NO Conjunto de datos Z). Si no agrega
 esta etiqueta al menos a la descripción de
-su recurso, no será
-embarcado.
-El valor es [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable) (aparecerá una lista desplegable)
+su recurso, no será embarcado a la plataforma virtual
+El valor es [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable) (aparecerá una lista desplegable, en la que podrá seleccionar de una lista de valores preestablecidos)
 
 
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Keyword
-Palabras clave aplicables a este Conjunto de datos
+Palabras clave aplicables a este Conjunto de datos. Las mejores palabras claves para añadir aquí son aquellos que describan lo que hacen tu recurso único, en lo que los usuarios podrían estar interesados sobre tu recurso que lo diferencie de los demás.
+
 
 *Ejemplo:*
 Papaver rhoeas
@@ -163,11 +160,11 @@ identificador) de un recurso.
 
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Conforms To
-Si corresponde, debería apuntar al
-URL, un estándar establecido al
-cual los datos dentro del
-recurso descrito se ajustan (por ejemplo,
-MAGE-ML para datos de microarrays).
+Si corresponde, debe apuntar a la
+URL de un estándar establecido al que
+los datos dentro del
+recurso descrito se conforman (por
+ejemplo, MAGE-ML para datos de microarrays).
 
 *Ejemplo:*
 https://fdp.bgv.cbgp.upm.es/profile/2f08228e-1789-40f8-84cd-28e3288c3604
