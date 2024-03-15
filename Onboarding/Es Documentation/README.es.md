@@ -29,11 +29,10 @@ Exporta la plantilla. Recomendamos que la exportes como archivo delimitado por t
 
 
 <br />
-
 <br />
 
 
-<div align="right">
+<div align="center">
 
 <a href="">[![Static Badge](https://img.shields.io/badge/Próxima%20Hoja-Organisation-green?style=for-the-badge)](./Organisation.es.md)</a>
 </div>

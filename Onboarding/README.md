@@ -40,9 +40,10 @@ that commas will be used in descriptions, addresses etc.
 <br />
 
 
-<div align="right">
+<div align="center">
 
 <a href="">[![Static Badge](https://img.shields.io/badge/Next%20Sheet-Organisation-green?style=for-the-badge)](./En%20Documentation/Organisation.md)</a>
 </div>
+
 
 

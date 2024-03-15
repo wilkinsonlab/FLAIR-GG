@@ -47,7 +47,9 @@ https://w3id.org/bgv-fdp
 
 <br />
 <br />
+<div align="center">
 
-<a style="text-align: left; width:1%; display: inline-block;">[![Static Badge](https://img.shields.io/badge/Hoja%20Anterior-README-yellow?style=for-the-badge)](./README.es.md)</a>
-<a style="text-align: center; width:20%; display: inline-block;">[![Static Badge](https://img.shields.io/badge/Página%20Pricipal-README-blue?style=for-the-badge)](./README.es.md)</a>
-<a style="text-align: right; width:20%;display: inline-block;">[![Static Badge](https://img.shields.io/badge/Próxima%20Hoja-ContactPoint-green?style=for-the-badge)](./ContactPoint.es.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Hoja%20Anterior-README-yellow?style=for-the-badge)](./README.es.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Página%20Pricipal-README-blue?style=for-the-badge)](./README.es.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Próxima%20Hoja-ContactPoint-green?style=for-the-badge)](./ContactPoint.es.md)</a>
+</div>

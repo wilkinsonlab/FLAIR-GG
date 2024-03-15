@@ -96,6 +96,11 @@ http://edamontology.org/format_3790
 <br />
 <br />
 
-<a style="text-align: left; width:1%; display: inline-block;">[![Static Badge](https://img.shields.io/badge/Previous%20Sheet-Dataset-yellow?style=for-the-badge)](./Dataset.md)</a>
-<a style="text-align: center; width:20%; display: inline-block;">[![Static Badge](https://img.shields.io/badge/Home-README-blue?style=for-the-badge)](../README.md)</a>
-<a style="text-align: right; width:20%;display: inline-block;">[![Static Badge](https://img.shields.io/badge/Next%20Sheet-Catalog-green?style=for-the-badge)](./Catalog.md)</a>
+<div align="center">
+
+<a href="">[![Static Badge](https://img.shields.io/badge/Previous%20Sheet-Dataset-yellow?style=for-the-badge)](./Dataset.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Home-README-blue?style=for-the-badge)](../README.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Next%20Sheet-Catalog-green?style=for-the-badge)](./Catalog.md)</a>
+
+</div>
+

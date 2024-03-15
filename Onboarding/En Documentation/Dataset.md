@@ -187,6 +187,10 @@ https://fdp.bgv.cbgp.upm.es/profile/2f08228e-1789-40f8-84cd-28e3288c3604
 <br />
 <br />
 
-<a style="text-align: left; width:1%; display: inline-block;">[![Static Badge](https://img.shields.io/badge/Previous%20Sheet-ContactPoint-yellow?style=for-the-badge)](./ContactPoint.md)</a>
-<a style="text-align: center; width:20%; display: inline-block;">[![Static Badge](https://img.shields.io/badge/Home-README-blue?style=for-the-badge)](../README.md)</a>
-<a style="text-align: right; width:20%;display: inline-block;">[![Static Badge](https://img.shields.io/badge/Next%20Sheet-Distribution-green?style=for-the-badge)](./Distribution.md)</a>
+<div align="center">
+
+<a href="">[![Static Badge](https://img.shields.io/badge/Previous%20Sheet-ContactPoint-yellow?style=for-the-badge)](./ContactPoint.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Home-README-blue?style=for-the-badge)](../README.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Next%20Sheet-Distribution-green?style=for-the-badge)](./Distribution.md)</a>
+
+</div>
