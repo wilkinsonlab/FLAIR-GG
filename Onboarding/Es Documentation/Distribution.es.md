@@ -79,3 +79,14 @@ Apunta al servicio de acceso a los datos disponibles en esta distribución (de l
 
 *Ejemplo:*
 http://edamontology.org/format_3790
+
+<br />
+<br />
+
+<div align="center">
+
+<a href="">[![Static Badge](https://img.shields.io/badge/Hoja%20Anterior-Dataset-yellow?style=for-the-badge)](./Dataset.es.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Página%20Pricipal-README-blue?style=for-the-badge)](./README.es.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Próxima%20Hoja-Catalog-green?style=for-the-badge)](./Catalog.es.md)</a>
+
+</div>
