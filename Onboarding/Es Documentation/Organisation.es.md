@@ -3,11 +3,11 @@
 Esta hoja describe una organización que proporciona acceso a 1 o más recursos relacionados con germoplasma.
 
 ### Leyenda:
-- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Esta columna es **OBLIGATORIA**
+- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Esta columna es **IMPRESCINDIBLE**
 - ![](https://placehold.jp/17/ea9999/000000/20x20.png?text=R) Esta columna es **RECOMENDADA**
 - ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Esta columna es **OPCIONAL**
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Title
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Title
 El nombre de la organización. Este campo debe ser único.
 
 *Ejemplo:*
@@ -15,7 +15,7 @@ César Gómez Campo Banco de Germoplasma Vegetal de la UPM
 
 > **Advertencia** Este campo debe ser `único`
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Description
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Description
 Una descripción de la organización.
 
 *Ejemplo:*
@@ -40,7 +40,16 @@ El nombre de la ubicación de la organización.
 Av. Puerta de Hierro, 2, Moncloa - Aravaca, 28040 Madrid, España
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Identifier
-Una identificación de su organización. Recomendamos utilizar el estándar ROR para identificar su organización, o el enlace a su Punto de Datos FAIR.
+Una identificación de su organización. Recomendamos utilizar el estándar ROR para identificar su organización, o el enlace a su FAIR Data Point.
 
 *Ejemplo:* 
 https://w3id.org/bgv-fdp
+
+<br />
+<br />
+<div align="center">
+
+<a href="">[![Static Badge](https://img.shields.io/badge/Hoja%20Anterior-README-yellow?style=for-the-badge)](./README.es.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Página%20Pricipal-README-blue?style=for-the-badge)](./README.es.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Próxima%20Hoja-ContactPoint-green?style=for-the-badge)](./ContactPoint.es.md)</a>
+</div>

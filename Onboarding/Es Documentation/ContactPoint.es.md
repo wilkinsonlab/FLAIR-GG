@@ -2,11 +2,21 @@
 # Contact Point
 Proporciona información de contacto para un recurso de metadatos.
 ### Leyenda:
-- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Esta columna es **OBLIGATORIA**
+- ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) Esta columna es **IMPRESCINDIBLE**
 
 
-## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) URL
+## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=I) URL
 Enlace al punto de contacto para el recurso. Puede ser una dirección de correo electrónico o un enlace a un sitio web al que puede enviar solicitudes de comunicación.
 
 *Ejemplo:*
 http://www.bancodegermoplasma.upm.es/
+
+<br />
+<br />
+
+<div align="center">
+
+<a href="">[![Static Badge](https://img.shields.io/badge/Hoja%20Anterior-Organisation-yellow?style=for-the-badge)](./Organisation.es.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Página%20Pricipal-README-blue?style=for-the-badge)](./README.es.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Próxima%20Hoja-Dataset-green?style=for-the-badge)](./Dataset.es.md)</a>
+</div>

@@ -36,7 +36,9 @@ Metadata snapshot of BGV taken in June 2023
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Theme
-Points to an URL that specifies relevant concepts that classify the resource. They must be ontological terms, and typically, these can be looked
+
+Points to an URL that specifies relevant concepts that classify the Dataset (they are basically Keywords for computers). The best concepts to include here are what you think make your resource unique, what the users might find most interesting about your resource.
+ They must be ontological terms, and typically, these can be looked
 up using the [Ontology Lookup Service (OLS)](https://www.ebi.ac.uk/ols4/index)  or [Bioportal](https://bioportal.bioontology.org/). In the case of species names, we recommend using the [World Flora Online Taxonomy](https://www.worldfloraonline.org/search?query=)
 
 *Example:*
@@ -46,35 +48,38 @@ https://www.worldfloraonline.org/taxon/wfo-0000481006
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Publisher
 Pointer to the Organisation that published the
-resource (from the Organisation sheet; a dropdown list will appear).
+resource (from the Organisation sheet; a dropdown list will appear, allowing you to select from pre-established options).
 
 *Example:*
 César Gómez Campo Banco de Germoplasma Vegetal de la UPM
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Contact Point
-Pointer to a Contact Point (from the Contact Point sheet; a dropdown list will appear)
+Pointer to a Contact Point (from the Contact Point sheet; a dropdown list will appear, allowing you to select from pre-established options)
 
 *Example:*
 http://www.bancodegermoplasma.upm.es/
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) PersonalData
-Set to "true" if the resource onboarded to the Virtual Platform contains personal data, personal data
-meaning data related to indentified or identifiable persons (as per GDPR definition), otherwise "false".
+Set to "true" if this resource contains personal
+data, personal data meaning data
+related to identified or identifiable
+persons (as per GDPR definition),
+otherwise "false".
+
 
 
 ## ![](https://placehold.jp/17/ff0000/000000/20x20.png?text=M) Language
 An ISO 639-1 two-letter code for the
 languages this patient registry is provided
-in. Example: en indicates that this patient
-registry is available in English. The range is
-an xsd:string. The ISO language codes
+in. The ISO language codes
 can be found at:
 [https://id.loc.gov/vocabulary/iso639-1.html](https://id.loc.gov/vocabulary/iso639-1.html)
 
 *Example:*
 en
+
 
 
 
@@ -99,7 +104,7 @@ https://fdb.bgv.cbgp.upm.es/
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Distribution
 
-Pointer to the distribution (from the distribution sheet; a dropdown list will appear) for this dataset.
+Pointer to the distribution (from the distribution sheet; a dropdown list will appear, allowing you to select from pre-established options) for this dataset.
 
 *Example:*
 BGV Germplasm SPARQL distribution
@@ -113,13 +118,13 @@ that you wish the VP to explore
 NOT Dataset Z). If you do not add
 this tag to at least the description of
 your resource, you will not be
-onboarded.
-The value is [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable) (a dropdown list will appear)
+onboarded to the virtual platform.
+The value is [https://w3id.org/ejp-rd/vocabulary#VPDiscoverable](https://w3id.org/ejp-rd/vocabulary#VPDiscoverable) (a dropdown list will appear, allowing you to select from pre-established options)
 
 
 
 ## ![](https://placehold.jp/17/ffffff/000000/20x20.png?text=O) Keyword
-Keywords applicable to this Dataset
+Keywords applicable to this Dataset. The best keywords to include here are what you think make your resource unique, what the users might find most interesting about your resource.
 
 *Example:*
 Papaver rhoeas
@@ -179,3 +184,13 @@ MAGE-ML for Microarray data).
 *Example:*
 https://fdp.bgv.cbgp.upm.es/profile/2f08228e-1789-40f8-84cd-28e3288c3604
 
+<br />
+<br />
+
+<div align="center">
+
+<a href="">[![Static Badge](https://img.shields.io/badge/Previous%20Sheet-ContactPoint-yellow?style=for-the-badge)](./ContactPoint.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Home-README-blue?style=for-the-badge)](../README.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Next%20Sheet-Distribution-green?style=for-the-badge)](./Distribution.md)</a>
+
+</div>

@@ -60,5 +60,14 @@ ROR standard to identify your organisation, or the link to your FAIR Data Point.
 *Example:* 
 https://w3id.org/bgv-fdp
 
+<br />
+<br />
 
+<div align="center">
+
+<a href="">[![Static Badge](https://img.shields.io/badge/Previous%20Sheet-README-yellow?style=for-the-badge)](../README.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Home-README-blue?style=for-the-badge)](../README.md)</a>
+<a href="">[![Static Badge](https://img.shields.io/badge/Next%20Sheet-ContactPoint-green?style=for-the-badge)](./ContactPoint.md)</a>
+
+</div>
 
