@@ -1,4 +1,5 @@
 # frozen_string_literal: false
+require 'erb'
 
 def set_routes(classes: allclasses)
   set :server_settings, timeout: 180
