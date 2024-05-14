@@ -193,12 +193,12 @@ the folder structure is:
 - The /data folder is where you will place your administrative, location, and germplasm CSV files [Here are the instructions for how to create these CSV files](../../SemanticModel/CSV/).
 - The /data folder will also contain the [YARRRML Templates](../../SemanticModel/) that will be applied to the final CSV.
 - *NOTA BENE*:  Please execute `chmod a+w ./data/triples` prior to executing a transformation.  The transformation tool in this container runs with very limited permissions, and cannot write to a folder that is mounted with default permissions.
-- *NOTA BENE*:  The YARRRML templates contains a placeholder for your installation's base URI.  This is passed as an environment variable `baseURI`, which appears in the cde-box-daemon clause of your docker-compose-ACME.yml file:
+- *NOTA BENE*:  The YARRRML templates contains a placeholder for your installation's base URI.  This is passed as an environment variable `baseURI`, which appears in the flair-box-daemon clause of your docker-compose-ACME.yml file:
 
 ```
-  cde-box-daemon: 
-    image: markw/cde-box-daemon:0.5.4
-    container_name: cde-box-daemon
+  flair-box-daemon: 
+    image: markw/flair-box-daemon:0.0.1
+    container_name: flair-box-daemon
     environment:
       GraphDB_User: ${GraphDB_User}
       GraphDB_Pass: ${GraphDB_Pass}
