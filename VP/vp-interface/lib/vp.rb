@@ -278,6 +278,7 @@ class VP
       endpoint = CGI.unescape(ep)
       if params["_request_body"]
         warn "POSTING: #{params["_request_body"]}"
+        # example data for beacon {"meta":{"apiVersion":"v0.2"},"query":{"filters":[{"id":["ordo:Orphanet_730"]}]}}
         result = RestClient.post(endpoint, params["_request_body"], {content_type: :json, accept: :json} )
       else
         result = RestClient.get(endpoint, {params: params})
