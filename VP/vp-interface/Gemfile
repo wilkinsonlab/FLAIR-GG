@@ -36,6 +36,7 @@ gem "xml-simple", "~>1.1.8"
 gem "csv"
 gem "tempfile"
 gem "securerandom"
+gem "zip-zip"
 
 group :test do
   gem "capybara"

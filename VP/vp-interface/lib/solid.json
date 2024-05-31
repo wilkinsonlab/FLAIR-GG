@@ -1,0 +1,222 @@
+osboxes@osboxes:~$ curl -v -H "Accept: application/json" http: //localhost:3000/.account/^C
+{
+    //   HERE
+    "controls": {
+        "password": {
+            "login": "http://localhost:3000/.account/login/password/",
+            // 
+            "forgot": "http://localhost:3000/.account/login/password/forgot/",
+            "reset": "http://localhost:3000/.account/login/password/reset/"
+        },
+        "main": {
+            "logins": "http://localhost:3000/.account/login/",
+            "index": "http://localhost:3000/.account/"
+        },
+        "account": {
+            "create": "http://localhost:3000/.account/account/"
+        },
+        "html": {
+            "password": {
+                "register": "http://localhost:3000/.account/login/password/register/",
+                "login": "http://localhost:3000/.account/login/password/",
+                "forgot": "http://localhost:3000/.account/login/password/forgot/"
+            },
+            "main": {
+                "login": "http://localhost:3000/.account/login/"
+            }
+        }
+    },
+    "version": "0.5"
+}
+
+
+curl -X POST -H "Accept: application/json" 
+-H "Content-type: application/json" 
+-d '{
+    "email": "my@email.com",
+    "password": "password"
+}' 
+http: //localhost:3000/.account/login/password/
+{
+    "authorization": "564f3049-9aa7-4f97-b727-9dfe238dce60",
+    "controls": {
+        "password": {
+            "login": "http://localhost:3000/.account/login/password/",
+            "forgot": "http://localhost:3000/.account/login/password/forgot/",
+            "reset": "http://localhost:3000/.account/login/password/reset/"
+        },
+        "main": {
+            "logins": "http://localhost:3000/.account/login/",
+            "index": "http://localhost:3000/.account/"
+        },
+        "account": {
+            "create": "http://localhost:3000/.account/account/"
+        },
+        "html": {
+            "password": {
+                "register": "http://localhost:3000/.account/login/password/register/",
+                "login": "http://localhost:3000/.account/login/password/",
+                "forgot": "http://localhost:3000/.account/login/password/forgot/"
+            },
+            "main": {
+                "login": "http://localhost:3000/.account/login/"
+            }
+        }
+    },
+    "version": "0.5"
+}
+
+curl -X GET 
+-H "Authorization: CSS-Account-Token 564f3049-9aa7-4f97-b727-9dfe238dce60" 
+http: //localhost:3000/.account/
+{
+    "controls": {
+        "password": {
+            "login": "http://localhost:3000/.account/login/password/",
+            "create": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/login/password/",
+            "forgot": "http://localhost:3000/.account/login/password/forgot/",
+            "reset": "http://localhost:3000/.account/login/password/reset/"
+        },
+        "main": {
+            "logins": "http://localhost:3000/.account/login/",
+            "index": "http://localhost:3000/.account/"
+        },
+        "account": {
+            "webId": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/",
+            "pod": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/pod/",
+            //   HERE
+            "clientCredentials": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/",
+            // 
+            "create": "http://localhost:3000/.account/account/",
+            "logout": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/logout/"
+        },
+        "html": {
+            "password": {
+                "register": "http://localhost:3000/.account/login/password/register/",
+                "login": "http://localhost:3000/.account/login/password/",
+                "create": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/login/password/",
+                "forgot": "http://localhost:3000/.account/login/password/forgot/"
+            },
+            "main": {
+                "login": "http://localhost:3000/.account/login/"
+            },
+            "account": {
+                "linkWebId": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/",
+                "createPod": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/pod/",
+                "createClientCredentials": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/",
+                "account": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/"
+            }
+        }
+    },
+    "version": "0.5"
+}
+
+curl -X GET 
+-H "Authorization: CSS-Account-Token 564f3049-9aa7-4f97-b727-9dfe238dce60" 
+http: //localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/
+{
+    "fields": {
+        "webId": {
+            "required": true,
+            "type": "string"
+        }
+    },
+    // HERE
+    "webIdLinks": {
+        "http://localhost:3000/markw/profile/card#me": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/74abd804-301d-4cd6-823c-89b3408aa723/"
+        // 
+    },
+    "controls": {
+        "password": {
+            "login": "http://localhost:3000/.account/login/password/",
+            "create": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/login/password/",
+            "forgot": "http://localhost:3000/.account/login/password/forgot/",
+            "reset": "http://localhost:3000/.account/login/password/reset/"
+        },
+        "main": {
+            "logins": "http://localhost:3000/.account/login/",
+            "index": "http://localhost:3000/.account/"
+        },
+        "account": {
+            "webId": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/",
+            "pod": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/pod/",
+            //  and here
+            "clientCredentials": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/",
+            // 
+            "create": "http://localhost:3000/.account/account/",
+            "logout": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/logout/"
+        },
+        "html": {
+            "password": {
+                "register": "http://localhost:3000/.account/login/password/register/",
+                "login": "http://localhost:3000/.account/login/password/",
+                "create": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/login/password/",
+                "forgot": "http://localhost:3000/.account/login/password/forgot/"
+            },
+            "main": {
+                "login": "http://localhost:3000/.account/login/"
+            },
+            "account": {
+                "linkWebId": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/",
+                "createPod": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/pod/",
+                "createClientCredentials": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/",
+                "account": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/"
+            }
+        }
+    },
+    "version": "0.5"
+}
+
+
+
+curl -X POST \
+-H "Accept: application/json" \
+-H "Content-type: application/json" \
+-H "Authorization: CSS-Account-Token 564f3049-9aa7-4f97-b727-9dfe238dce60" \
+-d '{"name": "my-token", "webId": "http://localhost:3000/markw/profile/card#me"}' \
+"http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/"{
+
+//  HERE
+    "id": "my-token_cb639d45-2865-4789-b959-782fad52d9b3",
+    "secret": "994ffc2d3f0a79a41380327f9dc33258a612c15a076ba1d77ec131d13bab08241ff86a97d9261b5d8a83914abeaaa09ad4de331cef5b5c554e890e6adb33ccf9",
+    "resource": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/a969d97b-91a1-452a-99e6-8259976c5a84/",
+// 
+
+    "controls": {
+        "password": {
+            "login": "http://localhost:3000/.account/login/password/",
+            "create": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/login/password/",
+            "forgot": "http://localhost:3000/.account/login/password/forgot/",
+            "reset": "http://localhost:3000/.account/login/password/reset/"
+        },
+        "main": {
+            "logins": "http://localhost:3000/.account/login/",
+            "index": "http://localhost:3000/.account/"
+        },
+        "account": {
+            "webId": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/",
+            "pod": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/pod/",
+            "clientCredentials": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/",
+            "create": "http://localhost:3000/.account/account/",
+            "logout": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/logout/"
+        },
+        "html": {
+            "password": {
+                "register": "http://localhost:3000/.account/login/password/register/",
+                "login": "http://localhost:3000/.account/login/password/",
+                "create": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/login/password/",
+                "forgot": "http://localhost:3000/.account/login/password/forgot/"
+            },
+            "main": {
+                "login": "http://localhost:3000/.account/login/"
+            },
+            "account": {
+                "linkWebId": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/",
+                "createPod": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/pod/",
+                "createClientCredentials": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/",
+                "account": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/"
+            }
+        }
+    },
+    "version": "0.5"
+}

@@ -286,7 +286,7 @@ class VP
       warn result.inspect
       results[endpoint] = result.body
     end
-    location = process_and_upload_sparql_output(results: results)
+    location = process_and_upload_output(results: results) # in serviceoutput_procdessors/general.rb
     [location, servicelabel, results]
   end
 
