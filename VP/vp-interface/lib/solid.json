@@ -1,10 +1,10 @@
-osboxes@osboxes:~$ curl -v -H "Accept: application/json" http: //localhost:3000/.account/^C
+osboxes@osboxes:~$ curl -v -H "Accept: application/json" http: //localhost:3000/.account/
 {
-    //   HERE
+//   HERE
     "controls": {
         "password": {
             "login": "http://localhost:3000/.account/login/password/",
-            // 
+// 
             "forgot": "http://localhost:3000/.account/login/password/forgot/",
             "reset": "http://localhost:3000/.account/login/password/reset/"
         },
@@ -173,15 +173,16 @@ curl -X POST \
 -H "Accept: application/json" \
 -H "Content-type: application/json" \
 -H "Authorization: CSS-Account-Token 564f3049-9aa7-4f97-b727-9dfe238dce60" \
--d '{"name": "my-token", "webId": "http://localhost:3000/markw/profile/card#me"}' \
+-d '{
+    "name": "my-token",
+    "webId": "http://localhost:3000/markw/profile/card#me"
+}' \
 "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/"{
-
-//  HERE
+    //  HERE
     "id": "my-token_cb639d45-2865-4789-b959-782fad52d9b3",
     "secret": "994ffc2d3f0a79a41380327f9dc33258a612c15a076ba1d77ec131d13bab08241ff86a97d9261b5d8a83914abeaaa09ad4de331cef5b5c554e890e6adb33ccf9",
     "resource": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/a969d97b-91a1-452a-99e6-8259976c5a84/",
-// 
-
+    // 
     "controls": {
         "password": {
             "login": "http://localhost:3000/.account/login/password/",
@@ -220,3 +221,107 @@ curl -X POST \
     },
     "version": "0.5"
 }
+
+
+
+authString:  my-token_cb639d45-2865-4789-b959-782fad52d9b3:994ffc2d3f0a79a41380327f9dc33258a612c15a076ba1d77ec131d1
+3bab08241ff86a97d9261b5d8a83914abeaaa09ad4de331cef5b5c554e890e6adb33ccf9
+
+get the token endpoint:
+curl -v http: //localhost:3000/.well-known/openid-configuration
+{
+    "authorization_endpoint": "http://localhost:3000/.oidc/auth",
+    "claims_parameter_supported": true,
+    "claims_supported": [
+        "azp",
+        "sub",
+        "webid",
+        "sid",
+        "auth_time",
+        "iss"
+    ],
+    "code_challenge_methods_supported": [
+        "S256"
+    ],
+    "end_session_endpoint": "http://localhost:3000/.oidc/session/end",
+    "grant_types_supported": [
+        "implicit",
+        "authorization_code",
+        "refresh_token",
+        "client_credentials"
+    ],
+    "issuer": "http://localhost:3000/",
+    "jwks_uri": "http://localhost:3000/.oidc/jwks",
+    "registration_endpoint": "http://localhost:3000/.oidc/reg",
+    "authorization_response_iss_parameter_supported": true,
+    "response_modes_supported": [
+        "form_post",
+        "fragment",
+        "query"
+    ],
+    "response_types_supported": [
+        "code id_token",
+        "code",
+        "id_token",
+        "none"
+    ],
+    "scopes_supported": [
+        "openid",
+        "profile",
+        "offline_access",
+        "webid"
+    ],
+    "subject_types_supported": [
+        "public"
+    ],
+    "token_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_jwt",
+        "client_secret_post",
+        "private_key_jwt",
+        "none"
+    ],
+    "token_endpoint_auth_signing_alg_values_supported": [
+        "HS256",
+        "RS256",
+        "PS256",
+        "ES256",
+        "EdDSA"
+    ],
+//   HERE
+    "token_endpoint": "http://localhost:3000/.oidc/token",
+// 
+    "id_token_signing_alg_values_supported": [
+        "ES256"
+    ],
+    "pushed_authorization_request_endpoint": "http://localhost:3000/.oidc/request",
+    "request_parameter_supported": false,
+    "request_uri_parameter_supported": false,
+    "introspection_endpoint": "http://localhost:3000/.oidc/token/introspection",
+    "dpop_signing_alg_values_supported": [
+        "RS256",
+        "RS384",
+        "RS512",
+        "PS256",
+        "PS384",
+        "PS512",
+        "ES256",
+        "ES256K",
+        "ES384",
+        "ES512",
+        "EdDSA"
+    ],
+    "revocation_endpoint": "http://localhost:3000/.oidc/token/revocation",
+    "claim_types_supported": [
+        "normal"
+    ]
+}
+
+base64 encode authString
+
+curl -v -X POST \
+-H "Authorization: Basic bXktdG9rZW5fY2I2MzlkNDUtMjg2NS00Nzg5LWI5NTktNzgyZmFkNTJkOWIz\nOjk5NGZmYzJkM2YwYTc5YTQxMzgwMzI3ZjlkYzMzMjU4YTYxMmMxNWEwNzZi\nYTFkNzdlYzEzMWQxM2JhYjA4MjQxZmY4NmE5N2Q5MjYxYjVkOGE4MzkxNGFi\nZWFhYTA5YWQ0ZGUzMzFjZWY1YjVjNTU0ZTg5MGU2YWRiMzNjY2Y5\n" \
+-H "Content-type: application/x-www-form-urlencoded" \
+-H "dpop: eyJhbGciOiJSUzI1NiIsInR5cCI6ImRwb3Arand0IiwiandrIjp7Imt0eSI6IlJTQSIsIm4iOiJ6VzFMaDk3cVBRa0JJdFZUZS1WVGwtTHg3cDNJSjV2ZjdlX2c2NzRkYzVoVDZmdXl5NE40VXFHeVF6cWxDN0lvNHlMS1pXQzFkX3BvTkl6SlpwVmhOQ2dRMmVURldlOUIyMnlPSDI4RlZlcFliT0NocGlkYjhWZC04dnhmclVkOHNWUUVOb3dHOGZLckl3YUdxVVlnVlotM0JYZklTV3hPU1VBVHd6ZGlCOXMiLCJlIjoiQVFBQiJ9fQ.eyJodHUiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAvLmFjY291bnQvYWNjb3VudC80YjZkZTgwMi0yOWUxLTQ5OGItOTRjZC04NzA5MmNjYTMxNjYvY2xpZW50LWNyZWRlbnRpYWxzL2E5NjlkOTdiLTkxYTEtNDUyYS05OWU2LTgyNTk5NzZjNWE4NC8iLCJodG0iOiJHRVQiLCJpYXQiOjE3MTcxNzEzNTUsImp0aSI6IjA5MWFlMGNjLTA3ZDUtNDBhYy04NTJhLTQwNzc2ZmJmZGMwOCJ9.tDFUUmYW-4Ol5jqSzO5wt6v6bMbdUBY0StY_IwssBbGo3dLtOIUGydNPqRc6q72cTz3ucc2cq8F5uk6lrTaWXo9tiWCE3A6S-QLsykmPDtgzmYDxlCypQYGs_M4oFBcatzswl6Di9imad8wnOYMOgCHpIzgpH1UoCd_qvyEuLZ8" \
+-d 'grant_type=client_credentials&scope=webid' \
+    "http://localhost:3000/.oidc/token"

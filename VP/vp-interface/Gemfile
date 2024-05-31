@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gemspec
-ruby "~> 3.0"
+ruby "~> 3.0.6"
 # gem 'activerecord', '~> 7', '>= 7', require: 'active_record'
 gem "bcrypt"
 gem "debase", git: "https://github.com/ruby-debug/debase.git", tag: "v0.2.5.beta2"
@@ -36,10 +36,15 @@ gem "xml-simple", "~>1.1.8"
 gem "csv"
 gem "tempfile"
 gem "securerandom"
-gem "zip-zip"
 
 group :test do
   gem "capybara"
   gem "rack-test"
   # gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
 end
+
+gem "dpop", "~> 0.1.2"
+
+gem "activesupport", "~> 7.0.3.1"
+
+gem "erb", "~> 4.0"
