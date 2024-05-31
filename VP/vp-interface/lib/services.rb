@@ -8,7 +8,7 @@ class ServiceCollection
 
   def initialize(vpgraph:, servicetype:)
     @vpgraph = vpgraph
-    @servicetype = servicetype  # this is the URI of the service type "a swat service"
+    @servicetype = servicetype  # this is the URI of the service type
     @servicelabel = ontology_annotations uri: servicetype
     @escapedtype = CGI.escape(servicetype)
     @allservices = []
@@ -34,8 +34,7 @@ class ServiceCollection
           dc:type <#{servicetype}> .
       OPTIONAL{?s dcat:contactPoint ?c .
         ?c <http://www.w3.org/2006/vcard/ns#url> ?contact } .
-    }"
-    )
+    }")
     results = vpgraph.query(vpd)
     results.each do |result|
       service = Service.new(contact: result[:contact], title: result[:title], openapi: result[:openapi], endpoint: result[:endpoint])
@@ -74,7 +73,7 @@ class Service
     @title = title
     @openapi = openapi
     @endpoint = endpoint
-#    @escapedendpoint = ERB::Util.url_encode(endpoint)
+    #    @escapedendpoint = ERB::Util.url_encode(endpoint)
     @escapedendpoint = CGI.escape(endpoint)
     @contact = contact
     @paths = {}
@@ -91,8 +90,8 @@ class Service
       get = pathitem.get  #  Openapi3Parser::Node::Operation or nil
       post = pathitem.post  #  Openapi3Parser::Node::Operation or nil
       fullpath = base + path
-      warn "testing #{fullpath} against #{@endpoint}|" 
-      unless fullpath == @endpoint  # this seems a bit dangerous, but it should be the same as what is in the DCAT record...
+      warn "testing #{fullpath} against #{@endpoint}|"
+      unless fullpath == @endpoint # this seems a bit dangerous, but it should be the same as what is in the DCAT record...
         warn "TEST FAILED"
         next
       end
@@ -101,7 +100,7 @@ class Service
       warn "\n\ninitializing with get: #{get}  and post #{post}\n"
       @paths[fullpath] = { get: get, post: post }
       self.successful = true
-      break  
+      break
     end
     api
   end
@@ -127,4 +126,3 @@ class Service
     params
   end
 end
-
