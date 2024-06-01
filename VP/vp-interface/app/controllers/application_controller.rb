@@ -7,7 +7,7 @@ require "sinatra/base"
 require "json"
 require "erb"
 # DO NOT change the order of loading below.  The files contain executable code that builds the overall configuration before this module starts
-require_relative "../../configuration"  # VPConfig and FDPConfig
+require_relative "../../lib/configuration"  # VPConfig and FDPConfig
 require_relative "models"
 require_relative "routes"
 require_relative "../../lib/cache"
