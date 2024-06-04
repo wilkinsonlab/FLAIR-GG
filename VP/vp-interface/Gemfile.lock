@@ -49,7 +49,7 @@ GEM
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    dpop (0.1.2)
+    dpop (0.1.3)
       activesupport
       jwt
       openssl
@@ -392,7 +392,7 @@ DEPENDENCIES
   cgi (~> 0.4.1)
   csv
   debase!
-  dpop (~> 0.1.2)
+  dpop (~> 0.1.3)
   erb (~> 4.0)
   fileutils (~> 1.5.0)
   json (~> 2.7.1)

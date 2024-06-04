@@ -1,4 +1,4 @@
-osboxes@osboxes:~$ curl -v -H "Accept: application/json" http: //localhost:3000/.account/
+osboxes@osboxes:~$ curl -v -H "Accept: application/json" http://localhost:3000/.account/
 {
 //   HERE
     "controls": {
@@ -30,15 +30,19 @@ osboxes@osboxes:~$ curl -v -H "Accept: application/json" http: //localhost:3000/
 }
 
 
-curl -X POST -H "Accept: application/json" 
--H "Content-type: application/json" 
--d '{
-    "email": "my@email.com",
-    "password": "password"
-}' 
-http: //localhost:3000/.account/login/password/
+curl -X POST -H "Accept: application/json" \
+-H "Content-type: application/json" \
+-d '{ \
+    "email": "my@email.com", \
+    "password": "password" \
+}'  \
+http://localhost:3000/.account/login/password/
+
+
 {
-    "authorization": "564f3049-9aa7-4f97-b727-9dfe238dce60",
+// HERE
+    "authorization": "35857203-f73a-4ae9-9ce3-ba215dc72365",
+// 
     "controls": {
         "password": {
             "login": "http://localhost:3000/.account/login/password/",
@@ -66,9 +70,13 @@ http: //localhost:3000/.account/login/password/
     "version": "0.5"
 }
 
-curl -X GET 
--H "Authorization: CSS-Account-Token 564f3049-9aa7-4f97-b727-9dfe238dce60" 
-http: //localhost:3000/.account/
+
+
+curl -X GET \
+-H "Authorization: CSS-Account-Token 35857203-f73a-4ae9-9ce3-ba215dc72365" \
+http://localhost:3000/.account/
+
+
 {
     "controls": {
         "password": {
@@ -111,9 +119,14 @@ http: //localhost:3000/.account/
     "version": "0.5"
 }
 
-curl -X GET 
--H "Authorization: CSS-Account-Token 564f3049-9aa7-4f97-b727-9dfe238dce60" 
+
+
+
+curl -X GET  \
+-H "Authorization: CSS-Account-Token 35857203-f73a-4ae9-9ce3-ba215dc72365"  \
 http: //localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/
+
+
 {
     "fields": {
         "webId": {
@@ -121,10 +134,10 @@ http: //localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/web
             "type": "string"
         }
     },
-    // HERE
+// HERE
     "webIdLinks": {
         "http://localhost:3000/markw/profile/card#me": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/74abd804-301d-4cd6-823c-89b3408aa723/"
-        // 
+// 
     },
     "controls": {
         "password": {
@@ -140,9 +153,9 @@ http: //localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/web
         "account": {
             "webId": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/webid/",
             "pod": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/pod/",
-            //  and here
+//  and here
             "clientCredentials": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/",
-            // 
+// 
             "create": "http://localhost:3000/.account/account/",
             "logout": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/logout/"
         },
@@ -177,12 +190,16 @@ curl -X POST \
     "name": "my-token",
     "webId": "http://localhost:3000/markw/profile/card#me"
 }' \
-"http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/"{
-    //  HERE
-    "id": "my-token_cb639d45-2865-4789-b959-782fad52d9b3",
-    "secret": "994ffc2d3f0a79a41380327f9dc33258a612c15a076ba1d77ec131d13bab08241ff86a97d9261b5d8a83914abeaaa09ad4de331cef5b5c554e890e6adb33ccf9",
-    "resource": "http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/a969d97b-91a1-452a-99e6-8259976c5a84/",
-    // 
+"http://localhost:3000/.account/account/4b6de802-29e1-498b-94cd-87092cca3166/client-credentials/"
+
+
+
+{
+//  HERE
+    "id": "my-token_cb021235-fb31-40d8-8ebf-0d2ec26b608a",
+    "secret": "463f41deb746f1099a017164e9fd3203ba5f1277f09ad0aef43bd861f1908a547519130f7bf0f802d61f31109b606fb3debbfc879e54c1544efb4c9b9b8ed136",
+    "resource": "http://localhost:3000/.account/account/d821264d-3c88-467d-ab3b-c49288ebb53a/client-credentials/0490b598-e231-44d8-85e8-81f472419c2a/",
+// 
     "controls": {
         "password": {
             "login": "http://localhost:3000/.account/login/password/",
@@ -224,8 +241,7 @@ curl -X POST \
 
 
 
-authString:  my-token_cb639d45-2865-4789-b959-782fad52d9b3:994ffc2d3f0a79a41380327f9dc33258a612c15a076ba1d77ec131d1
-3bab08241ff86a97d9261b5d8a83914abeaaa09ad4de331cef5b5c554e890e6adb33ccf9
+authString:  my-token_cb021235-fb31-40d8-8ebf-0d2ec26b608a:463f41deb746f1099a017164e9fd3203ba5f1277f09ad0aef43bd861f1908a547519130f7bf0f802d61f31109b606fb3debbfc879e54c1544efb4c9b9b8ed136
 
 get the token endpoint:
 curl -v http: //localhost:3000/.well-known/openid-configuration
@@ -318,10 +334,13 @@ curl -v http: //localhost:3000/.well-known/openid-configuration
 }
 
 base64 encode authString
+k = Dpop.generate_key_pair
+proof = Dpop.get_proof_with_key(k, htu: "http://localhost:3000/.oidc/token", htm: "POST")
+
 
 curl -v -X POST \
--H "Authorization: Basic bXktdG9rZW5fY2I2MzlkNDUtMjg2NS00Nzg5LWI5NTktNzgyZmFkNTJkOWIz\nOjk5NGZmYzJkM2YwYTc5YTQxMzgwMzI3ZjlkYzMzMjU4YTYxMmMxNWEwNzZi\nYTFkNzdlYzEzMWQxM2JhYjA4MjQxZmY4NmE5N2Q5MjYxYjVkOGE4MzkxNGFi\nZWFhYTA5YWQ0ZGUzMzFjZWY1YjVjNTU0ZTg5MGU2YWRiMzNjY2Y5\n" \
+-H "Authorization: Basic bXktdG9rZW5fY2IwMjEyMzUtZmIzMS00MGQ4LThlYmYtMGQyZWMyNmI2MDhhOjQ2M2Y0MWRlYjc0NmYxMDk5YTAxNzE2NGU5ZmQzMjAzYmE1ZjEyNzdmMDlhZDBhZWY0M2JkODYxZjE5MDhhNTQ3NTE5MTMwZjdiZjBmODAyZDYxZjMxMTA5YjYwNmZiM2RlYmJmYzg3OWU1NGMxNTQ0ZWZiNGM5YjliOGVkMTM2" \
 -H "Content-type: application/x-www-form-urlencoded" \
--H "dpop: eyJhbGciOiJSUzI1NiIsInR5cCI6ImRwb3Arand0IiwiandrIjp7Imt0eSI6IlJTQSIsIm4iOiJ6VzFMaDk3cVBRa0JJdFZUZS1WVGwtTHg3cDNJSjV2ZjdlX2c2NzRkYzVoVDZmdXl5NE40VXFHeVF6cWxDN0lvNHlMS1pXQzFkX3BvTkl6SlpwVmhOQ2dRMmVURldlOUIyMnlPSDI4RlZlcFliT0NocGlkYjhWZC04dnhmclVkOHNWUUVOb3dHOGZLckl3YUdxVVlnVlotM0JYZklTV3hPU1VBVHd6ZGlCOXMiLCJlIjoiQVFBQiJ9fQ.eyJodHUiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAvLmFjY291bnQvYWNjb3VudC80YjZkZTgwMi0yOWUxLTQ5OGItOTRjZC04NzA5MmNjYTMxNjYvY2xpZW50LWNyZWRlbnRpYWxzL2E5NjlkOTdiLTkxYTEtNDUyYS05OWU2LTgyNTk5NzZjNWE4NC8iLCJodG0iOiJHRVQiLCJpYXQiOjE3MTcxNzEzNTUsImp0aSI6IjA5MWFlMGNjLTA3ZDUtNDBhYy04NTJhLTQwNzc2ZmJmZGMwOCJ9.tDFUUmYW-4Ol5jqSzO5wt6v6bMbdUBY0StY_IwssBbGo3dLtOIUGydNPqRc6q72cTz3ucc2cq8F5uk6lrTaWXo9tiWCE3A6S-QLsykmPDtgzmYDxlCypQYGs_M4oFBcatzswl6Di9imad8wnOYMOgCHpIzgpH1UoCd_qvyEuLZ8" \
+-H "dpop: eyJhbGciOiJSUzI1NiIsInR5cCI6ImRwb3Arand0IiwiandrIjp7Imt0eSI6IlJTQSIsIm4iOiJ5WUpQbjNuaGh3MFFYdDA3MVJwbl9NSGJlelRCa3FrdFB5eUduVHMwMkt6MXBZMHVVSW9qSExVdklSMko4SUNNdXN5NkxLUnV6YWpPOEtZWF95OG1nc0RhWlZ0LVZVT3Vpc20tQVJ0UGdKVUdrTVRrMkZGMWltTS1xUXl5OFRxZDRSVzlTSHNIUkliN1JJNGNhNTlJU0hQbXM2N0JackduZjJuTl9Fd1UtTGsiLCJlIjoiQVFBQiJ9fQ.eyJodHUiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAvLm9pZGMvdG9rZW4iLCJodG0iOiJQT1NUIiwiaWF0IjoxNzE3NDIyOTQ4LCJqdGkiOiIyNjZiNjlhMy0wNmI0LTQ5MTktYmIzMi0xYjkyYjYzYTQ5NjYifQ.wKMghzbwGdl4Q2-1C2PRtx5D5BuMmgBNQjj4xl5zY6iGjAmg4UvugcWjoHCsMuspbGL3bPcjFSMhHb4Bw29N10rCKYTISqsj9ohVcKSDAV3C_taFlVGrq2mC7uBjfKGNsBzkk4cccw-Dj7gRqWsoolCmtktVVdK6lStQfIEKLJs" \
 -d 'grant_type=client_credentials&scope=webid' \
     "http://localhost:3000/.oidc/token"
