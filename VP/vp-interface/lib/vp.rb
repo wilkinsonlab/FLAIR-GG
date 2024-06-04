@@ -278,6 +278,7 @@ class VP
       endpoint = CGI.unescape(ep)
       if params["_request_body"]
         warn "POSTING: #{params["_request_body"]}"
+        # example data for beacon {"meta":{"apiVersion":"v0.2"},"query":{"filters":[{"id":["ordo:Orphanet_730"]}]}}
         result = RestClient.post(endpoint, params["_request_body"], {content_type: :json, accept: :json} )
       else
         result = RestClient.get(endpoint, {params: params})
@@ -285,7 +286,7 @@ class VP
       warn result.inspect
       results[endpoint] = result.body
     end
-    location = process_and_upload_sparql_output(results: results)
+    location = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
     [location, servicelabel, results]
   end
 
