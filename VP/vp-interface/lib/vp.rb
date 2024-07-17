@@ -308,7 +308,7 @@ class VP
   end
 
   def build_from_results(results:)
-    discoverables = {}
+    discoverables = []
     counter = 1
     results.each do |result|
       warn "result is #{result.inspect}"
@@ -319,19 +319,17 @@ class VP
       contact = result[:contact].to_s
       contact = "No Contact Provided (#{counter})" and counter += 1 unless contact
       contact = contact.gsub(/\/\s*$/, "")  # no diference between http://my.org/  and http://my.org
-      discoverables[contact] = [] unless discoverables[contact]
-      discoverables[contact] << { resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon }
+      discoverables << Discoverable.create_or_retrieve(contact: contact, resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon)
+      # discoverables[contact] = [] unless discoverables[contact]
+      # discoverables[contact] << { resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon }
     end
-    # discoverables[http://wilkinsonlab.info] =
-    # [
-    #  {resource: http://w.l/cat, title: "my cat", type: "http://dcat#Dataset", icon: "dataset.svg"},
-    #  {...}, {...}
-    # ]
-    sort_discoverables(discoverables: discoverables)
+    # sort_discoverables(discoverables: discoverables)
+    discoverables
   end
 
+  # ths might now be deprecated...
   def sort_discoverables(discoverables:)
-    discoverables.each_key do |provider|  # discoverables["banco"] = [{resource: http,  title: "hello", type: "dataset", icon: ico, contact: "banco"}, {resource: http ...}]
+    discoverables.each do |provider|  # discoverables["banco"] = [{resource: http,  title: "hello", type: "dataset", icon: ico, contact: "banco"}, {resource: http ...}]
       sorted = discoverables[provider].sort_by { |s| s[:type] }
       discoverables[provider] = sorted
     end
