@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gemspec
-ruby "~> 3.0.6"
+ruby "~> 3"
 # gem 'activerecord', '~> 7', '>= 7', require: 'active_record'
 gem "bcrypt"
 gem "debase", git: "https://github.com/ruby-debug/debase.git", tag: "v0.2.5.beta2"
