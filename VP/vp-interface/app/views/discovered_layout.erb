@@ -16,9 +16,8 @@
       <h2>Virtual Platform Resources: <%= @message %></h2>
 
       <% catno = dsno = distno = datsno = otherno = 0 %>
-      <% @discoverables.each_key do |site| %>
-        <% @discoverables[site].each do |resourcehash| %>
-          <% type = resourcehash[:type] %>
+        <% @discoverables.each do |disc| %>
+          <% type = disc.type %>
           <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
           <% case type 
              when "catalog" %>
@@ -33,8 +32,7 @@
           <%  otherno += 1 %>
           <% end %>
         <% end %>
-      <% end %>      
-
+  
 			<div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
 				<input type="radio" name="pcss3t" checked  id="catalog" class="tab-content-first">
 				<label for="catalog"><i class="fa-solid fa-book"></i>Catalogs (<%= catno %>}</label>
@@ -50,46 +48,62 @@
 
 				<input type="radio" name="pcss3t" id="other" class="tab-content-last">
 				<label for="other"><i class="fa-solid fa-circle-question"></i>Other (<%= otherno %>}</label>
+
+<!--
+        :contact, :resource, :title, :type, :icon, :typetag
+        def self.find_by_type(type:)
+        def self.all 
+        def self.find_by_typetag(typetag:)
+
+    @source = source   # this is the vcard url
+    @contact = source.gsub(/^https?\/\//, "")  # get rid of the http part of the url
+    @resource = resource  # this is the address of the resource itself
+    @title = title
+    @type = type  # http://w3c/dcat#Distribution
+    @icon = icon
+    @typetag = typetag  # Distribution
+    @@alldiscoverables << self
+
+-->
+
         <ul>
           <% [["catalog", "tab-content-first"], ["dataset", "tab-content-2"], ["distribution", "tab-content-3"], ["dataservice", "tab-content-4"]].each do |restypefilter, contenttab| %>
             <li class="<%= contenttab %>">
-              <% others = [] %>
-              <% @discoverables.each_key do |site| %>
-                <% next unless @discoverables[site].first %>
-                <% warn "disc #{@discoverables[site].first}" %>
-                <h4>SOURCE: <a href="https://<%= site %>" _target="_blank"><%= site %></a></h4>
-                <% @discoverables[site].each do |resourcehash| %>
-                  <% type = resourcehash[:type] %>
-                  <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
-                  <% next unless type == restypefilter %>
-                  <% resource = resourcehash[:resource] %>
-                  <% title = resourcehash[:title] %>
-                  &nbsp;&nbsp;<img src="/images/<%= resourcehash[:icon] %>" width=25 height=25/> &nbsp;&nbsp;
+              <% thistabresources = @discoverables.select {|d| d.typetag == restypefilter}%>
+              <% sources = thistabresources.map {|d| d.source}; sources.uniq! %>
+
+              <% sources.each do |source| %>
+                <h4>SOURCE: <a href="<%= source %>" _target="_blank"><%= source %></a></h4>
+                <% thistabresources.select {|d| d.source == source}.each do |disc| %>
+                  <% resource = disc.resource %>
+                  <% title = disc.title %>
+                  &nbsp;&nbsp;<img src="/images/<%= disc.icon %>" width=25 height=25/> &nbsp;&nbsp;
                   Resource: <a href="<%= resource %>" _target="_blank"> <%= title %> </a>
                   <br/>
                 <% end %>
-                <br/><br/>
+                <br/>
+                <br/>
               <% end %>
             </li>                  
           <% end %>
 
           <% [["other", "tab-content-last"]].each do |restypefilter, contenttab| %>
             <li class="<%= contenttab %>">
-              <% others = [] %>
-              <% @discoverables.each_key do |site| %>
-                <% next unless @discoverables[site].first %>
-                <h4>SOURCE: <a href="https://<%= site %>" _target="_blank"><%= site %></a></h4>
-                <% @discoverables[site].each do |resourcehash| %>
-                  <% type = resourcehash[:type] %>
-                  <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
-                  <% next if ["catalog", "dataset", "distribution", "dataservice"].include? type %>
-                  <% resource = resourcehash[:resource] %>
-                  <% title = resourcehash[:title] %>
-                  &nbsp;&nbsp;<img src="/images/<%= resourcehash[:icon] %>" width=25 height=25/> &nbsp;&nbsp;
+
+              <% thistabresources = @discoverables.reject {|d| ["catalog", "dataset", "distribution", "dataservice"].include? d.typetag}%>
+              <% sources = thistabresources.map {|d| d.source}; sources.uniq! %>
+
+              <% sources.each do |source| %>
+                <h4>SOURCE: <a href="<%= source %>" _target="_blank"><%= source %></a></h4>
+                <% thistabresources.select {|d| d.source == source}.each do |disc| %>
+                  <% resource = disc.resource %>
+                  <% title = disc.title %>
+                  &nbsp;&nbsp;<img src="/images/<%= disc.icon %>" width=25 height=25/> &nbsp;&nbsp;
                   Resource: <a href="<%= resource %>" _target="_blank"> <%= title %> </a>
                   <br/>
                 <% end %>
-                <br/><br/>
+                <br/>
+                <br/>
               <% end %>
             </li>                  
           <% end %>

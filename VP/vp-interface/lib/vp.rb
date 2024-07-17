@@ -10,6 +10,7 @@ require "require_all"
 
 require_rel 'ontologyservers'
 require_rel 'serviceoutput_processers'
+require_rel 'discoverable'
 
 
 class VP
@@ -92,7 +93,7 @@ class VP
     vpd = SPARQL.parse("
 
       #{NAMESPACES}
-      SELECT DISTINCT ?s ?t ?title ?contact WHERE
+      SELECT DISTINCT ?s ?t ?title ?contact ?servicetype WHERE
       { 
         VALUES ?connection { #{VPCONNECTION} }
         VALUES ?discoverable { #{VPDISCOVERABLE} }
@@ -103,6 +104,8 @@ class VP
 
         OPTIONAL{?s dcat:contactPoint ?c .
                  ?c <http://www.w3.org/2006/vcard/ns#url> ?contact }.
+        OPTIONAL{?s dc:type ?servicetype }.
+
       }
       ")
     discoverables = build_from_results(results: @graph.query(vpd))
@@ -310,16 +313,27 @@ class VP
   def build_from_results(results:)
     discoverables = []
     counter = 1
+#    s (resource URL) t(type) title contact(vcard url)
     results.each do |result|
-      warn "result is #{result.inspect}"
+#      warn "result is #{result.inspect}"
 
       next if result[:t].to_s =~ /\#Resource/
 
       icon = match_type_to_icon(type: result[:t].to_s)
-      contact = result[:contact].to_s
-      contact = "No Contact Provided (#{counter})" and counter += 1 unless contact
-      contact = contact.gsub(/\/\s*$/, "")  # no diference between http://my.org/  and http://my.org
-      discoverables << Discoverable.create_or_retrieve(contact: contact, resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon)
+      type = result[:t].to_s
+      typetag = type.match(/[\#\/](\w+?)$/)[1].downcase
+      next if typetag == "dataservice" && result[:servicetype].to_s.empty?  # if it is a dataservice without a service type, then it is a top level FDP
+      frozen = result[:contact].to_s
+      source = frozen.dup
+      source = "No Contact Provided (#{counter})" and counter += 1 unless source
+      source.gsub!(/\/\s*$/, "")  # no diference between http://my.org/  and http://my.org
+      discoverables << Discoverable.create_or_retrieve(
+        source: source,   # mylab.com
+        resource: result[:s].to_s,  # https://mylab.com/dist/1234231
+        title: result[:title].to_s,  # my mock data
+        type: type,  # https://w3.org/#Distribution
+        icon: icon, # whatever
+        typetag: typetag)  # Distribution
       # discoverables[contact] = [] unless discoverables[contact]
       # discoverables[contact] << { resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon }
     end
