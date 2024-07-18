@@ -2,7 +2,7 @@ FROM ruby:3.0
 #FROM ruby:3.2.2-alpine3.17
 
 ENV LANG="en_US.UTF-8" LANGUAGE="en_US:UTF-8" LC_ALL="C.UTF-8"
-RUN chmod a+r /etc/resolv.conf
+#RUN chmod a+r /etc/resolv.conf
 
 USER root
 RUN apt-get -y update && apt-get -y upgrade 
