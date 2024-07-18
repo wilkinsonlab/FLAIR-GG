@@ -50,7 +50,7 @@ class FDP
         :method => :get, 
         :verify_ssl => false
       )
-    rescue e
+    rescue 
       warn "#{address} didn't resolve"
     end
 
