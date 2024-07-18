@@ -49,22 +49,6 @@
 				<input type="radio" name="pcss3t" id="other" class="tab-content-last">
 				<label for="other"><i class="fa-solid fa-circle-question"></i>Other (<%= otherno %>}</label>
 
-<!--
-        :contact, :resource, :title, :type, :icon, :typetag
-        def self.find_by_type(type:)
-        def self.all 
-        def self.find_by_typetag(typetag:)
-
-    @source = source   # this is the vcard url
-    @contact = source.gsub(/^https?\/\//, "")  # get rid of the http part of the url
-    @resource = resource  # this is the address of the resource itself
-    @title = title
-    @type = type  # http://w3c/dcat#Distribution
-    @icon = icon
-    @typetag = typetag  # Distribution
-    @@alldiscoverables << self
-
--->
 
         <ul>
           <% [["catalog", "tab-content-first"], ["dataset", "tab-content-2"], ["distribution", "tab-content-3"], ["dataservice", "tab-content-4"]].each do |restypefilter, contenttab| %>

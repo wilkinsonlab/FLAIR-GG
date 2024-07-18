@@ -13,7 +13,6 @@ require_relative  "wordcloud"
 require_relative  "cache"
 require_relative  "metadata_functions"
 
-
 class FDP
   attr_accessor :graph, :address, :called
 
@@ -22,7 +21,7 @@ class FDP
     @address = address  # address of this FDP
     @called = []  # has this address already been called?  List of known
     warn "refreshing"
-    load(address: address)  # THIS IS A RECURSIVE FUNCTION THAT FOLLOWS ldp:contains 
+    load(address: address)  # THIS IS A RECURSIVE FUNCTION THAT FOLLOWS ldp:contains
     freezeme
   end
 
@@ -46,11 +45,11 @@ class FDP
     warn "getting #{address}"
     begin
       r = RestClient::Request.execute(
-        :url => address, 
-        :method => :get, 
-        :verify_ssl => false
+        url: address,
+        method: :get,
+        verify_ssl: false
       )
-    rescue 
+    rescue StandardError
       warn "#{address} didn't resolve"
     end
 
@@ -77,7 +76,4 @@ class FDP
     f.puts str
     f.close
   end
-
-
-
 end
