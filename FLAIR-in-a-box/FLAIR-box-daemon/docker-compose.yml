@@ -3,7 +3,7 @@ services:
 
 
   flair-box-daemon: 
-    image: markw/flair-box-daemon:0.0.1    # to use the version 2 CDE models with Hefesto
+    image: markw/flair-box-daemon:0.0.1   
     container_name: flair-box-daemon
     environment:
       GraphDB_User: ${GraphDB_User}

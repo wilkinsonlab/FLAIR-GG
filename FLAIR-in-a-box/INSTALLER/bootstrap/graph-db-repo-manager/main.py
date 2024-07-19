@@ -75,10 +75,24 @@ def secure_graphdb(graphdb_url):
 
 def main(graphdb_url):
     '''
-    Create cde repository in graph DB
+    Create location repository in graph DB
     '''
-    repo_id = FDP_PREFIX + "-cde"
-    repo_description = "Repository to store CDEs RDF documents"
+    repo_id = "location"
+    repo_description = "Repository to store location information"
+    create_repository(graphdb_url, repo_id, repo_description)
+
+    '''
+    Create location repository in graph DB
+    '''
+    repo_id = "germplasm"
+    repo_description = "Repository to store germplasm RDF"
+    create_repository(graphdb_url, repo_id, repo_description)
+
+    '''
+    Create location repository in graph DB
+    '''
+    repo_id = "administrative"
+    repo_description = "Repository to store administrative RDF"
     create_repository(graphdb_url, repo_id, repo_description)
 
     '''
