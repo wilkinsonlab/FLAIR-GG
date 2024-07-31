@@ -13,7 +13,7 @@
 
       <%= erb :_sidebar %>
 
-        <h3>Service Execution Parameters</h3>
+        <h3>Service Execution Parameters (if any)</h3>
 
 <%
 =begin
@@ -37,7 +37,10 @@ every param  responds to "in", "name", "description", "schema.example", "schema.
 
         <% @commongetparams.each do |paramname, param| %>
           <label for="<%= paramname %>" style="font-size: .75em;"><%= paramname %></label><br/>
-          <textarea style="resize: both;" rows="1" cols="100" name="<%= paramname %>" id="<%= paramname %>" value="<%= param.schema.example %>"><%= param.schema.example %></textarea><br/><br/>
+          <% example = "" %>
+          <% example = param.schema.example if param.schema.respond_to? "example" %>
+          <% example = param.schema.default if param.schema.respond_to? "default" %>          
+          <textarea style="resize: both;" rows="1" cols="100" name="<%= paramname %>" id="<%= paramname %>" value="<%= example %>"><%= example %></textarea><br/><br/>
         <% end %>
         <% @commonpostparams.each do |paramname, param| %>
           <label for="<%= paramname %>" style="font-size: .75em;"><%= paramname %></label><br/>
@@ -47,7 +50,7 @@ every param  responds to "in", "name", "description", "schema.example", "schema.
         <hr>
         <br/><br/>
 
-        <h3>Which providers should these values be sent to?</h3>
+        <h3>Which service providers should be invoked?</h3>
         <% if @servicecollection.warnings.first %>
           WARNINGS:<br/><br/>
           <% @servicecollection.warnings.each do |warn| %>

@@ -2,6 +2,8 @@
 
 require "openapi3_parser"
 require "cgi"
+require 'rest-client'
+require 'json'
 
 class ServiceCollection
   attr_accessor :vpgraph, :servicetype, :servicelabel, :allservices, :warnings, :escapedtype
@@ -83,7 +85,19 @@ class Service
 
   def retrieve_endpoint(openapi:)
     warn "retrieving #{openapi}"
-    api = Openapi3Parser.load_url(openapi)
+    # this is just temporary until I get the docker image working
+    resp = RestClient.get("https://converter.swagger.io/api/convert?url=#{openapi}").body
+    warn resp
+    # converter makes a mess of the URLs together with the grlc output... munge it
+    j = JSON.parse(resp)
+    j["servers"].each do |s|
+      s["url"].gsub!(/\/$/, "")
+      s["url"].gsub!(/^\/\//,"https://")
+    end
+    resp = j.to_json   # back to json for the openapi3
+      
+    api = Openapi3Parser.load(resp)
+    #api = Openapi3Parser.load_url(openapi)
     api.paths.each do |path, pathitem|
       warn "path #{path}"
       base = pathitem.servers.first.url
