@@ -107,6 +107,7 @@ export TMPDIR=$HOME/tmp
 export FDP_PREFIX=$P
 
 docker network rm bootstrap_default
+docker ps -a | egrep -oh "${P}-ready-to-go.*" | xargs docker rm
 docker rm -f  bootstrap_graphdb_1 metadata_fdp_1 metadata_fdp_client_1
 docker volume remove -f "${P}-graphdb ${P}-fdp-client-assets ${P}-fdp-client-css ${P}-fdp-client-scss ${P}-fdp-server ${P}-mongo-data ${P}-mongo-init"
 
