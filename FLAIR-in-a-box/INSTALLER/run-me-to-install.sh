@@ -130,7 +130,7 @@ cp docker-compose-template.yml "docker-compose-${P}.yml"
 sed -i s/{PREFIX}/${P}/ "docker-compose-${P}.yml"
 
 docker-compose -f "docker-compose-${P}.yml" up --build -d
-sleep 13
+sleep 60
 echo ""
 echo -e "${GREEN}Setting up FAIR Data Point client and server${NC}"
 echo ""
@@ -152,7 +152,7 @@ sed -i s%{GUID}%$uri% "./fdp/application-${P}.yml"
 docker-compose -f "docker-compose-${P}.yml" up --build -d
 
 
-sleep 15
+sleep 60
 
 echo ""
 echo -e "${GREEN}Creating a production server folder in ${NC} ./${P}-ready-to-go/"
