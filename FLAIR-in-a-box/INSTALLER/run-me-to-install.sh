@@ -69,7 +69,7 @@ if [ $production = "true" ]; then
 fi
 
 if [ -z $P ]; then
-  read -p "enter a prefix for your components (e.g. euronmd): " P
+  read -p "enter a prefix for your components (e.g. euronmd) NOTE: All existing installations with the same prefix will be obliterated!!!!: " P
   if [ -z $P ]; then
     echo "invalid..."
     exit 1
