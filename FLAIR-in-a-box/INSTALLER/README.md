@@ -6,7 +6,7 @@ FLAIR-in-a-box (Fiab) is the easiest way for you to join the FLAIR-GG network!
 It will automatically install all components required for full participation (even if you decide not to use them!)
 
 Once you have installed FLAIR-in-box, you should follow the ONBOARDING instructions
-After that, you can then decide if you want to offer more than just a general description of your database!
+After that, you can then decide if you want to offer more than just a general description of your database.
 
 # FLAIR-in-a-Box Detailed Install Instructions
 ---

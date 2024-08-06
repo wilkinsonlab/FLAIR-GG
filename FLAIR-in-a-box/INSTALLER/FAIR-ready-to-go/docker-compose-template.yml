@@ -57,7 +57,6 @@ services:
 
   flair-box-daemon: 
     image: markw/flair-box-daemon:0.0.1
-    container_name: flair-box-daemon
     environment:
       GraphDB_User: ${GraphDB_User}
       GraphDB_Pass: ${GraphDB_Pass}
@@ -74,8 +73,7 @@ services:
 
 
   yarrrml-rdfizer:
-    image: markw/yarrrml-rml-ejp:0.0.3
-    container_name: yarrrml-rdfizer
+    image: markw/yarrrml-rml-ejp:0.1.1
     hostname: yarrrml-rdfizer
     environment:
       # (nquads (default), trig, trix, jsonld, hdt, turtle)

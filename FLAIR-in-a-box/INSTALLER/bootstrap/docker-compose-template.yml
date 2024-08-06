@@ -12,7 +12,7 @@ services:
     networks:
       - graphdb_net
     
-  #  This service create's `cde` and `fdp` repositories in graphdb	
+  #  This service creates repositories in graphdb	
   graph_db_repo_manager:
     build: ./graph-db-repo-manager
     depends_on:

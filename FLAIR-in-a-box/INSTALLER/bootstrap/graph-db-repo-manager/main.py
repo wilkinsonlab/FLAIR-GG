@@ -77,21 +77,21 @@ def main(graphdb_url):
     '''
     Create location repository in graph DB
     '''
-    repo_id = "location"
+    repo_id = FDP_PREFIX + "-location"
     repo_description = "Repository to store location information"
     create_repository(graphdb_url, repo_id, repo_description)
 
     '''
-    Create location repository in graph DB
+    Create germplasm repository in graph DB
     '''
-    repo_id = "germplasm"
+    repo_id = FDP_PREFIX + "-germplasm"
     repo_description = "Repository to store germplasm RDF"
     create_repository(graphdb_url, repo_id, repo_description)
 
     '''
-    Create location repository in graph DB
+    Create administrative repository in graph DB
     '''
-    repo_id = "administrative"
+    repo_id = FDP_PREFIX + "-administrative"
     repo_description = "Repository to store administrative RDF"
     create_repository(graphdb_url, repo_id, repo_description)
 
