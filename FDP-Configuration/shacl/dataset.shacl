@@ -13,21 +13,4 @@
     sh:maxCount 1 ;
     dash:editor dash:DatePickerEditor ;
     dash:viewer dash:LiteralViewer ;
-  ], [
-    sh:path dct:modified ;
-    sh:datatype xsd:dateTime ;
-    sh:maxCount 1 ;
-    dash:editor dash:DatePickerEditor ;
-    dash:viewer dash:LiteralViewer ;
-  ], [
-    sh:path dcat:keyword ;
-    sh:nodeKind sh:Literal ;
-    dash:editor dash:TextFieldEditor ;
-    dash:viewer dash:LiteralViewer ;
-  ], [
-    sh:path dcat:landingPage ;
-    sh:nodeKind sh:IRI ;
-    sh:maxCount 1 ;
-    dash:editor dash:URIEditor ;
-    dash:viewer dash:LabelViewer ;
   ] .
