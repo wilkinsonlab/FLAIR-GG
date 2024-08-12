@@ -20,12 +20,6 @@
     dash:editor dash:DatePickerEditor ;
     dash:viewer dash:LiteralViewer ;
   ], [
-    sh:path dcat:contactPoint ;
-    sh:nodeKind sh:IRI ;
-    sh:maxCount 1 ;
-    dash:editor dash:URIEditor ;
-    dash:viewer dash:LabelViewer ;
-  ], [
     sh:path dcat:keyword ;
     sh:nodeKind sh:Literal ;
     dash:editor dash:TextFieldEditor ;
