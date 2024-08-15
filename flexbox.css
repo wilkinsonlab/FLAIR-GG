@@ -3,15 +3,14 @@
   flex-wrap: wrap;
   align-items: top;
   padding: 4em;
-  
-  &__item {
+}
+.c-posts__item {
     flex-grow: 1;
     padding-bottom: 5em;
     
     &:first-child {
       flex-grow: 2;
     }
-  }
 }
 
 @media all and (min-width:600px) {
