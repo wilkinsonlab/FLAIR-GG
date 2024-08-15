@@ -86,7 +86,15 @@ class Service
   def retrieve_endpoint(openapi:)
     warn "retrieving #{openapi}"
     # this is just temporary until I get the docker image working
-    resp = RestClient.get("https://converter.swagger.io/api/convert?url=#{openapi}").body
+    begin
+      resp = RestClient.get("https://converter.swagger.io/api/convert?url=#{openapi}").body
+    rescue
+      self.successful = false
+      warn "couldn't convert #{openapi}"
+      return nil
+    end
+
+
     warn resp
     # converter makes a mess of the URLs together with the grlc output... munge it
     j = JSON.parse(resp)
@@ -95,8 +103,13 @@ class Service
       s["url"].gsub!(/^\/\//,"https://")
     end
     resp = j.to_json   # back to json for the openapi3
-      
-    api = Openapi3Parser.load(resp)
+    begin
+      api = Openapi3Parser.load(resp)
+    rescue
+      self.successful = false
+      warn "couldn't parse openapi document at #{openapi}"
+      return nil
+    end
     #api = Openapi3Parser.load_url(openapi)
     api.paths.each do |path, pathitem|
       warn "path #{path}"

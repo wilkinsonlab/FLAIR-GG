@@ -8,10 +8,9 @@ require "uri"
 require "fileutils"
 require "require_all"
 
-require_rel 'ontologyservers'
-require_rel 'serviceoutput_processers'
-require_rel 'discoverable'
-
+require_rel "ontologyservers"
+require_rel "serviceoutput_processers"
+require_rel "discoverable"
 
 class VP
   attr_accessor :networkgraph, :vpconfig, :fdps, :aboutme
@@ -43,14 +42,14 @@ class VP
     @@thisvp
   end
 
-  def load_fdps_from_cache()
+  def load_fdps_from_cache
     Dir["./cache/*.marsh"].select { |f| !File.directory? File.join("./cache/", f) }.each do |marsh|
       fdp = FDP.load_from_cache(vp: self, marshalled: marsh)
       add_fdp(fdp: fdp)
     end
   end
 
-  def add_fdp(fdp: )
+  def add_fdp(fdp:)
     warn "fdp graph size #{fdp.graph.size}"
     @networkgraph << fdp.graph.statements
     warn "network graph size #{@networkgraph.size}"
@@ -83,18 +82,17 @@ class VP
   end
 
   def get_resources
-    discoverables = find_discoverables  # things that have been flagged as "VPDiscoverable"
-    discoverables
+    find_discoverables  # things that have been flagged as "VPDiscoverable"
   end
-  
+
   def find_discoverables
-    @graph = self.networkgraph
+    @graph = networkgraph
 
     vpd = SPARQL.parse("
 
       #{NAMESPACES}
       SELECT DISTINCT ?s ?t ?title ?contact ?servicetype WHERE
-      { 
+      {
         VALUES ?connection { #{VPCONNECTION} }
         VALUES ?discoverable { #{VPDISCOVERABLE} }
 
@@ -115,24 +113,22 @@ class VP
 
   def keyword_search_shell(keyword:)
     warn "in keyword search now\n\n\n"
-    discoverables = keyword_search(keyword: keyword)
-    discoverables
+    keyword_search(keyword: keyword)
   end
 
   def ontology_search_shell(term:)
     warn "in ontology search shell"
-    discoverables = ontology_search(uri: term)
-    discoverables
+    ontology_search(uri: term)
   end
 
   def keyword_search(keyword: "")
-    @graph = self.networkgraph
+    @graph = networkgraph
     keyword = keyword.downcase
     vpd = SPARQL.parse("
     #{NAMESPACES}
 
     SELECT DISTINCT ?s ?t ?title ?contact WHERE
-    { 
+    {
       VALUES ?connection { #{VPCONNECTION} }
       VALUES ?discoverable { #{VPDISCOVERABLE} }
       ?s  ?connection ?discoverable ;
@@ -142,11 +138,10 @@ class VP
                ?c <http://www.w3.org/2006/vcard/ns#url> ?contact } .
           {
               VALUES ?searchfields { dc:title dc:description dc:keyword }
-              ?s ?searchfields ?kw 
+              ?s ?searchfields ?kw
               FILTER(CONTAINS(lcase(?kw), '#{keyword}'))
           }
-    }"
-    )
+    }")
     warn "keyword search query #{vpd.to_sparql}"
     warn "graph is #{@graph.size}"
     warn "results of query #{@graph.query(vpd)}"
@@ -156,7 +151,7 @@ class VP
   end
 
   def ontology_search(uri: "")
-    @graph = self.networkgraph
+    @graph = networkgraph
     warn "in ontology search"
     warn "parse start"
     vpd = SPARQL.parse("
@@ -177,8 +172,7 @@ class VP
               ?s dcat:theme ?theme .
               FILTER(CONTAINS(str(?theme), '#{uri}'))
           }
-    }"
-    )
+    }")
     warn "parse end"
     warn "query start"
     results = @graph.query(vpd)
@@ -190,10 +184,10 @@ class VP
   end
 
   def verbose_annotations
-    @graph = self.networkgraph
+    @graph = networkgraph
     words = []
 
-    # TODO  This does not respect vpdiscoverable...
+    # TODO: This does not respect vpdiscoverable...
     vpd = SPARQL.parse("
     #{NAMESPACES}
     SELECT DISTINCT ?annot WHERE
@@ -205,7 +199,8 @@ class VP
       uri = res[:annot].to_s
       word = ontology_annotations(uri: uri)
       next unless word
-      next unless !word.empty?
+      next if word.empty?
+
       words << word.capitalize
     end
     # end of taxonomy parser
@@ -219,7 +214,8 @@ class VP
     }")
     results = @graph.query(vpd)
     results.each do |res|
-      next unless !res[:kw].to_s.empty?
+      next if res[:kw].to_s.empty?
+
       words << res[:kw].to_s.capitalize
     end
     words.compact!
@@ -231,7 +227,7 @@ class VP
     if File.exist?("./cache/servicetypes.json")
       services = thaw_servicetypes
     else
-      graph = self.networkgraph
+      graph = networkgraph
       warn "in collect data services"
       vpd = SPARQL.parse("
 
@@ -247,19 +243,18 @@ class VP
             {
                 ?s dc:type ?type .
             }
-      }"
-      )
+      }")
       results = graph.query(vpd)
       prehash = {}
       results.each do |r|
-        type = r[:type].to_s;
+        type = r[:type].to_s
         next if prehash[type]  # already known
 
         warn "subject type #{type}"
         kw = ontology_annotations(uri: type)
         prehash[type] = kw
       end
-      services = prehash.map {|k,v| [k,v] } # remove trailing space and turn into array
+      services = prehash.map { |k, v| [k, v] } # remove trailing space and turn into array
       freeze_servicetypes(types: services)
     end
     services
@@ -267,12 +262,13 @@ class VP
 
   def retrieve_sevices(termuri:)  #  the URI of the service type
     # hand off to services_functions
-    servicecollection = ServiceCollection.new(vpgraph: self.networkgraph, servicetype: termuri)
+    servicecollection = ServiceCollection.new(vpgraph: networkgraph, servicetype: termuri)
     commongetparams = servicecollection.gather_common_parameters(method: "get")
     commonpostparams = servicecollection.gather_common_parameters(method: "post")
     [servicecollection, commongetparams, commonpostparams]
   end
 
+  # 28b2cb8a656a0b9fdbd385d6e86e691f9ccff2f4c8605026c5bfbb2b1d36b4b5
   def execute_data_services(params:)
     endpoints = params.delete("endpoint") # returns an array of endpoints from the checkboxes
     results = {}
@@ -282,19 +278,46 @@ class VP
       if params["_request_body"]
         warn "POSTING: #{params["_request_body"]}"
         # example data for beacon {"meta":{"apiVersion":"v0.2"},"query":{"filters":[{"id":["ordo:Orphanet_730"]}]}}
-        result = RestClient.post(endpoint, params["_request_body"], {content_type: :json, accept: :json} )
+        begin
+          result = RestClient::Request.execute(
+            method: :post,
+            url: endpoint,
+            :payload => params["_request_body"],
+            headers: {
+              content_type: :json,
+              accept: :json,
+              "auth-key" => "28b2cb8a656a0b9fdbd385d6e86e691f9ccff2f4c8605026c5bfbb2b1d36b4b5"
+            }
+          )
+          # result = RestClient.post(endpoint, params["_request_body"], {content_type: :json, accept: :json} )
+        rescue StandardError
+          warn "couldn't execute service at #{endpoint}"
+          result = nil
+        end
       else
-        result = RestClient.get(endpoint, {params: params})
+        begin
+          result = RestClient::Request.execute(
+            method: :get,
+            url: endpoint,
+            payload: { params: params },
+            headers: {
+              "auth-key" => "28b2cb8a656a0b9fdbd385d6e86e691f9ccff2f4c8605026c5bfbb2b1d36b4b5"
+            }
+          )
+        #          result = RestClient.get(endpoint, {params: params})
+        rescue StandardError 
+          warn "couldn't execute service at #{endpoint}"
+          result = nil
+        end
       end
       warn result.inspect
-      results[endpoint] = result.body
+      results[endpoint] = result.body if result
     end
     location = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
     [location, servicelabel, results]
   end
 
   def match_type_to_icon(type:)
-
     t = type.match(%r{[\#/](\w+?)$})[1].downcase.to_sym  # anchor to end to capture last / or #
     warn "matching #{t}\n\n"
     hash = {
@@ -313,27 +336,30 @@ class VP
   def build_from_results(results:)
     discoverables = []
     counter = 1
-#    s (resource URL) t(type) title contact(vcard url)
+    #    s (resource URL) t(type) title contact(vcard url)
     results.each do |result|
-#      warn "result is #{result.inspect}"
+      #      warn "result is #{result.inspect}"
 
       next if result[:t].to_s =~ /\#Resource/
 
       icon = match_type_to_icon(type: result[:t].to_s)
       type = result[:t].to_s
-      typetag = type.match(/[\#\/](\w+?)$/)[1].downcase
-      next if typetag == "dataservice" && result[:servicetype].to_s.empty?  # if it is a dataservice without a service type, then it is a top level FDP
+      typetag = type.match(%r{[\#/](\w+?)$})[1].downcase
+      # if it is a dataservice without a service type, then it is a top level FDP
+      next if typetag == "dataservice" && result[:servicetype].to_s.empty?
+
       frozen = result[:contact].to_s
       source = frozen.dup
       source = "No Contact Provided (#{counter})" and counter += 1 unless source
-      source.gsub!(/\/\s*$/, "")  # no diference between http://my.org/  and http://my.org
+      source.gsub!(%r{/\s*$}, "")  # no diference between http://my.org/  and http://my.org
       discoverables << Discoverable.create_or_retrieve(
         source: source,   # mylab.com
         resource: result[:s].to_s,  # https://mylab.com/dist/1234231
         title: result[:title].to_s,  # my mock data
         type: type,  # https://w3.org/#Distribution
         icon: icon, # whatever
-        typetag: typetag)  # Distribution
+        typetag: typetag
+      )  # Distribution
       # discoverables[contact] = [] unless discoverables[contact]
       # discoverables[contact] << { resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon }
     end
