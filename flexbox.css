@@ -2,11 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   align-items: top;
-  padding: 5%;
+  padding: 10%;
   
   &__item {
     flex-grow: 1;
-    padding-bottom: 2em;
+    padding-bottom: 10em;
     
     &:first-child {
       flex-grow: 2;
