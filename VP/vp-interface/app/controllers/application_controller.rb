@@ -6,8 +6,8 @@ require "sinatra"
 require "sinatra/base"
 require "json"
 require "erb"
-require 'omniauth'
-require 'omniauth-openid-connect'
+# require 'omniauth'
+# require 'omniauth-openid-connect'
 require 'jwt'
 
 # DO NOT change the order of loading below.  The files contain executable code that builds the overall configuration before this module starts

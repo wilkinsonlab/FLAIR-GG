@@ -46,8 +46,8 @@ gem "activesupport", "~> 7.0.3.1"
 
 gem "erb", "~> 4.0"
 
-gem "omniauth", "~> 1.1"
+# gem "omniauth", "~> 1.1"
 
-gem "omniauth-openid-connect", "~> 0.2.3"
+# gem "omniauth-openid-connect", "~> 0.2.3"
 
 gem "jwt", "~> 2.8"

@@ -286,12 +286,11 @@ class VP
             headers: {
               content_type: :json,
               accept: :json,
-              "auth-key" => "28b2cb8a656a0b9fdbd385d6e86e691f9ccff2f4c8605026c5bfbb2b1d36b4b5"
+              # "auth-key" => ""
             }
           )
-          # result = RestClient.post(endpoint, params["_request_body"], {content_type: :json, accept: :json} )
-        rescue StandardError
-          warn "couldn't execute service at #{endpoint}"
+        rescue  => e
+          warn "couldn't execute POST service at #{endpoint}\n #{e.inspect}"
           result = nil
         end
       else
@@ -299,18 +298,18 @@ class VP
           result = RestClient::Request.execute(
             method: :get,
             url: endpoint,
-            payload: { params: params },
+            # payload: { params: params },
             headers: {
-              "auth-key" => "28b2cb8a656a0b9fdbd385d6e86e691f9ccff2f4c8605026c5bfbb2b1d36b4b5"
+              params: params,
+              # "auth-key" => ""
             }
           )
-        #          result = RestClient.get(endpoint, {params: params})
-        rescue StandardError 
-          warn "couldn't execute service at #{endpoint}"
+        rescue  => e
+          warn "couldn't execute GET service at #{endpoint}\n #{e.inspect}"
           result = nil
         end
       end
-      warn result.inspect
+      # warn result.inspect
       results[endpoint] = result.body if result
     end
     location = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
