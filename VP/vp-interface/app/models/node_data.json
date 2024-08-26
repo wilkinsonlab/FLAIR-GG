@@ -1,0 +1,367 @@
+{
+  "content"=>
+  #<Openapi3Parser: :Node: :Placeholder: 0x00007fe31c1a67e0
+   @field="content",
+   @node=Openapi3Parser: :Node: :Map(#/paths/~1individuals/post/requestBody/content),
+   @node_factory=
+    Openapi3Parser: :NodeFactory: :Map(Openapi3Parser: :Source: :Location(source: Openapi3Parser: :Source(input: {
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Beacon-API for CARE-SM ",
+      "version": "4.0.0"
+    },
+    "paths": {
+      "/": {
+        "get": {
+          "summary": "Api Ejstatus",
+          "operationId": "api_ejstatus__get",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "/filtering_terms": {
+        "get": {
+          "summary": "Valid Terms For Filtering",
+          "operationId": "valid_terms_for_filtering_filtering_terms_get",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "/individuals": {
+        "post": {
+          "summary": "Individuals Counts",
+          "operationId": "individuals_counts_individuals_post",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "AlphanumericRequestFilter": {
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id"
+            },
+            "operator": {
+              "type": "string",
+              "title": "Operator"
+            },
+            "type": {
+              "type": "string",
+              "title": "Type"
+            }
+          },
+          "type": "object",
+          "required": [
+            "id",
+            "operator",
+            "type"
+          ],
+          "title": "AlphanumericRequestFilter"
+        },
+        "AlphanumericRequestFilterList": {
+          "properties": {
+            "id": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "title": "Id"
+            },
+            "operator": {
+              "type": "string",
+              "title": "Operator"
+            },
+            "type": {
+              "type": "string",
+              "title": "Type"
+            }
+          },
+          "type": "object",
+          "required": [
+            "id",
+            "operator",
+            "type"
+          ],
+          "title": "AlphanumericRequestFilterList"
+        },
+        "HTTPValidationError": {
+          "properties": {
+            "detail": {
+              "items": {
+                "$ref": "#/components/schemas/ValidationError"
+              },
+              "type": "array",
+              "title": "Detail"
+            }
+          },
+          "type": "object",
+          "title": "HTTPValidationError"
+        },
+        "IndividualRequest": {
+          "properties": {
+            "meta": {
+              "$ref": "#/components/schemas/MetaContent"
+            },
+            "query": {
+              "$ref": "#/components/schemas/RequestQuery"
+            }
+          },
+          "type": "object",
+          "required": [
+            "meta",
+            "query"
+          ],
+          "title": "IndividualRequest"
+        },
+        "MetaContent": {
+          "properties": {
+            "apiVersion": {
+              "type": "string",
+              "title": "Apiversion"
+            },
+            "beaconID": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Beaconid"
+            },
+            "returnedSchemas": {
+              "items": {
+                "$ref": "#/components/schemas/ReturnedSchemas"
+              },
+              "type": "array",
+              "title": "Returnedschemas"
+            }
+          },
+          "type": "object",
+          "required": [
+            "apiVersion"
+          ],
+          "title": "MetaContent"
+        },
+        "OntologyRequestFilter": {
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Id"
+            },
+            "operator": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Operator"
+            },
+            "type": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Type"
+            }
+          },
+          "type": "object",
+          "required": [
+            "id"
+          ],
+          "title": "OntologyRequestFilter"
+        },
+        "OntologyRequestFilterList": {
+          "properties": {
+            "id": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "title": "Id"
+            },
+            "operator": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Operator"
+            },
+            "type": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Type"
+            }
+          },
+          "type": "object",
+          "required": [
+            "id"
+          ],
+          "title": "OntologyRequestFilterList"
+        },
+        "RequestQuery": {
+          "properties": {
+            "filters": {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/AlphanumericRequestFilter"
+                  },
+                  {
+                    "$ref": "#/components/schemas/OntologyRequestFilter"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AlphanumericRequestFilterList"
+                  },
+                  {
+                    "$ref": "#/components/schemas/OntologyRequestFilterList"
+                  }
+                ]
+              },
+              "type": "array",
+              "title": "Filters",
+              "default": []
+            }
+          },
+          "type": "object",
+          "title": "RequestQuery"
+        },
+        "ReturnedSchemas": {
+          "properties": {
+            "entityType": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Entitytype"
+            },
+            "scheme": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Scheme"
+            }
+          },
+          "type": "object",
+          "title": "ReturnedSchemas"
+        },
+        "ValidationError": {
+          "properties": {
+            "loc": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ]
+              },
+              "type": "array",
+              "title": "Location"
+            },
+            "msg": {
+              "type": "string",
+              "title": "Message"
+            },
+            "type": {
+              "type": "string",
+              "title": "Error Type"
+            }
+          },
+          "type": "object",
+          "required": [
+            "loc",
+            "msg",
+            "type"
+          ],
+          "title": "ValidationError"
+        }
+      }
+    },
+    "servers": [
+      {
+        "url": "http://fairdata.services:10004"
+      }
+    ]
+  }), pointer: #/paths/~1individuals/post/requestBody/content)),
+   @parent_context=
+    Openapi3Parser: :Node: :Context(document_location: #/paths/~1individuals/post/requestBody, source_location: #/paths/~1individuals/post/requestBody)>,
+  "required"=>true,
+  "description"=>nil
+}

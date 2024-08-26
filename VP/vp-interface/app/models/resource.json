@@ -1,0 +1,29 @@
+[
+  {
+    "source": "https://wilkinsonlab.info",
+    "contact": "https://wilkinsonlab.info",
+    "resource": "http://testbed.ejprd.semlab-leiden.nl:5000",
+    "title": "My FAIR Data Point",
+    "type": "https://w3id.org/fdp/fdp-o#MetadataService",
+    "icon": "unknown.svg",
+    "typetag": "metadataservice"
+  },
+  {
+    "source": "https://wilkinsonlab.info",
+    "contact": "https://wilkinsonlab.info",
+    "resource": "http://testbed.ejprd.semlab-leiden.nl:5000",
+    "title": "My FAIR Data Point",
+    "type": "https://w3id.org/fdp/fdp-o#MetadataService",
+    "icon": "unknown.svg",
+    "typetag": "metadataservice"
+  },
+  {
+    "source": "https://wilkinsonlab.info",
+    "contact": "https://wilkinsonlab.info",
+    "resource": "http://testbed.ejprd.semlab-leiden.nl:10000",
+    "title": "Mock Catalog One",
+    "type": "https://w3id.org/fdp/fdp-o#MetadataService",
+    "icon": "unknown.svg",
+    "typetag": "metadataservice"
+  }
+]

@@ -1,0 +1,62 @@
+{
+  "$id": "root",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "source": {
+        "type": "string",
+        "examples": [
+          "https://wilkinsonlab.info"
+        ]
+      },
+      "contact": {
+        "type": "string",
+        "examples": [
+          "https://wilkinsonlab.info"
+        ]
+      },
+      "resource": {
+        "type": "string",
+        "examples": [
+          "http://testbed.ejprd.semlab-leiden.nl:5000"
+        ]
+      },
+      "title": {
+        "type": "string",
+        "examples": [
+          "My FAIR Data Point"
+        ]
+      },
+      "type": {
+        "type": "string",
+        "examples": [
+          "https://w3id.org/fdp/fdp-o#MetadataService"
+        ]
+      },
+      "icon": {
+        "type": "string",
+        "examples": [
+          "unknown.svg"
+        ]
+      },
+      "typetag": {
+        "type": "string",
+        "examples": [
+          "metadataservice"
+        ]
+      }
+    },
+    "required": [
+      "source",
+      "contact",
+      "resource",
+      "title",
+      "type",
+      "icon",
+      "typetag"
+    ],
+    "additionalProperties": false
+  }
+}

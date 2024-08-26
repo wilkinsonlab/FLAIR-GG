@@ -1,0 +1,22 @@
+[
+  {
+    "source": "http://www.bancodegermoplasma.upm.es",
+    "contact": "http://www.bancodegermoplasma.upm.es",
+    "resource": "https://w3id.org/bgv-fdp/dataset/03a8b103-a408-4c1d-88c0-5c4e4417f499",
+    "title": "Location Information",
+    "type": "http://www.w3.org/ns/dcat#Dataset",
+    "icon": "dataset.svg",
+    "typetag": "dataset"
+  },
+  {
+    "source": "https://www.vitoria-gasteiz.org/wb021/was/contenidoAction.do?idioma=es\u0026uid=u_14508e8c_12dbba3c544__7fa6",
+    "contact": "https://www.vitoria-gasteiz.org/wb021/was/contenidoAction.do?idioma=es\u0026uid=u_14508e8c_12dbba3c544__7fa6",
+    "resource": "https://jbo.bgv.cbgp.upm.es/dataset/2be499bf-4e8c-4a9c-885a-bb115b8c34f6",
+    "title": "Location Information",
+    "type": "http://www.w3.org/ns/dcat#Dataset",
+    "icon": "dataset.svg",
+    "typetag": "dataset"
+  }
+]
+
+uses the same as resource.schema

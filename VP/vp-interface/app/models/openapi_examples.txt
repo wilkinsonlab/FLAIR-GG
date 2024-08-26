@@ -1,0 +1,530 @@
+        "summary": "Returns the number of patients in the registry with the corresponding disease code",
+     {
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Duchenne Parent Project Shallot",
+    "description": "The FAIR Data Point Shallot server for the Duchenne Parent Project",
+    "contact": {
+      "name": "Mark Wilkinson",
+      "url": "https://fairdata.systems"
+    },
+    "version": "local"
+  },
+  "servers": [
+    {
+      "url": "//fairdata.services/api-local/"
+    }
+  ],
+  "paths": {
+    "/count": {
+      "get": {
+        "tags": [
+          "Patient Count"
+        ],
+        "summary": "Returns the number of patients in the registry with the corresponding disease code",
+        "description": "\\n\\n```\\n#+ summary: Returns the number of patients in the registry with the corresponding disease code\\n#+ tags:\\n#+   - Patient Count\\n#+ defaults:\\n#+   - type: http://www.orpha.net/ORDO/Orphanet_98896\\n#+ endpoint_in_url: False\\n\\nPREFIX sio: <http://semanticscience.org/resource/>\\nselect (count(?p) as ?count) where { \\n    ?p sio:SIO_000228 ?role .  # person has role role\\n    ?role sio:SIO_000356 ?process . # is realized in process\\n    ?process sio:SIO_000229 ?output . #has output output\\n    ?output sio:SIO_000628 ?attribute . # output refers to attribute\\n\\t?attribute a ?_type_iri .  # attribute is a orphacode\\n}\\n\\n```",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "A value of type string (iri) that will substitute ?_type_iri in the original query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "iri",
+              "default": "http://www.orpha.net/ORDO/Orphanet_98896"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query response",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+api.paths.each do |path, pathitem|
+path contains the API path /individuals
+pathitem.methods
+options - nil
+servers - Openapi3Parser::Node::Array
+    :node_context, :[], :inspect, :empty?, :length, :size, :==, :node_at, :each, :node_data, :take_while, :drop, :drop_while, :cycle,
+    node_context = Openapi3Parser::Node::Context
+                .input.url - returns root URL for the API
+    [] - Openapi3Parser::Node::Server
+                 .url - returns root URL for the API
+
+delete = method
+head = method
+post = method
+
+get = method  (may return nil if there are no gets)
+    Openapi3Parser::Node::Operation
+    responses
+        Openapi3Parser::Node::Responses
+            default
+                Openapi3Parser::Node::Response
+                    headers = #<Openapi3Parser::Node::Map:0x00007fba3aed9ff8>
+
+            values
+            extension
+            node_at
+            ==
+            inspect
+            node_data
+            node_context
+            []
+            empty?
+            keys
+            length
+            size
+            each
+
+    callbacks
+    servers
+    operation_id - nil
+    request_body - nil
+    security - node array (can be length 0)
+    tags.to_a = ["Patient Count"]
+    external_docs
+    summary
+    parameters = Array of Openapi3Parser::Node::Parameter
+                    :in, :name, :allow_empty_value?, :schema, :example, :examples, :style, :explode?, :allow_reserved?, :description, :description_html, :content, :required?,
+                    in = "query"
+                    name = "type"
+                    allow_empty_value? = false
+                    schema = Openapi3Parser::Node::Schema(#/paths/~1count/get/parameters/0/schema)      
+                        read_only?, :write_only?, :discriminator, :default, :xml, :example, :external_docs, :deprecated?, 
+                        :description, :format, :not, :name, :pattern, :multiple_of, :maximum,
+                        default = "http://www.orpha.net/ORDO/Orphanet_98896"
+                        example = nil
+                        format = iri
+
+
+
+
+    alternative_servers?
+    description
+    description_html
+    deprecated?
+    []
+    empty?
+    keys
+    values
+    each
+    
+
+
+summary
+parameters
+alternative_servers?
+description
+description_html
+put
+patch
+trace
+render_markdown
+extension
+node_at
+==
+inspect
+node_data
+node_context
+[]
+
+
+
+
+=======================================
+
+
+
+
+openapi: "3.0.1"
+info:
+  title: SPARQL OpenAPI
+  version: "10"
+  description: |
+    This is a heavily trimmed copy of the RDF4J REST API that includes only the SPARQL endpoint GET and POST definitions
+
+    From this endpoint we serve the BGV Germplasm information (species and status)
+
+
+externalDocs:
+  url: https://rdf4j.org/documentation/reference/rest-api/
+
+servers:
+  - url: https://bgv.cbgp.upm.es
+    description: SPARQL server for the BANCO DE GERMOPLASMA VEGETAL-UPM
+
+tags:
+  - name: SPARQL
+    description: SPARQL Query execution
+
+components:
+  requestBodies:
+    RdfData:
+      description: RDF data payload
+      content:
+        application/rdf+xml:
+          schema:
+            type: object
+            xml:
+              name: RDF
+              namespace: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+        text/plain:
+          schema:
+            type: string
+        text/turtle:
+          schema:
+            type: string
+        text/rdf+n3:
+          schema:
+            type: string
+        text/x-nquads:
+          schema:
+            type: string
+        application/ld+json:
+          schema:
+            type: object
+            format: json
+        application/rdf+json:
+          schema:
+            type: object
+            format: json
+        application/trix:
+          schema:
+            type: object
+            xml:
+              name: TriX
+        application/x-trig:
+          schema:
+            type: string
+        application/x-binary-rdf:
+          schema:
+            type: string
+            format: binary
+  responses:
+    200SparqlResult:
+      description: SPARQL query result
+      content:
+        application/sparql-results+json:
+          examples:
+            SelectQueryResult:
+              $ref: "#/components/examples/SparqlJsonBindings"
+  examples:
+    SparqlJsonBindings:
+      value:
+        head:
+          vars: [ "s", "p", "o" ]
+          results:
+            bindings:
+              - s:
+                  type: "uri"
+                  value: "http://example.org/s1"
+              - p:
+                  type: "uri"
+                  value: "http://example.org/p1"
+              - o:
+                  type: "literal"
+                  value: "foo"
+paths:
+  /repositories/germplasm:
+    get:
+      tags:
+        - SPARQL
+      summary: Execute SPARQL query
+      description: |
+        Execute a SPARQL query on the repository. The result format is based on the type of result (boolean, variable bindings, or RDF data) and the negotiated acceptable content-type. Note that RDF4J supports executing SPARQL queries with either a GET or a POST request. POST is supported for queries that are too large to be encoded as a query parameter.
+      parameters:
+        - name: query
+          in: query
+          description: The query to evaluate
+          required: true
+          schema:
+            type: string
+            example: SELECT DISTINCT ?type WHERE {?s a ?type}
+      responses:
+        '200':
+          $ref: "#/components/responses/200SparqlResult"
+
+
+
+
+
+
+
+
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Beacon-API for CARE-SM ",
+    "version": "4.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Api Ejstatus",
+        "operationId": "api_ejstatus__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/filtering_terms": {
+      "get": {
+        "summary": "Valid Terms For Filtering",
+        "operationId": "valid_terms_for_filtering_filtering_terms_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/individuals": {
+      "post": {
+        "summary": "Individuals Counts",
+        "operationId": "individuals_counts_individuals_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/None/individuals/": {
+      "post": {
+        "summary": "Individuals Counts",
+        "operationId": "individuals_counts_None_individuals__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AlphanumericRequestFilter": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "operator": {
+            "type": "string",
+            "title": "Operator"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "operator",
+          "type"
+        ],
+        "title": "AlphanumericRequestFilter"
+      },
+      "AlphanumericRequestFilterList": {
+        "properties": {
+          "id": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Id"
+          },
+          "operator": {
+            "type": "string",
+            "title": "Operator"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "operator",
+          "type"
+        ],
+        "title": "AlphanumericRequestFilterList"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "IndividualRequest": {
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/MetaContent"
+          },
+          "query": {
+            "$ref": "#/components/schemas/RequestQuery"
+          }
+        },
+        "type": "object",
+        "required": [
+          "meta",
+          "query"
+        ],
+        "title": "IndividualRequest",
+        "example": {
+          "meta": {
+            "apiVersion": "v4.0",
+            "returnedSchemas": []
+          },
+          "query": {
+            "filters": [
+              {
+                "id": "1904",
+                "operator": "\u003E=",
+                "type": "obo:NCIT_C83164"
+              }
+            ]
+          }
+        }
+      },
+
+pathitem.post.request_body.content.first
+["application/json", Openapi3Parser::Node::MediaType(#/paths/~1individuals/post/requestBody/content/application~1json)]
+This call generates a list of lists, with the first element being the media type
+
+pathitem.post.request_body.content.first[1].schema.example
+the [1] here is electing the node, which then has the schema and the example
+

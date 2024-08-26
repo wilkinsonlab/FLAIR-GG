@@ -1,6 +1,9 @@
 # frozen_string_literal: false
 
 source "https://rubygems.org"
+#sinatra (2.2.4, 1.4.8)
+#sinatra-cross_origin (0.4.0)
+#sinatra-respond_to (0.9.0, 0.4.0)
 
 gemspec
 ruby "~> 3.3.0"
@@ -20,6 +23,7 @@ gem "rubocop"
 gem "ruby-debug-ide"
 gem "shotgun"
 gem "sinatra", "~> 2.2"
+#gem "sinatra", "~> 1.4.8"
 gem "cgi", "~> 0.4.1"
 gem "csv"
 gem "fileutils", "~>1.5.0"
@@ -51,3 +55,6 @@ gem "erb", "~> 4.0"
 # gem "omniauth-openid-connect", "~> 0.2.3"
 
 gem "jwt", "~> 2.8"
+
+
+gem "sinatra-respond_to", "~> 0.4.0"

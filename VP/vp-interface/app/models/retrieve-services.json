@@ -1,0 +1,49 @@
+{
+  "servicetype": "https://w3id.org/ejp-rd/vocabulary#VPBeacon2_individuals_4",
+  "servicelabel": "VPBeacon2_individuals_4",
+  "services": [
+    {
+      "title": {
+        "object": "Beacon2 v4  Individuals search of the DPP",
+        "string": "Beacon2 v4  Individuals search of the DPP",
+        "datatype": {
+          "hash": -4102033550034139435,
+          "object": null,
+          "value": "http://www.w3.org/2001/XMLSchema#string",
+          "mutex": {}
+        },
+        "hash": -735067067600490663
+      },
+      "openapi": {
+        "hash": -2957006337154231821,
+        "object": null,
+        "value": "http://fairdata.services:10004/openapi.json",
+        "mutex": {}
+      },
+      "endpoint": {
+        "hash": -976516556607286292,
+        "object": null,
+        "value": "http://fairdata.services:10004/individuals",
+        "mutex": {}
+      },
+      "contact": {
+        "hash": -1928644517843140173,
+        "object": null,
+        "value": "https://fairdata.systems",
+        "mutex": {}
+      },
+      "paths": {
+        "http://fairdata.services:10004/individuals": {
+          "get": null,
+          "post": "found"
+        }
+      }
+    }
+  ],
+  "commongetparams": {},
+  "commonpostparams": {
+    "_request_body": {
+      "example": "{\"YourJSON\": \"GoesHere\"}"
+    }
+  }
+}

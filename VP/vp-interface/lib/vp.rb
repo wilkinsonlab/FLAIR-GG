@@ -272,48 +272,17 @@ class VP
   def execute_data_services(params:)
     endpoints = params.delete("endpoint") # returns an array of endpoints from the checkboxes
     results = {}
-    servicelabel = params["servicelabel"].downcase
     endpoints.each do |ep|
       endpoint = CGI.unescape(ep)
       if params["_request_body"]
-        warn "POSTING: #{params["_request_body"]}"
-        # example data for beacon {"meta":{"apiVersion":"v0.2"},"query":{"filters":[{"id":["ordo:Orphanet_730"]}]}}
-        begin
-          result = RestClient::Request.execute(
-            method: :post,
-            url: endpoint,
-            :payload => params["_request_body"],
-            headers: {
-              content_type: :json,
-              accept: :json,
-              # "auth-key" => ""
-            }
-          )
-        rescue  => e
-          warn "couldn't execute POST service at #{endpoint}\n #{e.inspect}"
-          result = nil
-        end
+        result = Service::execute_post(endpoint: endpoint, body: params)
       else
-        begin
-          result = RestClient::Request.execute(
-            method: :get,
-            url: endpoint,
-            # payload: { params: params },
-            headers: {
-              params: params,
-              # "auth-key" => ""
-            }
-          )
-        rescue  => e
-          warn "couldn't execute GET service at #{endpoint}\n #{e.inspect}"
-          result = nil
-        end
+        result = Service::execute_get(endpoint: endpoint, params: params)
       end
-      # warn result.inspect
       results[endpoint] = result.body if result
     end
-    location = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
-    [location, servicelabel, results]
+    downloadlocation = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
+    [downloadlocation, results]
   end
 
   def match_type_to_icon(type:)
