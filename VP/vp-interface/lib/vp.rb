@@ -11,21 +11,10 @@ require "require_all"
 require_rel "ontologyservers"
 require_rel "serviceoutput_processers"
 require_rel "discoverable"
+require_rel "common_queries"
 
 class VP
   attr_accessor :networkgraph, :vpconfig, :fdps, :aboutme
-
-  NAMESPACES = "PREFIX ejpold: <http://purl.org/ejp-rd/vocabulary/>
-  PREFIX ejpnew: <https://w3id.org/ejp-rd/vocabulary#>
-  PREFIX dcat: <http://www.w3.org/ns/dcat#>
-  PREFIX dc: <http://purl.org/dc/terms/>
-  ".freeze
-  # VPCONNECTION = "ejpold:vpConnection ejpnew:vpConnection dcat:theme dcat:themeTaxonomy".freeze
-  # VPDISCOVERABLE = "ejpold:VPDiscoverable ejpnew:VPDiscoverable".freeze
-  # VPANNOTATION = "dcat:theme".freeze
-  VPCONNECTION = "ejpnew:vpConnection".freeze
-  VPDISCOVERABLE = "ejpnew:VPDiscoverable".freeze
-  VPANNOTATION = "dcat:theme".freeze
 
   @@thisvp = ""
 
@@ -86,27 +75,9 @@ class VP
   end
 
   def find_discoverables
-    @graph = networkgraph
 
-    vpd = SPARQL.parse("
-
-      #{NAMESPACES}
-      SELECT DISTINCT ?s ?t ?title ?contact ?servicetype WHERE
-      {
-        VALUES ?connection { #{VPCONNECTION} }
-        VALUES ?discoverable { #{VPDISCOVERABLE} }
-
-        ?s  ?connection ?discoverable ;
-            dc:title ?title ;
-            a ?t .
-
-        OPTIONAL{?s dcat:contactPoint ?c .
-                 ?c <http://www.w3.org/2006/vcard/ns#url> ?contact }.
-        OPTIONAL{?s dc:type ?servicetype }.
-
-      }
-      ")
-    discoverables = build_from_results(results: @graph.query(vpd))
+    results = find_discoverables_query(graph: networkgraph)
+    discoverables = build_from_results(results: results)
     warn discoverables
     discoverables
   end
@@ -122,62 +93,15 @@ class VP
   end
 
   def keyword_search(keyword: "")
-    @graph = networkgraph
     keyword = keyword.downcase
-    vpd = SPARQL.parse("
-    #{NAMESPACES}
-
-    SELECT DISTINCT ?s ?t ?title ?contact WHERE
-    {
-      VALUES ?connection { #{VPCONNECTION} }
-      VALUES ?discoverable { #{VPDISCOVERABLE} }
-      ?s  ?connection ?discoverable ;
-          dc:title ?title ;
-          a ?t .
-      OPTIONAL{?s dcat:contactPoint ?c .
-               ?c <http://www.w3.org/2006/vcard/ns#url> ?contact } .
-          {
-              VALUES ?searchfields { dc:title dc:description dc:keyword }
-              ?s ?searchfields ?kw
-              FILTER(CONTAINS(lcase(?kw), '#{keyword}'))
-          }
-    }")
-    warn "keyword search query #{vpd.to_sparql}"
-    warn "graph is #{@graph.size}"
-    warn "results of query #{@graph.query(vpd)}"
-    discoverables = build_from_results(results: @graph.query(vpd))
+    results = keyword_search_query(graph: networkgraph, keyword: keyword)
+    discoverables = build_from_results(results: results)
     warn discoverables
     discoverables
   end
 
   def ontology_search(uri: "")
-    @graph = networkgraph
-    warn "in ontology search"
-    warn "parse start"
-    vpd = SPARQL.parse("
-
-    #{NAMESPACES}
-
-    SELECT DISTINCT ?s ?t ?title ?contact WHERE
-    {
-      VALUES ?connection { #{VPCONNECTION} }
-      VALUES ?discoverable { #{VPDISCOVERABLE} }
-
-      ?s  ?connection ?discoverable ;
-          dc:title ?title ;
-          a ?t .
-      OPTIONAL{?s dcat:contactPoint ?c .
-               ?c <http://www.w3.org/2006/vcard/ns#url> ?contact } .
-          {
-              ?s dcat:theme ?theme .
-              FILTER(CONTAINS(str(?theme), '#{uri}'))
-          }
-    }")
-    warn "parse end"
-    warn "query start"
-    results = @graph.query(vpd)
-    warn "query end"
-
+    results = ontology_search_query(graph: networkgraph, uri: uri)
     discoverables = build_from_results(results: results)
     warn discoverables
     discoverables
@@ -186,15 +110,8 @@ class VP
   def verbose_annotations
     @graph = networkgraph
     words = []
+    results = verbose_annotations_query(graph: networkgraph)
 
-    # TODO: This does not respect vpdiscoverable...
-    vpd = SPARQL.parse("
-    #{NAMESPACES}
-    SELECT DISTINCT ?annot WHERE
-    { VALUES ?annotation { dcat:theme dcat:themeTaxonomy }
-      ?s  ?annotation ?annot .
-      }")
-    results = @graph.query(vpd)
     results.each do |res|
       uri = res[:annot].to_s
       word = ontology_annotations(uri: uri)
@@ -206,13 +123,7 @@ class VP
     # end of taxonomy parser
 
     warn "\n\nSWITCH TO KEYWORDS\n\n"
-    vpd = SPARQL.parse("
-    #{NAMESPACES}
-    select DISTINCT ?kw WHERE
-    { VALUES ?searchfields { dc:keyword }
-    ?s ?searchfields ?kw .
-    }")
-    results = @graph.query(vpd)
+    results = keyword_annotations_query(graph: networkgraph)
     results.each do |res|
       next if res[:kw].to_s.empty?
 
@@ -227,24 +138,8 @@ class VP
     if File.exist?("./cache/servicetypes.json")
       services = thaw_servicetypes
     else
-      graph = networkgraph
       warn "in collect data services"
-      vpd = SPARQL.parse("
-
-      #{NAMESPACES}
-
-      SELECT DISTINCT ?type WHERE
-      {
-        VALUES ?connection { #{VPCONNECTION} }
-        VALUES ?discoverable { #{VPDISCOVERABLE} }
-
-        ?s  ?connection ?discoverable ;
-            a dcat:DataService .
-            {
-                ?s dc:type ?type .
-            }
-      }")
-      results = graph.query(vpd)
+      results = collect_data_services_query(graph: networkgraph)
       prehash = {}
       results.each do |r|
         type = r[:type].to_s
