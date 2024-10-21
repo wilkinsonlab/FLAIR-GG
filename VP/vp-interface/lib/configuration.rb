@@ -21,8 +21,9 @@ class VPConfig
       :headers => { accept: "application/json" },
       :verify_ssl => false
     )
-    sites = JSON.parse(r.body).map { |s| s["clientUrl"] if s["state"] == "ACTIVE" }
+    sites = JSON.parse(r.body).map { |s| s["clientUrl"] if ["ACTIVE"].include? s["state"] }
     sites.compact!
+    warn "FOUND SITES #{sites}"
     sites
   end
     # {

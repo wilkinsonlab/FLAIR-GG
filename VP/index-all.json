@@ -1,0 +1,93 @@
+[
+  {
+    "uuid": "8a38755f-e805-42a6-b872-5bb4c9df1a1d",
+    "clientUrl": "http://testbed.ejprd.semlab-leiden.nl:5000",
+    "state": "ACTIVE",
+    "registrationTime": "2024-02-13T10:48:35.596Z",
+    "modificationTime": "2024-10-15T11:34:03.062Z"
+  },
+  {
+    "uuid": "cd65140d-27f6-45f3-afc0-84b3047ac0e0",
+    "clientUrl": "http://testbed.ejprd.semlab-leiden.nl:10000",
+    "state": "ACTIVE",
+    "registrationTime": "2024-02-27T15:53:06.198Z",
+    "modificationTime": "2024-10-15T11:34:02.970Z"
+  },
+  {
+    "uuid": "67f26b17-bed5-4be5-a9d9-e6488923faf1",
+    "clientUrl": "http://152.228.212.152:9000",
+    "state": "ACTIVE",
+    "registrationTime": "2024-03-25T11:48:35.327Z",
+    "modificationTime": "2024-10-17T07:31:55.958Z"
+  },
+  {
+    "uuid": "30874e87-2179-4101-a1a0-8451c5ed4d7f",
+    "clientUrl": "https://w3id.org/duchenne-fdp",
+    "state": "ACTIVE",
+    "registrationTime": "2024-05-24T11:03:06.503Z",
+    "modificationTime": "2024-10-18T11:37:18.262Z"
+  },
+  {
+    "uuid": "33cfda82-ae8b-417a-a867-ae101132ade9",
+    "clientUrl": "https://w3id.org/bgv-fdp",
+    "state": "INACTIVE",
+    "registrationTime": "2024-06-01T12:27:23.645Z",
+    "modificationTime": "2024-10-03T05:43:10.141Z"
+  },
+  {
+    "uuid": "7e435bb3-72e7-46b6-a4f6-64c0850f3eee",
+    "clientUrl": "https://w3id.org/ERKNet/fdp",
+    "state": "ACTIVE",
+    "registrationTime": "2024-08-13T10:12:41.598Z",
+    "modificationTime": "2024-10-17T10:12:41.517Z"
+  },
+  {
+    "uuid": "a0f736d9-7d38-48fa-b241-c76b29d73d65",
+    "clientUrl": "https://w3id.org/ERKNet/fdp/",
+    "state": "INACTIVE",
+    "registrationTime": "2024-08-13T13:46:02.737Z",
+    "modificationTime": "2024-08-30T10:23:34.927Z"
+  },
+  {
+    "uuid": "ecdc9b94-7084-4aea-9176-29251c35552f",
+    "clientUrl": "https://jbo.bgv.cbgp.upm.es",
+    "state": "INACTIVE",
+    "registrationTime": "2024-08-13T13:49:21.616Z",
+    "modificationTime": "2024-10-03T05:43:01.999Z"
+  },
+  {
+    "uuid": "196ff4c1-efed-496e-b465-c0754ff418ad",
+    "clientUrl": "http://fairdatapointorphanet.info:7070/",
+    "state": "INACTIVE",
+    "registrationTime": "2024-08-30T09:33:53.970Z",
+    "modificationTime": "2024-10-03T05:42:59.333Z"
+  },
+  {
+    "uuid": "38067156-fe30-4f1b-a234-84e6d53f0e42",
+    "clientUrl": "https://ostrails.github.io/sandbox/fdp.ttl",
+    "state": "ACTIVE",
+    "registrationTime": "2024-10-16T14:25:29.953Z",
+    "modificationTime": "2024-10-16T14:25:2* Connection #0 to host testbed.ejprd.semlab-leiden.nl left intact9.953Z"
+  },
+  {
+    "uuid": "5abb940a-fdca-4ec0-b133-df252c2fe4cb",
+    "clientUrl": "https: //ostrails.github.io/sandbox/proxyfdp.ttl",
+    "state": "ACTIVE",
+    "registrationTime": "2024-10-18T11:46:18.829Z",
+    "modificationTime": "2024-10-18T11:46:18.829Z"
+  },
+  {
+    "uuid": "88618abe-bfff-4289-bef9-a49f4fc01a0b",
+    "clientUrl": "https://ostrails.github.io/sandbox/proxyservice.ttl",
+    "state": "ACTIVE",
+    "registrationTime": "2024-10-18T14:37:32.592Z",
+    "modificationTime": "2024-10-18T14:37:32.592Z"
+  },
+  {
+    "uuid": "98179f89-2cfa-4084-b1cd-f7cbb73cff70",
+    "clientUrl": "https://ostrails.github.io/sandbox/gobierno.ttl",
+    "state": "ACTIVE",
+    "registrationTime": "2024-10-19T12:03:27.685Z",
+    "modificationTime": "2024-10-19T12:03:27.685Z"
+  }
+]

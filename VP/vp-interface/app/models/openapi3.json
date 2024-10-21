@@ -1,0 +1,229 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "XXX & GRLC",
+    "description": "The FAIR Data Point grlc server for the XXXX Project",
+    "contact": {
+      "name": "Your Name Here",
+      "url": "https://my.organization.org"
+    },
+    "version": "local"
+  },
+  "servers": [
+    {
+      "url": "//testbed.ejprd.semlab-leiden.nl:30001/api-local/"
+    }
+  ],
+  "paths": {
+    "/count": {
+      "get": {
+        "tags": [
+          "Patient Count"
+        ],
+        "summary": "Returns the number of patients in the registry with the corresponding disease code",
+        "description": "\n\n```\n#+ summary: Returns the number of patients in the registry with the corresponding disease code\n#+ tags:\n#+   - Patient Count\n#+ defaults:\n#+   - type: http://www.orpha.net/ORDO/Orphanet_98896\n#+ endpoint_in_url: False\n\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX ordo: <http://www.orpha.net/ORDO/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX ofn: <http://www.ontotext.com/sparql/functions/>\n\nselect (COUNT(?disattribute) as ?count) where { \n?disprocess a  <http://purl.obolibrary.org/obo/NCIT_C18020> ; # diagnostic process\n            sio:SIO_000229 ?disoutput .\n?disoutput a <http://purl.obolibrary.org/obo/NCIT_C154625>; # diagnosis code\n           sio:SIO_000628 ?disattribute.\n?disattribute a ?_type_iri .  # attribute is a orphacode\n}\n\n```",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "A value of type string (iri) that will substitute ?_type_iri in the original query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "iri",
+              "default": "http://www.orpha.net/ORDO/Orphanet_98896"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query response",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kpi-ttd": {
+      "get": {
+        "tags": [
+          "KPI diagnosis-delay"
+        ],
+        "summary": "Returns the Key Performance Indicator of the delay between symptom onset and diagnosis.  This data is aggregated by disease, and by year of diagnosis, and is measured in days.",
+        "description": "\n\n```\n#+ summary: Returns the Key Performance Indicator of the delay between symptom onset and diagnosis.  This data is aggregated by disease, and by year of diagnosis, and is measured in days.\n#+ tags:\n#+ - KPI diagnosis-delay\n#+ defaults:\n#+ \n#+ endpoint_in_url: False\n\n################################################################\n# list diagnosis and time from onset to diagnosis\n################################################################\n\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX ordo: <http://www.orpha.net/ORDO/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX ofn: <http://www.ontotext.com/sparql/functions/>\n\n# date of symptom onset is the value (output) of its own model, date of diagnosis is in the context of the diagnosis model\n#SELECT DISTINCT ?pid ?onsetvalue ?diagnosisdate ?ORDO ?yearOfDiagnosis (xsd:integer(ROUND(AVG(?timeOnsetToDiagnosis))) as ?avgoffset)\nSELECT DISTINCT ?ORDO ?yearOfDiagnosis (xsd:integer(ROUND(AVG(?timeOnsetToDiagnosis))) as ?avgoffset)\nWHERE {\n    BIND(xsd:integer(ofn:asDays(?diagnosisdate - ?onsetvalue )) AS ?timeOnsetToDiagnosis)\n    BIND(SUBSTR(str(?diagnosisdate), 1,4) AS ?yearOfDiagnosis)\n    \n\t\tGRAPH ?diseasegraph {\n                ?disperson sio:SIO_000228 ?disrole .  # person has role role\n                ?disrole sio:SIO_000356 ?disprocess ;  # is realized in process\n                            a sio:SIO_000016 .\n                ?disprocess a  <http://purl.obolibrary.org/obo/NCIT_C18020> ; # diagnostic process\n                            sio:SIO_000229 ?disoutput .\n                ?disoutput a <http://purl.obolibrary.org/obo/NCIT_C154625>; # diagnosis code\n                            sio:SIO_000628 ?disattribute.\n                ?disattribute a ?ORDO.\n        FILTER(!(?ORDO = sio:SIO_000614))\n        }\n        ?diseasegraph a obo:NCIT_C62143 ; # encounter\n    \t\t\tsio:SIO_000068 ?diseasetimeline, ?diseaseevent ; # is part of\n    \t\t\tsio:SIO_000680 ?diseasestartdate . # start date\n    \t?diseasestartdate sio:SIO_000300 ?diagnosisdate .  # need the has value property\n\n    ?diseasetimeline a obo:NCIT_C54576, sio:SIO_000417; \n                \tsio:SIO_000332 ?diseaseindividual .\n    ?diseaseindividual sio:SIO_000671 ?diseaseindividual_identifier .\n    ?diseaseindividual_identifier sio:SIO_000300 ?pid .\n\n\n# date of symptom onset is the value (output) of its own model, date of diagnosis is in the context of the diagnosis model\n        GRAPH ?onsetg {\n            ?onsetrole sio:SIO_000356 ?onsetprocess ; \n                        a sio:SIO_000016 .\n            ?onsetprocess a sio:SIO_000006 , ?onsetprocess_type ; \n                        sio:SIO_000229 ?onsetoutput .\n            ?onsetoutput a sio:SIO_000015, ?onsetoutput_type; \n                        sio:SIO_000628 ?onsetattribute.\n            ?onsetattribute a  <http://purl.obolibrary.org/obo/NCIT_C124353>.\n        \t\n            ?onsetoutput sio:SIO_000300 ?onsetvalue .\n        }\n        ?onsetg a obo:NCIT_C62143 ; # encounter\n\t            sio:SIO_000068 ?onsettimeline, ?onsetevent . # is part of\n\n        ?onsettimeline a obo:NCIT_C54576, sio:SIO_000417; \n    \t                sio:SIO_000332 ?onsetindividual .\n        ?onsetindividual sio:SIO_000671 ?onsetindividual_identifier .\n        ?onsetindividual_identifier sio:SIO_000300 ?pid .  # close the join around PID\n    \n} group by ?ORDO ?yearOfDiagnosis order by ?yearOfDiagnosis ?ORDO \n```",
+        "responses": {
+          "200": {
+            "description": "Query response",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/phenotype-frequencies": {
+      "get": {
+        "tags": [
+          "Phenotype frequency"
+        ],
+        "summary": "Returns the number of patients in the registry that have had a phenotype code at any time",
+        "description": "\n\n```\n#+ summary: Returns the number of patients in the registry that have had a phenotype code at any time\n#+ tags:\n#+ - Phenotype frequency\n#+ defaults:\n#+ \n#+ endpoint_in_url: False\n\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX ordo: <http://www.orpha.net/ORDO/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX ofn: <http://www.ontotext.com/sparql/functions/>\n\n\nselect ?pheno (count(?pheno) as ?frequency) where {\n  select distinct ?p ?pheno where {\n\t\tGRAPH ?diseasegraph {\n        ?disprocess a  <http://purl.obolibrary.org/obo/NCIT_C18020> ; # diagnostic process\n                    sio:SIO_000229 ?disoutput .\n        ?disoutput a <http://purl.obolibrary.org/obo/NCIT_C16977>; # diagnosis code\n                   sio:SIO_000628 ?disattribute.\n        ?disattribute a  ?pheno .\n        FILTER(!(?pheno = sio:SIO_000614))\n\n\t\t}\n       ?diseasegraph a obo:NCIT_C62143 ; # encounter\n    \t\t\tsio:SIO_000068 ?diseasetimeline, ?diseaseevent . # is part of\n\n\t    ?diseasetimeline a obo:NCIT_C54576, sio:SIO_000417; \n                \tsio:SIO_000332 ?diseaseindividual .\n\t    ?diseaseindividual sio:SIO_000671 ?diseaseindividual_identifier .\n    \t?diseaseindividual_identifier sio:SIO_000300 ?p .\n    }\n} group by ?pheno order by desc(?frequency)\n```",
+        "responses": {
+          "200": {
+            "description": "Query response",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {}
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Message": {
+        "type": "string"
+      }
+    }
+  },
+  "x-original-swagger-version": "2.0"
+}

@@ -1,13 +1,15 @@
-require_relative "spec_helper"
+# frozen_string_literal: false
 
-def app
-  ApplicationController
-end
+require_relative 'spec_helper'  # this will load the app
 
-describe ApplicationController do
-  it "responds with a welcome message" do
-    get '/'
-    expect(last_response.status).to eq(200)
-    expect(last_response.body).to include("Welcome to the Sinatra Template!")
+RSpec.describe 'ApplicationController', type: :request do
+  include Rack::Test::Methods
+  def app
+    ApplicationController
+  end
+
+  it 'returns a list of all known resources' do
+    get '/flair-gg-vp-server/resources'
+    expect(last_response.status).to eq(406)
   end
 end

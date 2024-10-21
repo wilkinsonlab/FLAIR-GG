@@ -78,7 +78,7 @@ class VP
 
     results = find_discoverables_query(graph: networkgraph)
     discoverables = build_from_results(results: results)
-    warn discoverables
+    warn "DISCOVERABLES", discoverables
     discoverables
   end
 
@@ -179,6 +179,24 @@ class VP
     downloadlocation = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
     [downloadlocation, results]
   end
+
+  def execute_data_services_api(json:)
+      # {uri: serviceuri, 
+      #  _request_body: {json: data},
+      #  service_list: [endpoint, endpoint, endpoint]
+      # }   # this is passed to all services
+    results = {}
+    json["service_list"].each do |ep|
+      endpoint = ep
+      if json["_request_body"]
+        result = Service::execute_post(endpoint: endpoint, body: params)
+      end
+      results[endpoint] = result.body if result
+    end
+    downloadlocation = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
+    [downloadlocation, results]
+  end
+
 
   def match_type_to_icon(type:)
     t = type.match(%r{[\#/](\w+?)$})[1].downcase.to_sym  # anchor to end to capture last / or #

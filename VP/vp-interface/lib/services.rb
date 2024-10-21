@@ -177,7 +177,7 @@ class Service
     j = JSON.parse(resp)
     j["servers"].each do |s|
       s["url"].gsub!(%r{/$}, "")
-      s["url"].gsub!(%r{^//}, "https://")
+      s["url"].gsub!(%r{^//}, "http://")
     end
     resp = j.to_json   # back to json for the openapi3
     begin
@@ -190,12 +190,16 @@ class Service
 
     # we are now scanning for the endpoint that was referenced in the FDP.
     # if we don't find it, we fail! (politely!)
+    # need to deal with http vs https, since they get messed up in the openAPI3 conversion
+    endpointsuffix = @endpoint.to_s.gsub(/https?:/, "")
+  
     api.paths.each do |path, pathitem|
       warn "path #{path}"
       base = pathitem.servers.first.url
       fullpath = base + path
-      warn "testing #{fullpath} against #{@endpoint}|"
-      unless fullpath == @endpoint # compare it to the endpoint that was in the FDP
+      fullpathsuffix = fullpath.gsub(/https?:/, "")
+      warn "testing #{fullpathsuffix} against #{endpointsuffix}|"
+      unless fullpathsuffix == endpointsuffix # compare it to the endpoint that was in the FDP
         warn "TEST FAILED"
         next
       end
