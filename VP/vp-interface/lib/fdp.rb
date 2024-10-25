@@ -1,5 +1,6 @@
 require_relative "ontologyservers/bioregistry"
 require_relative  "ontologyservers/identifiers"
+require_relative  "ontologyservers/inspire"
 require_relative  "ontologyservers/ebi_ontology"
 require_relative  "ontologyservers/ebi_ontology_v3"
 require_relative  "ontologyservers/ontobee"

@@ -149,6 +149,10 @@ def ontology_annotations(uri:)
     elsif uri =~ /schema\.org/ 
       warn "schema.org"
       term = SchemaOrg.new(uri: uri).term
+    elsif uri =~ /inspire\.ec/ 
+      warn "Inspire"
+      insp = Inspire.new(uri: uri)
+      term = insplookup_title
     end
     break if term =~ /\w+/
   end
