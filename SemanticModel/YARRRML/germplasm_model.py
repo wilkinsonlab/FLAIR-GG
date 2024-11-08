@@ -80,10 +80,10 @@ data = {
     ["this:$(uniqid)#Plant_identification_lista_patron", "sio:SIO_000008", "this:$(uniqid)#Determination_status_lista_patron", "iri"],
     ["this:$(uniqid)#Plant_identification_WFO", "sio:SIO_000008", "this:$(uniqid)#Determination_status_WFO", "iri"],
 
-    ["this:$(uniqid)#Determination_status_lista_patron", "rdf:type", "fao:determination_status", "iri"]
-    ["this:$(uniqid)#Determination_status_WFO", "rdf:type", "fao:determination_status", "iri"]
-    ["this:$(uniqid)#Determination_status_lista_patron", "sio:SIO_000300", "$(lista_patron_determination_status)", "xsd:string"]
-    ["this:$(uniqid)#Determination_status_WFO", "sio:SIO_000300", "$(WFO_determination_status)", "xsd:string"]
+    ["this:$(uniqid)#Determination_status_lista_patron", "rdf:type", "fao:determination_status", "iri"],
+    ["this:$(uniqid)#Determination_status_WFO", "rdf:type", "fao:determination_status", "iri"],
+    ["this:$(uniqid)#Determination_status_lista_patron", "sio:SIO_000300", "$(lista_patron_determination_status)", "xsd:string"],
+    ["this:$(uniqid)#Determination_status_WFO", "sio:SIO_000300", "$(WFO_determination_status)", "xsd:string"],
 
     ["this:$(uniqid)#Endangerment_assesment_process_LESPRE", "rdf:type", "sio:SIO_000006", "iri"],
     ["this:$(uniqid)#Endangerment_assesment_process_LESPRE", "rdf:type", "prov:activity", "iri"],
