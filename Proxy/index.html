@@ -8,7 +8,7 @@ To do this, you must use our FDP Proxy, which will add additional required metad
 and will set-up a "ping" such that your docuemnt is re-tested every week, and any new modifications are absorbed by the platform.
 
 <br/><br/>
-To pass your document to the Proxy, use the following CURL command:
+To pass your document to the Proxy, use the following CURL command (replacing the clientUrl value with the URL of your DCAT document)
 <br/><br/>
 
 <code>curl -v -L -H "Content-type: application/json" -d '{"clientUrl": "https://my.server.org/my_dcat_record.ttl"}' https://bgv.cbgp.upm.es/fdp-index-proxy/proxy</code>
