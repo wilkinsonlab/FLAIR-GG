@@ -41,7 +41,7 @@ data = {
 
   "config" : {
     "source_name" : "source_cde_test",
-    "configuration" : "default",    
+    "configuration" : "csv",    
     "csv_name" : "administrative.csv",
     "basicURI" : "this"
     }

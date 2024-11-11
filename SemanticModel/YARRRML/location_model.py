@@ -77,39 +77,39 @@ data = {
     ["this:$(uniqid)#GeoLocation","dwc:geodeticDatum","$(geodetic_datum)","xsd:float"],
 
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Threat","iri"],
-    ["this:$(uniqid)#Threat", "SIO_000300", "$(threat)", "xsd:string"]
+    ["this:$(uniqid)#Threat", "SIO_000300", "$(threat)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Reaction_HCL","iri"],
-    ["this:$(uniqid)#Reaction_HCL", "SIO_000300", "$(reaction_hcl)", "xsd:string"]
+    ["this:$(uniqid)#Reaction_HCL", "SIO_000300", "$(reaction_hcl)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Salty_types","iri"],
-    ["this:$(uniqid)#Salty_types", "SIO_000300", "$(salty_types)", "xsd:string"]
+    ["this:$(uniqid)#Salty_types", "SIO_000300", "$(salty_types)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Stonyness","iri"],
-    ["this:$(uniqid)#Stonyness", "SIO_000300", "$(stonyness)", "xsd:string"]
+    ["this:$(uniqid)#Stonyness", "SIO_000300", "$(stonyness)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Rockyness","iri"],
-    ["this:$(uniqid)#Rockyness", "SIO_000300", "$(rockyness)", "xsd:string"]
+    ["this:$(uniqid)#Rockyness", "SIO_000300", "$(rockyness)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Texture","iri"],
-    ["this:$(uniqid)#Texture", "SIO_000300", "$(texture)", "xsd:string"]
+    ["this:$(uniqid)#Texture", "SIO_000300", "$(texture)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Leaf_litter","iri"],
-    ["this:$(uniqid)#Leaf_litter", "SIO_000300", "$(leaf_litter)", "xsd:string"]
+    ["this:$(uniqid)#Leaf_litter", "SIO_000300", "$(leaf_litter)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Plant_cover","iri"],
-    ["this:$(uniqid)#Plant_cover", "SIO_000300", "$(plant_cover)", "xsd:string"]
+    ["this:$(uniqid)#Plant_cover", "SIO_000300", "$(plant_cover)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Organic_matter","iri"],
-    ["this:$(uniqid)#Organic_matter", "SIO_000300", "$(organic_matter)", "xsd:string"]
+    ["this:$(uniqid)#Organic_matter", "SIO_000300", "$(organic_matter)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Topography","iri"],
-    ["this:$(uniqid)#Topography", "SIO_000300", "$(topography)", "xsd:string"]
+    ["this:$(uniqid)#Topography", "SIO_000300", "$(topography)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Geology","iri"],
-    ["this:$(uniqid)#Geology", "SIO_000300", "$(geology)", "xsd:string"]
+    ["this:$(uniqid)#Geology", "SIO_000300", "$(geology)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Habitat","iri"],
-    ["this:$(uniqid)#Habitat", "SIO_000300", "$(habitat)", "xsd:string"]
+    ["this:$(uniqid)#Habitat", "SIO_000300", "$(habitat)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Associated_plant_species","iri"],
-    ["this:$(uniqid)#Associated_plant_species", "SIO_000300", "$(associated_plant_species)", "xsd:string"]
+    ["this:$(uniqid)#Associated_plant_species", "SIO_000300", "$(associated_plant_species)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","SIO_000008","this:$(uniqid)#Land_use","iri"],
-    ["this:$(uniqid)#Land_use", "SIO_000300", "$(land_use)", "xsd:string"]
+    ["this:$(uniqid)#Land_use", "SIO_000300", "$(land_use)", "xsd:string"],
     
   ],
 
   "config" : {
     "source_name" : "source_cde_test",
-    "configuration" : "default",    
+    "configuration" : "csv",    
     "csv_name" : "location.csv",
     "basicURI" : "this"
     }
