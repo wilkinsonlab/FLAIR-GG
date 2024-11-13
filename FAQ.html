@@ -21,17 +21,99 @@
   <article class="c-posts__item">
 
 <h2>Frequently Asked Questions</h2>
+
+
+
 <a id="Database"></a>
 <h3>Do I need to change my database or any part of my existing infrastructure?</h3>
 NO! FLAIR-GG requires, at a minimim, a document containing a description of your germplasm bank in DCAT format.
-This can be put on your existing Website and you can request FLAIR-GG to visit it. It will be indexed and you will become part of the Network.
+This can be put on your existing Website and you can <a href="https://wilkinsonlab.github.io/FLAIR-GG/Proxy/index.html">request FLAIR-GG to visit it</a>. It will be indexed and you will become part of the Network.
 <br/>
 If you wish to have more power, you can install a FAIR Data Point of your own (follow the onboarding instructions on the main page)
 <br/>
 If you wish to share your germplasm data, you need only export CSV from your existing database.  This does not require any changes to your database or infrastructure.
+<br/><br/>
   
+
+<a id="ThirdParty"></a>
+<h3>In the area of germplasm conservation and use, which external suppliers of
+  information could we connect under the FAIR principles?</h3>
+We can include any resource that is compliant with the DCAT standard.  This includes a wide range of government-sourced datasets, including ecological, environmental, and geographical.
+<br/><br/>
+
+
+<a id="Model"></a>
+<h3>What's a shared data model?</h3>
+FAIR is partially about metadata and partially about data.  In FLAIR-GG we require an agreement on the metadata model (i.e., DCAT) but we do not dictate a data model.  Nevertheless, to maximize interoperability between 
+germplasm resources, we have created <a href="./SemanticModel/index.html"></a>several core data models</a> that can be reused by Network members.
+We also provide a transformation tool that will take CSV exported from your existing Germplasm database, and will fill these 
+shared data models, thus requiring very little expertise to fully participate in this FAIR network.  Sharing a data model among all members
+allows us to send identical queries to all sites, maximizing the federation of the network.
+<br/><br/>
+
+
+<a id="Reusability"></a>
+<h3>Could you give me an example to see the differences between the terms
+  "reusability" and "interoperatibility"?</h3>
+FAIR is a set of data publishing principles that provide behaviours that will maximize the ability of both humans and machines to reuse data.
+Reusability and Interoperability are tightly aligned concepts. Interoperability is mostly associated with the ability to merge data from multiple sites 
+without manual manipulation.  Reusability is primarily around a single site, where the data can be reused by a machine without human intervention. Interoperability is mostly 
+about technology, while Reusability is primarily around adequate annotation of the data, and the availability of a license and citation information.
+<br/><br/>
+
+
+<a id="Hackers"></a>
+<h3>Increased findability and accessibility are not also increasing findability
+  and accessibility by hackers?</h3>
+Not in any meaningful way.  For example, one would not accuse Google of aiding hackers, even though it allows your website to be discovered by a search.
+<br/><br/>
+
+
+<a id="Taxonomies"></a>
+<h3>How is it possible the interoperability of seed banks databases under different taxonomies?</h3>
+FLAIR-GG does not mandate the use of any given taxonomy. We have selected World Flora Online for a variety of reasons. It is possible to participate in the network without 
+agreeing to use WFO, however your interoperability will be limited because the network tools do not automatically do taxonomy mapping.
+<br/><br/>
+
+
+<a id="Updates"></a>
+<h3>Does a germplasm bank need a database expert to update information on its metadata and data?</h3>
+For most levels of FLAIR-GG network participation, no special training is required (beyond what is 
+normally available within the Germplasm bank team).  For more advanced participation, such as deploying analytical interfaces over your database, it would be useful to have someone with slightly more experience.  We can provide advice and guidance, based on your ambitions.
+<br/><br/>
+
+
+<a id="InSitu"></a>
+<h3>Is the FLAIR-GG platform open to in-situ conservation information?</h3>
+Yes.  Any data source can participate simply by creating their DCAT-compliant record.  We currently do not have shared data models for in-situ 
+germplasm data, but we would be pleased to work with you to help us build them!
+<br/><br/>
+
+
+<a id="Size"></a>
+<h3>Is there a limitation of the number of germplasm banks that could be
+  integrated in the FLAIR-GG platform?</h3>
+There is no limit (beyond the capacity of our Index server, which is very high!).  The FLAIR-GG network is mostly distributed, so the data remains at-source. As a result 
+we will likely never reach the limits of our capacity.  The FLAIR-GG Virtual Platform has been tested up to 3700 datasets (more than the number of 
+germplasm banks on earth) and had acceptable performance. If performance ever became an issue, there are ways we could better optoimize the code.
+<br/><br/>
+
+
+
+<a id="Responsibility"></a>
+<h3>Who is responsible for updating the metadata and data? How can I update the metadata and data?</h3>
+The "generic" response to this is that it is the responsibility of the group that is hosting the metadata and/or data.
+Updating the metadata requires you to either modify a text file (if you are using a DCAT-File-based FAIR Data Point) or to go to your FAIR Data Point website, login,and edit the metadata through the web page.
+Updating data requires you to do a new CSV export of the data you want to update, and then trigger the transformation pipeline. This can be done whenever you wish.
+<br/><br/>
+
+
+
+
+
+
 </article>
-        
+     
 
 
 </section>
