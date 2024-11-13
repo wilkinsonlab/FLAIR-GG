@@ -52,6 +52,7 @@
 **reaction_hcl**: Observations on the reaction of the soil to hydrochloric acid (indicating carbonate content).  Yes/No
 
 **salty_types**: Description of salinity or salt types in the soil.  One of the following:
+
     - Undefined
     - Gypsum
     - Limestone
@@ -59,18 +60,21 @@
     - Saline efflorescences
 
 **stonyness**: The extent or proportion of stones present in the soil.  One of the following:
+
     - Undefined
     - High
     - Medium
     - Low
 
 **rockyness**: The presence or proportion of rocks at the collection site.  One of the following:
+
     - Undefined
     - High
     - Medium
     - Low
 
 **texture**: The soil texture. One of the following:
+
     - Sand
     - Loam
     - Clay
@@ -78,12 +82,14 @@
 
 
 **leaf_litter**: The amount or type of leaf litter present on the soil surface. One of the following:
+
     - Undefined
     - High
     - Medium
     - Low
 
 **plant_cover**: The percentage or type of plant cover at the collection site. One of the following:
+
     - Undefined
     - High
     - Medium
@@ -96,6 +102,7 @@
 **geology**: Information on the geological features or rock types in the area. String
 
 **habitat**: Description of the natural environment or ecosystem of the collection site.  We recommend using one from FAO's multi-crop passport descriptors:
+
     10) Wild habitat
         11) Forest or woodland
         12) Shrubland
@@ -157,12 +164,14 @@
 **chosen_taxonomy_scientific_name_authorship**: the author(s) who formally described the species, as recorded in the preferred taxonomy. String
 
 **WFO_determination_status**: One of the following: String
+
     - Unverified ID (doubtful)
     - Provisional ID (some uncertainty)
     - Verified in field
     - Verified off field
 
 **chosen_taxonomy_determination_status**: One of the following: String
+
     - Unverified ID (doubtful)
     - Provisional ID (some uncertainty)
     - Verified in field
@@ -175,6 +184,7 @@
 **lespre_endangerment_category**: Whether or not the species is recorded in LESPRE as endangered.
 
 **iucn_endangerment_category**: One of the following: String
+
     - Data deficient
     - Least concern
     - Near threatened
