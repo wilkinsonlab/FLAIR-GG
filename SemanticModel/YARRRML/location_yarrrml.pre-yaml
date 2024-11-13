@@ -1,315 +1,424 @@
-prefixes:
-  obo: http://purl.obolibrary.org/obo/
-  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
-  rdfs: http://www.w3.org/2000/01/rdf-schema#
-  sio: http://sio.semanticscience.org/resource/
-  this: |||baseURI|||
-  xsd: http://www.w3.org/2001/XMLSchema#
-  grel: http://users.ugent.be/~bjdmeest/function/grel.ttl#
-  idlab-fn: http://example.com/idlab/function/
-  geo: http://www.w3.org/2003/01/geo/wgs84_pos#
-  efo: http://www.ebi.ac.uk/efo/
-
-
-sources:
-  source_location:
-    access: /mnt/data/location.csv
-    iterator: $
-    referenceFormulation: csv
-
 mapping:
-  identifier_has_value:
-    graph: this:$(uniqid)_Context
-    sources:
-    - source_location
-    subjects: this:$(bgvid)#ID
+  20241111135203129273_source_cde_test:
     predicateobject:
     - objects:
         type: iri
-        value: sio:SIO_000115
+        value: this:$(uniqid)#Germplasm
+      predicate: sio:SIO_000229
+    - objects:
+        type: iri
+        value: sio:SIO_001049
       predicate: rdf:type
-
     - objects:
         datatype: xsd:string
-        value: Identifier
-      predicate: rdfs:label
-
+        value: $(collection_comment)
+      predicate: rdfs:comment
     - objects:
-        datatype: xsd:string
-        value: $(bgvid)
-      predicate: sio:SIO_000300
-
-
-  germplasm_has_identifier_identifier:
-    graph: this:$(uniqid)_Context
+        type: iri
+        value: this:$(uniqid)#Time_of_aquisition
+      predicate: fao:acquisition_time
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Time_of_collection
+      predicate: fao:collecting_time
     sources:
-    - source_location
-    subjects: this:$(bgvid)#Germplasm
+    - source_cde_test
+    subjects: this:$(uniqid)#Collection
+  20241111135203129332_source_cde_test:
     predicateobject:
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Collection
+      predicate: sio:SIO_000145
+    - objects:
+        type: iri
+        value: geo:point
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: $(location_comment)
+      predicate: rdfs:comment
+    - objects:
+        type: iri
+        value: $(geographical_areas)
+      predicate: rdfs:comment
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Soil_type
+      predicate: bfo:located_in_at_all_times
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Country
+      predicate: sio:SIO_000061
+    - objects:
+        datatype: xsd:float
+        value: $(longitude)
+      predicate: geo:longitude
+    - objects:
+        datatype: xsd:float
+        value: $(latitude)
+      predicate: geo:latitude
+    - objects:
+        datatype: xsd:float
+        value: $(coordinate_measurement_method)
+      predicate: bco:measurementMethod
+    - objects:
+        datatype: xsd:float
+        value: $(coordinate_uncertanty_meters)
+      predicate: bco:coordinateUncertantyInMeters
+    - objects:
+        datatype: xsd:float
+        value: $(location_minimum_elevation_meters)
+      predicate: bco:minimumElevationInMeters
+    - objects:
+        datatype: xsd:float
+        value: $(location_maximum_elevation_meters)
+      predicate: bco:maximumElevationInMeters
+    - objects:
+        datatype: xsd:float
+        value: $(location_slope)
+      predicate: sio:SIO_001184
+    - objects:
+        datatype: xsd:float
+        value: $(geodetic_datum)
+      predicate: dwc:geodeticDatum
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Threat
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Reaction_HCL
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Salty_types
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Stonyness
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Rockyness
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Texture
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Leaf_litter
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Plant_cover
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Organic_matter
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Topography
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Geology
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Habitat
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Associated_plant_species
+      predicate: SIO_000008
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Land_use
+      predicate: SIO_000008
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#GeoLocation
+  20241111135203129525_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: this:$(uniqid)#identifier
+      predicate: sio:SIO_000671
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Accession_number
+      predicate: sio:SIO_000671
+    - objects:
+        type: iri
+        value: this:$(uniqid)#National_catalogue_code
+      predicate: sio:SIO_000671
     - objects:
         type: iri
         value: efo:EFO_0007059
       predicate: rdf:type
-
-    - objects:
-        type: string
-        value: Germplasm
-      predicate: rdfs:label
-
     - objects:
         type: iri
-        value: this:$(bgvid)#ID
-      predicate: sio:SIO_000671
-
-
-
-
-  collection_output_germplasm:
-    graph: this:$(uniqid)_Context
-    sources:
-    - source_location
-    subjects: this:$(bgvid)#Collection
-    predicateobject:
-    - objects:
-        type: iri
-        value: sio:SIO:001049
+        value: sio:SIO_000000
       predicate: rdf:type
-
-    - objects:
-        type: string
-        value: Collection Activity
-      predicate: rdfs:label
-
-    - objects:
-        type: string
-        value: $(comment)
-      predicate: rdfs:label
-
     - objects:
         type: iri
-        value: this:$(bgvid)#Germplasm
-      predicate: sio:SIO_000229
-
-
-
-
-
-
-  location_location_of_collection:
-    graph: this:$(uniqid)_Context
-    sources:
-    - source_location
-    subjects: this:$(bgvid)#Geolocation
-    predicateobject:
-    - objects:
-        type: iri
-        value: geo:Point
+        value: prov:Entity
       predicate: rdf:type
-
-    - objects:
-        type: string
-        value: Location
-      predicate: rdfs:label
-
-      # is location of
-    - objects:
-        type: iri
-        value: this:$(bgvid)#Collection
-      predicate: sio:SIO_000145 
-
-    - objects:
-        datatype: xsd:float
-        value: $(latitude)
-      predicate: geo:lat
-
-    - objects:
-        datatype: xsd:float
-        value: $(longitude)
-      predicate: geo:long
-
-      # is located in
-    - objects:
-        type: iri
-        value: https://en.wikipedia.org/wiki/ISO_3166-1:$(country_code)
-      predicate: sio:SIO_000061
-
-
-
-
-  location_soil_type_soil:
-    graph: this:$(uniqid)_Context
     sources:
-    - source_location
-    subjects: this:$(bgvid)#Geolocation
+    - source_cde_test
+    subjects: this:$(uniqid)#Germplasm
+  20241111135203129559_source_cde_test:
     predicateobject:
     - objects:
+        datatype: xsd:string
+        value: $(bgvid)
+      predicate: sio:SIO_000300
+    - objects:
         type: iri
-        value: this:$(bgvid)#Soil
-      predicate: http://some.ontology.term/soiltype
-
-
-
-
-  country_annotations:
-    graph: this:$(uniqid)_Context
+        value: SIO:000115
+      predicate: rdf:type
     sources:
-    - source_location
-    subjects: https://en.wikipedia.org/wiki/ISO_3166-1:$(country_code)
+    - source_cde_test
+    subjects: this:$(uniqid)#identifier
+  20241111135203129590_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(accession_number)
+      predicate: sio:SIO_000300
+    - objects:
+        type: iri
+        value: SIO:000115
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: fao:CO_020:0000089
+      predicate: rdf:type
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Accession_number
+  20241111135203129625_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(national_catalogue_code)
+      predicate: sio:SIO_000300
+    - objects:
+        type: iri
+        value: SIO:000115
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: fao:national_catalogue_code
+      predicate: rdf:type
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#National_catalogue_code
+  20241111135203129657_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(date_of_aquisition)
+      predicate: sio:SIO_000300
+    - objects:
+        type: iri
+        value: sio:SIO_000391
+      predicate: rdf:type
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Time_of_aquisition
+  20241111135203129687_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(date_of_collection)
+      predicate: sio:SIO_000300
+    - objects:
+        type: iri
+        value: sio:SIO_000391
+      predicate: rdf:type
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Time_of_collection
+  20241111135203129722_source_cde_test:
     predicateobject:
     - objects:
         type: iri
         value: sio:SIO_000664
       predicate: rdf:type
- 
     - objects:
-        type: string
-        value: $(country_code)
-      predicate: rdfs:label
-
-    - objects:
-        type: string
+        datatype: xsd:string
         value: $(country_name)
-      predicate: rdfs:label
-
-
-
-
-  soil_type_soil_value:
-    graph: this:$(uniqid)_Context
+      predicate: rdf:label
+    - objects:
+        datatype: xsd:string
+        value: $(country_3letter_code)
+      predicate: rdf:label
+    - objects:
+        datatype: xsd:string
+        value: $(country_2letter_code)
+      predicate: rdf:label
     sources:
-    - source_location
-    subjects: this:$(bgvid)#Soil
+    - source_cde_test
+    subjects: this:$(uniqid)#Country
+  20241111135203129755_source_cde_test:
     predicateobject:
+    - objects:
+        type: iri
+        value: envo:soil
+      predicate: rdf:type
     - objects:
         type: iri
         value: $(soil_type)
-      predicate: rdf:type
-
-    - objects:
-        type: string
-        value: $(soil_label)
-      predicate: rdfs:label
-
-
-
-
-  collection_measured_at_time:
-    graph: this:$(uniqid)_Context
-    sources:
-    - source_location
-    subjects: this:$(bgvid)#Collection
-    predicateobject:
-    - objects:
-        datatype: xsd:date
-        value: this:$(bgvid)#CollectionTime
-      predicate: sio:SIO_000793
-
-
-
-
-
-  # when it is a specific date, different rdf:type
-  time_has_value_time:
-    graph: this:$(uniqid)_Context
-    sources:
-    - source_location
-    subjects: this:$(bgvid)#CollectionTime
-    predicateobject:
-    - objects:
-        type: iri
-        value: sio:SIO_000391
-      predicate: rdf:type
-
-    - objects:
-        datatype: xsd:date
-        value: $(collection_date)
       predicate: sio:SIO_000300
-
-
-
-
-
-
-
-  time_has_start_start:
-    graph: this:$(uniqid)_Context
     sources:
-    - source_location
-    subjects: this:$(bgvid)#CollectionTime
+    - source_cde_test
+    subjects: this:$(uniqid)#Soil_type
+  20241111135203129786_source_cde_test:
     predicateobject:
     - objects:
-        type: iri
-        value: sio:SIO_000417
-      predicate: rdf:type
-
-# has start time
-    - objects:
-        type: iri
-        value: this:$(bgvid)#CollectionStart
-      predicate: sio:SIO_000680
-# has end time
-    - objects:
-        type: iri
-        value: this:$(bgvid)#CollectionEnd
-      predicate: sio:SIO_000681
-
-
-  start_has_value_time:
-    graph: this:$(uniqid)_Context
+        datatype: xsd:string
+        value: $(threat)
+      predicate: SIO_000300
     sources:
-    - source_location
-    subjects: this:$(bgvid)#CollectionStart
+    - source_cde_test
+    subjects: this:$(uniqid)#Threat
+  20241111135203129816_source_cde_test:
     predicateobject:
     - objects:
-        type: iri
-        value: sio:SIO_000669
-      predicate: rdf:type
-
-    - objects:
-        datatype: xsd:date
-        value: $(collection_start)
-      predicate: sio:SIO_000300
-
-
-
-
-  end_has_value_time:
-    graph: this:$(uniqid)_Context
+        datatype: xsd:string
+        value: $(reaction_hcl)
+      predicate: SIO_000300
     sources:
-    - source_location
-    subjects: this:$(bgvid)#CollectionEnd
+    - source_cde_test
+    subjects: this:$(uniqid)#Reaction_HCL
+  20241111135203129850_source_cde_test:
     predicateobject:
     - objects:
-        type: iri
-        value: sio:SIO_000670
-      predicate: rdf:type
-
+        datatype: xsd:string
+        value: $(salty_types)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Salty_types
+  20241111135203129880_source_cde_test:
+    predicateobject:
     - objects:
-        datatype: xsd:date
-        value: $(collection_end)
-      predicate: sio:SIO_000300
-
-
-
-
-  # related_to_time:
-  #   graph: this:$(uniqid)_Context
-  #   sources:
-  #   - source_location
-  #   subjects: this:$(bgvid)_$(uniqid)_Process
-
-  #   predicateobject:
-  #     predicate: sio:SIO_000230
-  #   - objects:
-  #       function: grel:controls_if
-  #       parameters:
-  #         - parameter: grel:bool_b
-  #           value:
-  #             function: idlab-fn:isNull
-  #             parameters:
-  #               - [idlab-fn:str, $(value_id)]
-  #         - parameter: grel:any_true
-  #           value: this:$(bgvid)_$(uniqid)_Output
-  #         - parameter: grel:any_false
-  #           value: $(value_id)
-  #       type: iri
+        datatype: xsd:string
+        value: $(stonyness)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Stonyness
+  20241111135203129909_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(rockyness)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Rockyness
+  20241111135203129939_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(texture)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Texture
+  20241111135203130013_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(leaf_litter)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Leaf_litter
+  20241111135203130047_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(plant_cover)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Plant_cover
+  20241111135203130077_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(organic_matter)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Organic_matter
+  20241111135203130107_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(topography)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Topography
+  20241111135203130137_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(geology)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Geology
+  20241111135203130171_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(habitat)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Habitat
+  20241111135203130202_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(associated_plant_species)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Associated_plant_species
+  20241111135203130231_source_cde_test:
+    predicateobject:
+    - objects:
+        datatype: xsd:string
+        value: $(land_use)
+      predicate: SIO_000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Land_use
+prefixes:
+  bco: http://purl.obolibrary.org/obo/BCO_
+  bfo: http://purl.obolibrary.org/obo/BFO_
+  dwc: http://rs.tdwg.org/dwc/terms/
+  edam: http://edamontology.org/
+  efo: https://www.ebi.ac.uk/efo/
+  envo: ' http://purl.obolibrary.org/obo/ENVO_'
+  fao: https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#
+  geo: http://www.w3.org/2003/01/geo/wgs84_pos#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  sio: http://semanticscience.org/resource/
+  this: http://my_example.com/
+  xsd: http://www.w3.org/2001/XMLSchema#
+sources:
+  source_cde_test:
+    access: location.csv
+    iterator: $
+    referenceFormulation: csv
