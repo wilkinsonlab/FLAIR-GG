@@ -3,6 +3,9 @@
 
 > **Nota** Hay disponibles versiones en español de cualquiera de las secciones de esta documentación, a las que puedes acceder haciendo click en el botón que se encuentra en la parte superior izquierda de cada pantalla
 
+
+> **Note** For information on [how to onboard your data](https://wilkinsonlab.github.io/FLAIR-GG/SemanticModel/index.html), and [how the transformation pipeline works](https://wilkinsonlab.github.io/FLAIR-GG/TransformationPipeline/index.html), please click on the corresponding links.
+
 # How to describe a resource
 Here we list the steps to describe the metadata for a FLAIR-GG resource.
 
