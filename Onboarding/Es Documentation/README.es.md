@@ -2,6 +2,9 @@
 [![Static Badge](https://img.shields.io/badge/lang-en-blue?style=plastic)](../README.md)
 > **Note** You can access english versions of each of the sections of this documentation by clicking on the button in the top left corner of each screen.
 
+> **Nota** Para obtener información sobre [cómo unirte a la plataforma FLAIR-GG](https://wilkinsonlab.github.io/FLAIR-GG/SemanticModel/index.html), y [cómo funciona el proceso de transformación de los datos](https://wilkinsonlab.github.io/FLAIR-GG/TransformationPipeline/index.html), haz click en los correspondientes links.
+
+
 # Cómo describir un recurso
 Aquí se encuentran los pasos para describir los metadatos de un recurso que participa en la red del proyecto FLAIR-GG.
 
