@@ -17,6 +17,7 @@ QUERY3 = "select ?title where {|||SUBJECT||| <http://www.w3.org/2000/01/rdf-sche
 QUERY4 = "select ?title where {|||SUBJECT||| ?p1 ?title .
           FILTER(CONTAINS(lcase(str(?p1)), 'name')) }"
 QUERY5 = "select ?title where {|||SUBJECT||| <http://www.w3.org/2000/01/rdf-schema#label> ?title .}"
+QUERY6 = "select ?title where {|||SUBJECT||| <https://list.worldfloraonline.org/terms/fullName> ?title .}"
 
 def resolve_url_to_jsonld(url:)
   graph = RDF::Graph.new
@@ -76,8 +77,8 @@ def resolve_url_to_rdf(url:, accept: "text/turtle")
       url: url,
       headers: { accept: accept }
     )
-  rescue StandardError
-    warn "#{url} didn't resolve when trying for #{accept} #{r}"
+  rescue StandardError => e
+    warn "#{url} didn't resolve when trying for #{accept} #{r} #{e.inspect}"
     return graph
   end
 
@@ -152,7 +153,11 @@ def ontology_annotations(uri:)
     elsif uri =~ /inspire\.ec/ 
       warn "Inspire"
       insp = Inspire.new(uri: uri)
-      term = insplookup_title
+      term = insp.lookup_title
+    elsif uri =~ /worldfloraonline/ 
+      warn "WFO"
+      wfo = WFO.new(uri: uri)
+      term = wfo.lookup_title
     end
     break if term =~ /\w+/
   end
