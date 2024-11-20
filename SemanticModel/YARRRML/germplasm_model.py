@@ -46,9 +46,9 @@ data = {
     ["this:$(uniqid)#Accession_number","sio:SIO_000300","$(accession_number)","xsd:string"],
     ["this:$(uniqid)#National_catalogue_code","sio:SIO_000300","$(national_catalogue_code)","xsd:string"],
 
-    ["this:$(uniqid)#identifier","rdf:type","SIO:000115","iri"],
-    ["this:$(uniqid)#Accession_number","rdf:type","SIO:000115","iri"],
-    ["this:$(uniqid)#National_catalogue_code","rdf:type","SIO:000115","iri"],
+    ["this:$(uniqid)#identifier","rdf:type","sio:SIO_000115","iri"],
+    ["this:$(uniqid)#Accession_number","rdf:type","sio:SIO_000115","iri"],
+    ["this:$(uniqid)#National_catalogue_code","rdf:type","sio:SIO_000115","iri"],
 
     
     ["this:$(uniqid)#Accession_number","rdf:type","fao:CO_020:0000089","iri"],
