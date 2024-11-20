@@ -5,6 +5,7 @@ require "open3"
 
 include HTTPUtils
 
+# Version 0.0.6
 get "/" do
   update
   yarrrml_substitute
