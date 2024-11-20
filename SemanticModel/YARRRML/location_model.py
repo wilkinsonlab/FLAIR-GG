@@ -84,7 +84,7 @@ data = {
     ["this:$(uniqid)#Salty_types", "sio:SIO_000300", "$(salty_types)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","sio:SIO_000008","this:$(uniqid)#Stonyness","iri"],
     ["this:$(uniqid)#Stonyness", "sio:SIO_000300", "$(stonyness)", "xsd:string"],
-    ["this:$(uniqid)#GeoLocation","sio:SIO__000008","this:$(uniqid)#Rockyness","iri"],
+    ["this:$(uniqid)#GeoLocation","sio:SIO_000008","this:$(uniqid)#Rockyness","iri"],
     ["this:$(uniqid)#Rockyness", "sio:SIO_000300", "$(rockyness)", "xsd:string"],
     ["this:$(uniqid)#GeoLocation","sio:SIO_000008","this:$(uniqid)#Texture","iri"],
     ["this:$(uniqid)#Texture", "sio:SIO_00300", "$(texture)", "xsd:string"],
