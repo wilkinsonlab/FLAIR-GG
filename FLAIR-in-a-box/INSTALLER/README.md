@@ -200,7 +200,7 @@ the folder structure is:
 
 ```
   flair-box-daemon: 
-    image: markw/flair-box-daemon:0.0.1
+    image: markw/flair-box-daemon:0.0.6
     container_name: flair-box-daemon
     environment:
       GraphDB_User: ${GraphDB_User}
