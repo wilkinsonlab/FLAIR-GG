@@ -72,7 +72,7 @@ git clone https://github.com/wilkinsonlab/FLAIR-GG
 Once you have completed the "Downloading" section of this tutorial, you can run `run-me-to-install.sh` in the `./FLAIR-in-a-box/` folder
 
 ```
-sh ./run-me-to-install.sh
+bash ./run-me-to-install.sh
 ```
 
 ### How to answer the questions
@@ -200,7 +200,7 @@ the folder structure is:
 
 ```
   flair-box-daemon: 
-    image: markw/flair-box-daemon:0.0.1
+    image: markw/flair-box-daemon:0.0.6
     container_name: flair-box-daemon
     environment:
       GraphDB_User: ${GraphDB_User}
