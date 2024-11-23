@@ -1,0 +1,56 @@
+openapi: 3.0.3
+info:
+  title: TOGOWS Species Lookup Service
+  description: |-
+    TOGOWS Species Lookup Service
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: mark.wilkinson@upm.es
+  license:
+    name: MIT 
+    url: http://purl.org/NET/rdflicense/MIT1.0.ttl
+  version: 1.0.0
+externalDocs:
+  description: Find out more about TOGO Web Services
+  url: http://togows.dbcls.jp/
+servers:
+  - url: http://togows.org/
+tags:
+  - name: sequence
+    description: Retrieve sequences from the ENA archive
+    externalDocs:
+      description: Find out more about ENA
+      url: https://www.ebi.ac.uk/ena/browser/home
+paths:
+  /entry/ebi-ena/{sid}/seq.json:
+    get:
+      tags:
+        - sequence
+      summary: Retrieve species name by ENA identifier
+      description: Returns species name for an ENA sequence identifier
+      operationId: getSpeciesById
+      parameters:
+        - name: sid
+          in: path
+          description: ENA ID of sequence
+          required: true
+          schema:
+            type: string
+            example: AAP46064
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Species'  
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Sequence not found
+
+components:
+  schemas:
+    Species:
+      type: object
