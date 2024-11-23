@@ -17,10 +17,10 @@ servers:
   - url: http://togows.org/
 tags:
   - name: sequence
-    description: Everything about your Pets
+    description: Retrieve sequences from the ENA archive
     externalDocs:
-      description: Find out more
-      url: http://swagger.io
+      description: Find out more about ENA
+      url: https://www.ebi.ac.uk/ena/browser/home
 paths:
   /entry/ebi-ena/{sid}/seq.json:
     get:
