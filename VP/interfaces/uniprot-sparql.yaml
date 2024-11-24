@@ -101,14 +101,15 @@ paths:
           required: true
           schema:
             type: string
-            example:|
-PREFIX up: <http://purl.uniprot.org/core/>
-SELECT ?protein
-WHERE
-{
-    ?protein a up:Protein .
-    ?protein up:mnemonic 'UFO_ARATH'
-}
+            example: |
+              PREFIX up: <http://purl.uniprot.org/core/>
+              SELECT ?protein
+              WHERE
+              {
+                 ?protein a up:Protein .
+                 ?protein up:mnemonic 'UFO_ARATH'
+              }
+
       responses:
         '200':
           $ref: "#/components/responses/200SparqlResult"
