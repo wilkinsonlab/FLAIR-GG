@@ -156,23 +156,31 @@ class VP
   end
 
   def retrieve_sevices(termuri:)  #  the URI of the service type
+    contenttype = guess_best_content_type(termuri: termuri)
     # hand off to services_functions
     servicecollection = ServiceCollection.new(vpgraph: networkgraph, servicetype: termuri)
     commongetparams = servicecollection.gather_common_parameters(method: "get")
     commonpostparams = servicecollection.gather_common_parameters(method: "post")
-    [servicecollection, commongetparams, commonpostparams]
+    [servicecollection, commongetparams, commonpostparams, contenttype]
   end
 
+  def guess_best_content_type(termuri:)
+    mapping = {"http://edamontology.org/format_3790" => "text/csv"}
+    mapping[termuri] ? mapping[termuri] : "*/*"
+  end
   # 28b2cb8a656a0b9fdbd385d6e86e691f9ccff2f4c8605026c5bfbb2b1d36b4b5
+
+
   def execute_data_services(params:)
     endpoints = params.delete("endpoint") # returns an array of endpoints from the checkboxes
+    accept = params.delete("accept")
     results = {}
     endpoints.each do |ep|
       endpoint = CGI.unescape(ep)
       if params["_request_body"]
-        result = Service::execute_post(endpoint: endpoint, body: params)
+        result = Service::execute_post(endpoint: endpoint, body: params,)
       else
-        result = Service::execute_get(endpoint: endpoint, params: params)
+        result = Service::execute_get(endpoint: endpoint, params: params, accept: accept)
       end
       results[endpoint] = result.body if result
     end
@@ -186,10 +194,13 @@ class VP
       #  service_list: [endpoint, endpoint, endpoint]
       # }   # this is passed to all services
     results = {}
+    accept = json["accept"]
+    json.delete "accept"
+v
     json["service_list"].each do |ep|
       endpoint = ep
       if json["_request_body"]
-        result = Service::execute_post(endpoint: endpoint, body: params)
+        result = Service::execute_post(endpoint: endpoint, body: params, accept: accept)
       end
       results[endpoint] = result.body if result
     end

@@ -35,6 +35,7 @@ every param  responds to "in", "name", "description", "schema.example", "schema.
         <form action = "/flair-gg-vp-server/execute-data-services" method="post">
         <input type="hidden" name="servicetype" value="<%= @servicecollection.escapedtype %>">
         <input type="hidden" name="servicelabel" value="<%= @servicecollection.servicelabel %>">
+        <input type="hidden" name="accept" value="<%= @accept %>">
 
         <% @commongetparams.each do |paramname, param| # param is an openapi3 parser Node parameter object%>
           <label for="<%= paramname %>" style="font-size: .75em;"><%= paramname %></label><br/>

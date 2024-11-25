@@ -118,7 +118,7 @@ def set_routes(classes: allclasses)
   # end
   get '/flair-gg-vp-server/retrieve-services' do
     termuri = params['services']
-    @servicecollection, @commongetparams, @commonpostparams = VP.current_vp.retrieve_sevices(termuri: termuri) # "./lib/vp"
+    @servicecollection, @commongetparams, @commonpostparams, @accept = VP.current_vp.retrieve_sevices(termuri: termuri) # "./lib/vp"
     request.accept.each do |type|
       case type.to_s
       when 'text/html'
@@ -147,8 +147,8 @@ def set_routes(classes: allclasses)
       #  _request_body: {json: data},
       #  service_list: [endpoint, endpoint, endpoint]
       # }   # this is passed to all services
-      _serviceuri = j['uri'].gsub(%r{.*[/\#](\S+)}, '\1') # take fragment only
-      servicelabel = @serviceuri.downcase.gsub(/\s+/, '_')
+      serviceuri = j['uri'].gsub(%r{.*[/\#](\S+)}, '\1') # take fragment only
+      servicelabel = serviceuri.downcase.gsub(/\s+/, '_')
       analytics = "https://wilkinsonlab.github.io/FLAIR-GG-Analytics/lab/index.html?path=FLAIR-GG%2F#{servicelabel}.ipynb"
       location, results = VP.current_vp.execute_data_services_api(json: j)
       request.accept.each do |type|

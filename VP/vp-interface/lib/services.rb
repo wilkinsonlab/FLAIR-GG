@@ -250,7 +250,7 @@ class Service
       end
   end
 
-  def self.execute_post(endpoint:, body:, auth_key: nil)
+  def self.execute_post(endpoint:, body:, auth_key: nil, accept: :json )
     warn "POSTING: #{body}"
     # example data for beacon {"meta":{"apiVersion":"v0.2"},"query":{"filters":[{"id":["ordo:Orphanet_730"]}]}}
     begin
@@ -260,7 +260,7 @@ class Service
         payload: body["_request_body"],
         headers: {
           content_type: :json,
-          accept: :json,
+          accept: accept,
           # "auth-key" => ""
         }
       )
@@ -271,13 +271,14 @@ class Service
     result
   end
 
-  def self.execute_get(endpoint:, params:, auth_key: nil)
+  def self.execute_get(endpoint:, params:, auth_key: nil, accept: "*/*" )
     begin
       result = RestClient::Request.execute(
         method: :get,
         url: endpoint,
         headers: {
           params: params,
+          accept: accept,
           # "auth-key" => ""
         }
       )
