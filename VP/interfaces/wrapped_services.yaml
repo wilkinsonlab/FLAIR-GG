@@ -1,0 +1,52 @@
+openapi: 3.0.3
+info:
+  title: wrapped_services diadra
+  description: |-
+    diadra species lookup
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: mark.wilkinson@upm.es
+  license:
+    name: MIT 
+    url: http://purl.org/NET/rdflicense/MIT1.0.ttl
+  version: 1.0.0
+externalDocs:
+  description: DIADRA
+  url: https://www.conservacionvegetal.org/driada/
+servers:
+  - url: https://vp.bgv.cbgp.upm.es/
+tags:
+  - name: species_lookup
+    description: lookup species in DIADRA index
+paths:
+  /wrapped_services/diadra:
+    get:
+      tags:
+        - species
+      summary: Retrieve diadra species record
+      description: Retrieve diadra species record
+      operationId: getDiadraBySpecies
+      parameters:
+        - name: species
+          in: query
+          description: species to lookup
+          required: true
+          schema:
+            type: string
+            example: Abies pinsapo
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Species'  
+        '400':
+          description: Invalid species supplied
+        '404':
+          description: Sequence not found
+
+components:
+  schemas:
+    Species:
+      type: object

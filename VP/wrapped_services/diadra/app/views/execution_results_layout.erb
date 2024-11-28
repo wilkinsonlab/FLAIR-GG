@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  
+  <%= erb :_head %>
+
+  <body>
+    <div class="wrapper">
+    <div><a href="/flair-gg-vp-server/resources"><img src="/images/flair-gg-logo.png" width="400px"/></a></div>
+
+
+    <%= erb :_sidebar %>
+
+      <h2>Analytics</h2>
+      <% @location = @location.match(/.*\/([\S]+)$/)[1] %>
+      <br/>Your Secret Key: <b> <%= @location %> </b>
+      <br/>Copy this and enter it into the "XXXXXXX" variable in the Jupyter notebook at <a href="https://wilkinsonlab.github.io/FLAIR-GG-Analytics/lab/index.html?path=FLAIR-GG%2F<%= @servicelabel %>.ipynb" target="_blank">THIS PAGE</a>
+      <br/><br/>
+      <h2>Results</h2>
+      
+      
+          <% @results.each_key do |site| %>
+            <table>
+              <tr>
+                <td colspan=2>
+                  <h3>SOURCE: <a href="http://<%= site %>" _target="_blank"><%= site %></a></h3>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td>
+                      <textarea rows="30" cols="65"><%= @results[site] %></textarea>       
+                  </td>
+                </tr>
+            </table>
+            <br/><br/>
+          <% end %>
+
+
+    <%= erb :_footer %>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <!--[if lt IE 7]>
+      <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+      <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+    <![endif]-->
+  </body>
+</html>

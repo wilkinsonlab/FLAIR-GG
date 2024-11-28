@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  
+  <%= erb :_head %>
+
+  <body>
+    <div class="wrapper">
+    <div><a href="/flair-gg-vp-server/resources"><img src="/images/flair-gg-logo.png" width="400px"/></a></div>
+
+
+    <%= erb :_sidebar %>
+
+      <h2>Virtual Platform Resources: <%= @message %></h2>
+
+      <% catno = dsno = distno = datsno = otherno = 0 %>
+        <% @discoverables.each do |disc| %>
+          <% type = disc.type %>
+          <% type = type.match(/[\#\/](\w+?)$/)[1].downcase %>
+          <% case type 
+             when "catalog" %>
+          <%  catno += 1 %>
+          <% when "dataset"  %>
+          <%  dsno += 1 %>
+          <% when "distribution" %>
+          <%  distno += 1 %>
+          <% when "dataservice"  %>
+          <%  datsno += 1 %>
+          <% else  %>
+          <%  otherno += 1 %>
+          <% end %>
+        <% end %>
+  
+			<div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
+				<input type="radio" name="pcss3t" checked  id="catalog" class="tab-content-first">
+				<label for="catalog"><i class="fa-solid fa-book"></i>Catalogs (<%= catno %>}</label>
+				
+				<input type="radio" name="pcss3t" id="dataset" class="tab-content-2">
+				<label for="dataset"><i class="fa-solid fa-database"></i>Datasets (<%= dsno %>}</label>
+				
+				<input type="radio" name="pcss3t" id="distribution" class="tab-content-3">
+				<label for="distribution"><i class="fa-solid fa-table"></i>Distributions (<%= distno %>}</label>
+				
+				<input type="radio" name="pcss3t" id="dataservice" class="tab-content-4">
+				<label for="dataservice"><i class="fa-solid fa-gears"></i>Services (<%= datsno %>}</label>
+
+				<input type="radio" name="pcss3t" id="other" class="tab-content-last">
+				<label for="other"><i class="fa-solid fa-circle-question"></i>Other (<%= otherno %>}</label>
+
+
+        <ul>
+          <% [["catalog", "tab-content-first"], ["dataset", "tab-content-2"], ["distribution", "tab-content-3"], ["dataservice", "tab-content-4"]].each do |restypefilter, contenttab| %>
+            <li class="<%= contenttab %>">
+              <% thistabresources = @discoverables.select {|d| d.typetag == restypefilter}%>
+              <% sources = thistabresources.map {|d| d.source}; sources.uniq! %>
+
+              <% sources.each do |source| %>
+                <h4>SOURCE: <a href="<%= source %>" _target="_blank"><%= source %></a></h4>
+                <% thistabresources.select {|d| d.source == source}.each do |disc| %>
+                  <% resource = disc.resource %>
+                  <% title = disc.title %>
+                  &nbsp;&nbsp;<img src="/images/<%= disc.icon %>" width=25 height=25/> &nbsp;&nbsp;
+                  Resource: <a href="<%= resource %>" _target="_blank"> <%= title %> </a>
+                  <br/>
+                <% end %>
+                <br/>
+                <br/>
+              <% end %>
+            </li>                  
+          <% end %>
+
+          <% [["other", "tab-content-last"]].each do |restypefilter, contenttab| %>
+            <li class="<%= contenttab %>">
+
+              <% thistabresources = @discoverables.reject {|d| ["catalog", "dataset", "distribution", "dataservice"].include? d.typetag}%>
+              <% sources = thistabresources.map {|d| d.source}; sources.uniq! %>
+
+              <% sources.each do |source| %>
+                <h4>SOURCE: <a href="<%= source %>" _target="_blank"><%= source %></a></h4>
+                <% thistabresources.select {|d| d.source == source}.each do |disc| %>
+                  <% resource = disc.resource %>
+                  <% title = disc.title %>
+                  &nbsp;&nbsp;<img src="/images/<%= disc.icon %>" width=25 height=25/> &nbsp;&nbsp;
+                  Resource: <a href="<%= resource %>" _target="_blank"> <%= title %> </a>
+                  <br/>
+                <% end %>
+                <br/>
+                <br/>
+              <% end %>
+            </li>                  
+          <% end %>
+        </ul>
+      </div>
+
+
+    <%= erb :_footer %>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <!--[if lt IE 7]>
+      <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+      <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+    <![endif]-->
+  </body>
+</html>

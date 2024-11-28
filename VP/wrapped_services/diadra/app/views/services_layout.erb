@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  
+  <%= erb :_head %>
+
+  <body>
+    <div class="wrapper">
+      <div><a href="/flair-gg-vp-server/resources"><img src="/images/flair-gg-logo.png" width="400px"/></a></div>
+
+
+      <%= erb :_sidebar %>
+
+      <h3> <%= @servicecollection.servicelabel %> </h3>
+
+      <h3>Service Execution Parameters (if any)</h3>
+
+<%
+=begin
+
+class ServiceCollection  @servicecollection
+  attr_accessor :vpgraph, :servicetype, :allservices, :warnings, :escapedtype
+class Service  (from allservices)
+  attr_accessor :contact, :title, :openapi, :endpoint, :apiobject, :base, :paths,  :escapedendpoint
+  retrieve_parameters:  params[param.name] = param  # responds to "in", "name", "description", "schema.example", "schema.type"
+
+@commonparameters  (shared by all services) commonparams[paramname] = params[paramname], 
+every param  responds to "in", "name", "description", "schema.example", "schema.type"
+
+=end
+%>
+
+        <form action = "/flair-gg-vp-server/execute-data-services" method="post">
+        <input type="hidden" name="servicetype" value="<%= @servicecollection.escapedtype %>">
+        <input type="hidden" name="servicelabel" value="<%= @servicecollection.servicelabel %>">
+
+        <% @commongetparams.each do |paramname, param| # param is an openapi3 parser Node parameter object%>
+          <label for="<%= paramname %>" style="font-size: .75em;"><%= paramname %></label><br/>
+          <% example = "" %>
+          <% if param.schema.respond_to?("example") && param.schema.example =~ /\w/ %>
+            <% example = param.schema.example %>
+          <% elsif param.schema.respond_to?("default")  && param.schema.default =~ /\w/ %>
+            <% example = param.schema.default  %>
+          <% end %>
+          <textarea style="resize: both;" rows="<%= example.lines.count %>" cols="100" name="<%= paramname %>" id="<%= paramname %>" value="<%= example %>"><%= example %></textarea><br/><br/>
+        <% end %>
+          
+        <% @commonpostparams.each do |paramname, param| %>
+          <label for="<%= paramname %>" style="font-size: .75em;"><%= paramname %></label><br/>
+          <% example = '{"PutYour": "JSON_Here"}' %>
+          <% if param.schema.respond_to?("example") && param.schema.example.to_s =~ /\w/ %>
+            <% example = JSON.pretty_generate(param.schema.example) if param.schema.example.is_a? Hash %>
+            <% example = param.schema.example if param.schema.example.is_a? String %>
+          <% elsif param.schema.respond_to?("default")  && param.schema.default.to_s =~ /\w/ %>
+            <% example = JSON.pretty_generate(param.schema.default) if param.schema.default.is_a? Hash  %>
+            <% example = param.schema.default if param.schema.default.is_a? String %>
+          <% end %>
+          <textarea style="resize: both;" rows="<%= example.lines.count %>" cols="100" name="<%= paramname %>" id="<%= paramname %>"><%= example %></textarea><br/><br/>
+        <% end %>
+
+        <hr>
+        <br/><br/>
+
+        <h3>Which service providers should be invoked?</h3>
+        <% if @servicecollection.warnings.first %>
+          WARNINGS:<br/><br/>
+          <% @servicecollection.warnings.each do |warn| %>
+            - <%= warn %><br/>
+          <% end %>
+        <% end %>
+
+        <table>
+          <% @servicecollection.allservices.each do |service| %>
+            <tr>
+              <td style="padding-right: 5px;">
+                <input type="checkbox" name="endpoint[]" value="<%= service.escapedendpoint %>" id="<%= service.escapedendpoint %>"/>
+              </td>
+              <td>
+                <h4>Provider: <a href="<%= service.contact %>" _target="_blank"><%= service.contact %></a></h4>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><span style="font-size: .75em;"><%= service.title %></span></td>
+            </tr>
+            <tr>
+              <td>---<br/></td><td></td>
+            </tr>
+          <% end %>
+        </table>
+        <br/><br/>
+        <input type="submit" value="Let's do this!"/>
+        <form>
+
+
+      <%= erb :_footer %>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <!--[if lt IE 7]>
+      <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+      <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+    <![endif]-->
+  </body>
+</html>
