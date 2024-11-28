@@ -2,7 +2,7 @@ version: "3.0"
 services:
 
   diadra:
-    image: markw/wrapped_services:0.0.1
+    image: markw/wrapped_services:0.0.2
     restart: always
     hostname: "diadra"
     ports:

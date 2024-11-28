@@ -7,7 +7,14 @@ def set_routes()
 
   get "/diadra/lookup" do
 
+    unless params["species"]
+      redirect "/diadra/interface/form"
+      halt
+    end
+
     species = params["species"] ? params["species"].strip : ""
+    
+    @species = species
     @resp = species_lookup(species: species) # "./lib/vp"
 
     request.accept.each do |type|
@@ -19,6 +26,10 @@ def set_routes()
         halt @resp.to_json
       end
     end
+  end
+
+  get "/diadra/interface/form" do
+    halt erb :lookupform
   end
 
   get "/diadra/interface" do
