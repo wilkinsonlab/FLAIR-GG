@@ -15,7 +15,7 @@ tags:
   - name: threatened-species
     description: Check in the Spanish Catalog of Threatened species, the List of Wild Species under Special Protection Regime and the regional spanish catalogs if a species has legal protection in Spain.
 paths:
-  /lookup?species={scientificName}:
+  /lookup:
     get:
       tags:
         - threatened-species
@@ -23,8 +23,8 @@ paths:
       description: Returns the level of the legal protection (autonomic or national), taxonomic information, threat category, and the B.O.E. that included that species.
       operationId: getLegalStatusbyName
       parameters:
-        - name: scientificName
-          in: path
+        - name: species
+          in: query
           required: true
           description: Scientific name of the plant to fetch.
           schema:
