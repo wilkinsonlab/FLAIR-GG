@@ -2,7 +2,7 @@ version: "3.0"
 services:
 
   diadra:
-    image: markw/wrapped_services:0.0.2
+    image: markw/wrapped_services:0.0.3
     restart: always
     hostname: "diadra"
     ports:
@@ -11,8 +11,8 @@ services:
     environment:
       - RUBYOPT=-W0 -KU
 #      - RUBYOPT=-W0 -KU -E utf-8:utf-8
-    depends_on:
-      - swagger
+#    depends_on:
+#      - swagger
 
   # swagger:
   #   image: swaggerapi/swagger-ui:latest

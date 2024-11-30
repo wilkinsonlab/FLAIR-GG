@@ -4,7 +4,7 @@
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
   
-  <%= erb :_head %>
+  <%= erb :_driada_head %>
 
 
   <section class="c-posts">
@@ -13,7 +13,7 @@
 
       <h2>Enter Taxon Name </h2>
       <br/>
-      <form action="/diadra/lookup" method="GET">
+      <form action="/wrapped-services/driada/lookup" method="GET">
       <input type="text" width="40" name="species"/>
       <br/>
       <input type="submit" value="Species Lookup"/>
@@ -25,7 +25,7 @@
   </section>
 
 
-  <%= erb :_footer %>
+  <%= erb :_driada_footer %>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <!--[if lt IE 7]>
