@@ -11,6 +11,7 @@ RUN mkdir /server
 WORKDIR /server
 RUN gem update --system
 RUN gem install bundler:2.3.12
-COPY . /server
-WORKDIR /server/diadra
+COPY ./ /server
+WORKDIR /server
 RUN bundle install
+WORKDIR /server/wrapped_services

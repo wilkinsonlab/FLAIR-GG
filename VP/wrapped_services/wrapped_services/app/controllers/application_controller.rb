@@ -6,13 +6,13 @@ require "json"
 require "erb"
 require "csv"
 require "require_all"
-require_all "routes"
+require_all "."
 
 warn `pwd`
-DRIADA = "./app/rawdata/out.csv".freeze
 
 configure do
   set :public_folder, "public"
+  set :views, "app/controllers/views/"
   set :bind, "0.0.0.0"
   set :server_settings, timeout: 180
 
