@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: wrapped_services diadra
+  title: FLAIR-GG Wrapped Servies
   description: |-
-    diadra species lookup
+    Services that needed to be "wrapped" to be included in the FLAIR-GG network
   termsOfService: http://swagger.io/terms/
   contact:
     email: mark.wilkinson@upm.es
@@ -11,7 +11,7 @@ info:
     url: http://purl.org/NET/rdflicense/MIT1.0.ttl
   version: 1.0.0
 externalDocs:
-  description: DIADRA
+  description: Driada
   url: https://www.conservacionvegetal.org/driada/
 servers:
   - url: https://vp.bgv.cbgp.upm.es/
@@ -19,12 +19,12 @@ tags:
   - name: species_lookup
     description: lookup species in DIADRA index
 paths:
-  /wrapped_services/diadra:
+  /wrapped_services/driada:
     get:
       tags:
         - species
-      summary: Retrieve diadra species record
-      description: Retrieve diadra species record
+      summary: Retrieve the legal protection status for a species, as well as taxonomic information.
+      description: Check in the Spanish Catalog of Threatened species, the List of Wild Species under Special Protection Regime and the regional spanish catalogs if a species has legal protection in Spain.
       operationId: getDiadraBySpecies
       parameters:
         - name: species

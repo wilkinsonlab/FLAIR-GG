@@ -5,16 +5,14 @@ require "sinatra/base"
 require "json"
 require "erb"
 require "csv"
-require_relative "../../lib/lookups" 
-require_relative "./routes" 
+require "require_all"
+require_all "routes"
 
-#DIADRA = "./diadra/app/rawdata/BD_Driada20240825.csv".freeze
 warn `pwd`
-DIADRA = "./app/rawdata/out.csv".freeze
+DRIADA = "./app/rawdata/out.csv".freeze
 
 configure do
   set :public_folder, "public"
-  set :views, "app/views"
   set :bind, "0.0.0.0"
   set :server_settings, timeout: 180
 
@@ -31,6 +29,4 @@ options "*" do
   200
 end
 
-set_routes
-
-# run! if app_file == $PROGRAM_NAME
+# set_routes

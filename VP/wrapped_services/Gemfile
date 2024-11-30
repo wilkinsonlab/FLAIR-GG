@@ -31,3 +31,5 @@ gem "uri", "~>0.12.2"
 gem "pony", "~>1.13.1"
 gem "xml-simple", "~>1.1.8"
 
+
+gem "require_all", "~> 3.0"
