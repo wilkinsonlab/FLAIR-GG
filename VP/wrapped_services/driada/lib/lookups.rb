@@ -9,6 +9,6 @@ def species_lookup(species:)
     # warn data.inspect
     # warn "found", data["Taxon"]
     next unless data["Taxon"] == species
-    return data.to_json
+    return data
   end
 end
