@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: FLAIR-GG Driada service
+  description: Dríada is a web application designed to detect, in plant inventories, those species that have legal protection in Spain. The database against which it is checked includes all the vascular flora taxa included in the Spanish Catalog of Threatened Species, the List of Wild Species under Special Protection Regime and the regional catalogs
+  version: 1.0.0
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: mark.wilkinson@upm.es
+  license:
+    name: MIT
+    url: http://purl.org/NET/rdflicense/MIT1.0.ttl
+servers:
+  - url: https://vp.bgv.cbgp.upm.es/diadra
+tags:
+  - name: threatened-species
+    description: Check in the Spanish Catalog of Threatened species, the List of Wild Species under Special Protection Regime and the regional spanish catalogs if a species has legal protection in Spain.
+paths:
+  /lookup:
+    get:
+      tags:
+        - threatened-species
+      summary: Retrieve the legal protection status for a species, as well as taxonomic information.
+      description: Returns the level of the legal protection (autonomic or national), taxonomic information, threat category, and the B.O.E. that included that species.
+      operationId: getLegalStatusbyName
+      parameters:
+        - name: species
+          in: query
+          required: true
+          description: Scientific name of the plant to fetch.
+          schema:
+            type: string
+            example: Abies+pinsapo
+      responses:
+        '200':
+          description: Successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/legalStatus'
+        '404':
+          description: Resource not found
+components:
+  schemas:
+    legalStatus:
+      type: object
+      properties:
+        ID:
+          type: integer
+          example: 1
+        Nivel:
+          type: string
+          example: Autonómico
+        Comunidad Autónoma:
+          type: string
+          example: Andalucía
+        Grupo:
+          type: string
+          example: Pinopsida
+        Familia:
+          type: string
+          example: Pinaceae
+        Taxon:
+          type: string
+          example: Abies pinsapo
+        Nombre publicado con errata:
+          type: string
+          example:
+        Otro nombre publicado:
+          type: string
+          example:
+        Nombre asignado según Anthos:
+          type: string
+          example: Abies pinsapo
+        Estado:
+          type: string
+          example: Vigente
+        Categoría:
+          type: string
+          example: En peligro de extinción
+        Boletín Oficial:
+          type: string
+          example: BOJA
+        Número:
+          type: string
+          example: 129
+        Fecha:
+          type: string
+          example: 27 de marzo de 2012
+        Páginas:
+          type: string
+          example: A114-163
+        Población referida:
+          type: string
+          example:
