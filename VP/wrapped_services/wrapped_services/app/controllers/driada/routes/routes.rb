@@ -8,7 +8,7 @@
   get "/driada" do
     # case type.to_s
     # when "text/html"
-      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface"
+      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface", 307
       halt
     # else
     #   redirect "/wrapped-services/driada/interface/form"
@@ -19,7 +19,7 @@
   get "/driada/" do
     # case type.to_s
     # when "text/html"
-      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface"
+      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface", 307
       halt
     # else
     #   redirect "/wrapped-services/driada/interface/form"
@@ -30,7 +30,7 @@
   get "/driada/lookup" do
     unless params["species"]
       # one day, solve this problem in the lighttpd proxy!  grrrrr
-      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface/form"
+      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface/form", 307
       halt
     end
 
@@ -52,7 +52,7 @@
   get "/driada/lookup/" do
     unless params["species"]
       # one day, solve this problem in the lighttpd proxy!  grrrrr
-      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface/form"
+      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface/form", 307
       halt
     end
 
@@ -82,6 +82,6 @@
   end
 
   get "/driada/interface" do
-    redirect "https://wilkinsonlab.github.io/FLAIR-GG/VP/interfaces/wrapped_services.yaml"
+    redirect "https://wilkinsonlab.github.io/FLAIR-GG/VP/interfaces/wrapped_services.yaml", 307
   end
 # end
