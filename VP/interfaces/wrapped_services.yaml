@@ -19,7 +19,7 @@ tags:
   - name: species_lookup
     description: lookup species in DIADRA index
 paths:
-  /wrapped_services/driada/lookup:
+  /wrapped-services/driada/lookup:
     get:
       tags:
         - species
