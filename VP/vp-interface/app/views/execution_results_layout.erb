@@ -31,7 +31,7 @@
               <tr>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                   <td>
-                      <textarea rows="30" cols="65"><%= @results[site] %></textarea>       
+                      <textarea rows="30" cols="65"><%= @results[site].force_encoding("utf-8") %></textarea>       
                   </td>
                 </tr>
             </table>
