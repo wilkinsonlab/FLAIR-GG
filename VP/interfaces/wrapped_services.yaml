@@ -14,7 +14,7 @@ externalDocs:
   description: Driada
   url: https://www.conservacionvegetal.org/driada/
 servers:
-  - url: https://vp.bgv.cbgp.upm.es/
+  - url: https://vp.bgv.cbgp.upm.es
 tags:
   - name: species_lookup
     description: lookup species in DIADRA index
