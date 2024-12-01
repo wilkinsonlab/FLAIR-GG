@@ -10,7 +10,7 @@ end
 get %r{/driada/lookup/?} do
   Sinatra::Base.set :views, "./app/controllers/driada/views"
   unless params["species"]
-    redirect "/driada/interface/form", 303
+    redirect "/driada/lookup/form", 303
     halt
   end
 
@@ -29,7 +29,7 @@ get %r{/driada/lookup/?} do
   end
 end
 
-get %r{/driada/interface/form/?} do
+get %r{/driada/lookup/form/?} do
   Sinatra::Base.set :views, "./app/controllers/driada/views"
   halt erb :lookupform
 end
