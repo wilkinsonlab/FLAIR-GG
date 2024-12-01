@@ -1,87 +1,40 @@
 # frozen_string_literal: false
 
-# def set_routes()
+DRIADA = "./app/controllers/driada/rawdata/out.csv".freeze
 
+get %r{/driada/?} do
+  redirect "/driada/interface", 303
+  halt
+end
 
-  DRIADA = "./app/controllers/driada/rawdata/out.csv".freeze
-
-  get "/driada" do
-    # case type.to_s
-    # when "text/html"
-      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface", 307
-      halt
-    # else
-    #   redirect "/wrapped-services/driada/interface/form"
-    #   halt
-    # end
+get %r{/driada/lookup/?} do
+  Sinatra::Base.set :views, "./app/controllers/driada/views"
+  unless params["species"]
+    redirect "/driada/interface/form", 303
+    halt
   end
 
-  get "/driada/" do
-    # case type.to_s
-    # when "text/html"
-      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface", 307
-      halt
-    # else
-    #   redirect "/wrapped-services/driada/interface/form"
-    #   halt
-    # end
-  end
+  species = params["species"] ? params["species"].strip : ""
+  @species = species
+  @resp = species_lookup(species: species) # "./lib/vp"
 
-  get "/driada/lookup" do
-    unless params["species"]
-      # one day, solve this problem in the lighttpd proxy!  grrrrr
-      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface/form", 307
-      halt
-    end
-
-    species = params["species"] ? params["species"].strip : ""
-    @species = species
-    @resp = species_lookup(species: species) # "./lib/vp"
-
-    request.accept.each do |type|
-      case type.to_s
-      when "text/html"
-        # need to set views for this wrapped service.  This may not be sustainable...
-        halt erb :driada_species
-      else
-        content_type :json
-        halt @resp.to_json
-      end
+  request.accept.each do |type|
+    case type.to_s
+    when "text/html"
+      halt erb :species
+    else
+      content_type :json
+      halt @resp.to_json
     end
   end
-  get "/driada/lookup/" do
-    unless params["species"]
-      # one day, solve this problem in the lighttpd proxy!  grrrrr
-      redirect "https://vp.bgv.cbgp.upm.es/wrapped-services/driada/interface/form", 307
-      halt
-    end
+end
 
-    species = params["species"] ? params["species"].strip : ""
-    @species = species
-    @resp = species_lookup(species: species) # "./lib/vp"
+get %r{/driada/interface/form/?} do
+  Sinatra::Base.set :views, "./app/controllers/driada/views"
+  halt erb :lookupform
+end
 
-    request.accept.each do |type|
-      case type.to_s
-      when "text/html"
-        # need to set views for this wrapped service.  This may not be sustainable...
-        halt erb :driada_species
-      else
-        content_type :json
-        halt @resp.to_json
-      end
-    end
-  end
-
-  get "/driada/interface/form" do
-    # need to set views for this wrapped service.  This may not be sustainable...
-    halt erb :driada_lookupform
-  end
-  get "/driada/interface/form/" do
-    # need to set views for this wrapped service.  This may not be sustainable...
-    halt erb :driada_lookupform
-  end
-
-  get "/driada/interface" do
-    redirect "https://wilkinsonlab.github.io/FLAIR-GG/VP/interfaces/wrapped_services.yaml", 307
-  end
+get %r{/driada/interface/?} do
+  halt erb :interface
+end
 # end

@@ -4,7 +4,7 @@ services:
   diadra:
     image: markw/wrapped_services:0.0.3
     restart: always
-    hostname: "diadra"
+    hostname: "wrappedservices"
     ports:
       - "9000:4567"
     command: ruby /server/wrapped_services/app/controllers/application_controller.rb -o 0.0.0.0
