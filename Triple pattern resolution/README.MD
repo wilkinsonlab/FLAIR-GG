@@ -1,4 +1,4 @@
-# Triple pattern fragments resolultion - Project Overview
+# Triple pattern fragments resolultion
 
 This project consists of a set of functions for transforming a SPARQL query into Triple Pattern Fragments (TPF) server requests. The functions are designed to transform a SPARQL query into TPF request URLs, interact with a TPF service to fetch data, insert the retrieved triples into a specified GraphDB named graph, execute the query in that named graph's SPARQL endpoint and returning the results.
 
