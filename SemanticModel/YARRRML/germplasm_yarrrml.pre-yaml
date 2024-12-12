@@ -396,6 +396,6 @@ prefixes:
   xsd: http://www.w3.org/2001/XMLSchema#
 sources:
   source_cde_test:
-    access: germplasm.csv
+    access: /mnt/data/germplasm.csv
     iterator: $
     referenceFormulation: csv

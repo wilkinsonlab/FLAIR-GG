@@ -419,6 +419,6 @@ prefixes:
   xsd: http://www.w3.org/2001/XMLSchema#
 sources:
   source_cde_test:
-    access: location.csv
+    access: /mnt/data/location.csv
     iterator: $
     referenceFormulation: csv
