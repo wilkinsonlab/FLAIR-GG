@@ -1,0 +1,39 @@
+mapping:
+  20241120160130448500_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Germplasm
+      predicate: sio:SIO_000229
+    - objects:
+        type: iri
+        value: prov:Activity
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: sio:SIO_1049
+      predicate: rdf:type
+    - objects:
+        datatype: xsd:string
+        value: $(collection_comment)
+      predicate: rdfs:comment
+    sources:
+    - source_cde_test
+    subjects: this:$(bgvid)_$(uniqid)#Collection
+
+prefixes:
+  dwc: http://rs.tdwg.org/dwc/terms/
+  edam: http://edamontology.org/
+  efo: https://www.ebi.ac.uk/efo/
+  fao: https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#
+  prov: http://www.w3.org/ns/prov#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  sio: http://semanticscience.org/resource/
+  this: http://my_example.com/
+  xsd: http://www.w3.org/2001/XMLSchema#
+sources:
+  source_cde_test:
+    access: /mnt/data/germplasm.csv
+    iterator: $
+    referenceFormulation: csv
