@@ -182,7 +182,7 @@ mapping:
   20241120160130448785_source_cde_test:
     predicateobject:
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(WFO_vernacular_name)
       predicate: dwc:vernacularName
     - objects:
@@ -194,7 +194,7 @@ mapping:
         value: this:$(uniqid)#WFO_scientific_name
       predicate: dwc:sientificName
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(WFO_scientific_name_authorship)
       predicate: dwc:sientificNameAuthorship
     - objects:
@@ -232,7 +232,7 @@ mapping:
   20241120160130448852_source_cde_test:
     predicateobject:
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(chosen_taxonomy_vernacular_name)
       predicate: dwc:vernacularName
     - objects:
@@ -244,7 +244,7 @@ mapping:
         value: this:$(uniqid)#Chosen_taxonomy_scientific_name
       predicate: dwc:sientificName
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(chosen_taxonomy_scientific_name_authorship)
       predicate: dwc:sientificNameAuthorship
     - objects:
@@ -360,11 +360,11 @@ mapping:
   20241120160130449143_source_cde_test:
     predicateobject:
     - objects:
-        type: iri
+        datatype: xsd:string
         value: fao:endangerment_category
       predicate: rdf:type
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(lespre_endangerment_category)
       predicate: sio:SIO_000300
     sources:
