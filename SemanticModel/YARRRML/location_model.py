@@ -55,8 +55,8 @@ data = {
 
     
     ["this:$(uniqid)#GeoLocation","rdf:type","geo:point","iri"],
-    ["this:$(uniqid)#GeoLocation","rdfs:comment","$(location_comment)","iri"],
-    ["this:$(uniqid)#GeoLocation","rdfs:comment","$(geographical_areas)","iri"],
+    ["this:$(uniqid)#GeoLocation","rdfs:comment","$(location_comment)","xsd:string"],
+    ["this:$(uniqid)#GeoLocation","rdfs:comment","$(geographical_areas)","xsd:string"],
     ["this:$(uniqid)#GeoLocation","bfo:located_in_at_all_times","this:$(uniqid)#Soil_type","iri"],
     ["this:$(uniqid)#GeoLocation","sio:SIO_000061","this:$(uniqid)#Country","iri"],
     ["this:$(uniqid)#Country","rdf:type","sio:SIO_000664","iri"],
@@ -69,12 +69,12 @@ data = {
     
     ["this:$(uniqid)#GeoLocation","geo:longitude","$(longitude)","xsd:float"],
     ["this:$(uniqid)#GeoLocation","geo:latitude","$(latitude)","xsd:float"],
-    ["this:$(uniqid)#GeoLocation","bco:measurementMethod","$(coordinate_measurement_method)","xsd:float"],
+    ["this:$(uniqid)#GeoLocation","bco:measurementMethod","$(coordinate_measurement_method)","xsd:string"],
     ["this:$(uniqid)#GeoLocation","bco:coordinateUncertantyInMeters","$(coordinate_uncertanty_meters)","xsd:float"],
     ["this:$(uniqid)#GeoLocation","bco:minimumElevationInMeters","$(location_minimum_elevation_meters)","xsd:float"],
     ["this:$(uniqid)#GeoLocation","bco:maximumElevationInMeters","$(location_maximum_elevation_meters)","xsd:float"],
     ["this:$(uniqid)#GeoLocation","sio:SIO_001184","$(location_slope)","xsd:float"],
-    ["this:$(uniqid)#GeoLocation","dwc:geodeticDatum","$(geodetic_datum)","xsd:float"],
+    ["this:$(uniqid)#GeoLocation","dwc:geodeticDatum","$(geodetic_datum)","xsd:string"],
 
     ["this:$(uniqid)#GeoLocation","sio:SIO_000008","this:$(uniqid)#Threat","iri"],
     ["this:$(uniqid)#Threat", "sio:SIO_000300", "$(threat)", "xsd:string"],
