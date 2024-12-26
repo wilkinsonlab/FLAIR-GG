@@ -35,11 +35,11 @@ mapping:
         value: geo:point
       predicate: rdf:type
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(location_comment)
       predicate: rdfs:comment
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(geographical_areas)
       predicate: rdfs:comment
     - objects:
@@ -59,7 +59,7 @@ mapping:
         value: $(latitude)
       predicate: geo:latitude
     - objects:
-        datatype: xsd:float
+        datatype: xsd:string
         value: $(coordinate_measurement_method)
       predicate: bco:measurementMethod
     - objects:
@@ -79,7 +79,7 @@ mapping:
         value: $(location_slope)
       predicate: sio:SIO_001184
     - objects:
-        datatype: xsd:float
+        datatype: xsd:string
         value: $(geodetic_datum)
       predicate: dwc:geodeticDatum
     - objects:
