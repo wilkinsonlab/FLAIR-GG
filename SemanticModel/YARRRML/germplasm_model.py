@@ -59,21 +59,21 @@ data = {
     ["this:$(uniqid)#Plant_determination_process_chosen_taxonomy", "rdf:type", "prov:activity", "iri"],
     ["this:$(uniqid)#Plant_determination_process_chosen_taxonomy", "rdf:type", "sio:SIO_000006", "iri"],
 
-    ["this:$(uniqid)#Plant_identification_WFO", "dwc:vernacularName", "$(WFO_vernacular_name)", "iri"],
+    ["this:$(uniqid)#Plant_identification_WFO", "dwc:vernacularName", "$(WFO_vernacular_name)", "xsd:string"],
     ["this:$(uniqid)#Plant_identification_WFO", "rdf:type", "dwc:Taxon", "iri"],
     ["this:$(uniqid)#Plant_identification_WFO", "dwc:sientificName", "this:$(uniqid)#WFO_scientific_name", "iri"],
-    ["this:$(uniqid)#Plant_identification_WFO", "dwc:sientificNameAuthorship", "$(WFO_scientific_name_authorship)", "iri"],
+    ["this:$(uniqid)#Plant_identification_WFO", "dwc:sientificNameAuthorship", "$(WFO_scientific_name_authorship)", "xsd:string"],
 
     ["this:$(uniqid)#WFO_scientific_name", "rdf:type", "dwc:scientificName", "iri"],
     ["this:$(uniqid)#WFO_scientific_name", "sio:SIO_000300", "$(WFO_scientific_name)", "xsd:string"],
     ["this:$(uniqid)#WFO_scientific_name", "dwc:nameAccordingTo", "WFO (2024): World Flora Online. Published on the Internet;http://www.worldfloraonline.org", "xsd:string"],
     ["this:$(uniqid)#WFO_scientific_name", "dwc:nameAccordingToID", "https://www.worldfloraonline.org/", "iri"],
 
-    ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "dwc:vernacularName", "$(chosen_taxonomy_vernacular_name)", "iri"],
+    ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "dwc:vernacularName", "$(chosen_taxonomy_vernacular_name)", "xsd:string"],
     ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "rdf:type", "dwc:Taxon", "iri"],
     ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "dwc:sientificName", "this:$(uniqid)#Chosen_taxonomy_scientific_name", "iri"],
 
-    ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "dwc:sientificNameAuthorship", "$(chosen_taxonomy_scientific_name_authorship)", "iri"],
+    ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "dwc:sientificNameAuthorship", "$(chosen_taxonomy_scientific_name_authorship)", "xsd:string"],
 
     ["this:$(uniqid)#Chosen_taxonomy_scientific_name", "rdf:type", "dwc:scientificName", "iri"],
     ["this:$(uniqid)#Chosen_taxonomy_scientific_name", "sio:SIO_000300", "$(chosen_taxonomy_scientific_name)", "xsd:string"],
@@ -102,9 +102,9 @@ data = {
     ["this:$(uniqid)#Endangerment_assesment_process_IUCN", "rdf:type", "prov:activity", "iri"],
  
     ["this:$(uniqid)#Endangerment_category_LESPRE", "rdf:type", "fao:endangerment_category", "iri"],
-    ["this:$(uniqid)#Endangerment_category_LESPRE", "sio:SIO_000300", "$(lespre_endangerment_category)", "iri"],
+    ["this:$(uniqid)#Endangerment_category_LESPRE", "sio:SIO_000300", "$(lespre_endangerment_category)", "xsd:string"],
     ["this:$(uniqid)#Endangerment_category_IUCN", "rdf:type", "fao:endangerment_category", "iri"],
-    ["this:$(uniqid)#Endangerment_category_IUCN", "sio:SIO_000300", "$(iucn_endangerment_category)", "iri"],
+    ["this:$(uniqid)#Endangerment_category_IUCN", "sio:SIO_000300", "$(iucn_endangerment_category)", "xsd:string"],
 
 
 
