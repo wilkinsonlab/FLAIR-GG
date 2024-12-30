@@ -42,7 +42,7 @@ get "/:type" do
   yarrrml = "/mnt/data/#{type}_yarrrml.yaml"
 
   # Call the splitter with your input CSV file and desired number of lines per file
-  input_csv_file = '/mnt/data/#{type}.csv'
+  input_csv_file = "/mnt/data/#{type}.csv"
   FileUtils.cp(input_csv_file, "#{input_csv_file}_BAK")
   lines_per_file = 200
   split_csv(input_csv_file, lines_per_file)
