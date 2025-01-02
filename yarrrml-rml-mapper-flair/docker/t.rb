@@ -53,9 +53,16 @@ get "/:type" do
     FileUtils.cp(file, destination_file)
 
     # Execute the operation on the copied file
-    _a, _b, _c = Open3.capture3("bash map.sh #{yarrrml} --outputfile /mnt/data/tmp/#{File.basename(file)}.#{extension} --serialization #{serialization}")
-
-    puts "Copied and processed #{File.basename(file)}"
+    warn "BEGINNING TRANSFORMATION"
+    begin
+      warn "starting"
+      _a, _b, _c = Open3.capture3("bash map.sh #{yarrrml} --outputfile /mnt/data/tmp/#{File.basename(file)}.#{extension} --serialization #{serialization}")
+      warn "ending"
+    rescue
+     warn "\n\nRDFizer FAILED completely for some unknown reason... see docker logs"
+    end
+    warn "ANY RDFIXER ERRORS ARE HERE:  #{_b}"
+    warn "Copied and processed #{File.basename(file)}"
   end
 
   Dir.glob(File.join("/mnt/data/tmp", "*.#{extension}")) do |file|

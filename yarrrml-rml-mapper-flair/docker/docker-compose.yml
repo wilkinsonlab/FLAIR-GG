@@ -2,7 +2,7 @@ version: "3"
 services:
   
   yarrml-rdfizer: 
-    image: markw/yarrrml-rdfizer-flair:0.0.9
+    image: markw/yarrrml-rdfizer-flair:0.0.91
 
     environment:
       - SERIALIZATION=nquads
