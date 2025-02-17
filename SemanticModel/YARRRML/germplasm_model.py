@@ -31,8 +31,8 @@ data = {
     ["this:$(uniqid)#Germplasm", "sio:SIO_000231", "this:$(uniqid)#Endangerment_assesment_process_IUCN", "iri"],
     ["this:$(uniqid)#Germplasm", "prov:wasUsedBy", "this:$(uniqid)#Endangerment_assesment_process_LESPRE", "iri"],
     ["this:$(uniqid)#Germplasm", "sio:SIO_000231", "this:$(uniqid)#Endangerment_assesment_process_IUCN", "iri"],
-    ["this:$(uniqid)#Endangerment_assesment_process", "sio:SIO_000229", "this:$(uniqid)#Endangerment_category_LESPRE", "xsd:string"],
-    ["this:$(uniqid)#Endangerment_assesment_process", "sio:SIO_000229", "this:$(uniqid)#Endangerment_category_IUCN", "xsd:string"],
+    ["this:$(uniqid)#Endangerment_assesment_process", "sio:SIO_000229", "this:$(uniqid)#Endangerment_category_LESPRE", "iri"],
+    ["this:$(uniqid)#Endangerment_assesment_process", "sio:SIO_000229", "this:$(uniqid)#Endangerment_category_IUCN", "iri"],
       
 
     ["this:$(bgvid)_$(uniqid)#Collection","rdf:type","prov:Activity","iri"],
