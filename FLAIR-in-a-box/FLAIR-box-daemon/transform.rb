@@ -45,7 +45,8 @@ end
 
 def execute
   warn "executing transform"
-  purge_nq
+#  purge_nq
+  purge_ttl
   @datatype_list = Dir["/data/*.csv"]
   @datatype_list.each do |d|
     datatype = d.match(%r{.+/([^.]+)\.csv})[1]
@@ -58,10 +59,10 @@ def execute
 end
 
 def load_flair
-  files = Dir["/data/triples/*.nq"]
+  files = Dir["/data/triples/*.ttl"]
   files.each do |f|
     warn "Processing file #{f}"
-    datatype = f.match(%r{.+/([^.]+)\.nq})[1]
+    datatype = f.match(%r{.+/([^.]+)\.ttl})[1]
     content = File.read(f)
     content.gsub!(/<\s+/, "<")
     write_to_graphdb(content, datatype)
@@ -74,13 +75,24 @@ def write_to_graphdb(concatenated, reponame)
   pass = ENV.fetch("GraphDB_Pass", nil)
   network = ENV["networkname"] || "graphdb"
   url = "http://#{network}:7200/repositories/#{reponame}/statements"
-  headers = { content_type: "application/n-quads" }
+#  headers = { content_type: "application/n-quads" }
+  headers = { content_type: "text/turtle" }
   HTTPUtils.put(url, headers, concatenated, user, pass)
 end
 
 def purge_nq
   begin
     `rm -rf /data/triples/*.nq`
+  rescue StandardError
+    warn "Deleting the exisiting .nq files failed!"
+  ensure
+    warn "looks like it is already clean in here!"
+  end
+end
+
+def purge_ttl
+  begin
+    `rm -rf /data/triples/*.ttl`
   rescue StandardError
     warn "Deleting the exisiting .nq files failed!"
   ensure
