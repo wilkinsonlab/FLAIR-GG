@@ -56,7 +56,7 @@ services:
       - {PREFIX}-default
 
   flair-box-daemon: 
-    image: markw/flair-box-daemon:0.0.6
+    image: markw/flair-box-daemon:0.0.7
     environment:
       GraphDB_User: ${GraphDB_User}
       GraphDB_Pass: ${GraphDB_Pass}
@@ -77,7 +77,7 @@ services:
     hostname: yarrrml-rdfizer
     environment:
       # (nquads (default), trig, trix, jsonld, hdt, turtle)
-      - SERIALIZATION=nquads
+      - SERIALIZATION=turtle
     volumes:
       - ./data:/mnt/data
     networks:
