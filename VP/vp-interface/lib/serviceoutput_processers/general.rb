@@ -9,7 +9,7 @@ def process_and_upload_output(results: )  # results[provider] = csv/json
 
     resp = RestClient::Request.execute(
         method: :put,
-        url: "https://bgv.cbgp.upm.es/DAV/home/LDP/#{key}",
+        url: "https://bgv.cbgp.upm.es/DAV/home/LDP/FLAIR/#{key}",
         content_type: :json,
         payload: results.to_json, 
         user: "ldp",

@@ -1,5 +1,5 @@
 mapping:
-  20241120160130448500_source_cde_test:
+  20250217170823952077_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -20,7 +20,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(bgvid)_$(uniqid)#Collection
-  20241120160130448551_source_cde_test:
+  20250217170823952107_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -85,7 +85,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Germplasm
-  20241120160130448582_source_cde_test:
+  20250217170823952113_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -102,7 +102,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Plant_determination_process_WFO
-  20241120160130448618_source_cde_test:
+  20250217170823952121_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -119,7 +119,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Plant_determination_process_chosen_taxonomy
-  20241120160130448650_source_cde_test:
+  20250217170823952126_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -132,7 +132,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Endangerment_assesment_process
-  20241120160130448684_source_cde_test:
+  20250217170823952131_source_cde_test:
     predicateobject:
     - objects:
         datatype: xsd:string
@@ -145,7 +145,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#identifier
-  20241120160130448715_source_cde_test:
+  20250217170823952136_source_cde_test:
     predicateobject:
     - objects:
         datatype: xsd:string
@@ -162,7 +162,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Accession_number
-  20241120160130448749_source_cde_test:
+  20250217170823952143_source_cde_test:
     predicateobject:
     - objects:
         datatype: xsd:string
@@ -179,10 +179,10 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#National_catalogue_code
-  20241120160130448785_source_cde_test:
+  20250217170823952151_source_cde_test:
     predicateobject:
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(WFO_vernacular_name)
       predicate: dwc:vernacularName
     - objects:
@@ -194,7 +194,7 @@ mapping:
         value: this:$(uniqid)#WFO_scientific_name
       predicate: dwc:sientificName
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(WFO_scientific_name_authorship)
       predicate: dwc:sientificNameAuthorship
     - objects:
@@ -208,7 +208,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Plant_identification_WFO
-  20241120160130448820_source_cde_test:
+  20250217170823952160_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -229,10 +229,10 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#WFO_scientific_name
-  20241120160130448852_source_cde_test:
+  20250217170823952167_source_cde_test:
     predicateobject:
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(chosen_taxonomy_vernacular_name)
       predicate: dwc:vernacularName
     - objects:
@@ -244,7 +244,7 @@ mapping:
         value: this:$(uniqid)#Chosen_taxonomy_scientific_name
       predicate: dwc:sientificName
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(chosen_taxonomy_scientific_name_authorship)
       predicate: dwc:sientificNameAuthorship
     - objects:
@@ -258,7 +258,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Plant_identification_chosen_taxonomy
-  20241120160130448884_source_cde_test:
+  20250217170823952172_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -279,7 +279,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Chosen_taxonomy_scientific_name
-  20241120160130448918_source_cde_test:
+  20250217170823952178_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -292,7 +292,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#chosen_taxonomy_identifier
-  20241120160130448948_source_cde_test:
+  20250217170823952183_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -305,7 +305,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#WFO_identifier
-  20241120160130448982_source_cde_test:
+  20250217170823952189_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -318,7 +318,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Determination_status_chosen_taxonomy
-  20241120160130449012_source_cde_test:
+  20250217170823952193_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -331,7 +331,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Determination_status_WFO
-  20241120160130449043_source_cde_test:
+  20250217170823952198_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -344,7 +344,7 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Endangerment_assesment_process_LESPRE
-  20241120160130449111_source_cde_test:
+  20250217170823952242_source_cde_test:
     predicateobject:
     - objects:
         type: iri
@@ -357,27 +357,27 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Endangerment_assesment_process_IUCN
-  20241120160130449143_source_cde_test:
+  20250217170823952248_source_cde_test:
     predicateobject:
     - objects:
         type: iri
         value: fao:endangerment_category
       predicate: rdf:type
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(lespre_endangerment_category)
       predicate: sio:SIO_000300
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Endangerment_category_LESPRE
-  20241120160130449173_source_cde_test:
+  20250217170823952253_source_cde_test:
     predicateobject:
     - objects:
         type: iri
         value: fao:endangerment_category
       predicate: rdf:type
     - objects:
-        type: iri
+        datatype: xsd:string
         value: $(iucn_endangerment_category)
       predicate: sio:SIO_000300
     sources:
@@ -396,6 +396,6 @@ prefixes:
   xsd: http://www.w3.org/2001/XMLSchema#
 sources:
   source_cde_test:
-    access: germplasm.csv
+    access: /mnt/data/germplasm.csv
     iterator: $
     referenceFormulation: csv

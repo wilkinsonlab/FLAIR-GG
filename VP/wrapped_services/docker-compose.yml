@@ -1,0 +1,25 @@
+version: "3.0"
+services:
+
+  diadra:
+    image: markw/wrapped_services:0.0.3
+    restart: always
+    hostname: "wrappedservices"
+    ports:
+      - "9000:4567"
+    command: ruby /server/wrapped_services/app/controllers/application_controller.rb -o 0.0.0.0
+    environment:
+      - RUBYOPT=-W0 -KU
+#      - RUBYOPT=-W0 -KU -E utf-8:utf-8
+#    depends_on:
+#      - swagger
+
+  # swagger:
+  #   image: swaggerapi/swagger-ui:latest
+  #   restart: always
+  #   ports:
+  #     - "4566:8080"
+  #   environment:
+  #     - SUPPORTED_SUBMIT_METHODS=${SUPPORTED_SUBMIT_METHODS}
+  #     - URLS=${URLS}
+  #     - BASE_URL='/swagger'   # for our reverse proxy

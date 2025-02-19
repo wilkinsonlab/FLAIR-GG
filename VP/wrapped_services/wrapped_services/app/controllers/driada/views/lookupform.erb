@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  
+  <%= erb :_head %>
+
+
+  <section class="c-posts">
+
+    <article class="c-posts__item">
+
+      <h2>Enter Taxon Name </h2>
+      <br/>
+      <form action="/wrapped-services/driada/lookup" method="GET">
+      <input type="text" width="40" name="species"/>
+      <br/>
+      <input type="submit" value="Species Lookup"/>
+      </form>
+
+
+    </article>
+
+  </section>
+
+
+  <%= erb :_footer %>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <!--[if lt IE 7]>
+      <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+      <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+    <![endif]-->
+  </body>
+</html>

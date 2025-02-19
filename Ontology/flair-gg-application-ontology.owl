@@ -98,10 +98,22 @@
 
     <!-- https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#Servicetypes -->
 
-    <owl:Class rdf:about="https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#CollectionsInArea">
+    <owl:Class rdf:about="https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#Geographic">
         <rdfs:subClassOf rdf:resource="http://edamontology.org/operation_0224"/>
-        <rdfs:label>Collections In Area</rdfs:label>
+        <rdfs:label>Geographic Services</rdfs:label>
     </owl:Class>
+
+
+    <owl:Class rdf:about="https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#Lookup">
+        <rdfs:subClassOf rdf:resource="http://edamontology.org/operation_0224"/>
+        <rdfs:label>Lookup services</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#Driada">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#Lookup"/>
+        <rdfs:label>Driada species lookup</rdfs:label>
+    </owl:Class>
+
 </rdf:RDF>
 
 

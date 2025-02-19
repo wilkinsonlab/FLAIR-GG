@@ -2,36 +2,39 @@
 
 def set_routes(classes: allclasses)
   set :server_settings, timeout: 180
-  set :public_folder, 'public'
+  set :public_folder, "public"
 
-  get '/' do
-    redirect '/flair-gg-vp-server/resources'
+  get "/" do
+    redirect "/flair-gg-vp-server/resources"
   end
 
-  get '/flair-gg-vp-server' do
+  get %r{/flair-gg-vp-server/?} do
     content_type :json
     response.body = JSON.dump(Swagger::Blocks.build_root_json(classes))
   end
 
-  get '/flair-gg-vp-server/force-refresh' do
-    warn 'initializing refresh in routes'
-    unless File.exist?('./cache/REFRESHING') # multiple browser calls are a problem!
+  get %r{/flair-gg-vp-server/force-refresh/?} do
+    redirect "/flair-gg-vp-server/resources/force-refresh" # before do collect_data_services will be called, and this will refresh
+  end
+  get %r{/flair-gg-vp-server/resources/force-refresh/?} do
+    warn "initializing refresh in routes"
+    unless File.exist?("./cache/REFRESHING") # multiple browser calls are a problem!
       VP.restart
       @discoverables = VP.current_vp.get_resources # "./lib/metadata_functions"
-      FileUtils.rm_f('./cache/servicetypes.json') # remove the cache
+      FileUtils.rm_f("./cache/servicetypes.json") # remove the cache
       @services = VP.current_vp.collect_data_services
     end
-    redirect '/flair-gg-vp-server/resources' # before do collect_data_services will be called, and this will refresh
+    redirect "/flair-gg-vp-server/resources" # before do collect_data_services will be called, and this will refresh
   end
 
-  get '/flair-gg-vp-server/resources' do
+  get %r{/flair-gg-vp-server/resources/?} do
     @discoverables = VP.current_vp.get_resources # "./lib/metadata_functions"
-    @message = 'All Resources'
+    @message = "All Resources"
     request.accept.each do |type|
       case type.to_s
-      when 'text/html'
+      when "text/html"
         halt erb :discovered_layout
-      when 'application/json'
+      when "application/json"
         content_type :json
         halt @discoverables.to_json
       end
@@ -40,15 +43,15 @@ def set_routes(classes: allclasses)
     # erb :discovered_layout
   end
 
-  get '/flair-gg-vp-server/keyword-search' do
-    keyword = params['keyword'].strip
+  get %r{/flair-gg-vp-server/keyword-search/?} do
+    keyword = params["keyword"].strip
     @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword) # "./lib/vp"
-    @message = 'Keyword Search Results'
+    @message = "Keyword Search Results"
     request.accept.each do |type|
       case type.to_s
-      when 'text/html'
+      when "text/html"
         halt erb :discovered_layout
-      when 'application/json'
+      when "application/json"
         content_type :json
         halt @discoverables.to_json
       end
@@ -57,16 +60,16 @@ def set_routes(classes: allclasses)
     # erb :discovered_layout
   end
 
-  post '/flair-gg-vp-server/keyword-search' do
+  post %r{/flair-gg-vp-server/keyword-search/?} do
     data = JSON.parse request.body.read.to_s
-    keyword = data['keyword'] ? data['keyword'].strip : ''
+    keyword = data["keyword"] ? data["keyword"].strip : ""
     @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword) # "./lib/vp"
-    @message = 'Keyword Search Results'
+    @message = "Keyword Search Results"
     request.accept.each do |type|
       case type.to_s
-      when 'text/html'
+      when "text/html"
         halt erb :discovered_layout
-      when 'application/json'
+      when "application/json"
         content_type :json
         halt @discoverables.to_json
       end
@@ -75,16 +78,16 @@ def set_routes(classes: allclasses)
     # erb :discovered_layout
   end
 
-  get '/flair-gg-vp-server/ontology-search' do
-    term = params['uri'].strip
-    term = term.gsub(/\S+:/, '') unless term =~ /^http/
+  get %r{/flair-gg-vp-server/ontology-search/?} do
+    term = params["uri"].strip
+    term = term.gsub(/\S+:/, "") unless term =~ /^http/
     @discoverables = VP.current_vp.ontology_search_shell(term: term) # "./lib/vp"
-    @message = 'Ontology Search Results'
+    @message = "Ontology Search Results"
     request.accept.each do |type|
       case type.to_s
-      when 'text/html'
+      when "text/html"
         halt erb :discovered_layout
-      when 'application/json'
+      when "application/json"
         content_type :json
         halt @discoverables.to_json
       end
@@ -92,17 +95,18 @@ def set_routes(classes: allclasses)
     error 406
     # erb :discovered_layout
   end
-  post '/flair-gg-vp-server/ontology-search' do
+
+  post %r{/flair-gg-vp-server/ontology-search/?} do
     data = JSON.parse request.body.read.to_s
-    term = data['uri'] ? data['uri'].strip : ''
-    term = term.gsub(/\S+:/, '') unless term =~ /^http/
+    term = data["uri"] ? data["uri"].strip : ""
+    term = term.gsub(/\S+:/, "") unless term =~ /^http/
     @discoverables = VP.current_vp.ontology_search_shell(term: term) # "./lib/vp"
-    @message = 'Ontology Search Results'
+    @message = "Ontology Search Results"
     request.accept.each do |type|
       case type.to_s
-      when 'text/html'
+      when "text/html"
         halt erb :discovered_layout
-      when 'application/json'
+      when "application/json"
         content_type :json
         halt @discoverables.to_json
       end
@@ -116,14 +120,14 @@ def set_routes(classes: allclasses)
   #   @servicecollection, @commongetparams, @commonpostparams = VP.current_vp.retrieve_sevices(termuri: termuri) # "./lib/vp"
   #   erb :services_layout
   # end
-  get '/flair-gg-vp-server/retrieve-services' do
-    termuri = params['services']
+  get %r{/flair-gg-vp-server/retrieve-services/?} do
+    termuri = params["services"]
     @servicecollection, @commongetparams, @commonpostparams, @accept = VP.current_vp.retrieve_sevices(termuri: termuri) # "./lib/vp"
     request.accept.each do |type|
       case type.to_s
-      when 'text/html'
+      when "text/html"
         halt erb :services_layout
-      when 'application/json'
+      when "application/json"
         @minimized_collection = @servicecollection.minimize_service_collection(commongetparams: @commongetparams,
                                                                                commonpostparams: @commonpostparams)
         @servicecollection.vpgraph = nil
@@ -135,83 +139,83 @@ def set_routes(classes: allclasses)
     error 406
   end
 
-  post '/flair-gg-vp-server/execute-data-services' do
+  post %r{/flair-gg-vp-server/execute-data-services/?} do
     # three possibilities:
     # 1) they send key/value pairs as params from form interface
     # 2) they send _request_body from the form interfaces
     # 3) they send JSON as the body
-    if request.content_type == 'application/json'
+    if request.content_type == "application/json"
       j = JSON.parse(request.body.read.to_s)
       j = j.first if j.is_a? Array
       # {uri: serviceuri,
       #  _request_body: {json: data},
       #  service_list: [endpoint, endpoint, endpoint]
       # }   # this is passed to all services
-      serviceuri = j['uri'].gsub(%r{.*[/\#](\S+)}, '\1') # take fragment only
-      servicelabel = serviceuri.downcase.gsub(/\s+/, '_')
+      serviceuri = j["uri"].gsub(%r{.*[/\#](\S+)}, '\1') # take fragment only
+      servicelabel = serviceuri.downcase.gsub(/\s+/, "_")
       analytics = "https://wilkinsonlab.github.io/FLAIR-GG-Analytics/lab/index.html?path=FLAIR-GG%2F#{servicelabel}.ipynb"
       location, results = VP.current_vp.execute_data_services_api(json: j)
       request.accept.each do |type|
         case type.to_s
-        when 'application/json'
+        when "application/json"
           content_type :json
-          halt({ 'key' => location, 'jupyter' => analytics, 'results' => results }.to_json)
+          halt({ "key" => location, "jupyter" => analytics, "results" => results }.to_json)
         end
       end
     else
-      @servicelabel = params['servicelabel'].downcase.gsub(/\s+/, '_') # no spaces in service filenames - label leads to jupyter file
+      @servicelabel = params["servicelabel"].downcase.gsub(/\s+/, "_") # no spaces in service filenames - label leads to jupyter file
       @location, @results = VP.current_vp.execute_data_services(params: params)
 
       request.accept.each do |type|
         case type.to_s
-        when 'text/html'
+        when "text/html"
           halt erb :execution_results_layout
-        when 'application/json'
+        when "application/json"
           content_type :json
-          halt({ 'location' => location, 'jupyter' => @servicelabel }.to_json)
+          halt({ "location" => location, "jupyter" => @servicelabel }.to_json)
         end
       end
     end
     error 406
   end
 
-  get '/flair-gg-vp-server/wordcloud' do
+  get %r{/flair-gg-vp-server/wordcloud/?} do
     @freqs = Wordcloud.new.count_words # "./lib/wordcloud"
     erb :wordcloud
   end
 
-  get '/flair-gg-vp-server/wordcloud/force-refresh' do
+  get %r{/flair-gg-vp-server/wordcloud/force-refresh/?} do
     @discoverables = {}
     @freqs = {}
-    if File.exist?('./cache/WCREFRESHING') # multiple browser calls are a problem!
+    if File.exist?("./cache/WCREFRESHING") # multiple browser calls are a problem!
       erb :discovered_layout
     else
-      f = open('./cache/WCREFRESHING', 'w') # multiple browser calls are a problem!
-      f.puts 'WCREFRESHING'
+      f = open("./cache/WCREFRESHING", "w") # multiple browser calls are a problem!
+      f.puts "WCREFRESHING"
       f.close
 
-      warn 'forced refresh'
+      warn "forced refresh"
       wc = Wordcloud.new(refresh: true)
       @freqs = wc.count_words
       warn "received #{@freqs.length}"
-      FileUtils.rm_f('./cache/WCREFRESHING')
+      FileUtils.rm_f("./cache/WCREFRESHING")
     end
     erb :wordcloud
   end
 
-  get '/flair-gg-vp-server/refresh-servicetypes' do
-    FileUtils.rm_f('./cache/servicetypes.json') # remove the cache
+  get %r{/flair-gg-vp-server/refresh-servicetypes/?} do
+    FileUtils.rm_f("./cache/servicetypes.json") # remove the cache
     @services = VP.current_vp.collect_data_services # refresh
-    redirect '/flair-gg-vp-server/resources' # before do collect_data_services will be called, and this will refresh
+    redirect "/flair-gg-vp-server/resources" # before do collect_data_services will be called, and this will refresh
   end
 
   # API Only
-  get '/flair-gg-vp-server/servicetypes' do
-    FileUtils.rm_f('./cache/servicetypes.json') # remove the cache
+  get %r{/flair-gg-vp-server/servicetypes/?} do
+    FileUtils.rm_f("./cache/servicetypes.json") # remove the cache
     @services = VP.current_vp.collect_data_services # refresh
     request.accept.each do |type|
       case type.to_s
-      when 'application/json'
+      when "application/json"
         content_type :json
         halt @services.to_json
       end
