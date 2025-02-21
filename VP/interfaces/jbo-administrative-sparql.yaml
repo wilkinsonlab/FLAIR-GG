@@ -11,7 +11,7 @@ externalDocs:
   url: https://rdf4j.org/documentation/reference/rest-api/
 
 servers:
-  - url: https://bgv.cbgp.upm.es
+  - url: https://jbo.bgv.cbgp.upm.es
     description: SPARQL server for the JBO
 
 tags:
@@ -86,7 +86,7 @@ components:
                   type: "literal"
                   value: "foo"
 paths:
-  /repositories/jbo-administrative:
+  /repositories/administrative:
     get:
       tags:
         - SPARQL
