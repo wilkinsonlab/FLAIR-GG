@@ -31,8 +31,8 @@ data = {
     ["this:$(uniqid)#Germplasm", "sio:SIO_000231", "this:$(uniqid)#Endangerment_assesment_process_IUCN", "iri"],
     ["this:$(uniqid)#Germplasm", "prov:wasUsedBy", "this:$(uniqid)#Endangerment_assesment_process_LESPRE", "iri"],
     ["this:$(uniqid)#Germplasm", "sio:SIO_000231", "this:$(uniqid)#Endangerment_assesment_process_IUCN", "iri"],
-    ["this:$(uniqid)#Endangerment_assesment_process", "sio:SIO_000229", "this:$(uniqid)#Endangerment_category_LESPRE", "iri"],
-    ["this:$(uniqid)#Endangerment_assesment_process", "sio:SIO_000229", "this:$(uniqid)#Endangerment_category_IUCN", "iri"],
+    ["this:$(uniqid)#Endangerment_assesment_process_LESPRE", "sio:SIO_000229", "this:$(uniqid)#Endangerment_category_LESPRE", "iri"],
+    ["this:$(uniqid)#Endangerment_assesment_process_IUCN", "sio:SIO_000229", "this:$(uniqid)#Endangerment_category_IUCN", "iri"],
       
 
     ["this:$(bgvid)_$(uniqid)#Collection","rdf:type","prov:Activity","iri"],
@@ -51,7 +51,7 @@ data = {
     ["this:$(uniqid)#National_catalogue_code","rdf:type","sio:SIO_000115","iri"],
 
     
-    ["this:$(uniqid)#Accession_number","rdf:type","fao:CO_020:0000089","iri"],
+    ["this:$(uniqid)#Accession_number","rdf:type","fao:CO_020_0000089","iri"],
     ["this:$(uniqid)#National_catalogue_code","rdf:type","fao:national_catalogue_code","iri"],
 
     ["this:$(uniqid)#Plant_determination_process_WFO", "rdf:type", "prov:activity", "iri"],
@@ -61,8 +61,8 @@ data = {
 
     ["this:$(uniqid)#Plant_identification_WFO", "dwc:vernacularName", "$(WFO_vernacular_name)", "xsd:string"],
     ["this:$(uniqid)#Plant_identification_WFO", "rdf:type", "dwc:Taxon", "iri"],
-    ["this:$(uniqid)#Plant_identification_WFO", "dwc:sientificName", "this:$(uniqid)#WFO_scientific_name", "iri"],
-    ["this:$(uniqid)#Plant_identification_WFO", "dwc:sientificNameAuthorship", "$(WFO_scientific_name_authorship)", "xsd:string"],
+    ["this:$(uniqid)#Plant_identification_WFO", "dwc:scientificName", "this:$(uniqid)#WFO_scientific_name", "iri"],
+    ["this:$(uniqid)#Plant_identification_WFO", "dwc:scientificNameAuthorship", "$(WFO_scientific_name_authorship)", "xsd:string"],
 
     ["this:$(uniqid)#WFO_scientific_name", "rdf:type", "dwc:scientificName", "iri"],
     ["this:$(uniqid)#WFO_scientific_name", "sio:SIO_000300", "$(WFO_scientific_name)", "xsd:string"],
@@ -71,9 +71,9 @@ data = {
 
     ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "dwc:vernacularName", "$(chosen_taxonomy_vernacular_name)", "xsd:string"],
     ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "rdf:type", "dwc:Taxon", "iri"],
-    ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "dwc:sientificName", "this:$(uniqid)#Chosen_taxonomy_scientific_name", "iri"],
+    ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "dwc:scientificName", "this:$(uniqid)#Chosen_taxonomy_scientific_name", "iri"],
 
-    ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "dwc:sientificNameAuthorship", "$(chosen_taxonomy_scientific_name_authorship)", "xsd:string"],
+    ["this:$(uniqid)#Plant_identification_chosen_taxonomy", "dwc:scientificNameAuthorship", "$(chosen_taxonomy_scientific_name_authorship)", "xsd:string"],
 
     ["this:$(uniqid)#Chosen_taxonomy_scientific_name", "rdf:type", "dwc:scientificName", "iri"],
     ["this:$(uniqid)#Chosen_taxonomy_scientific_name", "sio:SIO_000300", "$(chosen_taxonomy_scientific_name)", "xsd:string"],
