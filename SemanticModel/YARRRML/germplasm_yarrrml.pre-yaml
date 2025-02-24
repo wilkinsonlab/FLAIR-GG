@@ -60,11 +60,11 @@ mapping:
       predicate: prov:wasUsedBy
     - objects:
         type: iri
-        value: this:$(uniqid)#Endangerment_assesment_process_IUCN
+        value: this:$(uniqid)#Endangerment_assesment_process_LESPRE
       predicate: sio:SIO_000231
     - objects:
         type: iri
-        value: this:$(uniqid)#Endangerment_assesment_process_LESPRE
+        value: this:$(uniqid)#Endangerment_assesment_process_IUCN
       predicate: prov:wasUsedBy
     - objects:
         type: iri
