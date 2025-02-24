@@ -29,8 +29,8 @@ data = {
     ["this:$(uniqid)#Plant_determination_process_chosen_taxonomy", "sio:SIO_000229", "this:$(uniqid)#Plant_identification_chosen_taxonomy", "iri"],
     ["this:$(uniqid)#Germplasm", "prov:wasUsedBy", "this:$(uniqid)#Endangerment_assesment_process_LESPRE", "iri"],
     ["this:$(uniqid)#Germplasm", "sio:SIO_000231", "this:$(uniqid)#Endangerment_assesment_process_IUCN", "iri"],
-    ["this:$(uniqid)#Germplasm", "prov:wasUsedBy", "this:$(uniqid)#Endangerment_assesment_process_LESPRE", "iri"],
-    ["this:$(uniqid)#Germplasm", "sio:SIO_000231", "this:$(uniqid)#Endangerment_assesment_process_IUCN", "iri"],
+    ["this:$(uniqid)#Germplasm", "prov:wasUsedBy", "this:$(uniqid)#Endangerment_assesment_process_IUCN", "iri"],
+    ["this:$(uniqid)#Germplasm", "sio:SIO_000231", "this:$(uniqid)#Endangerment_assesment_process_LESPRE", "iri"],
     ["this:$(uniqid)#Endangerment_assesment_process_LESPRE", "sio:SIO_000229", "this:$(uniqid)#Endangerment_category_LESPRE", "iri"],
     ["this:$(uniqid)#Endangerment_assesment_process_IUCN", "sio:SIO_000229", "this:$(uniqid)#Endangerment_category_IUCN", "iri"],
       
