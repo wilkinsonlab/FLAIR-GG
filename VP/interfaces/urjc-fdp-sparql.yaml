@@ -5,15 +5,15 @@ info:
   description: |
     This is a heavily trimmed copy of the RDF4J REST API that includes only the SPARQL endpoint GET and POST definitions
 
-    From this endpoint we serve the JBO Germplasm information (species and status)
+    From this endpoint we serve the URJC FAIR Data Point Metadata (DCAT model)
 
 
 externalDocs:
   url: https://rdf4j.org/documentation/reference/rest-api/
 
 servers:
-  - url: https://jbo.bgv.cbgp.upm.es
-    description: SPARQL server for the JBO
+  - url: https://urjc.bgv.cbgp.upm.es
+    description: SPARQL server for the URJC
 
 tags:
   - name: SPARQL
@@ -87,7 +87,7 @@ components:
                   type: "literal"
                   value: "foo"
 paths:
-  /repositories/germplasm:
+  /repositories/urjc-fdp:
     get:
       tags:
         - SPARQL

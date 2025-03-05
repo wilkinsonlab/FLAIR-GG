@@ -5,15 +5,15 @@ info:
   description: |
     This is a heavily trimmed copy of the RDF4J REST API that includes only the SPARQL endpoint GET and POST definitions
 
-    From this endpoint we serve the JBO Germplasm information (species and status)
+    From this endpoint we serve the BGUSAL Location of Collection information (geo-coordinates, soil type, etc.)
 
 
 externalDocs:
   url: https://rdf4j.org/documentation/reference/rest-api/
 
 servers:
-  - url: https://jbo.bgv.cbgp.upm.es
-    description: SPARQL server for the JBO
+  - url: https://bgusal.bgv.cbgp.upm.es
+    description: SPARQL server for the BGUSAL
 
 tags:
   - name: SPARQL
@@ -87,7 +87,7 @@ components:
                   type: "literal"
                   value: "foo"
 paths:
-  /repositories/germplasm:
+  /repositories/location:
     get:
       tags:
         - SPARQL
