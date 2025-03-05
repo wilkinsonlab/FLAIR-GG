@@ -173,6 +173,8 @@ class VP
 
   def execute_data_services(params:)
     endpoints = params.delete("endpoint") # returns an array of endpoints from the checkboxes
+    return [nil, nil] unless endpoints  # if there are no endpoints checked
+
     accept = params.delete("accept")
     results = {}
     endpoints.each do |ep|

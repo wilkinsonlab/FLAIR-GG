@@ -272,20 +272,27 @@ class Service
   end
 
   def self.execute_get(endpoint:, params:, auth_key: nil, accept: "*/*" )
-    begin
+
+    cleaned = {}
+    params.each do |key, val|
+      val.gsub!(/\r?\n/, " ")
+      cleaned[key] = val
+    end
+
+    #begin
       result = RestClient::Request.execute(
         method: :get,
         url: endpoint,
         headers: {
-          params: params,
+          params: cleaned,
           accept: accept,
           # "auth-key" => ""
         }
       )
-    rescue  => e
-      warn "couldn't execute GET service at #{endpoint}\n #{e.inspect}"
-      result = nil
-    end
+    #rescue  => e
+    #  warn "couldn't execute GET service at #{endpoint}\n #{e.inspect}"
+    #  result = nil
+    #end
     result
   end
 end
