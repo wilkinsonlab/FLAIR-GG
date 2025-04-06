@@ -185,7 +185,7 @@ class VP
       results[endpoint] = result.body if result
     end
     downloadlocation = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
-    [downloadlocation, results]
+    [downloadlocation, results]  # download location is the LDP server URL
   end
 
   def execute_data_services_api(json:)
@@ -205,7 +205,7 @@ v
       results[endpoint] = result.body if result
     end
     downloadlocation = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
-    [downloadlocation, results]
+    [downloadlocation, results]  # download location is the LDP server URL
   end
 
 

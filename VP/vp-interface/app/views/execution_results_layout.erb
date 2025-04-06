@@ -14,9 +14,14 @@
     <%= erb :_sidebar %>
 
       <h2>Analytics</h2>
-      <% @location = @location.match(/.*\/([\S]+)$/)[1] %>
-      <br/>Your Secret Key: <b> <%= @location %> </b>
-      <br/>Copy this and enter it into the "XXXXXXX" variable in the Jupyter notebook at <a href="https://wilkinsonlab.github.io/FLAIR-GG-Analytics/lab/index.html?path=FLAIR-GG%2F<%= @servicelabel %>.ipynb" target="_blank">THIS PAGE</a>
+      <% if @location %>
+        <% @location = @location.match(/.*\/([\S]+)$/)[1] %>
+        <br/>Your Secret Key: <b> <%= @location %> </b>
+        <br/>Copy this and enter it into the "XXXXXXX" variable in the Jupyter notebook at <a href="https://wilkinsonlab.github.io/FLAIR-GG-Analytics/lab/index.html?path=FLAIR-GG%2F<%= @servicelabel %>.ipynb" target="_blank">THIS PAGE</a>
+      <% else %>
+        <br/>CACHING SERVER IS DOWN - results have NOT been stored!!</b>
+      <% end %>
+
       <br/><br/>
       <h2>Results</h2>
       

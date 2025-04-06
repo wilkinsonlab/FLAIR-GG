@@ -172,7 +172,7 @@ def set_routes(classes: allclasses)
           halt erb :execution_results_layout
         when "application/json"
           content_type :json
-          halt({ "location" => location, "jupyter" => @servicelabel }.to_json)
+          halt({ "location" => @location, "jupyter" => @servicelabel }.to_json)
         end
       end
     end
