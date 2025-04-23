@@ -114,6 +114,11 @@
         <rdfs:label>Driada species lookup</rdfs:label>
     </owl:Class>
 
+    <owl:Class rdf:about="https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#IUCN_categorization">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/flair-gg-app/flair-gg-application-ontology.owl#Lookup"/>
+        <rdfs:label>IUCN Risk Categorization</rdfs:label>
+    </owl:Class>
+
 </rdf:RDF>
 
 
