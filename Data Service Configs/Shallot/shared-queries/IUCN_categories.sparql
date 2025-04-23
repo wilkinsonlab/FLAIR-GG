@@ -1,3 +1,10 @@
+#+ summary: the scientific name of the species, and its endangerment status (Vulnerable, Endangered, Critically endangered)
+#+ tags:
+#+   - IUCN_categories
+#+ endpoint_in_url: False
+
+
+
 PREFIX fao: <https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#>
 PREFIX sio: <http://semanticscience.org/resource/>
 PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
