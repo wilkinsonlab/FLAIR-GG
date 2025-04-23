@@ -1,0 +1,51 @@
+{
+  "basePath": "/api-local/",
+  "definitions": { "Message": { "type": "string" } },
+  "host": "bgv.cbgp.upm.es",
+  "info":
+    {
+      "contact":
+        {
+          "name": "Mark Wilkinson",
+          "url": "https://wilkinsonlab.github.io/FLAIR-GG/",
+        },
+      "description": "Shallot services that can be shared by memebers of the FLAIR-GG network",
+      "title": "FLAIR-GG Shallot Services",
+      "version": "local",
+    },
+  "next_commit": null,
+  "paths":
+    {
+      "/IUCN_categories":
+        {
+          "get":
+            {
+              "description": "\n\n```\n#+ summary: the scientific name of the species, and its endangerment status (Vulnerable, Endangered, Critically endangered)\n#+ tags:\n#+   - IUCN_categories\n#+ endpoint_in_url: False\n\n\n\nPREFIX fao: <https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX dwc: <http://rs.tdwg.org/dwc/terms/>\nSELECT DISTINCT ?plant_scientificName ?IUCN_endangerment_category \nWHERE {\n  ?IUCN_endangerment a fao:endangerment_category. \n  ?IUCN_endangerment sio:SIO_000300 ?IUCN_endangerment_category. \n  FILTER(\n    ?IUCN_endangerment_category = \"Vulnerable\" || \n    ?IUCN_endangerment_category = \"Endangered\" || \n    ?IUCN_endangerment_category = \"Critically endangered\"\n  ).\n  ?IUCN_endangerment_assesment sio:SIO_000229 ?IUCN_endangerment.\n  ?germplasm sio:SIO_000231 ?IUCN_endangerment_assesment.\n  ?germplasm sio:SIO_000231 ?WFO_determination_process.\n  ?WFO_determination_process sio:SIO_000229 ?WFO_id.\n  ?WFO_id dwc:scientificName ?WFO_scientificName.\n  ?WFO_scientificName sio:SIO_000300 ?plant_scientificName.\n}\n\n```",
+              "parameters": [],
+              "produces": ["text/csv", "application/json", "text/html"],
+              "responses":
+                {
+                  "200":
+                    {
+                      "description": "Query response",
+                      "schema":
+                        {
+                          "items": { "properties": null, "type": "object" },
+                          "type": "array",
+                        },
+                    },
+                  "default":
+                    {
+                      "description": "Unexpected error",
+                      "schema": { "$ref": "#/definitions/Message" },
+                    },
+                },
+              "summary": "the scientific name of the species, and its endangerment status (Vulnerable, Endangered, Critically endangered)",
+              "tags": ["IUCN_categories"],
+            },
+        },
+    },
+  "prev_commit": null,
+  "schemes": [],
+  "swagger": "2.0",
+}

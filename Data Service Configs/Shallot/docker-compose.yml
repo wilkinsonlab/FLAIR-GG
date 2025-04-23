@@ -1,0 +1,21 @@
+services:
+
+  shallot:
+    image: markw/shallot:0.0.2
+    hostname: "bgvshallot"
+    restart: always
+    volumes:
+    - ./shared-queries/:/home/grlc/queries/
+    - ./config.ini:/home/grlc/grlc/config.default.ini
+    ports:
+     - "8088:80" 
+    networks:
+      - default
+    environment:
+      - DEBUG=true
+      - GRLC_SPARQL_ENDPOINT=http://graphdb:7200/repositories/XXXXX
+
+networks:
+  default:  # need to look this up in every case, to get on the same network as graphdb
+    name: dpp4-ready-to-go_dpp4-default
+    external: true
