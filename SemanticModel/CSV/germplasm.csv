@@ -1,3 +1,3 @@
-bgvid,uniqid,org_name,collection_comment,accession_number,national_catalogue_code,WFO_identifier,chosen_taxonomy_identifier,WFO_vernacular_name,WFO_scientific_name,WFO_scientific_name_authorship,chosen_taxonomy_vernacular_name,chosen_taxonomy_scientific_name,chosen_taxonomy_scientific_name_authorship,WFO_determination_status,chosen_taxonomy_determination_status,chosen_taxonomy_reference,chosen_taxonomy_reference_url,lespre_endangerment_category,iucn_endangerment_category
-bgv123,1234567,UPM BGV,"amazing collection",1234567,ES1234,
-
+uniqid,accession_number,national_catalogue_code,taxon_identifier,scientific_name,scientific_name_authorship,vernacular_name,taxonomy_reference,determination_status,iucn_threat-category,
+321654,483,NC059118,https://www.worldfloraonline.org/taxon/wfo-0000380363,Noccaea montana (L.) F.K.Mey.,(L.) F.K.Mey.,Repollo,WFO (2024): World Flora Online. Published on the Internet;http://www.worldfloraonline.org,
+598456,483,NC059118,https://www.gbif.org/species/7584826,"Thlaspi montanum Bory & Chaub., 1838","Bory & Chaub., 1838",Repollo,GBIF Secretariat (2023). GBIF Backbone Taxonomy. Checklist dataset https://doi.org/10.15468/39omei accessed via GBIF.org on 2025-05-27.,

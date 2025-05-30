@@ -1,0 +1,120 @@
+mapping:
+  20250530123350359321_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: dwc:Taxon
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: sio:000000
+      predicate: rdf:type
+    - objects:
+        datatype: xsd:string
+        value: $(taxonID)
+      predicate: dwc:taxonID
+    - objects:
+        datatype: xsd:string
+        value: $(scientific_name)
+      predicate: dwc:scientificName
+    - objects:
+        datatype: xsd:string
+        value: $(taxonomy_reference)
+      predicate: dwc:nameAccordingTo
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Protection_category
+      predicate: sio:000008
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Taxon
+  20250530123350359341_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:000000
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: gsso:003562
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: $(protection_category)
+      predicate: sio:000300
+    - objects:
+        type: iri
+        value: this:$(uniqid)#BOE
+      predicate: dct:source
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Protection_category
+  20250530123350359350_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:000000
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: bibo:LegalDocument
+      predicate: rdf:type
+    - objects:
+        datatype: xsd:string
+        value: $(BOE_name)
+      predicate: dct:title
+    - objects:
+        datatype: ''
+        value: $(referred_population)
+      predicate: sio:000628
+    - objects:
+        datatype: xsd:integer
+        value: $(BOE_volume)
+      predicate: bibo:volume
+    - objects:
+        datatype: xsd:string
+        value: $(BOE_publication_date)
+      predicate: dct:issued
+    - objects:
+        datatype: xsd:string
+        value: $(BOE_pages)
+      predicate: bibo:pages
+    - objects:
+        type: iri
+        value: this:$(uniqid)#BOE_creator
+      predicate: dct:publisher
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#BOE
+  20250530123350359355_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: sio:000000
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: ncit:authority
+      predicate: rdf:type
+    - objects:
+        datatype: ''
+        value: $(BOE_creator)
+      predicate: sio:000300
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#BOE_creator
+prefixes:
+  bibo: http://purl.org/ontology/bibo/
+  dct: http://purl.org/dc/terms/
+  dwc: http://purl.org/dc/terms/
+  gsso: http://purl.obolibrary.org/obo/GSSO_
+  ncit: http://purl.obolibrary.org/obo/NCIT_
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  sio: http://semanticscience.org/resource/SIO_
+  this: http://my_example.com/
+sources:
+  source_cde_test:
+    access: driada.csv.csv
+    iterator: $
+    referenceFormulation: csv
+

@@ -1,197 +1,55 @@
 mapping:
-  20250224123946142539_source_cde_test:
+  20250530123236989427_source_cde_test:
     predicateobject:
     - objects:
         type: iri
-        value: this:$(uniqid)#Germplasm
-      predicate: sio:SIO_000229
-    - objects:
-        type: iri
-        value: prov:Activity
+        value: fao:accession_number
       predicate: rdf:type
     - objects:
         type: iri
-        value: sio:SIO_1049
+        value: sio:000115
       predicate: rdf:type
-    - objects:
-        datatype: xsd:string
-        value: $(collection_comment)
-      predicate: rdfs:comment
-    sources:
-    - source_cde_test
-    subjects: this:$(bgvid)_$(uniqid)#Collection
-  20250224123946142565_source_cde_test:
-    predicateobject:
-    - objects:
-        type: iri
-        value: this:$(bgvid)_$(uniqid)#Collection
-      predicate: prov:wasgeneratedby
-    - objects:
-        type: iri
-        value: this:$(uniqid)#identifier
-      predicate: sio:SIO_000671
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Accession_number
-      predicate: sio:SIO_000671
-    - objects:
-        type: iri
-        value: this:$(uniqid)#National_catalogue_code
-      predicate: sio:SIO_000671
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Plant_determination_process_WFO
-      predicate: prov:wasUsedBy
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Plant_determination_process_chosen_taxonomy
-      predicate: prov:wasUsedBy
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Plant_determination_process_WFO
-      predicate: sio:SIO_000231
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Plant_determination_process_chosen_taxonomy
-      predicate: sio:SIO_000231
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Endangerment_assesment_process_LESPRE
-      predicate: prov:wasUsedBy
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Endangerment_assesment_process_LESPRE
-      predicate: sio:SIO_000231
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Endangerment_assesment_process_IUCN
-      predicate: prov:wasUsedBy
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Endangerment_assesment_process_IUCN
-      predicate: sio:SIO_000231
-    - objects:
-        type: iri
-        value: sio:SIO_000000
-      predicate: rdf:type
-    - objects:
-        type: iri
-        value: efo:EFO_007059
-      predicate: rdf:type
-    - objects:
-        type: iri
-        value: prov:Entity
-      predicate: rdf:type
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#Germplasm
-  20250224123946142574_source_cde_test:
-    predicateobject:
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Plant_identification_WFO
-      predicate: sio:SIO_000229
-    - objects:
-        type: iri
-        value: prov:activity
-      predicate: rdf:type
-    - objects:
-        type: iri
-        value: sio:SIO_000006
-      predicate: rdf:type
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#Plant_determination_process_WFO
-  20250224123946142580_source_cde_test:
-    predicateobject:
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Plant_identification_chosen_taxonomy
-      predicate: sio:SIO_000229
-    - objects:
-        type: iri
-        value: prov:activity
-      predicate: rdf:type
-    - objects:
-        type: iri
-        value: sio:SIO_000006
-      predicate: rdf:type
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#Plant_determination_process_chosen_taxonomy
-  20250224123946142586_source_cde_test:
-    predicateobject:
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Endangerment_category_LESPRE
-      predicate: sio:SIO_000229
-    - objects:
-        type: iri
-        value: sio:SIO_000006
-      predicate: rdf:type
-    - objects:
-        type: iri
-        value: prov:activity
-      predicate: rdf:type
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#Endangerment_assesment_process_LESPRE
-  20250224123946142591_source_cde_test:
-    predicateobject:
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Endangerment_category_IUCN
-      predicate: sio:SIO_000229
-    - objects:
-        type: iri
-        value: sio:SIO_000006
-      predicate: rdf:type
-    - objects:
-        type: iri
-        value: prov:activity
-      predicate: rdf:type
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#Endangerment_assesment_process_IUCN
-  20250224123946142596_source_cde_test:
-    predicateobject:
-    - objects:
-        datatype: xsd:string
-        value: $(bgvid)
-      predicate: sio:SIO_000300
-    - objects:
-        type: iri
-        value: sio:SIO_000115
-      predicate: rdf:type
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#identifier
-  20250224123946142602_source_cde_test:
-    predicateobject:
     - objects:
         datatype: xsd:string
         value: $(accession_number)
-      predicate: sio:SIO_000300
-    - objects:
-        type: iri
-        value: sio:SIO_000115
-      predicate: rdf:type
-    - objects:
-        type: iri
-        value: fao:CO_020_0000089
-      predicate: rdf:type
+      predicate: sio:000300
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Accession_number
-  20250224123946142607_source_cde_test:
+  20250530123236989448_source_cde_test:
+    predicateobject:
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Accession_number
+      predicate: sio:000671
+    - objects:
+        type: iri
+        value: sio:000000
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: efo:007059
+      predicate: rdf:type
+    - objects:
+        type: iri
+        value: this:$(uniqid)#National_catalogue_code
+      predicate: sio:000671
+    - objects:
+        type: iri
+        value: this:$(uniqid)#Taxon
+      predicate: bco:0000087
+    sources:
+    - source_cde_test
+    subjects: this:$(uniqid)#Germplasm
+  20250530123236989455_source_cde_test:
     predicateobject:
     - objects:
         datatype: xsd:string
         value: $(national_catalogue_code)
-      predicate: sio:SIO_000300
+      predicate: sio:000300
     - objects:
         type: iri
-        value: sio:SIO_000115
+        value: sio:000115
       predicate: rdf:type
     - objects:
         type: iri
@@ -200,197 +58,76 @@ mapping:
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#National_catalogue_code
-  20250224123946142614_source_cde_test:
+  20250530123236989462_source_cde_test:
     predicateobject:
-    - objects:
-        datatype: xsd:string
-        value: $(WFO_vernacular_name)
-      predicate: dwc:vernacularName
     - objects:
         type: iri
         value: dwc:Taxon
       predicate: rdf:type
     - objects:
         type: iri
-        value: this:$(uniqid)#WFO_scientific_name
-      predicate: dwc:scientificName
-    - objects:
-        datatype: xsd:string
-        value: $(WFO_scientific_name_authorship)
-      predicate: dwc:scientificNameAuthorship
-    - objects:
-        type: iri
-        value: this:$(uniqid)#WFO_identifier
-      predicate: sio:SIO_000671
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Determination_status_WFO
-      predicate: sio:SIO_000008
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#Plant_identification_WFO
-  20250224123946142621_source_cde_test:
-    predicateobject:
-    - objects:
-        type: iri
-        value: dwc:scientificName
+        value: sio:000000
       predicate: rdf:type
     - objects:
         datatype: xsd:string
-        value: $(WFO_scientific_name)
-      predicate: sio:SIO_000300
+        value: $(taxon_identifier)
+      predicate: dwc:taxonID
     - objects:
         datatype: xsd:string
-        value: 'WFO (2024): World Flora Online. Published on the Internet;http://www.worldfloraonline.org'
-      predicate: dwc:nameAccordingTo
-    - objects:
-        type: iri
-        value: https://www.worldfloraonline.org/
-      predicate: dwc:nameAccordingToID
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#WFO_scientific_name
-  20250224123946142627_source_cde_test:
-    predicateobject:
+        value: $(iucn_threat_category)
+      predicate: iucn:threatStatus
     - objects:
         datatype: xsd:string
-        value: $(chosen_taxonomy_vernacular_name)
+        value: $(scientific_name)
+      predicate: dwc:scientificName
+    - objects:
+        datatype: xsd:string
+        value: $(scientific_name_authorship)
+      predicate: dwc:scientificNameAuthorship
+    - objects:
+        datatype: xsd:string
+        value: $(vernacular_name)
       predicate: dwc:vernacularName
     - objects:
-        type: iri
-        value: dwc:Taxon
-      predicate: rdf:type
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Chosen_taxonomy_scientific_name
-      predicate: dwc:scientificName
-    - objects:
         datatype: xsd:string
-        value: $(chosen_taxonomy_scientific_name_authorship)
-      predicate: dwc:scientificNameAuthorship
-    - objects:
-        type: iri
-        value: this:$(uniqid)#chosen_taxonomy_identifier
-      predicate: sio:SIO_000671
-    - objects:
-        type: iri
-        value: this:$(uniqid)#Determination_status_chosen_taxonomy
-      predicate: sio:SIO_000008
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#Plant_identification_chosen_taxonomy
-  20250224123946142632_source_cde_test:
-    predicateobject:
-    - objects:
-        type: iri
-        value: dwc:scientificName
-      predicate: rdf:type
-    - objects:
-        datatype: xsd:string
-        value: $(chosen_taxonomy_scientific_name)
-      predicate: sio:SIO_000300
-    - objects:
-        datatype: xsd:string
-        value: $(chosen_taxonomy_reference)
+        value: $(taxonomy_reference)
       predicate: dwc:nameAccordingTo
     - objects:
         type: iri
-        value: $(chosen_taxonomy_reference_url)
-      predicate: dwc:nameAccordingToID
+        value: this:$(uniqid)#Determination_status
+      predicate: sio:000008
     sources:
     - source_cde_test
-    subjects: this:$(uniqid)#Chosen_taxonomy_scientific_name
-  20250224123946142636_source_cde_test:
+    subjects: this:$(uniqid)#Taxon
+  20250530123236989471_source_cde_test:
     predicateobject:
-    - objects:
-        type: iri
-        value: sio:SIO_000115
-      predicate: rdf:type
     - objects:
         datatype: xsd:string
-        value: $(chosen_taxonomy_identifier)
-      predicate: sio:SIO_000300
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#chosen_taxonomy_identifier
-  20250224123946142644_source_cde_test:
-    predicateobject:
-    - objects:
-        type: iri
-        value: sio:SIO_000115
-      predicate: rdf:type
-    - objects:
-        datatype: xsd:string
-        value: $(WFO_identifier)
-      predicate: sio:SIO_000300
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#WFO_identifier
-  20250224123946142649_source_cde_test:
-    predicateobject:
+        value: $(determination_status)
+      predicate: sio:000300
     - objects:
         type: iri
         value: fao:determination_status
       predicate: rdf:type
     - objects:
-        datatype: xsd:string
-        value: $(chosen_taxonomy_determination_status)
-      predicate: sio:SIO_000300
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#Determination_status_chosen_taxonomy
-  20250224123946142652_source_cde_test:
-    predicateobject:
-    - objects:
         type: iri
-        value: fao:determination_status
+        value: sio:000000
       predicate: rdf:type
-    - objects:
-        datatype: xsd:string
-        value: $(WFO_determination_status)
-      predicate: sio:SIO_000300
     sources:
     - source_cde_test
-    subjects: this:$(uniqid)#Determination_status_WFO
-  20250224123946142657_source_cde_test:
-    predicateobject:
-    - objects:
-        type: iri
-        value: fao:endangerment_category
-      predicate: rdf:type
-    - objects:
-        datatype: xsd:string
-        value: $(lespre_endangerment_category)
-      predicate: sio:SIO_000300
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#Endangerment_category_LESPRE
-  20250224123946142660_source_cde_test:
-    predicateobject:
-    - objects:
-        type: iri
-        value: fao:endangerment_category
-      predicate: rdf:type
-    - objects:
-        datatype: xsd:string
-        value: $(iucn_endangerment_category)
-      predicate: sio:SIO_000300
-    sources:
-    - source_cde_test
-    subjects: this:$(uniqid)#Endangerment_category_IUCN
+    subjects: this:$(uniqid)#Determination_status
 prefixes:
-  dwc: http://rs.tdwg.org/dwc/terms/
-  edam: http://edamontology.org/
+  bco: http://purl.obolibrary.org/obo/BCO_
+  dwc: http://purl.org/dc/terms/
   efo: https://www.ebi.ac.uk/efo/
   fao: https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#
-  prov: http://www.w3.org/ns/prov#
+  iucn: http://iucn.org/terms/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
-  rdfs: http://www.w3.org/2000/01/rdf-schema#
-  sio: http://semanticscience.org/resource/
+  sio: http://semanticscience.org/resource/SIO_
   this: http://my_example.com/
-  xsd: http://www.w3.org/2001/XMLSchema#
 sources:
   source_cde_test:
-    access: /mnt/data/germplasm.csv
+    access: germplasm.csv
     iterator: $
     referenceFormulation: csv
+
