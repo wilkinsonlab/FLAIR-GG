@@ -175,7 +175,7 @@ mapping:
     subjects: this:$(uniqid)#Soil_type
 prefixes:
   bfo: http://purl.obolibrary.org/obo/BFO_
-  dwc: http://purl.org/dc/terms/
+  dwc: http://rs.tdwg.org/dwc/terms/
   efo: http://www.ebi.ac.uk/efo/
   envo: http://purl.obolibrary.org/obo/ENVO_
   fao: https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#
@@ -186,7 +186,7 @@ prefixes:
   this: http://my_example.com/
 sources:
   source_cde_test:
-    access: location.csv.csv
+    access: location.csv
     iterator: $
     referenceFormulation: csv
 

@@ -5,7 +5,7 @@ data = {
   "prefixes" : {
     "bibo" : "http://purl.org/ontology/bibo/",
     "dct" : "http://purl.org/dc/terms/",
-    "dwc": "http://purl.org/dc/terms/",
+    "dwc": "http://rs.tdwg.org/dwc/terms/",
     "gsso" : "http://purl.obolibrary.org/obo/GSSO_",
     "ncit" : "http://purl.obolibrary.org/obo/NCIT_",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -41,7 +41,7 @@ data = {
   "config" : {
     "source_name" : "source_cde_test",
     "configuration" : "default",    
-    "csv_name" : "driada.csv",
+    "csv_name" : "driada",
     "basicURI" : "this"
     }
   }    

@@ -4,7 +4,7 @@ from embuilder.builder import EMB
 data = {
   "prefixes" : {
     "bco": "http://purl.obolibrary.org/obo/BCO_",
-    "dwc": "http://purl.org/dc/terms/",
+    "dwc": "http://rs.tdwg.org/dwc/terms/",
     "efo": "https://www.ebi.ac.uk/efo/",
     "fao": "https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#",
     "iucn": "http://iucn.org/terms/",

@@ -106,7 +106,7 @@ mapping:
 prefixes:
   bibo: http://purl.org/ontology/bibo/
   dct: http://purl.org/dc/terms/
-  dwc: http://purl.org/dc/terms/
+  dwc: http://rs.tdwg.org/dwc/terms/
   gsso: http://purl.obolibrary.org/obo/GSSO_
   ncit: http://purl.obolibrary.org/obo/NCIT_
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
@@ -114,7 +114,7 @@ prefixes:
   this: http://my_example.com/
 sources:
   source_cde_test:
-    access: driada.csv.csv
+    access: driada.csv
     iterator: $
     referenceFormulation: csv
 

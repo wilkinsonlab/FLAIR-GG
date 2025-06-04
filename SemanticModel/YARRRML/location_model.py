@@ -4,7 +4,7 @@ from embuilder.builder import EMB
 data = {
   "prefixes" : {
     "bfo": "http://purl.obolibrary.org/obo/BFO_",
-    "dwc": "http://purl.org/dc/terms/",
+    "dwc": "http://rs.tdwg.org/dwc/terms/",
     "efo": "http://www.ebi.ac.uk/efo/",
     "envo": "http://purl.obolibrary.org/obo/ENVO_",
     "fao": "https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#",
@@ -63,7 +63,7 @@ data = {
   "config" : {
     "source_name" : "source_cde_test",
     "configuration" : "default",    
-    "csv_name" : "location.csv",
+    "csv_name" : "location",
     "basicURI" : "this"
     }
 }
