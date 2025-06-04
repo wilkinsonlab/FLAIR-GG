@@ -44,7 +44,7 @@ data = {
   "config" : {
     "source_name" : "source_cde_test",
     "configuration" : "default",    
-    "csv_name" : "germplasm.csv",
+    "csv_name" : "germplasm",
     "basicURI" : "this"
     }
   }    
