@@ -3,7 +3,7 @@ mapping:
     predicateobject:
     - objects:
         type: iri
-        value: fao:accession_number
+        value: fao:0000089
       predicate: rdf:type
     - objects:
         type: iri
@@ -49,7 +49,7 @@ mapping:
       predicate: rdf:type
     - objects:
         type: iri
-        value: fao:national_catalogue_code
+        value: fao:0000129
       predicate: rdf:type
     sources:
     - source_cde_test
@@ -71,11 +71,11 @@ mapping:
     - objects:
         datatype: xsd:date
         value: $(acquisition_time)
-      predicate: fao:0000126
+      predicate: fao:0000131
     - objects:
         datatype: xsd:date
         value: $(collecting_time)
-      predicate: fao:0000127
+      predicate: fao:0000132
     sources:
     - source_cde_test
     subjects: this:$(uniqid)#Collection_process
@@ -124,7 +124,7 @@ mapping:
     - objects:
         datatype: xsd:string
         value: $(terrain_inclination)
-      predicate: fao:0000128
+      predicate: fao:0000133
     - objects:
         datatype: xsd:string
         value: $(country_name)
@@ -136,19 +136,19 @@ mapping:
     - objects:
         datatype: xsd:string
         value: $(first_admin_subdivision)
-      predicate: fao:0000125
+      predicate: dwc:stateProvince
     - objects:
         datatype: xsd:string
         value: $(second_admin_subdivision)
-      predicate: fao:0000124
+      predicate: dwc:county
     - objects:
         datatype: xsd:string
         value: $(third_admin_subdivision)
-      predicate: fao:0000123
+      predicate: dwc:municipality
     - objects:
         datatype: xsd:string
         value: $(fourth_admin_subdivision)
-      predicate: fao:0000122
+      predicate: dwc:locality
     - objects:
         datatype: xsd:string
         value: $(locality_description)
@@ -178,7 +178,7 @@ prefixes:
   dwc: http://rs.tdwg.org/dwc/terms/
   efo: http://www.ebi.ac.uk/efo/
   envo: http://purl.obolibrary.org/obo/ENVO_
-  fao: https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#
+  fao: https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#CO_020:
   obi: http://purl.obolibrary.org/obo/OBI_
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   rdfs: http://www.w3.org/2000/01/rdf-schema#

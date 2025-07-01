@@ -7,7 +7,7 @@ data = {
     "dwc": "http://rs.tdwg.org/dwc/terms/",
     "efo": "http://www.ebi.ac.uk/efo/",
     "envo": "http://purl.obolibrary.org/obo/ENVO_",
-    "fao": "https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#",
+    "fao": "https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#CO_020:",
     "obi": "http://purl.obolibrary.org/obo/OBI_",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
@@ -16,7 +16,7 @@ data = {
    
 
   "triplets" : [
-    ["this:$(uniqid)#Accession_number", "rdf:type", "fao:accession_number", "iri"],
+    ["this:$(uniqid)#Accession_number", "rdf:type", "fao:0000089", "iri"], #accession number
     ["this:$(uniqid)#Accession_number", "rdf:type", "sio:000115", "iri"], #identifier
     ["this:$(uniqid)#Accession_number","sio:000300","$(accession_number)","xsd:string"], #has value
 
@@ -27,13 +27,13 @@ data = {
 
     ["this:$(uniqid)#National_catalogue_code","sio:000300","$(national_catalogue_code)","xsd:string"], #has value
     ["this:$(uniqid)#National_catalogue_code","rdf:type","sio:000115","iri"], #identifier
-    ["this:$(uniqid)#National_catalogue_code","rdf:type","fao:national_catalogue_code","iri"],
+    ["this:$(uniqid)#National_catalogue_code","rdf:type","fao:0000129","iri"],#national catalogue code
 
     ["this:$(uniqid)#Collection_process","sio:000229","this:$(uniqid)#Germplasm","iri"],#has output
     ["this:$(uniqid)#Collection_process","rdf:type","sio:000006","iri"],#process
     ["this:$(uniqid)#Collection_process","rdf:type","obi:0000744","iri"], #material sampling process
-    ["this:$(uniqid)#Collection_process","fao:0000126","$(acquisition_time)","xsd:date"], #acquisition time
-    ["this:$(uniqid)#Collection_process","fao:0000127","$(collecting_time)","xsd:date"], #collecting date of sample
+    ["this:$(uniqid)#Collection_process","fao:0000131","$(acquisition_time)","xsd:date"], #acquisition time
+    ["this:$(uniqid)#Collection_process","fao:0000132","$(collecting_time)","xsd:date"], #collecting date of sample
 
     ["this:$(uniqid)#Geolocation","sio:000145","this:$(uniqid)#Collection_process",""], #is location of
     ["this:$(uniqid)#Geolocation","rdf:type","sio:000000","iri"], #entity
@@ -50,13 +50,13 @@ data = {
     ["this:$(uniqid)#Geolocation","dwc:geodeticDatum","$(geodetic_datum)","xsd:string"],
     ["this:$(uniqid)#Geolocation","dwc:maximumElevationInMeters","$(maximum_elevation)","xsd:float"],
     ["this:$(uniqid)#Geolocation","dwc:minimumElevationInMeters","$(minimum_elevation)","xsd:float"],
-    ["this:$(uniqid)#Geolocation","fao:0000128","$(terrain_inclination)","xsd:string"], #terrain inclination
+    ["this:$(uniqid)#Geolocation","fao:0000133","$(terrain_inclination)","xsd:string"], #terrain inclination
     ["this:$(uniqid)#Geolocation","dwc:country","$(country_name)","xsd:string"],
     ["this:$(uniqid)#Geolocation","dwc:countryCode","$(country_2letter_code)","xsd:string"],
-    ["this:$(uniqid)#Geolocation","fao:0000125","$(first_admin_subdivision)","xsd:string"], #first order administrative region
-    ["this:$(uniqid)#Geolocation","fao:0000124","$(second_admin_subdivision)","xsd:string"],# second order administrative region
-    ["this:$(uniqid)#Geolocation","fao:0000123","$(third_admin_subdivision)","xsd:string"],# third order administrative region
-    ["this:$(uniqid)#Geolocation","fao:0000122","$(fourth_admin_subdivision)","xsd:string"], #fourth order administrative region
+    ["this:$(uniqid)#Geolocation","dwc:stateProvince","$(first_admin_subdivision)","xsd:string"], #first order administrative region
+    ["this:$(uniqid)#Geolocation","dwc:county","$(second_admin_subdivision)","xsd:string"],# second order administrative region
+    ["this:$(uniqid)#Geolocation","dwc:municipality","$(third_admin_subdivision)","xsd:string"],# third order administrative region
+    ["this:$(uniqid)#Geolocation","dwc:locality","$(fourth_admin_subdivision)","xsd:string"], #fourth order administrative region
     ["this:$(uniqid)#Geolocation","dwc:verbatimLocality","$(locality_description)","xsd:string"],  
   ],
 

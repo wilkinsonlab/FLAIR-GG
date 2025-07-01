@@ -3,7 +3,7 @@ mapping:
     predicateobject:
     - objects:
         type: iri
-        value: fao:accession_number
+        value: fao:0000089
       predicate: rdf:type
     - objects:
         type: iri
@@ -53,7 +53,7 @@ mapping:
       predicate: rdf:type
     - objects:
         type: iri
-        value: fao:national_catalogue_code
+        value: fao:0000129
       predicate: rdf:type
     sources:
     - source_cde_test
@@ -107,7 +107,7 @@ mapping:
       predicate: sio:000300
     - objects:
         type: iri
-        value: fao:determination_status
+        value: fao:0000130
       predicate: rdf:type
     - objects:
         type: iri
@@ -120,7 +120,7 @@ prefixes:
   bco: http://purl.obolibrary.org/obo/BCO_
   dwc: zhttp://rs.tdwg.org/dwc/terms/
   efo: https://www.ebi.ac.uk/efo/
-  fao: https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#
+  fao: https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#CO_020:
   iucn: http://iucn.org/terms/
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
   sio: http://semanticscience.org/resource/SIO_
