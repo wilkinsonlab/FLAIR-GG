@@ -1,16 +1,20 @@
-FROM ruby:3.0.0
+FROM ruby:3.3.0
 
-RUN apt-get -y update && apt-get -y dist-upgrade && apt-get -y update
+ENV LANG="en_US.UTF-8" LANGUAGE="en_US:UTF-8" LC_ALL="C.UTF-8"
+ENV RACK_ENV=production
+RUN apt-get update -q
+RUN apt-get -y dist-upgrade --fix-missing -q
 RUN apt-get -y install git
-RUN gem install bundler:2.3.12
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
-RUN mkdir -p /app
-COPY . /app
+RUN apt-get clean
+RUN mkdir /app
 WORKDIR /app
-
+RUN gem update --system
+RUN gem install bundler:2.3.12
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
-
 RUN git clone https://github.com/wilkinsonlab/FLAIR-GG.git
+COPY . .
+
+
 
 ENTRYPOINT ["sh", "entrypoint.sh"]

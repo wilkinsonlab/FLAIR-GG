@@ -6,10 +6,9 @@ gem 'rest-client'
 gem 'json'
 gem 'jwt'
 gem 'addressable'
+gem 'linkeddata'
 gem 'digest'
 gem 'ffi'
 gem 'sinatra'
 gem 'puma'
-gem "nokogiri"
-
-gem "linkeddata", "~> 3.3"
+gem "nokogiri", "~> 1.11"
