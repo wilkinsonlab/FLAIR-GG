@@ -100,6 +100,7 @@ def purge_ttl
   end
 end
 
+# DEPRECATED
 def metadata_update
   return if ENV["DIST_RECORDID"].nil? || ENV["DATASET_RECORDID"].nil? || ENV["DATA_SPARQL_ENDPOINT"].nil?
   return if ENV["DIST_RECORDID"].empty? || ENV["DATASET_RECORDID"].empty? || ENV["DATA_SPARQL_ENDPOINT"].empty?

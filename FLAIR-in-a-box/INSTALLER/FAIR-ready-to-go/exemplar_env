@@ -4,3 +4,4 @@ baseURI=http://germplasm.for.sure/data/
 # user and password with write-permissions on the CDE database
 GraphDB_User=admin
 GraphDB_Pass=root
+

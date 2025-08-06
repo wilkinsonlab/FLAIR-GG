@@ -61,7 +61,6 @@ services:
       GraphDB_User: ${GraphDB_User}
       GraphDB_Pass: ${GraphDB_Pass}
       baseURI: ${baseURI}
-      GRAPHDB_REPONAME: ${GRAPHDB_REPONAME}
     depends_on:
       - yarrrml-rdfizer
     ports:
