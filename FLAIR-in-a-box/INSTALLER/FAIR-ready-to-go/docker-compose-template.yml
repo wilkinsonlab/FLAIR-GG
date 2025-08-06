@@ -58,6 +58,9 @@ services:
   flair-box-daemon: 
     image: markw/flair-box-daemon:0.0.7
     environment:
+      ADMIN_SHEET: ${ADMIN_SHEET}
+      GERMPLASM_SHEET: ${GERMPLASM_SHEET}
+      LOCATION_SHEET: ${LOCATION_SHEET}
       GraphDB_User: ${GraphDB_User}
       GraphDB_Pass: ${GraphDB_Pass}
       baseURI: ${baseURI}

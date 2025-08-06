@@ -7,7 +7,8 @@ include HTTPUtils
 
 # Version 0.0.6
 get "/" do
-  update
+  update_yarrrml
+  update_csv
   yarrrml_substitute
   execute
   load_flair
@@ -16,12 +17,38 @@ get "/" do
   "Execution complete.  See docker log for errors (if any)\n\n"
 end
 
-def update
+def update_yarrml
   warn "first open3 git pull"
   o, e, _s = Open3.capture3("cd FLAIR-GG && git pull")
   warn "second open3 copy yarrrml #{o}  #{e}"
   o, e, _s = Open3.capture3("cp -rf ./FLAIR-GG/SemanticModel/YARRRML/*.pre-yaml  /data") # CDE V2
   warn "second open3 complete #{o} #{e}"
+end
+
+def update_csv
+  datatypes = {
+    admin: ENV["ADMIN_SHEET" ],
+    germplasm: ENV["GERMPLASM_SHEET"],
+    location: ENV["LOCATION_SHEET"]
+  }
+
+  datatypes.each do |datatype, sheet|
+    next if sheet.empty
+
+    # Transform the spreadsheet URL to CSV export format
+    csv_url = sheet.sub(%r{/edit.*$}, "") + "/export?exportFormat=csv"
+    # Use RestClient with follow redirects (default max_redirects is 10)
+    response = RestClient::Request.execute(
+      method: :get,
+      url: csv_url,
+      headers: { accept: "text/csv" },
+      max_redirects: 10
+    )
+    csv = response.body
+    File.open("/data/#{datatype}.csv", "w") do |file|
+      file.write csv, "\n"
+    end
+  end
 end
 
 def yarrrml_substitute
@@ -45,7 +72,7 @@ end
 
 def execute
   warn "executing transform"
-#  purge_nq
+  #  purge_nq
   purge_ttl
   @datatype_list = Dir["/data/*.csv"]
   @datatype_list.each do |d|
@@ -75,29 +102,25 @@ def write_to_graphdb(concatenated, reponame)
   pass = ENV.fetch("GraphDB_Pass", nil)
   network = ENV["networkname"] || "graphdb"
   url = "http://#{network}:7200/repositories/#{reponame}/statements"
-#  headers = { content_type: "application/n-quads" }
+  #  headers = { content_type: "application/n-quads" }
   headers = { content_type: "text/turtle" }
   HTTPUtils.put(url, headers, concatenated, user, pass)
 end
 
 def purge_nq
-  begin
-    `rm -rf /data/triples/*.nq`
-  rescue StandardError
-    warn "Deleting the exisiting .nq files failed!"
-  ensure
-    warn "looks like it is already clean in here!"
-  end
+  `rm -rf /data/triples/*.nq`
+rescue StandardError
+  warn "Deleting the exisiting .nq files failed!"
+ensure
+  warn "looks like it is already clean in here!"
 end
 
 def purge_ttl
-  begin
-    `rm -rf /data/triples/*.ttl`
-  rescue StandardError
-    warn "Deleting the exisiting .nq files failed!"
-  ensure
-    warn "looks like it is already clean in here!"
-  end
+  `rm -rf /data/triples/*.ttl`
+rescue StandardError
+  warn "Deleting the exisiting .nq files failed!"
+ensure
+  warn "looks like it is already clean in here!"
 end
 
 # DEPRECATED
