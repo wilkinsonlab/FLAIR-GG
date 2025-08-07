@@ -17,7 +17,7 @@ get "/" do
   "Execution complete.  See docker log for errors (if any)\n\n"
 end
 
-def update_yarrml
+def update_yarrrml
   warn "first open3 git pull"
   o, e, _s = Open3.capture3("cd FLAIR-GG && git pull")
   warn "second open3 copy yarrrml #{o}  #{e}"
@@ -33,7 +33,14 @@ def update_csv
   }
 
   datatypes.each do |datatype, sheet|
-    next if sheet.empty
+    if sheet.empty?
+      begin
+        File.delete("/data/#{datatype}.csv")
+      rescue
+        warn "csv file for #{datatype} didn't exist when attempting to delete"
+      end
+      next
+    end
 
     # Transform the spreadsheet URL to CSV export format
     csv_url = sheet.sub(%r{/edit.*$}, "") + "/export?exportFormat=csv"
