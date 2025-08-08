@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  graphdb:
-    image: ontotext/graphdb:10.1.2
+  graphdb;
+    image: ontotext/graphdb:10.8.9
     restart: always
     hostname: graphdb
     ports:
