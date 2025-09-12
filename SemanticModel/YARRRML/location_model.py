@@ -35,7 +35,7 @@ data = {
     ["this:$(uniqid)#Collection_process","fao:0000131","$(acquisition_time)","xsd:date"], #acquisition time
     ["this:$(uniqid)#Collection_process","fao:0000132","$(collecting_time)","xsd:date"], #collecting date of sample
 
-    ["this:$(uniqid)#Geolocation","sio:000145","this:$(uniqid)#Collection_process",""], #is location of
+    ["this:$(uniqid)#Geolocation","sio:000145","this:$(uniqid)#Collection_process","iri"], #is location of
     ["this:$(uniqid)#Geolocation","rdf:type","sio:000000","iri"], #entity
     ["this:$(uniqid)#Geolocation","rdf:type","dwc:Location","iri"],
 
@@ -79,4 +79,5 @@ yarrrml = EMB(data["config"], data["prefixes"],data["triplets"])
 # test_sparql = yarrrml.transform_SPARQL()
 # print(test_sparql)
 test_yarrrml = yarrrml.transform_YARRRML()
+
 print(test_yarrrml)
