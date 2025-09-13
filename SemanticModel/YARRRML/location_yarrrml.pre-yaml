@@ -82,7 +82,7 @@ mapping:
   20250530123337890796_source_cde_test:
     predicateobject:
     - objects:
-        type: 'iri'
+        type: iri
         value: this:$(uniqid)#Collection_process
       predicate: sio:000145
     - objects:
