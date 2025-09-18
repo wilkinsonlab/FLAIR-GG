@@ -118,7 +118,7 @@ mapping:
     subjects: this:$(uniqid)#Determination_status
 prefixes:
   bco: http://purl.obolibrary.org/obo/BCO_
-  dwc: zhttp://rs.tdwg.org/dwc/terms/
+  dwc: http://rs.tdwg.org/dwc/terms/
   efo: https://www.ebi.ac.uk/efo/
   fao: https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#CO_020:
   iucn: http://iucn.org/terms/
