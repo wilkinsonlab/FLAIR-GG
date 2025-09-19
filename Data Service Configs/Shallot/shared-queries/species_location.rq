@@ -1,0 +1,36 @@
+#+ summary: the geo-coordinates for every sample of a given species in that germplasm bank
+#+ tags:
+#+   - Species sampled locations
+#+ defaults:
+#+   - speciesname: Arabidopsis thaliana
+#+ endpoint_in_url: False
+
+
+
+
+PREFIX bco: <http://purl.obolibrary.org/obo/BCO_>
+PREFIX fao: <https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#CO_020:>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sio: <http://semanticscience.org/resource/SIO_>
+PREFIX ex: <http://example.org/>
+PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
+
+SELECT DISTINCT ?scientific_name ?accession_number ?latitude ?longitude
+WHERE {
+  BIND(?_species AS ?search)
+  ?accession sio:000300 ?accession_number .
+  ?accession a fao:0000089 .
+  ?germplasm sio:000671 ?accession .
+  ?germplasm bco:0000087 ?taxon.
+  ?taxon dwc:scientificName ?scientific_name .
+  
+  FILTER (
+    contains(lcase(str(?scientific_name)), lcase(?search))
+  )
+    ?accessionl sio:000300 ?accession_number .
+    ?germplasml sio:000671 ?accessionl .
+    ?collection_process sio:000229 ?germplasml .
+    ?geolocation sio:000145 ?collection_process .
+    ?geolocation dwc:decimalLatitude ?latitude .
+    ?geolocation dwc:decimalLongitude ?longitude .
+}

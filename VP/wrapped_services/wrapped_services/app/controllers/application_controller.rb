@@ -1,7 +1,7 @@
 # frozen_string_literal: false
 
 require "sinatra"
-require "sinatra/base"
+# require "sinatra/base"
 require "json"
 require "erb"
 require "csv"

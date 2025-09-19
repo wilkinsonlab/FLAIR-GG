@@ -4,6 +4,11 @@
 Query : [IUCN categories](./IUCN_categories.rq)
 Extracts the World Flora Online scientific names for all accessions that have the [IUCN Red List categories](https://www.iucnredlist.org/) <code>Vulnerable, Endangered and Critically endangered</code>
 
+## Species sampled locations
+Query : [ISampled Locations](./species_location.rq)
+Returns the geo-coordinates for all samples of a provided species
+
+
 
 
 
