@@ -8,19 +8,14 @@
 PREFIX fao: <https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#>
 PREFIX sio: <http://semanticscience.org/resource/>
 PREFIX dwc: <http://rs.tdwg.org/dwc/terms/>
-SELECT DISTINCT ?plant_scientificName ?IUCN_endangerment_category 
+PREFIX iucn: <http://iucn.org/terms/>
+SELECT DISTINCT ?plant_scientificName  ?IUCN_endangerment_category
 WHERE {
-  ?IUCN_endangerment a fao:endangerment_category. 
-  ?IUCN_endangerment sio:SIO_000300 ?IUCN_endangerment_category. 
+  ?taxon dwc:scientificName ?plant_scientificName .
+  ?taxon iucn:threatStatus ?IUCN_endangerment_category
   FILTER(
-    ?IUCN_endangerment_category = "Vulnerable" || 
-    ?IUCN_endangerment_category = "Endangered" || 
-    ?IUCN_endangerment_category = "Critically endangered"
+    ?IUCN_endangerment_category = "http://rs.gbif.org/vocabulary/iucn/threat_status/VU" || 
+    ?IUCN_endangerment_category = "http://rs.gbif.org/vocabulary/iucn/threat_status/EN" || 
+    ?IUCN_endangerment_category = "http://rs.gbif.org/vocabulary/iucn/threat_status/CR"
   ).
-  ?IUCN_endangerment_assesment sio:SIO_000229 ?IUCN_endangerment.
-  ?germplasm sio:SIO_000231 ?IUCN_endangerment_assesment.
-  ?germplasm sio:SIO_000231 ?WFO_determination_process.
-  ?WFO_determination_process sio:SIO_000229 ?WFO_id.
-  ?WFO_id dwc:scientificName ?WFO_scientificName.
-  ?WFO_scientificName sio:SIO_000300 ?plant_scientificName.
 }
