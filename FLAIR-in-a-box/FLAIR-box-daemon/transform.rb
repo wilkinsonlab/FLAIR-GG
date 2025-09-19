@@ -94,20 +94,24 @@ end
 
 def load_flair
   files = Dir["/data/triples/*.ttl"]
+  content = ""
   files.each do |f|
     warn "Processing file #{f}"
     datatype = f.match(%r{.+/([^.]+)\.ttl})[1]
-    content = File.read(f)
+    content = content.concat("\n")
+    content = content.concat(File.read(f))
     content.gsub!(/<\s+/, "<")
-    write_to_graphdb(content, datatype)
-    warn "wrote #{datatype}"
+    warn "added #{datatype}"
   end
+  write_to_graphdb(content, "germplasm")
+  warn "wrote all data"
 end
 
 def write_to_graphdb(concatenated, reponame)
   user = ENV.fetch("GraphDB_User", nil)
   pass = ENV.fetch("GraphDB_Pass", nil)
   network = ENV["networkname"] || "graphdb"
+  reponame = "germplasm"
   url = "http://#{network}:7200/repositories/#{reponame}/statements"
   #  headers = { content_type: "application/n-quads" }
   headers = { content_type: "text/turtle" }
