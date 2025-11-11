@@ -56,7 +56,7 @@ services:
       - {PREFIX}-default
 
   flair-box-daemon: 
-    image: markw/flair-box-daemon:0.0.7
+    image: markw/flair-box-daemon:0.0.8
     environment:
       ADMIN_SHEET: ${ADMIN_SHEET}
       GERMPLASM_SHEET: ${GERMPLASM_SHEET}
