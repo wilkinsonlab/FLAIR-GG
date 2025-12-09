@@ -5,3 +5,5 @@ This folder contains letters from breeders and organizations that have offered t
 [Germplasm Bank of the Universidad Rey Juan Carlos (BGV URJC)](https://github.com/wilkinsonlab/FLAIR-GG/blob/main/support_letters/Recomendacion_%20proyecto%20Mark%20Wilkinson_signed_iriondo.pdf)
 
 [Ramiro Arnedo Semillas, S.L., Spain](https://github.com/wilkinsonlab/FLAIR-GG/blob/main/support_letters/SupportRamiroArnedosigned.pdf)
+
+[Lammers Seed Options S.L., Spain](https://github.com/wilkinsonlab/FLAIR-GG/blob/main/support_letters/Support%20Carta%20de%20apoyo%20LSO.pdf)
