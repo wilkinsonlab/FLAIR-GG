@@ -7,28 +7,40 @@ class VP
   # VPCONNECTION = "ejpold:vpConnection ejpnew:vpConnection dcat:theme dcat:themeTaxonomy".freeze
   # VPDISCOVERABLE = "ejpold:VPDiscoverable ejpnew:VPDiscoverable".freeze
   # VPANNOTATION = "dcat:theme".freeze
-  VPCONNECTION = "ejpnew:vpConnection".freeze
-  VPDISCOVERABLE = "ejpnew:VPDiscoverable".freeze
-  VPANNOTATION = "dcat:theme".freeze
+  VPCONNECTION = 'ejpnew:vpConnection'.freeze
+  VPDISCOVERABLE = 'ejpnew:VPDiscoverable'.freeze
+  VPINVISIBLE = 'ejpnew:VPInvisible'.freeze
+  VPANNOTATION = 'dcat:theme'.freeze
 
   def find_discoverables_query(graph:)
     vpd = SPARQL.parse("
       #{NAMESPACES}
-      SELECT DISTINCT ?s ?t ?title ?contact ?servicetype WHERE
-      {
-        VALUES ?connection { #{VPCONNECTION} }
-        VALUES ?discoverable { #{VPDISCOVERABLE} }
+      PREFIX dc: <http://purl.org/dc/elements/1.1/>
+      PREFIX dcat: <http://www.w3.org/ns/dcat#>
+      PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 
-        ?s  ?connection ?discoverable ;
-            dc:title ?title ;
-            a ?t .
+      SELECT DISTINCT ?s ?t ?title ?contact ?servicetype WHERE {
+        VALUES ?connection { ejpnew:vpConnection }
+        VALUES ?discoverable { ejpnew:VPDiscoverable }
+        VALUES ?invisible { ejpnew:VPInvisible }
 
-        OPTIONAL{?s dcat:contactPoint ?c .
-                 ?c <http://www.w3.org/2006/vcard/ns#url> ?contact }.
-        OPTIONAL{?s dc:type ?servicetype }.
+        ?s a ?t .
+        ?s dc:title ?title .
 
+        OPTIONAL { ?s ?connection ?discoverable . }
+
+        OPTIONAL {
+          ?s dcat:contactPoint ?c .
+          ?c vcard:hasURL ?url .
+          ?url vcard:url ?contact .
+        }
+
+        OPTIONAL { ?s dc:type ?servicetype . }
+
+        # Exclude any ?s that has a connection to VPInvisible
+        FILTER NOT EXISTS { ?s ?connection ?invisible }
       }
-      ")
+    ")
     graph.query(vpd)
   end
 

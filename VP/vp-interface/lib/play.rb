@@ -1,11 +1,11 @@
-require "openapi3_parser"
-require "cgi"
-require "rest-client"
-require "json"
+require 'openapi3_parser'
+require 'cgi'
+require 'rest-client'
+require 'json'
 
 # openapi = "https://wilkinsonlab.github.io/FLAIR-GG/VP/interfaces/germplasm-sparql.yaml"
 # openapi = "https://fairdata.services/api-local/swagger"
-openapi = "http://fairdata.services:10004/openapi.json"
+openapi = 'http://fairdata.services:10004/openapi.json'
 warn "retrieving #{openapi}"
 # this is just temporary until I get the docker image working
 begin
@@ -19,11 +19,11 @@ end
 warn resp
 # converter makes a mess of the URLs together with the grlc output... munge it
 j = JSON.parse(resp)
-j["servers"].each do |s|
-  s["url"].gsub!(%r{/$}, "")
-  s["url"].gsub!(%r{^//}, "https://")
+j['servers'].each do |s|
+  s['url'].gsub!(%r{/$}, '')
+  s['url'].gsub!(%r{^//}, 'https://')
 end
-resp = j.to_json   # back to json for the openapi3
+resp = j.to_json # back to json for the openapi3
 begin
   api = Openapi3Parser.load(resp)
 rescue StandardError
@@ -35,18 +35,18 @@ end
 api.paths.each do |path, pathitem|
   warn "path #{path}"
   base = pathitem.servers.first.url
-  get = pathitem.get  #  Openapi3Parser::Node::Operation or nil
-  post = pathitem.post  #  Openapi3Parser::Node::Operation or nil
+  get = pathitem.get #  Openapi3Parser::Node::Operation or nil
+  post = pathitem.post #  Openapi3Parser::Node::Operation or nil
   fullpath = base + path
   warn "testing #{fullpath} against #{@endpoint}|"
   unless fullpath == @endpoint # this seems a bit dangerous, but it should be the same as what is in the DCAT record...
-    warn "TEST FAILED"
+    warn 'TEST FAILED'
     next
   end
 
   @paths[fullpath] = {} unless @paths[fullpath]  # initialize
   warn "\n\ninitializing with get: #{get}  and post #{post}\n"
-  @paths[fullpath] = { get: get, post: post }
+  @paths[fullpath] = { get:, post: }
   self.successful = true
   break
 end

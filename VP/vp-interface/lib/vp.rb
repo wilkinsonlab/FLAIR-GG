@@ -1,28 +1,28 @@
 # frozen_string_literal: false
 
-require "linkeddata"
-require "digest"
-require "restclient"
-require "json"
-require "uri"
-require "fileutils"
-require "require_all"
+require 'linkeddata'
+require 'digest'
+require 'restclient'
+require 'json'
+require 'uri'
+require 'fileutils'
+require 'require_all'
 
-require_rel "ontologyservers"
-require_rel "serviceoutput_processers"
-require_rel "discoverable"
-require_rel "common_queries"
+require_rel 'ontologyservers'
+require_rel 'serviceoutput_processers'
+require_rel 'discoverable'
+require_rel 'common_queries'
 
 class VP
   attr_accessor :networkgraph, :vpconfig, :fdps, :aboutme
 
-  @@thisvp = ""
+  @@thisvp = ''
 
   def initialize(config: vpconfig)
     @vpconfig = config # my configuration
     @networkgraph = RDF::Graph.new # the full network of FDP triples
-    @fdps = []  # the FDPs that I know
-    @aboutme = []  # the list of keywords for the word cloud
+    @fdps = [] # the FDPs that I know
+    @aboutme = [] # the list of keywords for the word cloud
     load_fdps_from_cache
     @@thisvp = self
   end
@@ -32,9 +32,9 @@ class VP
   end
 
   def load_fdps_from_cache
-    Dir["./cache/*.marsh"].select { |f| !File.directory? File.join("./cache/", f) }.each do |marsh|
+    Dir['./cache/*.marsh'].reject { |f| File.directory? File.join('./cache/', f) }.each do |marsh|
       fdp = FDP.load_from_cache(vp: self, marshalled: marsh)
-      add_fdp(fdp: fdp)
+      add_fdp(fdp:)
     end
   end
 
@@ -46,63 +46,62 @@ class VP
   end
 
   def self.restart
-    f = open("./cache/REFRESHING", "w") # multiple browser calls are a problem!
-    f.puts "REFRESHING"
+    f = open('./cache/REFRESHING', 'w') # multiple browser calls are a problem!
+    f.puts 'REFRESHING'
     f.close
 
-    fdpsites = VPConfig::FDPSITES   # current sites
-    fdpsites.each do |fdp_address|   # one for every active FDP site
+    fdpsites = VPConfig::FDPSITES # current sites
+    fdpsites.each do |fdp_address| # one for every active FDP site
       warn "deleting #{fdp_address}"
       hexaddress = Digest::SHA256.hexdigest fdp_address
-      FileUtils.rm_f("./cache/#{hexaddress}.marsh")  # clear existing cache
+      FileUtils.rm_f("./cache/#{hexaddress}.marsh") # clear existing cache
     end
 
-    vp = VP.new(config: VPConfig.new)  # refresh from index
+    vp = VP.new(config: VPConfig.new) # refresh from index
 
-    fdpsites = VPConfig::FDPSITES   # new set of sites
-    fdpsites.each do |fdp_address|   # one for every active FDP site
+    fdpsites = VPConfig::FDPSITES # new set of sites
+    fdpsites.each do |fdp_address| # one for every active FDP site
       warn "working with #{fdp_address}"
       fdp = FDP.new(address: fdp_address)
       fdp.freezeme
-      vp.add_fdp(fdp: fdp)
+      vp.add_fdp(fdp:)
     end
-    FileUtils.rm_f("./cache/REFRESHING")
-    @@thisvp = vp  # set current VP to class variable
+    FileUtils.rm_f('./cache/REFRESHING')
+    @@thisvp = vp # set current VP to class variable
   end
 
-  def get_resources
-    find_discoverables  # things that have been flagged as "VPDiscoverable"
+  def get_resources # rubocop:disable Naming/AccessorMethodName
+    find_discoverables # things that have been flagged as "VPDiscoverable"
   end
 
   def find_discoverables
-
     results = find_discoverables_query(graph: networkgraph)
-    discoverables = build_from_results(results: results)
-    warn "DISCOVERABLES", discoverables
+    discoverables = build_from_results(results:)
+    warn 'DISCOVERABLES', discoverables
     discoverables
   end
 
   def keyword_search_shell(keyword:)
     warn "in keyword search now\n\n\n"
-    keyword_search(keyword: keyword)
+    keyword_search(keyword:)
   end
 
   def ontology_search_shell(term:)
-    warn "in ontology search shell"
+    warn 'in ontology search shell'
     ontology_search(uri: term)
   end
 
-  def keyword_search(keyword: "")
+  def keyword_search(keyword: '')
     keyword = keyword.downcase
-    results = keyword_search_query(graph: networkgraph, keyword: keyword)
-    discoverables = build_from_results(results: results)
+    results = keyword_search_query(graph: networkgraph, keyword:)
+    discoverables = build_from_results(results:)
     warn discoverables
     discoverables
   end
 
-  def ontology_search(uri: "")
-    results = ontology_search_query(graph: networkgraph, uri: uri)
-    discoverables = build_from_results(results: results)
+  def ontology_search(uri: '')
+    results = ontology_search_query(graph: networkgraph, uri:)
+    discoverables = build_from_results(results:)
     warn discoverables
     discoverables
   end
@@ -114,7 +113,7 @@ class VP
 
     results.each do |res|
       uri = res[:annot].to_s
-      word = ontology_annotations(uri: uri)
+      word = ontology_annotations(uri:)
       next unless word
       next if word.empty?
 
@@ -135,15 +134,15 @@ class VP
   end
 
   def collect_data_services
-    if File.exist?("./cache/servicetypes.json")
+    if File.exist?('./cache/servicetypes.json')
       services = thaw_servicetypes
     else
-      warn "in collect data services"
+      warn 'in collect data services'
       results = collect_data_services_query(graph: networkgraph)
       prehash = {}
       results.each do |r|
         type = r[:type].to_s
-        next if prehash[type]  # already known
+        next if prehash[type] # already known
 
         warn "subject type #{type}"
         kw = ontology_annotations(uri: type)
@@ -155,76 +154,73 @@ class VP
     services
   end
 
-  def retrieve_sevices(termuri:)  #  the URI of the service type
-    contenttype = guess_best_content_type(termuri: termuri)
+  def retrieve_sevices(termuri:)
+    # termuri  the URI of the service type
+    contenttype = guess_best_content_type(termuri:)
     # hand off to services_functions
     servicecollection = ServiceCollection.new(vpgraph: networkgraph, servicetype: termuri)
-    commongetparams = servicecollection.gather_common_parameters(method: "get")
-    commonpostparams = servicecollection.gather_common_parameters(method: "post")
+    commongetparams = servicecollection.gather_common_parameters(method: 'get')
+    commonpostparams = servicecollection.gather_common_parameters(method: 'post')
     [servicecollection, commongetparams, commonpostparams, contenttype]
   end
 
   def guess_best_content_type(termuri:)
-    mapping = {"http://edamontology.org/format_3790" => "text/csv"}
-    mapping[termuri] ? mapping[termuri] : "*/*"
+    mapping = { 'http://edamontology.org/format_3790' => 'text/csv' }
+    mapping[termuri] || '*/*'
   end
   # 28b2cb8a656a0b9fdbd385d6e86e691f9ccff2f4c8605026c5bfbb2b1d36b4b5
 
-
   def execute_data_services(params:)
-    endpoints = params.delete("endpoint") # returns an array of endpoints from the checkboxes
-    return [nil, nil] unless endpoints  # if there are no endpoints checked
+    endpoints = params.delete('endpoint') # returns an array of endpoints from the checkboxes
+    return [nil, nil] unless endpoints # if there are no endpoints checked
 
-    accept = params.delete("accept")
+    accept = params.delete('accept')
     results = {}
     endpoints.each do |ep|
       endpoint = CGI.unescape(ep)
-      if params["_request_body"]
-        result = Service::execute_post(endpoint: endpoint, body: params,)
-      else
-        result = Service::execute_get(endpoint: endpoint, params: params, accept: accept)
-      end
+      result = if params['_request_body']
+                 Service.execute_post(endpoint:, body: params)
+               else
+                 Service.execute_get(endpoint:, params:, accept:)
+               end
       results[endpoint] = result.body if result
     end
-    downloadlocation = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
-    [downloadlocation, results]  # download location is the LDP server URL
+    downloadlocation = process_and_upload_output(results:) # in serviceoutput_processors/general.rb
+    [downloadlocation, results] # download location is the LDP server URL
   end
 
   def execute_data_services_api(json:)
-      # {uri: serviceuri, 
-      #  _request_body: {json: data},
-      #  service_list: [endpoint, endpoint, endpoint]
-      # }   # this is passed to all services
+    # {uri: serviceuri,
+    #  _request_body: {json: data},
+    #  service_list: [endpoint, endpoint, endpoint]
+    # }   # this is passed to all services
     results = {}
-    accept = json["accept"]
-    json.delete "accept"
-v
-    json["service_list"].each do |ep|
+    accept = json['accept']
+    json.delete 'accept'
+    v
+    json['service_list'].each do |ep|
       endpoint = ep
-      if json["_request_body"]
-        result = Service::execute_post(endpoint: endpoint, body: params, accept: accept)
-      end
+      result = Service.execute_post(endpoint:, body: params, accept:) if json['_request_body']
       results[endpoint] = result.body if result
     end
-    downloadlocation = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
-    [downloadlocation, results]  # download location is the LDP server URL
+    downloadlocation = process_and_upload_output(results:) # in serviceoutput_processors/general.rb
+    [downloadlocation, results] # download location is the LDP server URL
   end
 
-
   def match_type_to_icon(type:)
-    t = type.match(%r{[\#/](\w+?)$})[1].downcase.to_sym  # anchor to end to capture last / or #
+    t = type.match(%r{[\#/](\w+?)$})[1].downcase.to_sym # anchor to end to capture last / or #
     warn "matching #{t}\n\n"
     hash = {
-      biobank: "biobank.svg",
-      catalog: "catalog.svg",
-      dataservice: "dataservice.svg",
-      distribution: "distribution.svg",
-      dataset: "dataset.svg",
-      patientregistry: "registry.svg"
+      biobank: 'biobank.svg',
+      catalog: 'catalog.svg',
+      dataservice: 'dataservice.svg',
+      distribution: 'distribution.svg',
+      dataset: 'dataset.svg',
+      patientregistry: 'registry.svg'
     }
     return hash[t] if hash[t]
 
-    "unknown.svg"
+    'unknown.svg'
   end
 
   def build_from_results(results:)
@@ -240,22 +236,22 @@ v
       type = result[:t].to_s
       typetag = type.match(%r{[\#/](\w+?)$})[1].downcase
       # if it is a dataservice without a service type, then it is a top level FDP
-      next if typetag == "dataservice" && result[:servicetype].to_s.empty?
+      next if typetag == 'dataservice' && result[:servicetype].to_s.empty?
 
       frozen = result[:contact].to_s
       source = frozen.dup
       source = "No Contact Provided (#{counter})" and counter += 1 unless source
-      source.gsub!(%r{/\s*$}, "")  # no diference between http://my.org/  and http://my.org
+      source.gsub!(%r{/\s*$}, '') # no diference between http://my.org/  and http://my.org
       discoverables << Discoverable.create_or_retrieve(
-        source: source,   # mylab.com
-        resource: result[:s].to_s,  # https://mylab.com/dist/1234231
-        title: result[:title].to_s,  # my mock data
-        type: type,  # https://w3.org/#Distribution
-        icon: icon, # whatever
-        typetag: typetag
-      )  # Distribution
+        source:, # mylab.com
+        resource: result[:s].to_s, # https://mylab.com/dist/1234231
+        title: result[:title].to_s, # my mock data
+        type:, # https://w3.org/#Distribution
+        icon:, # whatever
+        typetag:
+      ) # Distribution
       # discoverables[contact] = [] unless discoverables[contact]
-      # discoverables[contact] << { resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon }
+      # discoverables[contact] << { resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon } # rubocop:disable Layout/LineLength
     end
     # sort_discoverables(discoverables: discoverables)
     discoverables
@@ -263,7 +259,7 @@ v
 
   # ths might now be deprecated...
   def sort_discoverables(discoverables:)
-    discoverables.each do |provider|  # discoverables["banco"] = [{resource: http,  title: "hello", type: "dataset", icon: ico, contact: "banco"}, {resource: http ...}]
+    discoverables.each do |provider|  # discoverables["banco"] = [{resource: http,  title: "hello", type: "dataset", icon: ico, contact: "banco"}, {resource: http ...}] # rubocop:disable Layout/LineLength
       sorted = discoverables[provider].sort_by { |s| s[:type] }
       discoverables[provider] = sorted
     end
