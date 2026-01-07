@@ -1,8 +1,10 @@
 class VP
-  NAMESPACES = "PREFIX ejpold: <http://purl.org/ejp-rd/vocabulary/>
+  NAMESPACES = "
+  PREFIX ejpold: <http://purl.org/ejp-rd/vocabulary/>
   PREFIX ejpnew: <https://w3id.org/ejp-rd/vocabulary#>
   PREFIX dcat: <http://www.w3.org/ns/dcat#>
   PREFIX dc: <http://purl.org/dc/terms/>
+  PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
   ".freeze
   # VPCONNECTION = "ejpold:vpConnection ejpnew:vpConnection dcat:theme dcat:themeTaxonomy".freeze
   # VPDISCOVERABLE = "ejpold:VPDiscoverable ejpnew:VPDiscoverable".freeze
@@ -13,11 +15,9 @@ class VP
   VPANNOTATION = 'dcat:theme'.freeze
 
   def find_discoverables_query(graph:)
+    warn "querying graph #{graph.size}"
     vpd = SPARQL.parse("
       #{NAMESPACES}
-      PREFIX dc: <http://purl.org/dc/elements/1.1/>
-      PREFIX dcat: <http://www.w3.org/ns/dcat#>
-      PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 
       SELECT DISTINCT ?s ?t ?title ?contact ?servicetype WHERE {
         VALUES ?connection { ejpnew:vpConnection }

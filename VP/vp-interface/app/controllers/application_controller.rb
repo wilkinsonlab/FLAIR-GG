@@ -6,6 +6,7 @@ require 'sinatra'
 require 'sinatra/base'
 require 'json'
 require 'erb'
+
 # require 'omniauth'
 # require 'omniauth-openid-connect'
 require 'jwt'

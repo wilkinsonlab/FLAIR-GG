@@ -34,7 +34,7 @@ class VP
   def load_fdps_from_cache
     Dir['./cache/*.marsh'].reject { |f| File.directory? File.join('./cache/', f) }.each do |marsh|
       fdp = FDP.load_from_cache(vp: self, marshalled: marsh)
-      add_fdp(fdp:)
+      add_fdp(fdp: fdp)
     end
   end
 
@@ -64,7 +64,7 @@ class VP
       warn "working with #{fdp_address}"
       fdp = FDP.new(address: fdp_address)
       fdp.freezeme
-      vp.add_fdp(fdp:)
+      vp.add_fdp(fdp: fdp)
     end
     FileUtils.rm_f('./cache/REFRESHING')
     @@thisvp = vp # set current VP to class variable
@@ -75,15 +75,17 @@ class VP
   end
 
   def find_discoverables
+    # warn "network graph size #{networkgraph.size}"
     results = find_discoverables_query(graph: networkgraph)
-    discoverables = build_from_results(results:)
+    # warn "find disc results #{results.inspect}"
+    discoverables = build_from_results(results: results)
     warn 'DISCOVERABLES', discoverables
     discoverables
   end
 
   def keyword_search_shell(keyword:)
     warn "in keyword search now\n\n\n"
-    keyword_search(keyword:)
+    keyword_search(keyword: keyword)
   end
 
   def ontology_search_shell(term:)
@@ -94,14 +96,14 @@ class VP
   def keyword_search(keyword: '')
     keyword = keyword.downcase
     results = keyword_search_query(graph: networkgraph, keyword:)
-    discoverables = build_from_results(results:)
+    discoverables = build_from_results(results: results)
     warn discoverables
     discoverables
   end
 
   def ontology_search(uri: '')
-    results = ontology_search_query(graph: networkgraph, uri:)
-    discoverables = build_from_results(results:)
+    results = ontology_search_query(graph: networkgraph, uri: uri)
+    discoverables = build_from_results(results: results)
     warn discoverables
     discoverables
   end
@@ -113,7 +115,7 @@ class VP
 
     results.each do |res|
       uri = res[:annot].to_s
-      word = ontology_annotations(uri:)
+      word = ontology_annotations(uri: uri)
       next unless word
       next if word.empty?
 
@@ -156,7 +158,7 @@ class VP
 
   def retrieve_sevices(termuri:)
     # termuri  the URI of the service type
-    contenttype = guess_best_content_type(termuri:)
+    contenttype = guess_best_content_type(termuri: termuri)
     # hand off to services_functions
     servicecollection = ServiceCollection.new(vpgraph: networkgraph, servicetype: termuri)
     commongetparams = servicecollection.gather_common_parameters(method: 'get')
@@ -179,13 +181,13 @@ class VP
     endpoints.each do |ep|
       endpoint = CGI.unescape(ep)
       result = if params['_request_body']
-                 Service.execute_post(endpoint:, body: params)
+                 Service.execute_post(endpoint: endpoint, body: params)
                else
-                 Service.execute_get(endpoint:, params:, accept:)
+                 Service.execute_get(endpoint: endpoint, params:, accept:)
                end
       results[endpoint] = result.body if result
     end
-    downloadlocation = process_and_upload_output(results:) # in serviceoutput_processors/general.rb
+    downloadlocation = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
     [downloadlocation, results] # download location is the LDP server URL
   end
 
@@ -200,7 +202,7 @@ class VP
     v
     json['service_list'].each do |ep|
       endpoint = ep
-      result = Service.execute_post(endpoint:, body: params, accept:) if json['_request_body']
+      result = Service.execute_post(endpoint: endpoint, body: params, accept:) if json['_request_body']
       results[endpoint] = result.body if result
     end
     downloadlocation = process_and_upload_output(results:) # in serviceoutput_processors/general.rb

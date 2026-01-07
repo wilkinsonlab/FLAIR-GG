@@ -49,14 +49,14 @@ def resolve_url_to_json(url:, accept: 'application/json')
     r = RestClient::Request.execute(
       method: :get,
       url:,
-      headers: { accept: }
+      headers: { accept: accept}
     )
   rescue StandardError
     warn "#{url} didn't resolve when trying for #{accept} #{r}"
     r = RestClient::Request.execute(
       method: :get,
       url:,
-      headers: { accept: }
+      headers: { accept: accept}
     )
   end
 
@@ -74,7 +74,7 @@ def resolve_url_to_rdf(url:, accept: 'text/turtle')
     r = RestClient::Request.execute(
       method: :get,
       url:,
-      headers: { accept: }
+      headers: { accept: accept}
     )
   rescue StandardError => e
     warn "#{url} didn't resolve when trying for #{accept} #{r} #{e.inspect}"
@@ -104,7 +104,7 @@ def ontology_annotations(uri:) # rubocop:disable Metrics/CyclomaticComplexity,Me
   # <https://bioregistry.io/api/reference/sio:SIO_001052 - doesn't generate usable URLs from bioregistry
 
   term = nil
-  urls = pre_process_uri(uri:)
+  urls = pre_process_uri(uri: uri)
   warn "Final URL list #{urls}\n\n"
   urls.each do |url| # rubocop:disable Metrics/BlockLength
     warn "processing #{url}\n"
@@ -173,10 +173,10 @@ end
 def pre_process_uri(uri:)
   synonym_urls = []
   if uri =~ /bioregistry\.io/
-    br = BioRegistry.new(uri:)
+    br = BioRegistry.new(uri: uri)
     synonym_urls = br.synonym_urls
   elsif uri =~ /identifiers\.org/
-    ido = IDsOrg.new(uri:)
+    ido = IDsOrg.new(uri: uri)
     synonym_urls = ido.synonym_urls
   else
     synonym_urls << uri
