@@ -45,7 +45,7 @@ def set_routes(classes: allclasses)
 
   get %r{/flair-gg-vp-server/keyword-search/?} do
     keyword = params['keyword'].strip
-    @discoverables = VP.current_vp.keyword_search_shell(keyword:) # "./lib/vp"
+    @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword) # "./lib/vp"
     @message = 'Keyword Search Results'
     request.accept.each do |type|
       case type.to_s
@@ -63,7 +63,7 @@ def set_routes(classes: allclasses)
   post %r{/flair-gg-vp-server/keyword-search/?} do
     data = JSON.parse request.body.read.to_s
     keyword = data['keyword'] ? data['keyword'].strip : ''
-    @discoverables = VP.current_vp.keyword_search_shell(keyword:) # "./lib/vp"
+    @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword) # "./lib/vp"
     @message = 'Keyword Search Results'
     request.accept.each do |type|
       case type.to_s
@@ -81,7 +81,7 @@ def set_routes(classes: allclasses)
   get %r{/flair-gg-vp-server/ontology-search/?} do
     term = params['uri'].strip
     term = term.gsub(/\S+:/, '') unless term =~ /^http/
-    @discoverables = VP.current_vp.ontology_search_shell(term:) # "./lib/vp"
+    @discoverables = VP.current_vp.ontology_search_shell(term: term) # "./lib/vp"
     @message = 'Ontology Search Results'
     request.accept.each do |type|
       case type.to_s
@@ -100,7 +100,7 @@ def set_routes(classes: allclasses)
     data = JSON.parse request.body.read.to_s
     term = data['uri'] ? data['uri'].strip : ''
     term = term.gsub(/\S+:/, '') unless term =~ /^http/
-    @discoverables = VP.current_vp.ontology_search_shell(term:) # "./lib/vp"
+    @discoverables = VP.current_vp.ontology_search_shell(term: term) # "./lib/vp"
     @message = 'Ontology Search Results'
     request.accept.each do |type|
       case type.to_s
@@ -122,7 +122,7 @@ def set_routes(classes: allclasses)
   # end
   get %r{/flair-gg-vp-server/retrieve-services/?} do
     termuri = params['services']
-    @servicecollection, @commongetparams, @commonpostparams, @accept = VP.current_vp.retrieve_sevices(termuri:) # "./lib/vp"
+    @servicecollection, @commongetparams, @commonpostparams, @accept = VP.current_vp.retrieve_sevices(termuri: termuri) # "./lib/vp"
     request.accept.each do |type|
       case type.to_s
       when 'text/html'
@@ -164,7 +164,7 @@ def set_routes(classes: allclasses)
       end
     else
       @servicelabel = params['servicelabel'].downcase.gsub(/\s+/, '_') # no spaces in service filenames - label leads to jupyter file
-      @location, @results = VP.current_vp.execute_data_services(params:)
+      @location, @results = VP.current_vp.execute_data_services(params: params)
 
       request.accept.each do |type|
         case type.to_s

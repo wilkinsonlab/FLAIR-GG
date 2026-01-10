@@ -41,6 +41,6 @@ class Discoverable
       # this is probably redundant, unless another site is pointing to your resource
       return d if d.source == source && d.resource == resource
     end
-    Discoverable.new(source:, resource:, title:, type:, icon:, typetag:)
+    Discoverable.new(source: source, resource: resource, title: title, type: type, icon: icon, typetag: typetag)
   end
 end

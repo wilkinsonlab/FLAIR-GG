@@ -55,7 +55,7 @@ class ServiceCollection
     commonparams = {}
     @allservices.each do |service|
       service.paths.each_key do |fullpath|
-        params = service.retrieve_parameters(fullpath:, operation: method)
+        params = service.retrieve_parameters(fullpath: fullpath, operation: method)
         # params[param_name] = Openapi3Parser::Node::Parameter
         params.each_key do |paramname|
           warn "found #{paramname}"
@@ -201,7 +201,7 @@ class Service
 
       @paths[fullpath] = {} unless @paths[fullpath] # initialize
       warn "\n\ninitializing with get: #{get}  and post #{post}\n"
-      @paths[fullpath] = { get:, post: }
+      @paths[fullpath] = { get: get, post: post }
       self.successful = true
       break
     end
@@ -253,7 +253,7 @@ class Service
         payload: body['_request_body'],
         headers: {
           content_type: :json,
-          accept:
+          accept: accept
           # "auth-key" => ""
         }
       )
@@ -277,7 +277,7 @@ class Service
       url: endpoint,
       headers: {
         params: cleaned,
-        accept:
+        accept: accept
         # "auth-key" => ""
       }
     )

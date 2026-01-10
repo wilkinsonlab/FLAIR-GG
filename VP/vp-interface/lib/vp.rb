@@ -95,7 +95,7 @@ class VP
 
   def keyword_search(keyword: '')
     keyword = keyword.downcase
-    results = keyword_search_query(graph: networkgraph, keyword:)
+    results = keyword_search_query(graph: networkgraph, keyword: keyword)
     discoverables = build_from_results(results: results)
     warn discoverables
     discoverables
@@ -183,7 +183,7 @@ class VP
       result = if params['_request_body']
                  Service.execute_post(endpoint: endpoint, body: params)
                else
-                 Service.execute_get(endpoint: endpoint, params:, accept:)
+                 Service.execute_get(endpoint: endpoint, params: params, accept: accept)
                end
       results[endpoint] = result.body if result
     end
@@ -202,10 +202,10 @@ class VP
     v
     json['service_list'].each do |ep|
       endpoint = ep
-      result = Service.execute_post(endpoint: endpoint, body: params, accept:) if json['_request_body']
+      result = Service.execute_post(endpoint: endpoint, body: params, accept: accept) if json['_request_body']
       results[endpoint] = result.body if result
     end
-    downloadlocation = process_and_upload_output(results:) # in serviceoutput_processors/general.rb
+    downloadlocation = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
     [downloadlocation, results] # download location is the LDP server URL
   end
 
@@ -245,12 +245,12 @@ class VP
       source = "No Contact Provided (#{counter})" and counter += 1 unless source
       source.gsub!(%r{/\s*$}, '') # no diference between http://my.org/  and http://my.org
       discoverables << Discoverable.create_or_retrieve(
-        source:, # mylab.com
+        source: source, # mylab.com
         resource: result[:s].to_s, # https://mylab.com/dist/1234231
         title: result[:title].to_s, # my mock data
-        type:, # https://w3.org/#Distribution
-        icon:, # whatever
-        typetag:
+        type: type, # https://w3.org/#Distribution
+        icon: icon, # whatever
+        typetag: typetag
       ) # Distribution
       # discoverables[contact] = [] unless discoverables[contact]
       # discoverables[contact] << { resource: result[:s].to_s, title: result[:title].to_s, type: result[:t].to_s, icon: icon } # rubocop:disable Layout/LineLength
@@ -261,7 +261,7 @@ class VP
 
   # ths might now be deprecated...
   def sort_discoverables(discoverables:)
-    discoverables.each do |provider|  # discoverables["banco"] = [{resource: http,  title: "hello", type: "dataset", icon: ico, contact: "banco"}, {resource: http ...}] # rubocop:disable Layout/LineLength
+    discoverables.each do |provider| # discoverables["banco"] = [{resource: http,  title: "hello", type: "dataset", icon: ico, contact: "banco"}, {resource: http ...}] # rubocop:disable Layout/LineLength
       sorted = discoverables[provider].sort_by { |s| s[:type] }
       discoverables[provider] = sorted
     end

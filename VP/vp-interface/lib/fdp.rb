@@ -23,7 +23,7 @@ class FDP
     @address = address # address of this FDP
     @called = [] # has this address already been called?  List of known
     warn 'refreshing'
-    load(address:) # THIS IS A RECURSIVE FUNCTION THAT FOLLOWS ldp:contains
+    load(address: address) # THIS IS A RECURSIVE FUNCTION THAT FOLLOWS ldp:contains
     freezeme
   end
 

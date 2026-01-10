@@ -1,12 +1,12 @@
 class VPConfig
   FDPSITES = []
-  FDPINDEX = ''
+  FDPINDEX = ENV['FDPINDEX'] || 'https://index.bgv.cbgp.upm.es'
   HOMEPAGE = ENV['HOMEPAGE'] || 'https://wilkinsonlab.github.io/FLAIR-GG/'
   ACKNOWLEDGEMENT = ENV['ACKNOWLEDGEMENT'] || 'Proyecto TED2021-130788B-I00 financiado por MCIN/AEI /10.13039/501100011033 y por la Unión Europea NextGeneration EU/PRTR'
   VPTITLE = ENV['VPTITLE'] || 'FLAIR-GG Virtual Platform'
   VPLOGO = ENV['VPLOGO'] || '/images/flair-gg-logo.png'
 
-  def initialize(index: ENV['FDPINDEX'])
+  def initialize(index: FDPINDEX)
     abort 'no FDP index provided' unless index =~ /^http/
     warn 'running FDP Config'
     FDPINDEX.replace index

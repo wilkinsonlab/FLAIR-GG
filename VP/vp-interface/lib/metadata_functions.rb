@@ -48,15 +48,15 @@ def resolve_url_to_json(url:, accept: 'application/json')
   begin
     r = RestClient::Request.execute(
       method: :get,
-      url:,
-      headers: { accept: accept}
+      url: url,
+      headers: { accept: accept }
     )
   rescue StandardError
     warn "#{url} didn't resolve when trying for #{accept} #{r}"
     r = RestClient::Request.execute(
       method: :get,
-      url:,
-      headers: { accept: accept}
+      url: url,
+      headers: { accept: accept }
     )
   end
 
@@ -73,8 +73,8 @@ def resolve_url_to_rdf(url:, accept: 'text/turtle')
   begin
     r = RestClient::Request.execute(
       method: :get,
-      url:,
-      headers: { accept: accept}
+      url: url,
+      headers: { accept: accept }
     )
   rescue StandardError => e
     warn "#{url} didn't resolve when trying for #{accept} #{r} #{e.inspect}"
