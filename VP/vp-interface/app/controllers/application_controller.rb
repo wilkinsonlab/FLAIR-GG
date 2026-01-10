@@ -80,5 +80,5 @@ class ApplicationController < Sinatra::Application
 
   VP.new(config: VPConfig.new) # set up index and active sites)
 
-  # run! # if app_file == $PROGRAM_NAME
+  run! # if app_file == $PROGRAM_NAME
 end
