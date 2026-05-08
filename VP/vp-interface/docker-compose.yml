@@ -2,7 +2,7 @@ version: "3.0"
 services:
 
   flair-gg-vp-server:
-    image: markw/flair-gg-vp-server:0.3.0
+    image: markw/flair-gg-vp-server:0.3.3
     restart: always
     container_name: "flair-gg-vp-server-bgv"
     hostname: "flairgg"
@@ -17,6 +17,7 @@ services:
 #      - RUBYOPT=-W0 -KU -E utf-8:utf-8
     depends_on:
       - swagger
+      - swagger-converter
 
   swagger:
     image: swaggerapi/swagger-ui:latest
@@ -28,6 +29,13 @@ services:
       - SUPPORTED_SUBMIT_METHODS=${SUPPORTED_SUBMIT_METHODS}
       - URLS=${URLS}
       - BASE_URL='/swagger'   # for our reverse proxy
+
+  swagger-converter:
+    image: swaggerapi/swagger-converter:latest
+    restart: always
+    container_name: "swagger-converter"
+    ports:
+      - "8081:8080"
 
   ldp:
     image: markw/ldp_server:latest

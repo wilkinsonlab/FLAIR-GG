@@ -39,8 +39,9 @@ class ServiceCollection
     }")
     results = vpgraph.query(vpd)
     results.each do |result|
-      service = Service.new(contact: result[:contact], title: result[:title], openapi: result[:openapi],
-                            endpoint: result[:endpoint])
+      service = Service.new(contact: result[:contact].to_s, title: result[:title].to_s,
+                            openapi: result[:openapi].to_s,
+                            endpoint: result[:endpoint].to_s)
       if service.successful
         @allservices << service # only if there's a match!
       else
@@ -155,12 +156,19 @@ class Service
 
   def retrieve_endpoint(openapi:)
     warn "retrieving #{openapi}"
-    # this is just temporary until I get the docker image working
     begin
-      resp = RestClient.get("https://converter.swagger.io/api/convert?url=#{openapi}").body
-    rescue StandardError
+      # Fetch the spec locally, bypassing SSL cert issues on remote FAIR Data Point servers
+      raw = RestClient::Request.execute(method: :get, url: openapi, verify_ssl: OpenSSL::SSL::VERIFY_NONE).body
+      content_type = begin
+        JSON.parse(raw) && 'application/json'
+      rescue JSON::ParserError
+        'application/yaml'
+      end
+      # POST to local converter container (avoids the remote converter's SSL trust restrictions)
+      resp = RestClient.post('http://swagger-converter:8080/api/convert', raw, content_type: content_type).body
+    rescue StandardError => e
       self.successful = false
-      warn "couldn't convert #{openapi}"
+      warn "couldn't convert #{openapi}: #{e.message}"
       return nil
     end
 
