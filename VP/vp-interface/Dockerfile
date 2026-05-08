@@ -1,22 +1,18 @@
-# Switch to Debian-based slim image to avoid all musl/glibc compatibility issues
-# Precompiled gems like commonmarker and eventmachine load natively without shims
-FROM ruby:3.3-slim
+# Ruby 3.2: json-ld / LinkedData libraries clash with the json gem changes in 3.3
+FROM ruby:3.2-slim
 
-# Set locale
 ENV LANG=C.UTF-8 \
     LANGUAGE=C.UTF-8 \
     LC_ALL=C.UTF-8
 
-# Install runtime and build dependencies
-# Runtime: libraries needed at run time
-# Build: headers/compilers needed only for gem compilation
+# Install runtime libs and build deps in one layer.
+# Build deps (headers/compilers) are purged after gem compilation to keep the image lean.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         libxml2 \
         libxslt1.1 \
         libyaml-0-2 \
-        libraptor2-0 && \
-    apt-get install -y --no-install-recommends \
+        libraptor2-0 \
         build-essential \
         pkg-config \
         libxml2-dev \
@@ -26,27 +22,24 @@ RUN apt-get update && \
     bundle config set --global build.nokogiri '--use-system-libraries' && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /server
+WORKDIR /server/vp-interface
 
-# Copy Gemfile + lock + gemspec for better caching
-COPY Gemfile Gemfile.lock vp-interface.gemspec /server/
+# Copy dependency manifests first for better layer caching —
+# bundle install only re-runs when these files change.
+COPY Gemfile Gemfile.lock vp-interface.gemspec ./
 
-# Install gems
-RUN bundle install --jobs $(nproc) --retry 5
-
-# Remove build dependencies to shrink image
-RUN apt-get purge -y --auto-remove \
+RUN bundle install --jobs $(nproc) --retry 5 && \
+    apt-get purge -y --auto-remove \
         build-essential \
         pkg-config \
         libxml2-dev \
         libxslt1-dev \
         libyaml-dev \
-        libraptor2-dev && \
-    rm -rf /var/lib/apt/lists/*
+        libraptor2-dev
 
-# Copy application code
-COPY . /server/vp-interface
-WORKDIR /server/vp-interface
+# Copy application code after gems are installed
+COPY . .
 
-# Your app start command
-# CMD ["bundle", "exec", "thin", "start", "-p", "3000"]  # or ruby app.rb, etc.
+EXPOSE 4567
+
+CMD ["bundle", "exec", "ruby", "run.rb"]

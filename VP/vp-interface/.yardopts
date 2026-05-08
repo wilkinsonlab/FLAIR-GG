@@ -1,0 +1,7 @@
+app/**/*.rb
+lib/**/*.rb
+--no-private
+--markup markdown
+--tag "prefix:RDF Namespace Prefix"
+--hide-tag prefix
+--output-dir doc

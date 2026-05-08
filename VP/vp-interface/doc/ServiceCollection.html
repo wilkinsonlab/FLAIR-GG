@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: ServiceCollection
+  
+    &mdash; Documentation by YARD 0.9.43
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+
+  <link rel="stylesheet" href="css/common.css" type="text/css">
+
+<script type="text/javascript">
+  pathId = "ServiceCollection";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="main_progress" aria-hidden="true"></div>
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (S)</a> &raquo;
+    
+    
+    <span class="title">ServiceCollection</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: ServiceCollection
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ServiceCollection</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/services.rb
+</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#allservices-instance_method" title="#allservices (instance method)">#<strong>allservices</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute allservices.</p></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#escapedtype-instance_method" title="#escapedtype (instance method)">#<strong>escapedtype</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute escapedtype.</p></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#servicelabel-instance_method" title="#servicelabel (instance method)">#<strong>servicelabel</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute servicelabel.</p></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#servicetype-instance_method" title="#servicetype (instance method)">#<strong>servicetype</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute servicetype.</p></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#vpgraph-instance_method" title="#vpgraph (instance method)">#<strong>vpgraph</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute vpgraph.</p></div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#warnings-instance_method" title="#warnings (instance method)">#<strong>warnings</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute warnings.</p></div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#collect_similar_services-instance_method" title="#collect_similar_services (instance method)">#<strong>collect_similar_services</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gather_common_parameters-instance_method" title="#gather_common_parameters (instance method)">#<strong>gather_common_parameters</strong>(method:)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(vpgraph:, servicetype:)  &#x21d2; ServiceCollection </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A new instance of ServiceCollection.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#minimize_service_collection-instance_method" title="#minimize_service_collection (instance method)">#<strong>minimize_service_collection</strong>(commongetparams:, commonpostparams:)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>&quot;title&quot;: {   &quot;string&quot;: &quot;Beacon2 v4  Individuals search of the DPP&quot;, }, &quot;openapi&quot;: {   &quot;value&quot;: &quot;<a href="http://fairdata.services:10004/openapi.json&amp;quot">http://fairdata.services:10004/openapi.json&amp;quot</a>;, }, &quot;endpoint&quot;: {   &quot;value&quot;: &quot;<a href="http://fairdata.services:10004/individuals&amp;quot">http://fairdata.services:10004/individuals&amp;quot</a>;, }, &quot;contact&quot;: {   &quot;value&quot;: &quot;<a href="https://fairdata.systems&amp;quot">https://fairdata.systems&amp;quot</a>;, }, &quot;paths&quot;: {   &quot;<a href="http://fairdata.services:10004/individuals&amp;quot">http://fairdata.services:10004/individuals&amp;quot</a>;: {     &quot;get&quot;: null,     &quot;post&quot;: [       [         &quot;summary&quot;,         &quot;Individuals Counts&quot;       ],       [         &quot;operationId&quot;,         &quot;individuals_counts_individuals_post&quot;       ],.</p></div></span>
+  
+</li>
+
+      
+    </ul>
+    
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(vpgraph:, servicetype:)  &#x21d2; <tt><span class='object_link'><a href="" title="ServiceCollection (class)">ServiceCollection</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a new instance of ServiceCollection.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/services.rb', line 11</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>vpgraph:</span><span class='comma'>,</span> <span class='label'>servicetype:</span><span class='rparen'>)</span>
+  <span class='ivar'>@vpgraph</span> <span class='op'>=</span> <span class='id identifier rubyid_vpgraph'>vpgraph</span>
+  <span class='ivar'>@servicetype</span> <span class='op'>=</span> <span class='id identifier rubyid_servicetype'>servicetype</span> <span class='comment'># this is the URI of the service type
+</span>  <span class='ivar'>@servicelabel</span> <span class='op'>=</span> <span class='id identifier rubyid_ontology_annotations'><span class='object_link'><a href="top-level-namespace.html#ontology_annotations-instance_method" title="#ontology_annotations (method)">ontology_annotations</a></span></span> <span class='label'>uri:</span> <span class='id identifier rubyid_servicetype'>servicetype</span>
+  <span class='ivar'>@escapedtype</span> <span class='op'>=</span> <span class='const'>CGI</span><span class='period'>.</span><span class='id identifier rubyid_escape'>escape</span><span class='lparen'>(</span><span class='id identifier rubyid_servicetype'>servicetype</span><span class='rparen'>)</span>
+  <span class='ivar'>@allservices</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@warnings</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+
+  <span class='id identifier rubyid_collect_similar_services'>collect_similar_services</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="allservices=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="allservices-instance_method">
+  
+    #<strong>allservices</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute allservices.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/services.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_allservices'>allservices</span>
+  <span class='ivar'>@allservices</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="escapedtype=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="escapedtype-instance_method">
+  
+    #<strong>escapedtype</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute escapedtype.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/services.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_escapedtype'>escapedtype</span>
+  <span class='ivar'>@escapedtype</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="servicelabel=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="servicelabel-instance_method">
+  
+    #<strong>servicelabel</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute servicelabel.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/services.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_servicelabel'>servicelabel</span>
+  <span class='ivar'>@servicelabel</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="servicetype=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="servicetype-instance_method">
+  
+    #<strong>servicetype</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute servicetype.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/services.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_servicetype'>servicetype</span>
+  <span class='ivar'>@servicetype</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="vpgraph=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="vpgraph-instance_method">
+  
+    #<strong>vpgraph</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute vpgraph.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/services.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_vpgraph'>vpgraph</span>
+  <span class='ivar'>@vpgraph</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="warnings=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="warnings-instance_method">
+  
+    #<strong>warnings</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute warnings.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/services.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_warnings'>warnings</span>
+  <span class='ivar'>@warnings</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="collect_similar_services-instance_method">
+  
+    #<strong>collect_similar_services</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/services.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_collect_similar_services'>collect_similar_services</span>
+  <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>in collect similar services</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_vpd'>vpd</span> <span class='op'>=</span> <span class='const'>SPARQL</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>
+  </span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="VP.html" title="VP (class)">VP</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="VP.html#NAMESPACES-constant" title="VP::NAMESPACES (constant)">NAMESPACES</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>
+  SELECT DISTINCT ?contact ?title ?openapi ?endpoint WHERE
+  {
+    VALUES ?connection { </span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="VP.html" title="VP (class)">VP</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="VP.html#VPCONNECTION-constant" title="VP::VPCONNECTION (constant)">VPCONNECTION</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'> }
+    VALUES ?discoverable { </span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="VP.html" title="VP (class)">VP</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="VP.html#VPDISCOVERABLE-constant" title="VP::VPDISCOVERABLE (constant)">VPDISCOVERABLE</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'> }
+
+    ?s  ?connection ?discoverable ;
+        a dcat:DataService ;
+        dc:title ?title ;
+        dcat:endpointURL ?endpoint ;
+        dcat:endpointDescription ?openapi ;
+        dc:type &lt;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_servicetype'>servicetype</span><span class='embexpr_end'>}</span><span class='tstring_content'>&gt; .
+    OPTIONAL{?s dcat:contactPoint ?c .
+      ?c &lt;http://www.w3.org/2006/vcard/ns#url&gt; ?contact } .
+  }</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='id identifier rubyid_vpgraph'>vpgraph</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='id identifier rubyid_vpd'>vpd</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span>
+    <span class='id identifier rubyid_service'>service</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Service.html" title="Service (class)">Service</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Service.html#initialize-instance_method" title="Service#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>contact:</span> <span class='id identifier rubyid_result'>result</span><span class='lbracket'>[</span><span class='symbol'>:contact</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>title:</span> <span class='id identifier rubyid_result'>result</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>openapi:</span> <span class='id identifier rubyid_result'>result</span><span class='lbracket'>[</span><span class='symbol'>:openapi</span><span class='rbracket'>]</span><span class='comma'>,</span>
+                          <span class='label'>endpoint:</span> <span class='id identifier rubyid_result'>result</span><span class='lbracket'>[</span><span class='symbol'>:endpoint</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_successful'>successful</span>
+      <span class='ivar'>@allservices</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_service'>service</span> <span class='comment'># only if there&#39;s a match!
+</span>    <span class='kw'>else</span>
+      <span class='comment'># if not, no path in the openapi YAML matched the path in the DCAT
+</span>      <span class='ivar'>@warnings</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The endpoint for </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_contact'>contact</span><span class='embexpr_end'>}</span><span class='tstring_content'> (</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_endpoint'>endpoint</span><span class='embexpr_end'>}</span><span class='tstring_content'>) in the DCAT did not match any endpoint in the OpenAPI YAML. It was therefore not returned</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># rubocop:disable Layout/LineLength
+</span>    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gather_common_parameters-instance_method">
+  
+    #<strong>gather_common_parameters</strong>(method:)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/services.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_gather_common_parameters'>gather_common_parameters</span><span class='lparen'>(</span><span class='label'>method:</span><span class='rparen'>)</span>
+  <span class='comment'># method is &quot;get&quot; or &quot;post&quot;
+</span>  <span class='id identifier rubyid_commonparams'>commonparams</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@allservices</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_service'>service</span><span class='op'>|</span>
+    <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_paths'>paths</span><span class='period'>.</span><span class='id identifier rubyid_each_key'>each_key</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fullpath'>fullpath</span><span class='op'>|</span>
+      <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_retrieve_parameters'>retrieve_parameters</span><span class='lparen'>(</span><span class='label'>fullpath:</span> <span class='id identifier rubyid_fullpath'>fullpath</span><span class='comma'>,</span> <span class='label'>operation:</span> <span class='id identifier rubyid_method'>method</span><span class='rparen'>)</span>
+      <span class='comment'># params[param_name] = Openapi3Parser::Node::Parameter
+</span>      <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_each_key'>each_key</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_paramname'>paramname</span><span class='op'>|</span>
+        <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>found </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_paramname'>paramname</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>already found </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_paramname'>paramname</span><span class='embexpr_end'>}</span><span class='tstring_content'> - now overwriting</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_commonparams'>commonparams</span><span class='lbracket'>[</span><span class='id identifier rubyid_paramname'>paramname</span><span class='rbracket'>]</span>
+        <span class='id identifier rubyid_commonparams'>commonparams</span><span class='lbracket'>[</span><span class='id identifier rubyid_paramname'>paramname</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='id identifier rubyid_paramname'>paramname</span><span class='rbracket'>]</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_commonparams'>commonparams</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="minimize_service_collection-instance_method">
+  
+    #<strong>minimize_service_collection</strong>(commongetparams:, commonpostparams:)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>&quot;title&quot;: {
+&quot;string&quot;: &quot;Beacon2 v4  Individuals search of the DPP&quot;,
+},
+&quot;openapi&quot;: {
+&quot;value&quot;: &quot;<a href="http://fairdata.services:10004/openapi.json&amp;quot">http://fairdata.services:10004/openapi.json&amp;quot</a>;,
+},
+&quot;endpoint&quot;: {
+&quot;value&quot;: &quot;<a href="http://fairdata.services:10004/individuals&amp;quot">http://fairdata.services:10004/individuals&amp;quot</a>;,
+},
+&quot;contact&quot;: {
+&quot;value&quot;: &quot;<a href="https://fairdata.systems&amp;quot">https://fairdata.systems&amp;quot</a>;,
+},
+&quot;paths&quot;: {
+&quot;<a href="http://fairdata.services:10004/individuals&amp;quot">http://fairdata.services:10004/individuals&amp;quot</a>;: {
+&quot;get&quot;: null,
+&quot;post&quot;: [
+[
+&quot;summary&quot;,
+&quot;Individuals Counts&quot;
+],
+[
+&quot;operationId&quot;,
+&quot;individuals_counts_individuals_post&quot;
+],</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/services.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_minimize_service_collection'>minimize_service_collection</span><span class='lparen'>(</span><span class='label'>commongetparams:</span><span class='comma'>,</span> <span class='label'>commonpostparams:</span><span class='rparen'>)</span> <span class='comment'># rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+</span>  <span class='id identifier rubyid_collection'>collection</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_commonget'>commonget</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_commonpost'>commonpost</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='comment'># &quot;servicetype&quot;: &quot;https://w3id.org/ejp-rd/vocabulary#VPBeacon2_individuals_4&quot;,
+</span>  <span class='comment'># &quot;servicelabel&quot;: &quot;VPBeacon2_individuals_4&quot;,
+</span>  <span class='id identifier rubyid_collection'>collection</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>servicetype</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_servicetype'>servicetype</span>
+  <span class='id identifier rubyid_collection'>collection</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>servicelabel</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_servicelabel'>servicelabel</span>
+  <span class='id identifier rubyid_services'>services</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_allservices'>allservices</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span> <span class='comment'># Service Object!
+</span>    <span class='id identifier rubyid_paths'>paths</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+    <span class='id identifier rubyid_title'>title</span> <span class='op'>=</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span>
+    <span class='id identifier rubyid_openapi'>openapi</span> <span class='op'>=</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_openapi'>openapi</span>
+    <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='op'>=</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_endpoint'>endpoint</span>
+    <span class='id identifier rubyid_contact'>contact</span> <span class='op'>=</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_contact'>contact</span>
+    <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_paths'>paths</span><span class='period'>.</span><span class='id identifier rubyid_each_key'>each_key</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fullpath'>fullpath</span><span class='op'>|</span>
+      <span class='id identifier rubyid_paths'>paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_fullpath'>fullpath</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+      <span class='id identifier rubyid_paths'>paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_fullpath'>fullpath</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>get</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>found</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_paths'>paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_fullpath'>fullpath</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:get</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_paths'>paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_fullpath'>fullpath</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>post</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>found</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_paths'>paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_fullpath'>fullpath</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:post</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_services'>services</span> <span class='op'>&lt;&lt;</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>title</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_title'>title</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>openapi</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_openapi'>openapi</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>endpoint</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>contact</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_contact'>contact</span><span class='comma'>,</span>
+                  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>paths</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_paths'>paths</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_collection'>collection</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>services</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_services'>services</span>
+
+  <span class='id identifier rubyid_commongetparams'>commongetparams</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_paramname'>paramname</span><span class='comma'>,</span> <span class='id identifier rubyid_param'>param</span><span class='op'>|</span>
+    <span class='id identifier rubyid_example'>example</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_param'>param</span><span class='period'>.</span><span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>example</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_param'>param</span><span class='period'>.</span><span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_example'>example</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\w</span><span class='regexp_end'>/</span></span>
+      <span class='id identifier rubyid_example'>example</span> <span class='op'>=</span> <span class='id identifier rubyid_param'>param</span><span class='period'>.</span><span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_example'>example</span>
+    <span class='kw'>elsif</span> <span class='id identifier rubyid_param'>param</span><span class='period'>.</span><span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>default</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_param'>param</span><span class='period'>.</span><span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\w</span><span class='regexp_end'>/</span></span>
+      <span class='id identifier rubyid_example'>example</span> <span class='op'>=</span> <span class='id identifier rubyid_param'>param</span><span class='period'>.</span><span class='id identifier rubyid_schema'>schema</span><span class='period'>.</span><span class='id identifier rubyid_default'>default</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_commonget'>commonget</span><span class='lbracket'>[</span><span class='id identifier rubyid_paramname'>paramname</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>example</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_example'>example</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_commonpostparams'>commonpostparams</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_paramname'>paramname</span><span class='comma'>,</span> <span class='id identifier rubyid__param'>_param</span><span class='op'>|</span>
+    <span class='id identifier rubyid_commonpost'>commonpost</span><span class='lbracket'>[</span><span class='id identifier rubyid_paramname'>paramname</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>example</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>{&quot;YourJSON&quot;: &quot;GoesHere&quot;}</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_collection'>collection</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>commongetparams</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_commonget'>commonget</span>
+  <span class='id identifier rubyid_collection'>collection</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>commonpostparams</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_commonpost'>commonpost</span>
+
+  <span class='id identifier rubyid_collection'>collection</span> <span class='comment'># this is the minimized collection
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri May  8 09:42:07 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.43 (ruby-3.2.4).
+</div>
+
+    </div>
+  </body>
+</html>

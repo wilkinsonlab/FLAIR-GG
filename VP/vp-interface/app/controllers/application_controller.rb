@@ -22,26 +22,15 @@ require_relative '../../lib/metadata_functions'
 require_relative '../../lib/services'
 require_relative '../../lib/wordcloud'
 
-class ApplicationController < Sinatra::Application
+# Top-level Sinatra application.  Inherits all HTTP routes from {VPRoutes} and
+# adds Swagger/OpenAPI configuration and VP initialisation.
+class ApplicationController < VPRoutes
   include Swagger::Blocks
 
   set :bind, '0.0.0.0'
-  before do
-    response.headers['Access-Control-Allow-Origin'] = '*'
-  end
 
   configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
     enable :cross_origin
-  end
-
-  # routes...
-  options '*' do
-    response.headers['Allow'] = 'GET, PUT, POST, DELETE, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type, Accept, X-User-Email, X-Auth-Token'
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    200
   end
 
   swagger_root do
@@ -58,27 +47,19 @@ class ApplicationController < Sinatra::Application
         key :name, 'MIT'
       end
     end
-    # tag do
-    #   key :name, $th.keys.first
-    #   key :description, 'All Tests'
-    #   externalDocs do
-    #     key :description, 'Find more info here'
-    #     key :url, 'https://fairdata.services/Champion/about'
-    #   end
-    # end
     key :schemes, ['http']
     key :host, ENV.fetch('HARVESTER', nil)
     key :basePath, '/flair-gg-vp-server'
-    #    key :consumes, ['application/json']
-    #    key :produces, ['application/json']
   end
 
-  # A list of all classes that have swagger_* declarations.
+  # All classes that carry +swagger_*+ declarations, used to build the OpenAPI
+  # root document served by +GET /flair-gg-vp-server+.
   SWAGGERED_CLASSES = [ErrorModel, AllResourcesResponse, OntologySearchResponse, KeywordSearchResponse, self].freeze
 
-  set_routes(classes: SWAGGERED_CLASSES)
+  # @return [Array<Class>] the Swagger-annotated classes for this application
+  def self.swaggered_classes
+    SWAGGERED_CLASSES
+  end
 
-  VP.new(config: VPConfig.new) # set up index and active sites)
-
-  run! # if app_file == $PROGRAM_NAME
+  VP.new(config: VPConfig.new) # set up index and active sites
 end

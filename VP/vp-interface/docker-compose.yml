@@ -8,7 +8,7 @@ services:
     hostname: "flairgg"
     ports:
       - "4567:4567"
-    command: ruby /server/vp-interface/app/controllers/application_controller.rb -o 0.0.0.0
+    command: bundle exec ruby /server/vp-interface/run.rb
     volumes:
       - ./cache:/server/vp-interface/cache/
     environment:
