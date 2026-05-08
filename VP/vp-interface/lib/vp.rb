@@ -193,17 +193,20 @@ class VP
 
   def execute_data_services_api(json:)
     # {uri: serviceuri,
-    #  _request_body: {json: data},
+    #  _request_body: {json: data},   # optional; triggers POST if present
     #  service_list: [endpoint, endpoint, endpoint]
-    # }   # this is passed to all services
+    # }
     results = {}
     accept = json['accept']
     json.delete 'accept'
-    v
+
     json['service_list'].each do |ep|
-      endpoint = ep
-      result = Service.execute_post(endpoint: endpoint, body: params, accept: accept) if json['_request_body']
-      results[endpoint] = result.body if result
+      result = if json['_request_body']
+                 Service.execute_post(endpoint: ep, body: json['_request_body'], accept: accept)
+               else
+                 Service.execute_get(endpoint: ep, params: {}, accept: accept)
+               end
+      results[ep] = result.body if result
     end
     downloadlocation = process_and_upload_output(results: results) # in serviceoutput_processors/general.rb
     [downloadlocation, results] # download location is the LDP server URL
