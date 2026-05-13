@@ -63,8 +63,8 @@
                   <% resource = disc.resource %>
                   <% title = disc.title %>
                   <h4>&nbsp;&nbsp;<img src="/images/<%= disc.icon %>" width=25 height=25/> &nbsp;&nbsp;
-                  Title: <a href="<%= resource %>" _target="_blank"><%= title %></a></h4>
-                  &nbsp;&nbsp;&nbsp;&nbsp;Website: <a href="<%= resource %>" _target="_blank"> <%= resource %> </a>
+                  Title: <a href="<%= resource %>" target="_blank"><%= title %></a></h4>
+                  &nbsp;&nbsp;&nbsp;&nbsp;Website: <a href="<%= resource %>" target="_blank"> <%= resource %> </a>
                   <br/>
                   <br/>
                 <% end %>
@@ -81,12 +81,12 @@
               <% sources = thistabresources.map {|d| d.source}; sources.uniq! %>
 
               <% sources.each do |source| %>
-                <h4>SOURCE: <a href="<%= source %>" _target="_blank"><%= source %></a></h4>
+                <h4>SOURCE: <a href="<%= source %>" target="_blank"><%= source %></a></h4>
                 <% thistabresources.select {|d| d.source == source}.each do |disc| %>
                   <% resource = disc.resource %>
                   <% title = disc.title %>
                   &nbsp;&nbsp;<img src="/images/<%= disc.icon %>" width=25 height=25/> &nbsp;&nbsp;
-                  Resource: <a href="<%= resource %>" _target="_blank"> <%= title %> </a>
+                  Resource: <a href="<%= resource %>" target="_blank"> <%= title %> </a>
                   <br/>
                 <% end %>
                 <br/>

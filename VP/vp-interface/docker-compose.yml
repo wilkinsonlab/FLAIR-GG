@@ -12,6 +12,8 @@ services:
     environment:
       - RUBYOPT=-W0 -KU
       - FDPINDEX=https://index.bgv.cbgp.upm.es/
+      - FDPSPARQL=http://localhost:3501/sparql
+
 #      - RUBYOPT=-W0 -KU -E utf-8:utf-8
     depends_on:
       - swagger

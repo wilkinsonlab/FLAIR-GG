@@ -6,10 +6,10 @@ require 'rest-client'
 require 'json'
 
 class ServiceCollection
-  attr_accessor :vpgraph, :servicetype, :servicelabel, :allservices, :warnings, :escapedtype
+  attr_accessor :endpoint, :servicetype, :servicelabel, :allservices, :warnings, :escapedtype
 
-  def initialize(vpgraph:, servicetype:)
-    @vpgraph = vpgraph
+  def initialize(endpoint:, servicetype:)
+    @endpoint = endpoint
     @servicetype = servicetype # this is the URI of the service type
     @servicelabel = ontology_annotations uri: servicetype
     @escapedtype = CGI.escape(servicetype)
@@ -21,23 +21,8 @@ class ServiceCollection
 
   def collect_similar_services
     warn 'in collect similar services'
-    vpd = SPARQL.parse("
-    #{VP::NAMESPACES}
-    SELECT DISTINCT ?contact ?title ?openapi ?endpoint WHERE
-    {
-      VALUES ?connection { #{VP::VPCONNECTION} }
-      VALUES ?discoverable { #{VP::VPDISCOVERABLE} }
+    results = VP.collect_similar_services_query(endpoint: VPConfig::FDPSPARQL, termuri: servicetype)
 
-      ?s  ?connection ?discoverable ;
-          a dcat:DataService ;
-          dc:title ?title ;
-          dcat:endpointURL ?endpoint ;
-          dcat:endpointDescription ?openapi ;
-          dc:type <#{servicetype}> .
-      OPTIONAL{?s dcat:contactPoint ?c .
-        ?c <http://www.w3.org/2006/vcard/ns#url> ?contact } .
-    }")
-    results = vpgraph.query(vpd)
     results.each do |result|
       service = Service.new(contact: result[:contact].to_s, title: result[:title].to_s,
                             openapi: result[:openapi].to_s,

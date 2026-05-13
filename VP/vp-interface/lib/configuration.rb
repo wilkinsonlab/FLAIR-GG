@@ -1,31 +1,30 @@
 # frozen_string_literal: false
 
 class VPConfig
-  @@fdpindex = ENV['FDPINDEX'] || 'https://index.bgv.cbgp.upm.es'
+  fdpindex = ENV['FDPINDEX']
+  fdpindex = fdpindex.dup
+  fdpindex.gsub!(%r{/\s*$}, '') # no diference between http://my.org/  and http://my.org
+  FDPINDEX = fdpindex.freeze
+
+  fdpsparql = ENV['FDPSPARQL']
+  fdpsparql = fdpsparql.dup
+  fdpsparql.gsub!(%r{/\s*$}, '') # no diference between http://my.org/  and http://my.org
+  FDPSPARQL = fdpsparql.freeze
+
   FDPSITES = []
   HOMEPAGE = ENV['HOMEPAGE'] || 'https://wilkinsonlab.github.io/FLAIR-GG/'
   ACKNOWLEDGEMENT = ENV['ACKNOWLEDGEMENT'] || 'Proyecto TED2021-130788B-I00 financiado por MCIN/AEI /10.13039/501100011033 y por la Unión Europea NextGeneration EU/PRTR'
   VPTITLE = ENV['VPTITLE'] || 'FLAIR-GG Virtual Platform'
   VPLOGO = ENV['VPLOGO'] || '/images/flair-gg-logo.png'
 
-  def initialize(index: @@fdpindex)
+  def initialize(index: FDPINDEX, sparql: FDPSPARQL)
     abort 'no FDP index provided' unless index =~ /^http/
+    abort 'no FDP sparql provided' unless sparql =~ /^http/
     warn 'running FDP Config'
-    fdpindex = index
 
-    index = index.gsub(%r{/\s*$}, '')
     indexapicall = "#{index}/index/entries/all"
 
     FDPSITES.replace get_active_sites(api: indexapicall)
-  end
-
-  def fdpindex
-    @@fdpindex
-  end
-
-  def fdpindex=(val)
-    @@fdpindex = val
-    @@fdpindex
   end
 
   def get_active_sites(api:)
@@ -52,9 +51,11 @@ end
 
 class FDPConfig
   FDPDOMAIN = ''
+  FDPINDEX = VPConfig::FDPINDEX
+  FDPSPARQL = VPConfig::FDPSPARQL
 
   def initialize
     # this is only used to create the prefix for the cache...
-    FDPDOMAIN.replace VPConfig.fdpindex.gsub(%r{https?://}, '').gsub(%r{/.*}, '')
+    FDPDOMAIN.replace FDPINDEX.gsub(%r{https?://}, '').gsub(%r{/.*}, '')
   end
 end

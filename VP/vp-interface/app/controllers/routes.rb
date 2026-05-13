@@ -93,7 +93,7 @@ class VPRoutes < Sinatra::Base
   get %r{/flair-gg-vp-server/resources/force-refresh/?} do
     warn 'initializing refresh in routes'
     unless File.exist?('./cache/REFRESHING')
-      VP.restart
+      # VP.restart
       @discoverables = VP.current_vp.get_resources
       FileUtils.rm_f('./cache/servicetypes.json')
       @services = VP.current_vp.collect_data_services

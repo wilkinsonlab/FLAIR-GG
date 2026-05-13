@@ -23,7 +23,7 @@ class VP
     @networkgraph = RDF::Graph.new # the full network of FDP triples
     @fdps = [] # the FDPs that I know
     @aboutme = [] # the list of keywords for the word cloud
-    load_fdps_from_cache
+    # load_fdps_from_cache
     @@thisvp = self
   end
 
@@ -76,7 +76,7 @@ class VP
 
   def find_discoverables
     # warn "network graph size #{networkgraph.size}"
-    results = find_discoverables_query(graph: networkgraph)
+    results = find_discoverables_query(endpoint: VPConfig::FDPSPARQL)
     # warn "find disc results #{results.inspect}"
     discoverables = build_from_results(results: results)
     warn 'DISCOVERABLES', discoverables
@@ -95,23 +95,22 @@ class VP
 
   def keyword_search(keyword: '')
     keyword = keyword.downcase
-    results = keyword_search_query(graph: networkgraph, keyword: keyword)
+    results = find_discoverables_query(endpoint: VPConfig::FDPSPARQL, keyword: keyword)
     discoverables = build_from_results(results: results)
     warn discoverables
     discoverables
   end
 
   def ontology_search(uri: '')
-    results = ontology_search_query(graph: networkgraph, uri: uri)
+    results = find_discoverables_query(endpoint: VPConfig::FDPSPARQL, uri: uri)
     discoverables = build_from_results(results: results)
     warn discoverables
     discoverables
   end
 
   def verbose_annotations
-    @graph = networkgraph
     words = []
-    results = verbose_annotations_query(graph: networkgraph)
+    results = verbose_annotations_query(endpoint: VPConfig::FDPSPARQL)
 
     results.each do |res|
       uri = res[:annot].to_s
@@ -124,7 +123,7 @@ class VP
     # end of taxonomy parser
 
     warn "\n\nSWITCH TO KEYWORDS\n\n"
-    results = keyword_annotations_query(graph: networkgraph)
+    results = keyword_annotations_query(endpoint: VPConfig::FDPSPARQL)
     results.each do |res|
       next if res[:kw].to_s.empty?
 
@@ -140,10 +139,13 @@ class VP
       services = thaw_servicetypes
     else
       warn 'in collect data services'
-      results = collect_data_services_query(graph: networkgraph)
+      results = collect_data_services_query(endpoint: VPConfig::FDPSPARQL)
+      # warn "collect data services results #{results.inspect}  \n\n"
+
       prehash = {}
       results.each do |r|
         type = r[:type].to_s
+        warn "checking type #{type}"
         next if prehash[type] # already known
 
         warn "subject type #{type}"
@@ -160,7 +162,7 @@ class VP
     # termuri  the URI of the service type
     contenttype = guess_best_content_type(termuri: termuri)
     # hand off to services_functions
-    servicecollection = ServiceCollection.new(vpgraph: networkgraph, servicetype: termuri)
+    servicecollection = ServiceCollection.new(endpoint: VPConfig::FDPSPARQL, servicetype: termuri)
     commongetparams = servicecollection.gather_common_parameters(method: 'get')
     commonpostparams = servicecollection.gather_common_parameters(method: 'post')
     [servicecollection, commongetparams, commonpostparams, contenttype]
@@ -214,7 +216,7 @@ class VP
 
   def match_type_to_icon(type:)
     t = type.match(%r{[\#/](\w+?)$})[1].downcase.to_sym # anchor to end to capture last / or #
-    warn "matching #{t}\n\n"
+    # warn "matching icon #{t}\n\n"
     hash = {
       biobank: 'biobank.svg',
       catalog: 'catalog.svg',
@@ -234,14 +236,21 @@ class VP
     #    s (resource URL) t(type) title contact(vcard url)
     results.each do |result|
       #      warn "result is #{result.inspect}"
+      # SELECT DISTINCT
+      # ?resource ?fdp
+      # ?resourceName ?resourceTypeURI ?ServiceType
+      # ?ResourceType ?resourceCreated
+      # ?resourceUpdated ?resourceHomepage
+      # ?resourceDescription ?resourceLogo
+      # ?publisherLogo
 
-      next if result[:t].to_s =~ /\#Resource/
+      next if result[:resourceTypeURI].to_s =~ /\#Resource/
 
-      icon = match_type_to_icon(type: result[:t].to_s)
-      type = result[:t].to_s
+      icon = match_type_to_icon(type: result[:resourceTypeURI].to_s)
+      type = result[:resourceTypeURI].to_s
       typetag = type.match(%r{[\#/](\w+?)$})[1].downcase
       # if it is a dataservice without a service type, then it is a top level FDP
-      next if typetag == 'dataservice' && result[:servicetype].to_s.empty?
+      next if typetag == 'dataservice' && result[:ServiceType].to_s.empty?
 
       frozen = result[:contact].to_s
       source = frozen.dup
@@ -249,8 +258,8 @@ class VP
       source.gsub!(%r{/\s*$}, '') # no diference between http://my.org/  and http://my.org
       discoverables << Discoverable.create_or_retrieve(
         source: source, # mylab.com
-        resource: result[:s].to_s, # https://mylab.com/dist/1234231
-        title: result[:title].to_s, # my mock data
+        resource: result[:resource].to_s, # https://mylab.com/dist/1234231
+        title: result[:resourceName].to_s, # my mock data
         type: type, # https://w3.org/#Distribution
         icon: icon, # whatever
         typetag: typetag
