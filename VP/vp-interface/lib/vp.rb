@@ -12,6 +12,7 @@ require_rel 'ontologyservers'
 require_rel 'serviceoutput_processers'
 require_rel 'discoverable'
 require_rel 'common_queries'
+require_relative 'fdp_index_client'
 
 class VP
   attr_accessor :networkgraph, :vpconfig, :fdps, :aboutme

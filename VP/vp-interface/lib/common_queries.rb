@@ -15,18 +15,69 @@ PREFIX ldp: <http://www.w3.org/ns/ldp#>
   VPINVISIBLE = 'ejp:VPInvisible'.freeze
   VPANNOTATION = 'dcat:theme'.freeze
 
+  # Builds a SPARQL::Client authenticated against the FDP Index's
+  # +/search/sparql+ proxy (bearer token, see VPConfig::FDPINDEX_API_TOKEN).
+  def self.sparql_client(endpoint:)
+    FDPIndexClient.sparql_client(endpoint: endpoint, token: VPConfig::FDPINDEX_API_TOKEN)
+  end
+
+  # Escapes a value for safe interpolation inside a SPARQL string literal
+  # ("..."), per the STRING_LITERAL_QUOTE production. Every user-supplied
+  # value interpolated into a query as a quoted literal must go through this
+  # - otherwise a value containing e.g. `"` can break out of the literal and
+  # inject arbitrary SPARQL (this is exactly how SQL injection works, just
+  # for SPARQL).
+  def self.escape_sparql_literal(value)
+    value.to_s.gsub('\\', '\\\\\\\\').gsub('"', '\\"').gsub("\n", '\\n').gsub("\r", '\\r')
+  end
+
+  # True if `value` contains none of the characters forbidden inside a
+  # SPARQL IRIREF (<...>) - control characters, space, or < > " { } | ^ ` \.
+  # There is no escape sequence for these inside an IRIREF, so a value that
+  # fails this check cannot be safely interpolated there at all and must be
+  # rejected rather than merely escaped.
+  def self.safe_sparql_iri?(value)
+    value.to_s.match?(/\A[^\x00-\x20<>"{}|^`\\]+\z/)
+  end
+
+  # [EXPERIMENTAL] Executes an arbitrary, LLM-authored read-only SPARQL query
+  # against the FDP Index - see MCP_TOOLS in app/controllers/mcp_routes.rb
+  # for the tool description/examples an LLM sees before calling this.
+  #
+  # Only SELECT is allowed (no ASK/CONSTRUCT/DESCRIBE/updates) - this is the
+  # form whose results serialize simply and safely as JSON rows, and it's
+  # the only one the FDP Index's own /search/sparql proxy needs to support
+  # anyway (updates are rejected server-side regardless). A LIMIT is
+  # appended automatically if the query doesn't include one, since an
+  # LLM-authored query has no guarantee of being bounded and the index may
+  # hold hundreds of entries.
+  #
+  # @param query [String] a SPARQL 1.1 SELECT query
+  # @raise [ArgumentError] if the query is not a SELECT query
+  # @return [Array<Hash>] one Hash per result row, variable name => string value
+  def self.execute_raw_sparql(query:)
+    normalized = query.to_s.strip
+    unless normalized =~ /\A(?:PREFIX\s+\S*:\s*<[^>]*>\s*)*SELECT\b/i
+      raise ArgumentError, 'Only SELECT queries are supported'
+    end
+
+    normalized = "#{normalized} LIMIT 100" unless normalized =~ /\bLIMIT\s+\d+\b/i
+
+    sparql = sparql_client(endpoint: VPConfig::FDPSPARQL)
+    sparql.query(normalized).map { |solution| solution.to_h.transform_values(&:to_s) }
+  end
+
   def find_discoverables_query(endpoint:, keyword: nil, uri: nil)
     # try querying the FDP directly
     warn "querying endpoint #{endpoint}"
-    sparql = SPARQL::Client.new(endpoint, method: :post, headers: { accept: 'application/sparql-results+json' },
-                                          verify_ssl: false)
+    sparql = VP.sparql_client(endpoint: endpoint)
 
     keyword_filter =
       if keyword
         "
           VALUES ?searchfields { dc:title dc:description dc:keyword dcat:keyword }
           ?resource ?searchfields ?kw .
-          FILTER(CONTAINS(LCASE(str(?kw)), LCASE(\"#{keyword}\")))
+          FILTER(CONTAINS(LCASE(str(?kw)), LCASE(\"#{VP.escape_sparql_literal(keyword)}\")))
         "
       else
         ''
@@ -36,7 +87,7 @@ PREFIX ldp: <http://www.w3.org/ns/ldp#>
       if uri
         "
           ?resource dcat:theme ?theme .
-          FILTER(CONTAINS(str(?theme), \"#{uri}\"))
+          FILTER(CONTAINS(str(?theme), \"#{VP.escape_sparql_literal(uri)}\"))
         "
       else
         ''
@@ -210,8 +261,7 @@ DISCOVERY
 
   def verbose_annotations_query(endpoint:)
     # TODO: This does not respect vpdiscoverable...
-    sparql = SPARQL::Client.new(endpoint, method: :post, headers: { accept: 'application/sparql-results+json' },
-                                          verify_ssl: false)
+    sparql = VP.sparql_client(endpoint: endpoint)
 
     vpd = "
       #{NAMESPACES}
@@ -223,8 +273,7 @@ DISCOVERY
   end
 
   def keyword_annotations_query(endpoint:)
-    sparql = SPARQL::Client.new(endpoint, method: :post, headers: { accept: 'application/sparql-results+json' },
-                                          verify_ssl: false)
+    sparql = VP.sparql_client(endpoint: endpoint)
     vpd = "
       #{NAMESPACES}
       select DISTINCT ?kw WHERE
@@ -235,8 +284,7 @@ DISCOVERY
   end
 
   def collect_data_services_query(endpoint:)
-    sparql = SPARQL::Client.new(endpoint, method: :post, headers: { accept: 'application/sparql-results+json' },
-                                          verify_ssl: false)
+    sparql = VP.sparql_client(endpoint: endpoint)
     vpd = "
 
       #{NAMESPACES}
@@ -258,8 +306,9 @@ DISCOVERY
   end
 
   def self.collect_similar_services_query(endpoint:, termuri:)
-    sparql = SPARQL::Client.new(endpoint, method: :post, headers: { accept: 'application/sparql-results+json' },
-                                          verify_ssl: false)
+    raise ArgumentError, "invalid service type URI: #{termuri.inspect}" unless safe_sparql_iri?(termuri)
+
+    sparql = VP.sparql_client(endpoint: endpoint)
     vpd = "
     #{NAMESPACES}
     SELECT DISTINCT ?contact ?title ?openapi ?endpoint WHERE

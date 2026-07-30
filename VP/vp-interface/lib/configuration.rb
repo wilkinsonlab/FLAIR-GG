@@ -11,6 +11,8 @@ class VPConfig
   fdpsparql.gsub!(%r{/\s*$}, '') # no diference between http://my.org/  and http://my.org
   FDPSPARQL = fdpsparql.freeze
 
+  FDPINDEX_API_TOKEN = ENV['FDPINDEX_API_TOKEN'].freeze
+
   FDPSITES = []
   HOMEPAGE = ENV['HOMEPAGE'] || 'https://wilkinsonlab.github.io/FLAIR-GG/'
   ACKNOWLEDGEMENT = ENV['ACKNOWLEDGEMENT'] || 'Proyecto TED2021-130788B-I00 financiado por MCIN/AEI /10.13039/501100011033 y por la Unión Europea NextGeneration EU/PRTR'
@@ -20,6 +22,7 @@ class VPConfig
   def initialize(index: FDPINDEX, sparql: FDPSPARQL)
     abort 'no FDP index provided' unless index =~ /^http/
     abort 'no FDP sparql provided' unless sparql =~ /^http/
+    abort 'no FDP index API token provided (FDPINDEX_API_TOKEN)' if FDPINDEX_API_TOKEN.nil? || FDPINDEX_API_TOKEN.empty?
     warn 'running FDP Config'
 
     indexapicall = "#{index}/index/entries/all"
