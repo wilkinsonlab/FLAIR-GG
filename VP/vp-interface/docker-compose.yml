@@ -1,17 +1,21 @@
 services:
   flair-gg-vp-server:
     image: markw/flair-gg-vp-server:0.3.4
+
+    
     restart: always
  #   container_name: "flair-gg-vp-server-bgv"
     hostname: "flairgg"
-    network_mode: host  # so localhost:9091 reaches the host-bound GraphDB port
+    ports:
+      - "4567:4567"
     command: bundle exec ruby /server/vp-interface/run.rb
     volumes:
       - ./cache:/server/vp-interface/cache/
     environment:
       - RUBYOPT=-W0 -KU
       - FDPINDEX=https://index.bgv.cbgp.upm.es/
-      - FDPSPARQL=http://localhost:9091/repositories/index-fdp
+      - FDPSPARQL=https://index.linkeddata.systems/search/sparql
+      - FDPINDEX_API_TOKEN=${FDPINDEX_API_TOKEN}
 
 #      - RUBYOPT=-W0 -KU -E utf-8:utf-8
     depends_on:

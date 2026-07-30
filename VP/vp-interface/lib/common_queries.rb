@@ -15,11 +15,23 @@ PREFIX ldp: <http://www.w3.org/ns/ldp#>
   VPINVISIBLE = 'ejp:VPInvisible'.freeze
   VPANNOTATION = 'dcat:theme'.freeze
 
+  # Builds a SPARQL::Client authenticated against the FDP Index's
+  # +/search/sparql+ proxy (bearer token, see VPConfig::FDPINDEX_API_TOKEN).
+  def self.sparql_client(endpoint:)
+    SPARQL::Client.new(
+      endpoint,
+      method: :post,
+      headers: {
+        accept: 'application/sparql-results+json',
+        authorization: "Bearer #{VPConfig::FDPINDEX_API_TOKEN}"
+      }
+    )
+  end
+
   def find_discoverables_query(endpoint:, keyword: nil, uri: nil)
     # try querying the FDP directly
     warn "querying endpoint #{endpoint}"
-    sparql = SPARQL::Client.new(endpoint, method: :post, headers: { accept: 'application/sparql-results+json' },
-                                          verify_ssl: false)
+    sparql = VP.sparql_client(endpoint: endpoint)
 
     keyword_filter =
       if keyword
@@ -210,8 +222,7 @@ DISCOVERY
 
   def verbose_annotations_query(endpoint:)
     # TODO: This does not respect vpdiscoverable...
-    sparql = SPARQL::Client.new(endpoint, method: :post, headers: { accept: 'application/sparql-results+json' },
-                                          verify_ssl: false)
+    sparql = VP.sparql_client(endpoint: endpoint)
 
     vpd = "
       #{NAMESPACES}
@@ -223,8 +234,7 @@ DISCOVERY
   end
 
   def keyword_annotations_query(endpoint:)
-    sparql = SPARQL::Client.new(endpoint, method: :post, headers: { accept: 'application/sparql-results+json' },
-                                          verify_ssl: false)
+    sparql = VP.sparql_client(endpoint: endpoint)
     vpd = "
       #{NAMESPACES}
       select DISTINCT ?kw WHERE
@@ -235,8 +245,7 @@ DISCOVERY
   end
 
   def collect_data_services_query(endpoint:)
-    sparql = SPARQL::Client.new(endpoint, method: :post, headers: { accept: 'application/sparql-results+json' },
-                                          verify_ssl: false)
+    sparql = VP.sparql_client(endpoint: endpoint)
     vpd = "
 
       #{NAMESPACES}
@@ -258,8 +267,7 @@ DISCOVERY
   end
 
   def self.collect_similar_services_query(endpoint:, termuri:)
-    sparql = SPARQL::Client.new(endpoint, method: :post, headers: { accept: 'application/sparql-results+json' },
-                                          verify_ssl: false)
+    sparql = sparql_client(endpoint: endpoint)
     vpd = "
     #{NAMESPACES}
     SELECT DISTINCT ?contact ?title ?openapi ?endpoint WHERE

@@ -30,11 +30,8 @@ class Wordcloud
 
   def count_words
     warn 'counting keywords'
-    freqs = {}
-    @words.each do |w|
-      freq = @words.count(w)
-      freqs[w] = freq
-    end
+    freqs = Hash.new(0)
+    @words.each { |w| freqs[w] += 1 }
     warn freqs
     freqs
   end
