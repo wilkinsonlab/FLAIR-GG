@@ -40,6 +40,33 @@ PREFIX ldp: <http://www.w3.org/ns/ldp#>
     value.to_s.match?(/\A[^\x00-\x20<>"{}|^`\\]+\z/)
   end
 
+  # [EXPERIMENTAL] Executes an arbitrary, LLM-authored read-only SPARQL query
+  # against the FDP Index - see MCP_TOOLS in app/controllers/mcp_routes.rb
+  # for the tool description/examples an LLM sees before calling this.
+  #
+  # Only SELECT is allowed (no ASK/CONSTRUCT/DESCRIBE/updates) - this is the
+  # form whose results serialize simply and safely as JSON rows, and it's
+  # the only one the FDP Index's own /search/sparql proxy needs to support
+  # anyway (updates are rejected server-side regardless). A LIMIT is
+  # appended automatically if the query doesn't include one, since an
+  # LLM-authored query has no guarantee of being bounded and the index may
+  # hold hundreds of entries.
+  #
+  # @param query [String] a SPARQL 1.1 SELECT query
+  # @raise [ArgumentError] if the query is not a SELECT query
+  # @return [Array<Hash>] one Hash per result row, variable name => string value
+  def self.execute_raw_sparql(query:)
+    normalized = query.to_s.strip
+    unless normalized =~ /\A(?:PREFIX\s+\S*:\s*<[^>]*>\s*)*SELECT\b/i
+      raise ArgumentError, 'Only SELECT queries are supported'
+    end
+
+    normalized = "#{normalized} LIMIT 100" unless normalized =~ /\bLIMIT\s+\d+\b/i
+
+    sparql = sparql_client(endpoint: VPConfig::FDPSPARQL)
+    sparql.query(normalized).map { |solution| solution.to_h.transform_values(&:to_s) }
+  end
+
   def find_discoverables_query(endpoint:, keyword: nil, uri: nil)
     # try querying the FDP directly
     warn "querying endpoint #{endpoint}"

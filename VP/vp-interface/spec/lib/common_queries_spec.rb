@@ -72,3 +72,63 @@ RSpec.describe 'VP query-building SPARQL escaping' do
     end
   end
 end
+
+# .execute_raw_sparql backs the experimental sparql_query MCP tool
+# (app/controllers/mcp_routes.rb), which lets an LLM author its own SPARQL
+# query - so unlike the rest of common_queries.rb, the query text here is
+# never something the app itself wrote. The safety net is entirely at the
+# query-*form* level (SELECT only), not escaping, since there's no fixed
+# template to inject into.
+RSpec.describe 'VP.execute_raw_sparql' do
+  let(:fake_client) { instance_double(SPARQL::Client) }
+
+  before { allow(VP).to receive(:sparql_client).and_return(fake_client) }
+
+  it 'rejects non-SELECT query forms' do
+    expect { VP.execute_raw_sparql(query: 'ASK { ?s ?p ?o }') }.to raise_error(ArgumentError, /Only SELECT/)
+  end
+
+  it 'rejects update operations' do
+    expect { VP.execute_raw_sparql(query: 'DELETE WHERE { ?s ?p ?o }') }.to raise_error(ArgumentError)
+  end
+
+  it 'allows a SELECT query preceded by PREFIX declarations' do
+    allow(fake_client).to receive(:query).and_return([])
+    expect do
+      VP.execute_raw_sparql(query: 'PREFIX x: <http://x/> SELECT ?s WHERE { ?s ?p ?o }')
+    end.not_to raise_error
+  end
+
+  it 'appends a default LIMIT when none is given' do
+    captured = nil
+    allow(fake_client).to receive(:query) do |q|
+      captured = q
+      []
+    end
+
+    VP.execute_raw_sparql(query: 'SELECT ?s WHERE { ?s ?p ?o }')
+
+    expect(captured).to include('LIMIT 100')
+  end
+
+  it 'does not append a second LIMIT when one is already present' do
+    captured = nil
+    allow(fake_client).to receive(:query) do |q|
+      captured = q
+      []
+    end
+
+    VP.execute_raw_sparql(query: 'SELECT ?s WHERE { ?s ?p ?o } LIMIT 5')
+
+    expect(captured.scan(/LIMIT/i).size).to eq(1)
+  end
+
+  it 'converts result rows to plain string-valued hashes' do
+    solution = instance_double('RDF::Query::Solution', to_h: { s: 'http://example.org/1', label: 'Example' })
+    allow(fake_client).to receive(:query).and_return([solution])
+
+    rows = VP.execute_raw_sparql(query: 'SELECT ?s ?label WHERE { ?s rdfs:label ?label }')
+
+    expect(rows).to eq([{ s: 'http://example.org/1', label: 'Example' }])
+  end
+end

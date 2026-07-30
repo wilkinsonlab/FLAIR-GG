@@ -1,0 +1,5 @@
+To regenerate doc/openapi.yaml after changing a route:
+
+OPENAPI=1 bundle exec rspec
+
+Served live at GET /flair-gg-vp-server. Config: spec/spec_helper.rb.
