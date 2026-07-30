@@ -18,14 +18,7 @@ PREFIX ldp: <http://www.w3.org/ns/ldp#>
   # Builds a SPARQL::Client authenticated against the FDP Index's
   # +/search/sparql+ proxy (bearer token, see VPConfig::FDPINDEX_API_TOKEN).
   def self.sparql_client(endpoint:)
-    SPARQL::Client.new(
-      endpoint,
-      method: :post,
-      headers: {
-        accept: 'application/sparql-results+json',
-        authorization: "Bearer #{VPConfig::FDPINDEX_API_TOKEN}"
-      }
-    )
+    FDPIndexClient.sparql_client(endpoint: endpoint, token: VPConfig::FDPINDEX_API_TOKEN)
   end
 
   def find_discoverables_query(endpoint:, keyword: nil, uri: nil)

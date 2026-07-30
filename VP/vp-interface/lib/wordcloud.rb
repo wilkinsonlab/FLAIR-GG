@@ -28,6 +28,10 @@ class Wordcloud
     end
   end
 
+  def self.refreshing?
+    File.exist?('./cache/WCREFRESHING')
+  end
+
   def count_words
     warn 'counting keywords'
     freqs = Hash.new(0)

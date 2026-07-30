@@ -28,6 +28,28 @@ class VPRoutes < Sinatra::Base
     []
   end
 
+  helpers do
+    # Content-negotiates between +text/html+ (renders +html_view+) and
+    # +application/json+ (renders +json_body+ as the response, halting the
+    # request either way). Used by every route that supports both an HTML
+    # UI and a programmatic JSON API. Halts with 406 if neither is accepted.
+    #
+    # @param html_view [Symbol] ERB template to render for +text/html+
+    # @param json_body [#to_json] object to serialize for +application/json+
+    def respond_with(html_view:, json_body:)
+      request.accept.each do |type|
+        case type.to_s
+        when 'text/html'
+          halt erb(html_view)
+        when 'application/json'
+          content_type :json
+          halt json_body.to_json
+        end
+      end
+      error 406
+    end
+  end
+
   # @!group Filters and CORS
 
   # Runs before every request.  Sets the CORS allow-origin header and populates
@@ -95,8 +117,7 @@ class VPRoutes < Sinatra::Base
     unless File.exist?('./cache/REFRESHING')
       # VP.restart
       @discoverables = VP.current_vp.get_resources
-      FileUtils.rm_f('./cache/servicetypes.json')
-      @services = VP.current_vp.collect_data_services
+      @services = VP.current_vp.refresh_service_types
     end
     redirect '/flair-gg-vp-server/resources'
   end
@@ -116,16 +137,7 @@ class VPRoutes < Sinatra::Base
   get %r{/flair-gg-vp-server/resources/?} do
     @discoverables = VP.current_vp.get_resources
     @message = 'All Resources'
-    request.accept.each do |type|
-      case type.to_s
-      when 'text/html'
-        halt erb :discovered_layout
-      when 'application/json'
-        content_type :json
-        halt @discoverables.to_json
-      end
-    end
-    error 406
+    respond_with(html_view: :discovered_layout, json_body: @discoverables)
   end
 
   # @!group Keyword Search
@@ -146,16 +158,7 @@ class VPRoutes < Sinatra::Base
     keyword = params['keyword'].strip
     @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword)
     @message = 'Keyword Search Results'
-    request.accept.each do |type|
-      case type.to_s
-      when 'text/html'
-        halt erb :discovered_layout
-      when 'application/json'
-        content_type :json
-        halt @discoverables.to_json
-      end
-    end
-    error 406
+    respond_with(html_view: :discovered_layout, json_body: @discoverables)
   end
 
   # @!method post_keyword_search(body)
@@ -174,16 +177,7 @@ class VPRoutes < Sinatra::Base
     keyword = data['keyword'] ? data['keyword'].strip : ''
     @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword)
     @message = 'Keyword Search Results'
-    request.accept.each do |type|
-      case type.to_s
-      when 'text/html'
-        halt erb :discovered_layout
-      when 'application/json'
-        content_type :json
-        halt @discoverables.to_json
-      end
-    end
-    error 406
+    respond_with(html_view: :discovered_layout, json_body: @discoverables)
   end
 
   # @!group Ontology Search
@@ -203,20 +197,9 @@ class VPRoutes < Sinatra::Base
   # @return [String, HTML] matching resources
   # @raise [406] if the client +Accept+ header cannot be satisfied
   get %r{/flair-gg-vp-server/ontology-search/?} do
-    term = params['uri'].strip
-    term = term.gsub(/\S+:/, '') unless term =~ /^http/
-    @discoverables = VP.current_vp.ontology_search_shell(term: term)
+    @discoverables = VP.current_vp.ontology_search_shell(term: params['uri'])
     @message = 'Ontology Search Results'
-    request.accept.each do |type|
-      case type.to_s
-      when 'text/html'
-        halt erb :discovered_layout
-      when 'application/json'
-        content_type :json
-        halt @discoverables.to_json
-      end
-    end
-    error 406
+    respond_with(html_view: :discovered_layout, json_body: @discoverables)
   end
 
   # @!method post_ontology_search(body)
@@ -231,20 +214,9 @@ class VPRoutes < Sinatra::Base
   # @raise [406] if the client +Accept+ header cannot be satisfied
   post %r{/flair-gg-vp-server/ontology-search/?} do
     data = JSON.parse request.body.read.to_s
-    term = data['uri'] ? data['uri'].strip : ''
-    term = term.gsub(/\S+:/, '') unless term =~ /^http/
-    @discoverables = VP.current_vp.ontology_search_shell(term: term)
+    @discoverables = VP.current_vp.ontology_search_shell(term: data['uri'] || '')
     @message = 'Ontology Search Results'
-    request.accept.each do |type|
-      case type.to_s
-      when 'text/html'
-        halt erb :discovered_layout
-      when 'application/json'
-        content_type :json
-        halt @discoverables.to_json
-      end
-    end
-    error 406
+    respond_with(html_view: :discovered_layout, json_body: @discoverables)
   end
 
   # @!group Service Retrieval
@@ -269,20 +241,10 @@ class VPRoutes < Sinatra::Base
   get %r{/flair-gg-vp-server/retrieve-services/?} do
     termuri = params['services']
     @servicecollection, @commongetparams, @commonpostparams, @accept = VP.current_vp.retrieve_sevices(termuri: termuri)
-    request.accept.each do |type|
-      case type.to_s
-      when 'text/html'
-        halt erb :services_layout
-      when 'application/json'
-        @minimized_collection = @servicecollection.minimize_service_collection(commongetparams: @commongetparams,
-                                                                               commonpostparams: @commonpostparams)
-        @servicecollection.vpgraph = nil
-        content_type :json
-        response = @minimized_collection.to_json
-        halt response
-      end
-    end
-    error 406
+    @minimized_collection = @servicecollection.minimize_service_collection(
+      commongetparams: @commongetparams, commonpostparams: @commonpostparams
+    )
+    respond_with(html_view: :services_layout, json_body: @minimized_collection)
   end
 
   # @!group Service Execution
@@ -356,8 +318,8 @@ class VPRoutes < Sinatra::Base
       #  service_list: [endpoint, endpoint, endpoint]
       # }
       serviceuri = j['uri'] ? j['uri'].gsub(%r{.*[/\#](\S+)}, '\1') : 'unknown'
-      servicelabel = serviceuri.downcase.gsub(/\s+/, '_')
-      analytics = "https://wilkinsonlab.github.io/FLAIR-GG-Analytics/lab/index.html?path=FLAIR-GG%2F#{servicelabel}.ipynb"
+      servicelabel = VP.current_vp.build_service_label(serviceuri)
+      analytics = VP.current_vp.notebook_url(servicelabel)
       location, results = VP.current_vp.execute_data_services_api(json: j)
       request.accept.each do |type|
         case type.to_s
@@ -367,17 +329,10 @@ class VPRoutes < Sinatra::Base
         end
       end
     else
-      @servicelabel = params['servicelabel'].downcase.gsub(/\s+/, '_')
+      @servicelabel = VP.current_vp.build_service_label(params['servicelabel'])
       @location, @results = VP.current_vp.execute_data_services(params: params)
-      request.accept.each do |type|
-        case type.to_s
-        when 'text/html'
-          halt erb :execution_results_layout
-        when 'application/json'
-          content_type :json
-          halt({ 'location' => @location, 'jupyter' => @servicelabel }.to_json)
-        end
-      end
+      respond_with(html_view: :execution_results_layout,
+                   json_body: { 'location' => @location, 'jupyter' => @servicelabel })
     end
     error 406
   end
@@ -409,15 +364,12 @@ class VPRoutes < Sinatra::Base
   get %r{/flair-gg-vp-server/wordcloud/force-refresh/?} do
     @discoverables = {}
     @freqs = {}
-    if File.exist?('./cache/WCREFRESHING')
+    if Wordcloud.refreshing?
       erb :discovered_layout
     else
-      File.open('./cache/WCREFRESHING', 'w') { |f| f.puts 'WCREFRESHING' }
       warn 'forced refresh'
-      wc = Wordcloud.new(refresh: true)
-      @freqs = wc.count_words
+      @freqs = Wordcloud.new(refresh: true).count_words
       warn "received #{@freqs.length}"
-      FileUtils.rm_f('./cache/WCREFRESHING')
     end
     erb :wordcloud
   end
@@ -430,8 +382,7 @@ class VPRoutes < Sinatra::Base
   #
   # @return [void] issues a 302 redirect to +/flair-gg-vp-server/resources+
   get %r{/flair-gg-vp-server/refresh-servicetypes/?} do
-    FileUtils.rm_f('./cache/servicetypes.json')
-    @services = VP.current_vp.collect_data_services
+    @services = VP.current_vp.refresh_service_types
     redirect '/flair-gg-vp-server/resources'
   end
 
@@ -443,8 +394,7 @@ class VPRoutes < Sinatra::Base
   # @return [String] JSON array of +[uri, label]+ pairs representing each service type
   # @raise [406] if the client +Accept+ header cannot be satisfied
   get %r{/flair-gg-vp-server/servicetypes/?} do
-    FileUtils.rm_f('./cache/servicetypes.json')
-    @services = VP.current_vp.collect_data_services
+    @services = VP.current_vp.refresh_service_types
     request.accept.each do |type|
       case type.to_s
       when 'application/json'
