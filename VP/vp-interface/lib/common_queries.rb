@@ -21,6 +21,25 @@ PREFIX ldp: <http://www.w3.org/ns/ldp#>
     FDPIndexClient.sparql_client(endpoint: endpoint, token: VPConfig::FDPINDEX_API_TOKEN)
   end
 
+  # Escapes a value for safe interpolation inside a SPARQL string literal
+  # ("..."), per the STRING_LITERAL_QUOTE production. Every user-supplied
+  # value interpolated into a query as a quoted literal must go through this
+  # - otherwise a value containing e.g. `"` can break out of the literal and
+  # inject arbitrary SPARQL (this is exactly how SQL injection works, just
+  # for SPARQL).
+  def self.escape_sparql_literal(value)
+    value.to_s.gsub('\\', '\\\\\\\\').gsub('"', '\\"').gsub("\n", '\\n').gsub("\r", '\\r')
+  end
+
+  # True if `value` contains none of the characters forbidden inside a
+  # SPARQL IRIREF (<...>) - control characters, space, or < > " { } | ^ ` \.
+  # There is no escape sequence for these inside an IRIREF, so a value that
+  # fails this check cannot be safely interpolated there at all and must be
+  # rejected rather than merely escaped.
+  def self.safe_sparql_iri?(value)
+    value.to_s.match?(/\A[^\x00-\x20<>"{}|^`\\]+\z/)
+  end
+
   def find_discoverables_query(endpoint:, keyword: nil, uri: nil)
     # try querying the FDP directly
     warn "querying endpoint #{endpoint}"
@@ -31,7 +50,7 @@ PREFIX ldp: <http://www.w3.org/ns/ldp#>
         "
           VALUES ?searchfields { dc:title dc:description dc:keyword dcat:keyword }
           ?resource ?searchfields ?kw .
-          FILTER(CONTAINS(LCASE(str(?kw)), LCASE(\"#{keyword}\")))
+          FILTER(CONTAINS(LCASE(str(?kw)), LCASE(\"#{VP.escape_sparql_literal(keyword)}\")))
         "
       else
         ''
@@ -41,7 +60,7 @@ PREFIX ldp: <http://www.w3.org/ns/ldp#>
       if uri
         "
           ?resource dcat:theme ?theme .
-          FILTER(CONTAINS(str(?theme), \"#{uri}\"))
+          FILTER(CONTAINS(str(?theme), \"#{VP.escape_sparql_literal(uri)}\"))
         "
       else
         ''
@@ -260,6 +279,8 @@ DISCOVERY
   end
 
   def self.collect_similar_services_query(endpoint:, termuri:)
+    raise ArgumentError, "invalid service type URI: #{termuri.inspect}" unless safe_sparql_iri?(termuri)
+
     sparql = sparql_client(endpoint: endpoint)
     vpd = "
     #{NAMESPACES}
