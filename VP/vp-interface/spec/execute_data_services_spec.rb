@@ -45,6 +45,18 @@ RSpec.describe 'POST /flair-gg-vp-server/execute-data-services', type: :request 
 
       expect(last_response.status).to eq(200)
     end
+
+    it 'responds with JSON even with no Accept header (e.g. a Jupyter notebook client)' do
+      vp = stub_vp
+      stub_label_helpers(vp)
+      expect(vp).to receive(:execute_data_services_api).and_return(['loc', {}])
+
+      body = { uri: 'http://x/op', service_list: [] }.to_json
+      post '/flair-gg-vp-server/execute-data-services', body, { 'CONTENT_TYPE' => 'application/json' }
+
+      expect(last_response.status).to eq(200)
+      expect(last_response.content_type).to include('application/json')
+    end
   end
 
   describe 'Mode 2 - HTML form' do

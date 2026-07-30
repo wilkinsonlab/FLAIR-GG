@@ -70,10 +70,11 @@ RSpec.describe 'Redirects, refresh, and CORS routes', type: :request do
       expect(JSON.parse(last_response.body)).to eq([['http://example.org/Type', 'Type']])
     end
 
-    it 'returns 406 without an acceptable content type' do
+    it 'returns JSON even with no Accept header (always JSON - API only, no HTML view)' do
       stub_vp(refresh_service_types: [])
       get '/flair-gg-vp-server/servicetypes'
-      expect(last_response.status).to eq(406)
+      expect(last_response.status).to eq(200)
+      expect(last_response.content_type).to include('application/json')
     end
   end
 

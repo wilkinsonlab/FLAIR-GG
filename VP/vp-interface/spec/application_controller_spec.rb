@@ -11,9 +11,11 @@ RSpec.describe 'ApplicationController', type: :request do
 
     before { stub_vp(get_resources: [discoverable]) }
 
-    it 'returns 406 when no acceptable content type is requested' do
+    it 'defaults to JSON when no Accept header is sent at all (e.g. a Jupyter notebook client)' do
       get '/flair-gg-vp-server/resources'
-      expect(last_response.status).to eq(406)
+      expect(last_response.status).to eq(200)
+      expect(last_response.content_type).to include('application/json')
+      expect(JSON.parse(last_response.body).first['title']).to eq('Test Resource')
     end
 
     it 'returns the discoverables as JSON when Accept: application/json' do
@@ -23,8 +25,21 @@ RSpec.describe 'ApplicationController', type: :request do
       expect(JSON.parse(last_response.body).first['title']).to eq('Test Resource')
     end
 
+    it 'defaults to JSON for Accept: */* too' do
+      get '/flair-gg-vp-server/resources', {}, { 'HTTP_ACCEPT' => '*/*' }
+      expect(last_response.status).to eq(200)
+      expect(last_response.content_type).to include('application/json')
+    end
+
     it 'renders the discovered_layout view when Accept: text/html' do
       get '/flair-gg-vp-server/resources', {}, { 'HTTP_ACCEPT' => 'text/html' }
+      expect(last_response.status).to eq(200)
+      expect(last_response.content_type).to include('text/html')
+    end
+
+    it 'renders HTML for a typical browser Accept header (text/html preferred, */* also present)' do
+      get '/flair-gg-vp-server/resources', {},
+          { 'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' }
       expect(last_response.status).to eq(200)
       expect(last_response.content_type).to include('text/html')
     end

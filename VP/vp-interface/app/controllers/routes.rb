@@ -30,23 +30,24 @@ class VPRoutes < Sinatra::Base
 
   helpers do
     # Content-negotiates between +text/html+ (renders +html_view+) and
-    # +application/json+ (renders +json_body+ as the response, halting the
-    # request either way). Used by every route that supports both an HTML
-    # UI and a programmatic JSON API. Halts with 406 if neither is accepted.
+    # +application/json+ (renders +json_body+). This is an API-first service
+    # (the HTML views are a secondary convenience, not the primary
+    # interface), so JSON is the default: HTML is only served when the
+    # client's *top* Accept preference is exactly +text/html+ (e.g. a
+    # browser navigating directly to the URL). Any other Accept value -
+    # missing entirely, +*/*+, +application/json+, or anything else - gets
+    # JSON, so API clients work correctly without having to know to ask for
+    # it explicitly.
     #
     # @param html_view [Symbol] ERB template to render for +text/html+
-    # @param json_body [#to_json] object to serialize for +application/json+
+    # @param json_body [#to_json] object to serialize as JSON
     def respond_with(html_view:, json_body:)
-      request.accept.each do |type|
-        case type.to_s
-        when 'text/html'
-          halt erb(html_view)
-        when 'application/json'
-          content_type :json
-          halt json_body.to_json
-        end
+      if request.accept.first.to_s == 'text/html'
+        halt erb(html_view)
+      else
+        content_type :json
+        halt json_body.to_json
       end
-      error 406
     end
   end
 
@@ -133,7 +134,6 @@ class VPRoutes < Sinatra::Base
   #
   # @return [String, HTML] JSON array of {Discoverable} objects, or the
   #   +:discovered_layout+ ERB template
-  # @raise [406] if the client +Accept+ header cannot be satisfied
   get %r{/flair-gg-vp-server/resources/?} do
     @discoverables = VP.current_vp.get_resources
     @message = 'All Resources'
@@ -153,7 +153,6 @@ class VPRoutes < Sinatra::Base
   # - +application/json+ → returns matching {Discoverable} objects as JSON
   #
   # @return [String, HTML] matching resources
-  # @raise [406] if the client +Accept+ header cannot be satisfied
   get %r{/flair-gg-vp-server/keyword-search/?} do
     keyword = params['keyword'].strip
     @discoverables = VP.current_vp.keyword_search_shell(keyword: keyword)
@@ -171,7 +170,6 @@ class VPRoutes < Sinatra::Base
   # Content negotiation: same as {#get_keyword_search}.
   #
   # @return [String, HTML] matching resources
-  # @raise [406] if the client +Accept+ header cannot be satisfied
   post %r{/flair-gg-vp-server/keyword-search/?} do
     data = JSON.parse request.body.read.to_s
     keyword = data['keyword'] ? data['keyword'].strip : ''
@@ -195,7 +193,6 @@ class VPRoutes < Sinatra::Base
   # - +application/json+ → returns matching {Discoverable} objects as JSON
   #
   # @return [String, HTML] matching resources
-  # @raise [406] if the client +Accept+ header cannot be satisfied
   get %r{/flair-gg-vp-server/ontology-search/?} do
     @discoverables = VP.current_vp.ontology_search_shell(term: params['uri'])
     @message = 'Ontology Search Results'
@@ -211,7 +208,6 @@ class VPRoutes < Sinatra::Base
   # Content negotiation: same as {#get_ontology_search}.
   #
   # @return [String, HTML] matching resources
-  # @raise [406] if the client +Accept+ header cannot be satisfied
   post %r{/flair-gg-vp-server/ontology-search/?} do
     data = JSON.parse request.body.read.to_s
     @discoverables = VP.current_vp.ontology_search_shell(term: data['uri'] || '')
@@ -237,7 +233,6 @@ class VPRoutes < Sinatra::Base
   #   (RDF graph stripped; only endpoints, parameters, and metadata retained)
   #
   # @return [String, HTML] service collection for the requested type
-  # @raise [406] if the client +Accept+ header cannot be satisfied
   get %r{/flair-gg-vp-server/retrieve-services/?} do
     termuri = params['services']
     @servicecollection, @commongetparams, @commonpostparams, @accept = VP.current_vp.retrieve_sevices(termuri: termuri)
@@ -307,8 +302,8 @@ class VPRoutes < Sinatra::Base
   # URL of that uploaded resource.
   #
   # @param content_type [String] +application/json+ selects Mode 1; anything else selects Mode 2
-  # @return [String, HTML] response format determined by the +Accept+ request header
-  # @raise [406] if the client +Accept+ header cannot be satisfied by either branch
+  # @return [String, HTML] Mode 1 always responds with JSON; Mode 2 content-negotiates
+  #   (see {#respond_with})
   post %r{/flair-gg-vp-server/execute-data-services/?} do
     if request.content_type == 'application/json'
       j = JSON.parse(request.body.read.to_s)
@@ -321,20 +316,14 @@ class VPRoutes < Sinatra::Base
       servicelabel = VP.current_vp.build_service_label(serviceuri)
       analytics = VP.current_vp.notebook_url(servicelabel)
       location, results = VP.current_vp.execute_data_services_api(json: j)
-      request.accept.each do |type|
-        case type.to_s
-        when 'application/json'
-          content_type :json
-          halt({ 'location' => location, 'jupyter' => analytics, 'results' => results }.to_json)
-        end
-      end
+      content_type :json
+      { 'location' => location, 'jupyter' => analytics, 'results' => results }.to_json
     else
       @servicelabel = VP.current_vp.build_service_label(params['servicelabel'])
       @location, @results = VP.current_vp.execute_data_services(params: params)
       respond_with(html_view: :execution_results_layout,
                    json_body: { 'location' => @location, 'jupyter' => @servicelabel })
     end
-    error 406
   end
 
   # @!group Word Cloud
@@ -392,16 +381,9 @@ class VPRoutes < Sinatra::Base
   # Intended for programmatic / API access only.
   #
   # @return [String] JSON array of +[uri, label]+ pairs representing each service type
-  # @raise [406] if the client +Accept+ header cannot be satisfied
   get %r{/flair-gg-vp-server/servicetypes/?} do
     @services = VP.current_vp.refresh_service_types
-    request.accept.each do |type|
-      case type.to_s
-      when 'application/json'
-        content_type :json
-        halt @services.to_json
-      end
-    end
-    error 406
+    content_type :json
+    @services.to_json
   end
 end
