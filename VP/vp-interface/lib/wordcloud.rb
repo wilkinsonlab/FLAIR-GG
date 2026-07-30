@@ -10,7 +10,7 @@ class Wordcloud
       @words = thaw_keywords
     else
       begin
-        f = open('./cache/WCREFRESHING', 'w')  # multiple browser calls are a problem!
+        f = open('./cache/WCREFRESHING', 'w') # multiple browser calls are a problem!
         f.puts 'WCREFRESHING'
         f.close
       rescue StandardError
