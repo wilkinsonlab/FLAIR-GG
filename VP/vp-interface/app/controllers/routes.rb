@@ -2,13 +2,13 @@
 
 require 'sinatra/base'
 require 'json'
+require 'yaml'
 require 'fileutils'
 
 # Defines all HTTP routes for the FLAIR-GG Virtual Platform (VP) server.
 #
 # Subclasses +Sinatra::Base+ so that routes are a first-class, independently
-# documentable layer.  {ApplicationController} inherits from this class and
-# supplies the Swagger configuration and VP initialisation.
+# documentable layer.  {ApplicationController} adds VP initialisation.
 #
 # Route handlers depend on:
 # - {VP.current_vp}       — the singleton VP instance initialised by {ApplicationController}
@@ -19,14 +19,6 @@ class VPRoutes < Sinatra::Base
   set :public_folder, 'public'
   set :views, 'app/views'
   enable :logging
-
-  # Returns the Swagger/OpenAPI classes to include in the root JSON document.
-  # Overridden by {ApplicationController} to supply +SWAGGERED_CLASSES+.
-  #
-  # @return [Array<Class>]
-  def self.swaggered_classes
-    []
-  end
 
   helpers do
     # Content-negotiates between +text/html+ (renders +html_view+) and
@@ -82,15 +74,21 @@ class VPRoutes < Sinatra::Base
     redirect '/flair-gg-vp-server/resources'
   end
 
-  # @!method get_swagger_root
-  # Returns the OpenAPI / Swagger root JSON document for this VP server.
-  # The document is built from the classes registered via
-  # {ApplicationController.swaggered_classes}.
+  # @!method get_openapi_root
+  # Returns this VP server's OpenAPI 3 document. Generated from the request
+  # specs (see +spec/spec_helper.rb+ and +doc/openapi.yaml+) rather than
+  # hand-maintained - run <tt>OPENAPI=1 bundle exec rspec</tt> to regenerate
+  # it after changing a route.
   #
-  # @return [String] JSON-encoded OpenAPI root document
+  # @return [String] JSON-encoded OpenAPI 3 document
+  OPENAPI_DOC_PATH = File.expand_path('../../doc/openapi.yaml', __dir__)
+
   get %r{/flair-gg-vp-server/?} do
     content_type :json
-    response.body = JSON.dump(Swagger::Blocks.build_root_json(self.class.swaggered_classes))
+    unless File.exist?(OPENAPI_DOC_PATH)
+      halt 404, { error: 'doc/openapi.yaml not generated yet - run OPENAPI=1 bundle exec rspec' }.to_json
+    end
+    YAML.load_file(OPENAPI_DOC_PATH).to_json
   end
 
   # @!group Cache Refresh

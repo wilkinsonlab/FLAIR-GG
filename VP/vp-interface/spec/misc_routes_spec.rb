@@ -79,7 +79,9 @@ RSpec.describe 'Redirects, refresh, and CORS routes', type: :request do
   end
 
   describe 'OPTIONS preflight' do
-    it 'answers any path with CORS headers and 200' do
+    # openapi: false - this hits an arbitrary path to prove the wildcard `options
+    # '*'` route matches anything; it isn't a real, individually-documentable endpoint.
+    it 'answers any path with CORS headers and 200', openapi: false do
       options '/flair-gg-vp-server/anything-at-all'
       expect(last_response.status).to eq(200)
       expect(last_response.headers['Access-Control-Allow-Origin']).to eq('*')

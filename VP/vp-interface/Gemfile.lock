@@ -448,7 +448,6 @@ GEM
       net-http-persistent (~> 4.0, >= 4.0.2)
       rdf (~> 3.3)
     stringio (3.2.0)
-    swagger-blocks (3.0.0)
     sxp (2.0.0)
       matrix (~> 0.4)
       rdf (~> 3.3)
@@ -527,7 +526,6 @@ DEPENDENCIES
   sinatra (~> 2.2)
   sinatra-cross_origin (~> 0.4.0)
   sinatra-respond_to
-  swagger-blocks (~> 3.0)
   tempfile
   thin (~> 1.8)
   vp-interface!
@@ -701,7 +699,6 @@ CHECKSUMS
   sparql (3.3.2) sha256=20d73a62801fd6d03c834ca5012c11aaf6594ef536f554e92fd94bf9b3ed64dc
   sparql-client (3.3.0) sha256=71225eefad48dc2baab6b7008df8a9bcfffa833e5f25387dbe87ff52a5cad64e
   stringio (3.2.0) sha256=c37cb2e58b4ffbd33fe5cd948c05934af997b36e0b6ca6fdf43afa234cf222e1
-  swagger-blocks (3.0.0) sha256=130938b62daf6faad3d00f6c60ebae20411619871f478cc14a265f127579cc2f
   sxp (2.0.0) sha256=79971bbab54a82fe4a861332475eb8c1f33142d70f2b7e830dacbd9082824721
   tempfile (0.3.1) sha256=0bb53ab646744e505eb3102147e22ae130a626a15563e882428c1ec973fed76a
   temple (0.10.4) sha256=b7a1e94b6f09038ab0b6e4fe0126996055da2c38bec53a8a336f075748fff72c

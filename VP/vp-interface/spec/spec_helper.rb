@@ -27,8 +27,19 @@ require_relative '../config/environment'
 require 'webmock/rspec'
 require 'rspec'
 require 'rack/test'
+require 'rspec/openapi'
 # require 'capybara/rspec'
 # require 'capybara/dsl'
+
+# Real OpenAPI 3 doc generated from these request specs - run with OPENAPI=1
+# to regenerate doc/openapi.yaml after changing a route. Replaces the old
+# hand-maintained swagger-blocks (Swagger 2.0, long deprecated) annotations,
+# which only ever covered 3 of the API's ~13 routes and could silently drift
+# from what the routes actually do; this can't drift; if it's wrong, the
+# spec it was generated from is failing.
+RSpec::OpenAPI.title = 'FLAIR-GG Virtual Platform Server'
+RSpec::OpenAPI.info = { description: 'Enables discovery of Germplasm resources across the FAIR network' }
+RSpec::OpenAPI.path = 'doc/openapi.yaml'
 
 set :environment, :test
 set :run, false

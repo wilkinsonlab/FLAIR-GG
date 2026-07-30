@@ -68,8 +68,6 @@ gem "rest-client", "~> 2.1"
 
 gem "openapi3_parser", "~> 0.10.0"
 
-gem "swagger-blocks", "~> 3.0"
-
 gem "metainspector", "~> 5.15"
 
 gem "thin", "~> 1.8"
