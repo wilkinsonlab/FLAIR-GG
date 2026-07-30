@@ -15,6 +15,7 @@ require 'jwt'
 require_relative '../../lib/configuration' # VPConfig and FDPConfig
 require_relative 'models'
 require_relative 'routes'
+require_relative 'mcp_routes'
 require_relative '../../lib/cache'
 require_relative '../../lib/fdp'
 require_relative '../../lib/vp'

@@ -26,6 +26,18 @@ class Discoverable
     @@alldiscoverables.select { |d| d.source == source }
   end
 
+  def to_json(*args)
+    {
+      source: source,
+      contact: contact,
+      resource: resource,
+      title: title,
+      type: type,
+      icon: icon,
+      typetag: typetag
+    }.to_json(*args)
+  end
+
   def self.all_sources
     sources = @@alldiscoverables.map(&:contact)
     sources.uniq.sort
