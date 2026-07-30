@@ -20,10 +20,21 @@ class VPRoutes < Sinatra::Base
     against the FDP Index, the same live network of FAIR Data Points that
     keyword_search searches. Use this for anything keyword_search can't
     answer - counting, grouping, filtering on dates or specific properties,
-    or combining several conditions in one query. SELECT only: no ASK,
-    CONSTRUCT, DESCRIBE, or updates. Results come back as JSON rows, one
-    object per SPARQL result row, string-valued. A LIMIT is added
-    automatically (default 100) if you don't include one.
+    contact/curator lookups, or combining several conditions in one query.
+    SELECT only: no ASK, CONSTRUCT, DESCRIBE, or updates. Results come back
+    as JSON rows, one object per SPARQL result row, string-valued. A LIMIT
+    is added automatically (default 100) if you don't include one.
+
+    IMPORTANT for "who do I contact" / curator / ownership questions: run
+    Example 4 below BEFORE giving up or searching the web. If it returns no
+    contact for a resource, that means the DCAT record genuinely has none
+    registered - it is not a tool failure. In that case, tell the user the
+    record has no contact on file, then proactively do a normal web search
+    for the owning institution's name (returned by this query) to find an
+    official contact page - do not ask the user's permission first, and do
+    not stop at "the record doesn't have this." Clearly label anything found
+    via web search as unverified/external, separate from the authoritative
+    DCAT data.
 
     Key namespaces:
       PREFIX fdp: <https://w3id.org/fdp/fdp-o#>
@@ -31,6 +42,7 @@ class VPRoutes < Sinatra::Base
       PREFIX dcat: <http://www.w3.org/ns/dcat#>
       PREFIX dcterms: <http://purl.org/dc/terms/>
       PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+      PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
 
     A resource is publicly discoverable only if it has:
       ?resource ejp:vpConnection ejp:VPDiscoverable .
@@ -61,13 +73,33 @@ class VPRoutes < Sinatra::Base
         ?s a dcat:DataService ;
           dcterms:type <http://edamontology.org/operation_3436> .
       }
+
+    Example 4 - contact/curator lookup for banks matching a keyword (combine
+    with Example 2's FILTER to scope to a topic, as shown here for "wheat"):
+      PREFIX fdp: <https://w3id.org/fdp/fdp-o#>
+      PREFIX dc: <http://purl.org/dc/terms/>
+      PREFIX dcat: <http://www.w3.org/ns/dcat#>
+      PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+      SELECT DISTINCT ?resource ?title ?contact WHERE {
+        VALUES ?searchfields { dc:title dc:description dc:keyword dcat:keyword }
+        ?resource ?searchfields ?kw ;
+                  dc:title ?title .
+        FILTER(CONTAINS(LCASE(str(?kw)), LCASE("wheat")))
+        OPTIONAL {
+          ?resource dcat:contactPoint ?c .
+          ?c vcard:url ?contact .
+        }
+      }
   DESCRIPTION
 
   MCP_TOOLS = [
     {
       name: 'keyword_search',
       description: 'Searches the FLAIR-GG VP network for resources whose metadata ' \
-                    'contains the given keyword. Case-insensitive.',
+                    'contains the given keyword. Case-insensitive. Returns basic ' \
+                    'resource info only (no contact/curator details) - for "who do I ' \
+                    'contact" questions or anything else beyond a simple keyword match, ' \
+                    'use sparql_query instead.',
       inputSchema: {
         type: 'object',
         properties: {
