@@ -11,7 +11,7 @@ externalDocs:
   url: https://rdf4j.org/documentation/reference/rest-api/
 
 servers:
-  - url: https://bgv.linkeddata.systems
+  - url: https://w3id.org/bgv-fdp
     description: SPARQL server for the BANCO DE GERMOPLASMA VEGETAL-UPM
 
 tags:
