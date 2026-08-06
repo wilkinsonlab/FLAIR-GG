@@ -18,6 +18,30 @@ together below as `0.3.6`, incrementing from the last real image tag
 (`0.3.5`), with `VERSION`, the gemspec, and `docker-compose.yml`'s image
 tag now all aligned to this one number going forward.
 
+## [0.3.8] - 2026-08-06
+
+### Changed
+
+- `ServiceCollection#collect_similar_services`: a provider whose
+  DCAT-registered endpoint doesn't match any path in its OpenAPI document
+  is no longer excluded from `retrieve-services` results - it's still
+  listed (checkbox and all), with `Service#successful` false and a
+  per-provider warning shown inline (`services_layout.erb`) plus in the
+  aggregate warnings list, worded to say what's actually at risk
+  ("parameters could not be verified... may fail if it requires
+  parameters not shared by other matched providers"). Execution was
+  never affected by this match either way - `Service#execute_get`/`_post`
+  always hit the raw DCAT-registered endpoint directly, never anything
+  derived from the OpenAPI match - so excluding was strictly worse than
+  warning: a provider whose real endpoint genuinely can't be expressed as
+  a single non-templated OpenAPI path (e.g. one needing a path variable,
+  see `species_by_ena_id.yaml`) was indistinguishable from an actually
+  broken one, and either had to be hidden or have a fake endpoint value
+  spoofed into its DCAT record just to make it reappear. The minimized
+  JSON collection (`ServiceCollection#minimize_service_collection`) also
+  gained a `verified` field per service, so API/MCP consumers see the
+  same signal, not just the HTML form.
+
 ## [0.3.7] - 2026-08-06
 
 ### Fixed

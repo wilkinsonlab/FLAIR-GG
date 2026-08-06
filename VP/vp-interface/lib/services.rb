@@ -27,11 +27,22 @@ class ServiceCollection
       service = Service.new(contact: result[:contact].to_s, title: result[:title].to_s,
                             openapi: result[:openapi].to_s,
                             endpoint: result[:endpoint].to_s)
-      if service.successful
-        @allservices << service # only if there's a match!
-      else
-        # if not, no path in the openapi YAML matched the path in the DCAT
-        @warnings << "The endpoint for #{service.contact} (#{service.endpoint}) in the DCAT did not match any endpoint in the OpenAPI YAML. It was therefore not returned" # rubocop:disable Layout/LineLength
+      # Always listed, matched or not: execution hits `service.endpoint` (the
+      # DCAT-registered URL) directly, never anything derived from the
+      # OpenAPI match, so a mismatch can't make execution use the wrong URL.
+      # What a mismatch DOES mean: `service.paths` stays empty, so this
+      # service contributes no parameters of its own to the execution form
+      # (see #gather_common_parameters) - it may fail if it needs parameters
+      # no other matched provider of this type also needs. That's a real,
+      # useful signal (has caught genuine cross-partner miswiring before),
+      # so it's still recorded as a warning - just no longer used to hide
+      # the provider entirely, since a legitimate provider whose real
+      # endpoint can't be expressed as a single non-templated OpenAPI path
+      # (e.g. one with a path variable) would otherwise be indistinguishable
+      # from an actually-broken one, and both would vanish identically.
+      @allservices << service
+      unless service.successful
+        @warnings << "The endpoint for #{service.contact} (#{service.endpoint}) in the DCAT did not match any endpoint in the OpenAPI YAML - its parameters could not be verified. It is still listed below, but may fail if it requires parameters not shared by other matched providers of this service type." # rubocop:disable Layout/LineLength
       end
     end
   end
@@ -98,7 +109,7 @@ class ServiceCollection
         paths[fullpath]['post'] = ('found' if s.paths[fullpath][:post])
       end
       services << { 'title' => title, 'openapi' => openapi, 'endpoint' => endpoint, 'contact' => contact,
-                    'paths' => paths }
+                    'paths' => paths, 'verified' => s.successful }
     end
     collection['services'] = services
 

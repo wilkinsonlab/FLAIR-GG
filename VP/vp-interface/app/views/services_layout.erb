@@ -86,6 +86,12 @@ every param  responds to "in", "name", "description", "schema.example", "schema.
               <td></td>
               <td><span style="font-size: .75em;"><%= service.title %></span></td>
             </tr>
+            <% unless service.successful %>
+              <tr>
+                <td></td>
+                <td><span style="font-size: .75em; color: #a00;">&#9888; Parameters for this provider could not be verified against its OpenAPI document - it may fail if it requires parameters not shared by other matched providers of this service type.</span></td>
+              </tr>
+            <% end %>
             <tr>
               <td>---<br/></td><td></td>
             </tr>

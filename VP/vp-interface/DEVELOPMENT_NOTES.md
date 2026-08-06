@@ -110,11 +110,44 @@ above describe how it got there. Kept as history, not a live TODO list.
 
 ## Ideas logged for (much) later, not started
 
-- Exposing more of the VP's functionality as additional MCP tools (only
-  `keyword_search` exists today).
-- A raw/ad-hoc SPARQL-query MCP tool, where the LLM is given the DCAT/`ejp:`
-  data model and writes its own queries — plausible (similar to
-  text-to-SQL) but needs query validation/dry-run before returning results,
-  and should stay read-only.
+- ~~Exposing more of the VP's functionality as additional MCP tools~~ and
+  ~~a raw/ad-hoc SPARQL-query MCP tool~~ - **both done**: `sparql_query`
+  and `iucn_endangerment_status` now exist alongside `keyword_search`
+  (see `lib/mcp_tools/`). `iucn_endangerment_status` is also the first
+  instance of "one MCP tool per registered data service type" from the
+  idea below, via the `RawServiceTypeCall` base class.
 - DataService health/liveness monitoring, and eventually one MCP tool per
-  registered data service so an AI UI could execute any of them directly.
+  registered data service so an AI UI could execute any of them directly
+  (partially started - see above).
+- **Better OpenAPI interface-definition support** (2026-08-06, from a
+  conversation about `ServiceCollection#collect_similar_services`'s
+  DCAT-endpoint-vs-OpenAPI-path matching, since 0.3.8 switched a mismatch
+  from excluding the provider to just flagging it as unverified - not
+  urgent, don't start without asking):
+  - No path-template-variable support anywhere in the execution path
+    (`execute_data_services`/`execute_data_services_api` only handle
+    query-string GET params or a POST body). A service whose real
+    endpoint has a variable *in the path* (e.g. the TOGO endpoint behind
+    `species_by_ena_id.yaml` - see that file's comment) can't actually be
+    executed correctly through the generic mechanism today, matched or
+    not; someone currently has to hand-pick a single concrete endpoint
+    value into the DCAT record to work around it. Properly fixing this
+    means parsing `{param}` placeholders out of the OpenAPI path,
+    offering them as form inputs alongside the query/body params, and
+    substituting them into the endpoint URL before executing - real work,
+    not a one-liner.
+  - No Ruby gem does this dynamic "discover an arbitrary OpenAPI doc at
+    runtime, build a working parameterized client from it" job - looked
+    into it (2026-08-06): `openapi3_parser` (already used here) covers
+    parsing/validation, but the closest things do the opposite direction
+    (validate/generate docs for *your own* API - `committee`, `rswag`,
+    `rspec-openapi`, also already used) or are static code-generators for
+    *one known* spec (`openapi-generator`), not useful across dozens of
+    independently-run, never-seen-before partner specs. This is likely
+    staying bespoke regardless of how much of it gets rebuilt.
+  - Separately: the Swagger-2.0-to-OpenAPI-3.0 conversion step
+    (`docker-compose.yml`'s `swagger-converter` service, `swaggerapi/swagger-converter`)
+    is a whole extra Node-based Docker container specifically because
+    Ruby doesn't have a mature native equivalent of `swagger2openapi`.
+    Worth a look someday to see if that's changed, but not expected to
+    have.
