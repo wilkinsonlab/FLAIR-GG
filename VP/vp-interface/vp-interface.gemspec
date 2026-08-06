@@ -4,7 +4,7 @@
 
 Gem::Specification.new do |spec|
   spec.name = "vp-interface"
-  spec.version = "0.3.6"
+  spec.version = "0.3.7"
   spec.authors = ["Mark Wilkinson"]
   spec.email = ["markw@illuminae.com"]
 

@@ -1,6 +1,6 @@
 services:
   flair-gg-vp-server:
-    image: markw/flair-gg-vp-server:0.3.6
+    image: markw/flair-gg-vp-server:0.3.7
     restart: always
  #   container_name: "flair-gg-vp-server-bgv"
     hostname: "flairgg"

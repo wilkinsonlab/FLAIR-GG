@@ -18,6 +18,32 @@ together below as `0.3.6`, incrementing from the last real image tag
 (`0.3.5`), with `VERSION`, the gemspec, and `docker-compose.yml`'s image
 tag now all aligned to this one number going forward.
 
+## [0.3.7] - 2026-08-06
+
+### Fixed
+
+- `wordcloud.erb` wasn't rendering, or rendered inconsistently across
+  browsers/environments, for two real reasons found once the 0.3.6 cache
+  fix let a full label-resolution run actually complete for the first
+  time:
+  - Three competing jQuery loads, two over plain `http://` on an HTTPS
+    page (mixed-content-blocked by most browsers) - including one that
+    reloaded a *different* jQuery version at the bottom of the page,
+    after the jQCloud plugin had already attached itself to the first
+    one. Collapsed to a single HTTPS jQuery load; also dropped a dead
+    IE6/`chrome-frame` compatibility block.
+  - Word labels (pulled from external, uncontrolled ontology services)
+    were interpolated into the inline `<script>` block as raw,
+    unescaped JS string literals - a label containing so much as a `"`
+    broke the JS syntax and silently killed the entire script, cloud
+    included. Now built via `.to_json` (plus escaping `/` so a label
+    containing `</script>` can't prematurely close the tag either).
+    Previously this rarely triggered since a full resolution run had
+    never actually completed; now that it reliably does, real external
+    labels hit it far more often. New spec asserts a label containing
+    quotes, a backslash, and a `</script>` sequence round-trips as valid
+    JSON rather than breaking the page.
+
 ## [0.3.6] - 2026-08-06
 
 ### Added

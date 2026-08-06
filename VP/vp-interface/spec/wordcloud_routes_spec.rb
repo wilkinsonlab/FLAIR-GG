@@ -14,6 +14,20 @@ RSpec.describe 'Word cloud routes', type: :request do
       expect(last_response.status).to eq(200)
       expect(last_response.content_type).to include('text/html')
     end
+
+    it 'safely embeds a label containing quotes, backslashes, and a script-closing sequence' do
+      tricky_label = %(Weird "label" with a \\ and a </script> inside)
+      allow(Wordcloud).to receive(:new).and_return(instance_double(Wordcloud, count_words: { tricky_label => 1 }))
+
+      get '/flair-gg-vp-server/wordcloud'
+
+      expect(last_response.status).to eq(200)
+      expect(last_response.body).not_to include('</script> inside') # would prematurely close the script tag unescaped
+
+      word_array_json = last_response.body[/var word_array = (\[.*?\]);/m, 1]
+      parsed = JSON.parse(word_array_json)
+      expect(parsed).to eq([{ 'text' => tricky_label, 'weight' => 1 }])
+    end
   end
 
   describe 'GET /flair-gg-vp-server/wordcloud/force-refresh' do
