@@ -89,6 +89,35 @@ host that serves `/search/sparql`, these are genuinely different things) and
 This branch has since been merged into `main` (2026-08-06) - the sections
 above describe how it got there. Kept as history, not a live TODO list.
 
+## Known issue needing action (not deferred - infra fix, not code)
+
+- **All five migrated germplasm-bank hosts (`jbo`, `jbclm`, `bgusal`, `jbs`,
+  `urjc` on `*.linkeddata.systems`) serve a stale `IUCN_categories` shallot
+  query** (found 2026-08-06, testing `iucn_endangerment_status` live).
+  Confirmed via `GET /api-local/swagger` on each: they're still running an
+  old query pattern (`fao:endangerment_category`/`sio:SIO_000300`, matching
+  plain-English strings `"Vulnerable"`/`"Endangered"`/`"Critically endangered"`
+  through an assessment/determination-process node chain), while
+  `Data Service Configs/Shallot/shared-queries/IUCN_categories.rq` (and the
+  still-live `fdp.bgv.cbgp.upm.es`, confirmed serving the current version)
+  use a simpler, current pattern: `dwc:scientificName` + `iucn:threatStatus`
+  directly, matching GBIF vocabulary URIs
+  (`http://rs.gbif.org/vocabulary/iucn/threat_status/{VU,EN,CR}`). This is
+  **not a data-migration gap** - directly confirmed `jbo.linkeddata.systems`'s
+  `germplasm` RDF4J repository has real `iucn:threatStatus`/`dwc:scientificName`
+  triples in the *current* shape (1012/1144 respectively), and running the
+  current query against it directly returns real rows. The shallot service
+  deployment on the migrated hosts simply never picked up the query-file
+  update. Net effect: `iucn_endangerment_status` (and the human-facing
+  `/api-local/IUCN_categories` endpoint) silently returns zero rows from
+  five of six providers - a real, currently-live data-quality gap, not a
+  hypothetical.
+  **Not something this codebase can fix** - each host's shallot deployment
+  is that institution's own infrastructure (see `Data Service Configs/Shallot/`
+  for the shared query source and deployment setup, but this repo doesn't
+  control redeployment on partner-run hosts). Needs manual action: redeploy/
+  refresh the shallot query set on each of the five hosts.
+
 ## Known, deliberately deferred issues (not urgent, don't fix without asking)
 
 - ~~Word cloud is slow on refresh~~ **Fixed 2026-08-06**: the underlying
