@@ -10,7 +10,54 @@ This file starts now (2026-08-06); earlier history (the MCP endpoint's
 the RSpec foundation, etc.) predates it and isn't backfilled — see git log
 and `DEVELOPMENT_NOTES.md` for that history.
 
-## [1.2.0] - 2026-08-06
+**Versioning bootstrap (2026-08-06):** this file briefly used an
+independent `1.x` numbering (see git history of this file) before the
+Docker image's own pre-existing `0.3.x` tag scheme was pointed out —
+neither `1.1.0` nor `1.2.0` was ever actually built/tagged. Squashed
+together below as `0.3.6`, incrementing from the last real image tag
+(`0.3.5`), with `VERSION`, the gemspec, and `docker-compose.yml`'s image
+tag now all aligned to this one number going forward.
+
+## [0.3.6] - 2026-08-06
+
+### Added
+
+- `GET /flair-gg-vp-server/mcp` — human-readable rendering of the MCP tool
+  catalogue (same data as `tools/list`, no JSON-RPC envelope), so the tools
+  available at this endpoint can be read in a browser, or shared as a
+  plain link, without an MCP client or a read of the source code.
+- `lib/mcp_tools/` — MCP tool metadata (name, description, input schema)
+  and implementation now live one file per tool in this folder, rather
+  than being embedded in `app/controllers/mcp_routes.rb`. The router only
+  knows how to list `MCP_TOOL_CLASSES` and dispatch a call to whichever
+  tool was named.
+- `iucn_endangerment_status` MCP tool — executes a raw `GET` against every
+  live `IUCN_categorization` data service currently discoverable in the
+  FLAIR-GG VP network. Providers are found via the VP's own
+  service-discovery search (`VP#retrieve_sevices`), not a hand-written
+  SPARQL query, so newly added or relocated providers are picked up
+  automatically. Deliberately skips the LDP-upload/notebook wiring the
+  human UI and ComfyUI workflow integration use — an MCP caller gets the
+  raw provider responses back directly. One provider failing (e.g. a
+  mid-migration host) surfaces as `{"error": "..."}` for that provider's
+  key; it doesn't sink the whole call.
+- `lib/mcp_tools/raw_service_type_call.rb` — reusable base class behind
+  `iucn_endangerment_status`, for any future "one MCP tool per DCAT
+  service type" tool whose interface takes no parameters (a fixed lookup,
+  per the FLAIR-GG convention that every provider under the same `dc:type`
+  implements the same interface). Also builds each tool's `DESCRIPTION`
+  from a `summary:` plus an optional `reference_notebook_filename:`,
+  appending a pointer to that FLAIR-GG-Analytics notebook's **raw**
+  (fetchable-as-JSON) GitHub URL — not `VP#notebook_url`'s JupyterLite
+  viewer link, which is an HTML app an LLM can't read as content — so a
+  tool-calling LLM has a documented reference implementation to consult
+  for how this kind of data is normally analyzed (categorized, plotted,
+  etc.), without the tool itself returning any notebook content.
+- `lib/mcp_tools/README.md` — contributor guide for adding a new MCP tool,
+  covering both shapes (plain standalone tool vs. `RawServiceTypeCall`
+  subclass), how to find a service type's `SERVICE_TYPE_URI`, and a
+  load-order gotcha specific to this folder's `require_rel` usage. Linked
+  from the main `README.md`.
 
 ### Fixed
 
@@ -26,19 +73,19 @@ and `DEVELOPMENT_NOTES.md` for that history.
 
 ### Changed
 
+- `mcp_call_tool`'s error handling generalized from a per-tool exception
+  whitelist to one `rescue StandardError` at the dispatch level, now that
+  tool implementations are decoupled from the router — a new tool doesn't
+  need the router to know which exception classes it might raise.
 - Merged the `fdp-index-sparql` branch into `main` now that the
   linkeddata.systems/CESVIMA server migration is complete: the RSpec
   foundation (89 examples), the routes.rb/lib business-logic extraction,
   the generated OpenAPI doc, the SPARQL-injection fix, and the full MCP
-  tool refactor from 1.1.0 below. Two DESCRIPTION improvements that had
-  been made independently on `main` (sparql_query's contact/curator-lookup
-  example and web-search-fallback guidance; keyword_search's pointer to
+  tool refactor above. Two DESCRIPTION improvements that had been made
+  independently on `main` (sparql_query's contact/curator-lookup example
+  and web-search-fallback guidance; keyword_search's pointer to
   sparql_query for anything beyond a simple keyword match) were ported
   forward into the merged per-file tool structure rather than lost.
-
-## [1.1.0] - 2026-08-06
-
-### Added
 
 - `GET /flair-gg-vp-server/mcp` — human-readable rendering of the MCP tool
   catalogue (same data as `tools/list`, no JSON-RPC envelope), so the tools
