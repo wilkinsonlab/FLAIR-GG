@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%= erb :_head %>
+
+  <body>
+    <div class="wrapper">
+
+      <%= erb :_logo %>
+
+      <h2>MCP Tools: flair-gg-vp-server</h2>
+
+      <p>
+        This is the tool catalogue for the Model Context Protocol (MCP) endpoint at
+        <code><%= request.path %></code>. An MCP client (e.g. an LLM agent) talks to
+        this same URL via JSON-RPC 2.0 <code>POST</code> requests
+        (<code>initialize</code>, <code>tools/list</code>, <code>tools/call</code>).
+        This page is a human-readable view of the same tool list, generated from
+        <code>lib/mcp_tools/</code> - one file per tool - so it can never drift
+        from what the server actually offers.
+      </p>
+
+      <% @tools.each do |tool| %>
+        <div style="border: 1px solid #ccc; border-radius: 6px; padding: 1em; margin-bottom: 1.5em;">
+          <h3><code><%= tool[:name] %></code></h3>
+          <pre style="white-space: pre-wrap;"><%= tool[:description] %></pre>
+          <h4>Input schema</h4>
+          <pre><%= JSON.pretty_generate(tool[:inputSchema]) %></pre>
+        </div>
+      <% end %>
+
+    <%= erb :_footer %>
+    </div>
+  </body>
+</html>

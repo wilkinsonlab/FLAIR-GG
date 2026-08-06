@@ -2,6 +2,25 @@
 
 require_relative 'spec_helper'
 
+RSpec.describe 'GET /flair-gg-vp-server/mcp', type: :request do
+  it 'returns the tool catalogue as JSON, matching tools/list' do
+    stub_vp
+    get '/flair-gg-vp-server/mcp', {}, { 'HTTP_ACCEPT' => 'application/json' }
+    body = JSON.parse(last_response.body)
+    names = body['tools'].map { |t| t['name'] }
+    expect(names).to eq(%w[keyword_search sparql_query iucn_endangerment_status])
+  end
+
+  it 'returns an HTML page when the browser asks for text/html' do
+    stub_vp
+    get '/flair-gg-vp-server/mcp', {}, { 'HTTP_ACCEPT' => 'text/html' }
+    expect(last_response.content_type).to include('text/html')
+    expect(last_response.body).to include('keyword_search')
+    expect(last_response.body).to include('sparql_query')
+    expect(last_response.body).to include('iucn_endangerment_status')
+  end
+end
+
 RSpec.describe 'POST /flair-gg-vp-server/mcp', type: :request do
   def rpc(method, params = {}, id = 1)
     stub_vp # every request still passes through the `before` filter
@@ -16,11 +35,11 @@ RSpec.describe 'POST /flair-gg-vp-server/mcp', type: :request do
     expect(body['result']['serverInfo']['name']).to eq('flair-gg-vp-server')
   end
 
-  it 'lists the keyword_search and sparql_query tools' do
+  it 'lists the registered tools' do
     rpc('tools/list')
     body = JSON.parse(last_response.body)
     names = body['result']['tools'].map { |t| t['name'] }
-    expect(names).to eq(%w[keyword_search sparql_query])
+    expect(names).to eq(%w[keyword_search sparql_query iucn_endangerment_status])
     keyword_tool = body['result']['tools'].find { |t| t['name'] == 'keyword_search' }
     expect(keyword_tool['inputSchema']['required']).to eq(['keyword'])
   end
@@ -68,6 +87,34 @@ RSpec.describe 'POST /flair-gg-vp-server/mcp', type: :request do
     body = JSON.parse(last_response.body)
     expect(body['error']['code']).to eq(-32_000)
     expect(body['error']['message']).to include('Only SELECT')
+  end
+
+  it 'calls iucn_endangerment_status and returns raw per-endpoint bodies, tolerating one failure' do
+    service_a = instance_double(Service, endpoint: 'http://a.example.org/iucn')
+    service_b = instance_double(Service, endpoint: 'http://b.example.org/iucn')
+    servicecollection = instance_double(ServiceCollection, allservices: [service_a, service_b])
+
+    stub_vp(
+      retrieve_sevices: [servicecollection, {}, {}, '*/*'],
+      guess_best_content_type: '*/*'
+    )
+
+    expect(Service).to receive(:execute_get)
+      .with(endpoint: 'http://a.example.org/iucn', params: {}, accept: '*/*')
+      .and_return(instance_double(RestClient::Response, body: 'raw a'))
+    expect(Service).to receive(:execute_get)
+      .with(endpoint: 'http://b.example.org/iucn', params: {}, accept: '*/*')
+      .and_raise(StandardError, 'timeout')
+
+    post '/flair-gg-vp-server/mcp',
+         { jsonrpc: '2.0', id: 1, method: 'tools/call',
+           params: { name: 'iucn_endangerment_status', arguments: {} } }.to_json,
+         { 'CONTENT_TYPE' => 'application/json' }
+
+    body = JSON.parse(last_response.body)
+    content = JSON.parse(body['result']['content'].first['text'])
+    expect(content['http://a.example.org/iucn']).to eq('raw a')
+    expect(content['http://b.example.org/iucn']).to eq({ 'error' => 'timeout' })
   end
 
   it 'returns a JSON-RPC error for an unknown tool' do

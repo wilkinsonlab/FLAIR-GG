@@ -2,6 +2,9 @@
 
 require 'sinatra/base'
 require 'json'
+require 'require_all'
+
+require_rel '../../lib/mcp_tools'
 
 # Reopens {VPRoutes} (defined in +routes.rb+) to add the MCP (Model Context
 # Protocol) endpoint, kept in its own file so +routes.rb+ doesn't have to grow
@@ -10,99 +13,65 @@ require 'json'
 # from the single, combined +VPRoutes+ class.
 #
 # Implements the MCP "Streamable HTTP" transport as plain JSON-RPC 2.0 over
-# a single POST endpoint — no MCP SDK required. Exposes one tool,
-# +keyword_search+, backed by {VP#keyword_search_shell}.
+# a single POST endpoint - no MCP SDK required. Each tool's metadata
+# (name, description, input schema) and implementation live together in
+# their own file under +lib/mcp_tools/+, one file per tool - see
+# {McpTools::KeywordSearch} and {McpTools::SparqlQuery} - rather than being
+# embedded in this routing file. This file only knows how to list the
+# registered tools and dispatch a call to whichever one was named.
+#
+# The same path also answers plain +GET+ requests (human/browser, no
+# JSON-RPC envelope needed) so the tool catalogue can be read - and shared
+# as a link - without reading source code.
 class VPRoutes < Sinatra::Base
   MCP_PROTOCOL_VERSION = '2025-06-18'.freeze
 
-  SPARQL_TOOL_DESCRIPTION = <<~DESCRIPTION.freeze
-    [EXPERIMENTAL] Executes a read-only SPARQL 1.1 SELECT query directly
-    against the FDP Index, the same live network of FAIR Data Points that
-    keyword_search searches. Use this for anything keyword_search can't
-    answer - counting, grouping, filtering on dates or specific properties,
-    or combining several conditions in one query. SELECT only: no ASK,
-    CONSTRUCT, DESCRIBE, or updates. Results come back as JSON rows, one
-    object per SPARQL result row, string-valued. A LIMIT is added
-    automatically (default 100) if you don't include one.
-
-    Key namespaces:
-      PREFIX fdp: <https://w3id.org/fdp/fdp-o#>
-      PREFIX ejp: <https://w3id.org/ejp-rd/vocabulary#>
-      PREFIX dcat: <http://www.w3.org/ns/dcat#>
-      PREFIX dcterms: <http://purl.org/dc/terms/>
-      PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-
-    A resource is publicly discoverable only if it has:
-      ?resource ejp:vpConnection ejp:VPDiscoverable .
-
-    Example 1 - list discoverable FAIR Data Points with their titles:
-      PREFIX fdp: <https://w3id.org/fdp/fdp-o#>
-      PREFIX ejp: <https://w3id.org/ejp-rd/vocabulary#>
-      PREFIX dcterms: <http://purl.org/dc/terms/>
-      SELECT ?resource ?title WHERE {
-        ?resource a fdp:FAIRDataPoint ;
-          dcterms:title ?title ;
-          ejp:vpConnection ejp:VPDiscoverable .
-      }
-
-    Example 2 - keyword search over title/description/keyword fields:
-      PREFIX dc: <http://purl.org/dc/terms/>
-      PREFIX dcat: <http://www.w3.org/ns/dcat#>
-      SELECT DISTINCT ?resource ?kw WHERE {
-        VALUES ?searchfields { dc:title dc:description dc:keyword dcat:keyword }
-        ?resource ?searchfields ?kw .
-        FILTER(CONTAINS(LCASE(str(?kw)), LCASE("wheat")))
-      }
-
-    Example 3 - count data services of a given ontology type:
-      PREFIX dcat: <http://www.w3.org/ns/dcat#>
-      PREFIX dcterms: <http://purl.org/dc/terms/>
-      SELECT (COUNT(?s) AS ?count) WHERE {
-        ?s a dcat:DataService ;
-          dcterms:type <http://edamontology.org/operation_3436> .
-      }
-  DESCRIPTION
-
-  MCP_TOOLS = [
-    {
-      name: 'keyword_search',
-      description: 'Searches the FLAIR-GG VP network for resources whose metadata ' \
-                    'contains the given keyword. Case-insensitive.',
-      inputSchema: {
-        type: 'object',
-        properties: {
-          keyword: {
-            type: 'string',
-            description: 'The term to search for'
-          }
-        },
-        required: ['keyword']
-      }
-    }.freeze,
-    {
-      name: 'sparql_query',
-      description: SPARQL_TOOL_DESCRIPTION,
-      inputSchema: {
-        type: 'object',
-        properties: {
-          query: {
-            type: 'string',
-            description: 'A read-only SPARQL 1.1 SELECT query (see tool description for namespaces and examples)'
-          }
-        },
-        required: ['query']
-      }
-    }.freeze
+  # Registry of available MCP tools. Add a new tool by dropping a file in
+  # +lib/mcp_tools/+ (see the existing ones for the expected shape: +NAME+,
+  # +DESCRIPTION+, +INPUT_SCHEMA+ constants and a +self.call(arguments)+
+  # class method) and listing its class here.
+  MCP_TOOL_CLASSES = [
+    McpTools::KeywordSearch,
+    McpTools::SparqlQuery,
+    McpTools::IucnEndangermentStatus
   ].freeze
 
+  # +tools/list+ result entries, derived from {MCP_TOOL_CLASSES} so the
+  # metadata is never hand-duplicated here.
+  MCP_TOOLS = MCP_TOOL_CLASSES.map do |tool_class|
+    {
+      name: tool_class::NAME,
+      description: tool_class::DESCRIPTION,
+      inputSchema: tool_class::INPUT_SCHEMA
+    }.freeze
+  end.freeze
+
   # @!group MCP
+
+  # @!method get_mcp
+  # Human-readable rendering of the MCP tool catalogue - the same data
+  # {#post_mcp}'s +tools/list+ returns, without the JSON-RPC envelope, so
+  # the tools available at this endpoint can be read in a browser (or
+  # shared as a link) instead of requiring an MCP client or a read of the
+  # source code.
+  #
+  # Content negotiation:
+  # - +text/html+        → renders +:mcp_layout+
+  # - +application/json+ → returns <tt>{ "tools": [...] }</tt>, matching
+  #   the shape of a +tools/list+ JSON-RPC result
+  #
+  # @return [String, HTML] the tool catalogue
+  get %r{/flair-gg-vp-server/mcp/?} do
+    @tools = MCP_TOOLS
+    respond_with(html_view: :mcp_layout, json_body: { tools: @tools })
+  end
 
   # @!method post_mcp(body)
   # Single JSON-RPC 2.0 endpoint implementing the MCP Streamable HTTP transport.
   #
   # Handles the +initialize+, +notifications/initialized+, +tools/list+ and
-  # +tools/call+ methods. +tools/call+ currently supports only +keyword_search+,
-  # which delegates to {VP#keyword_search_shell} exactly as {#post_keyword_search} does.
+  # +tools/call+ methods. +tools/call+ dispatches to whichever {MCP_TOOL_CLASSES}
+  # entry matches the requested tool name.
   #
   # @param [Hash] body JSON-RPC request, e.g.
   #   <tt>{ "jsonrpc": "2.0", "id": 1, "method": "tools/list" }</tt>
@@ -136,29 +105,25 @@ class VPRoutes < Sinatra::Base
 
   private
 
-  # Dispatches a +tools/call+ request to the named tool and wraps the result
-  # as MCP tool-call content.
+  # Dispatches a +tools/call+ request to the named tool's +call+ method and
+  # wraps the result as MCP tool-call content. Any exception raised by the
+  # tool (malformed input, a rejected query, an upstream failure, ...)
+  # becomes a JSON-RPC error rather than a 500 - tools are trusted to raise
+  # something with a useful +#message+, not to catch their own errors.
   #
   # @param id [Integer, String, nil] JSON-RPC request id
-  # @param params [Hash] must contain +name+ and, for +keyword_search+, an
-  #   +arguments+ hash with a +keyword+ string
+  # @param params [Hash] must contain +name+ and an +arguments+ hash
   # @return [String] JSON-RPC response
   def mcp_call_tool(id:, params:)
+    tool_class = MCP_TOOL_CLASSES.find { |t| params['name'] == t::NAME }
+    return mcp_error(id, -32_602, "Unknown tool: #{params['name']}") unless tool_class
+
     arguments = params['arguments'] || {}
-    case params['name']
-    when 'keyword_search'
-      keyword = arguments['keyword'] ? arguments['keyword'].strip : ''
-      discoverables = VP.current_vp.keyword_search_shell(keyword: keyword)
-      mcp_result(id, { content: [{ type: 'text', text: discoverables.to_json }] }.to_json)
-    when 'sparql_query'
-      begin
-        rows = VP.execute_raw_sparql(query: arguments['query'])
-        mcp_result(id, { content: [{ type: 'text', text: rows.to_json }] }.to_json)
-      rescue ArgumentError, SPARQL::Client::ClientError, SPARQL::Client::ServerError => e
-        mcp_error(id, -32_000, "Query failed: #{e.message}")
-      end
-    else
-      mcp_error(id, -32_602, "Unknown tool: #{params['name']}")
+    begin
+      content = tool_class.call(arguments)
+      mcp_result(id, { content: content }.to_json)
+    rescue StandardError => e
+      mcp_error(id, -32_000, "Query failed: #{e.message}")
     end
   end
 
