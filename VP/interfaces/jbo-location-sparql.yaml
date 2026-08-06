@@ -12,7 +12,7 @@ externalDocs:
   url: https://rdf4j.org/documentation/reference/rest-api/
 
 servers:
-  - url: https://jbo.bgv.cbgp.upm.es
+  - url: https://jbo.linkeddata.systems
     description: SPARQL server for the JBO
 
 tags:

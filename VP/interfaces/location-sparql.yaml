@@ -12,7 +12,7 @@ externalDocs:
   url: https://rdf4j.org/documentation/reference/rest-api/
 
 servers:
-  - url: https://bgv.cbgp.upm.es
+  - url: https://bgv.linkeddata.systems
     description: SPARQL server for the BANCO DE GERMOPLASMA VEGETAL-UPM
 
 tags:

@@ -12,7 +12,7 @@ externalDocs:
   url: https://rdf4j.org/documentation/reference/rest-api/
 
 servers:
-  - url: https://jbs.bgv.cbgp.upm.es
+  - url: https://jbs.linkeddata.systems
     description: SPARQL server for the JBS
 
 tags:

@@ -12,7 +12,7 @@ externalDocs:
   url: https://rdf4j.org/documentation/reference/rest-api/
 
 servers:
-  - url: https://jbclm.bgv.cbgp.upm.es
+  - url: https://jbclm.linkeddata.systems
     description: SPARQL server for the JBCLM
 
 tags:
