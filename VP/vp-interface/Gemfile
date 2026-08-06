@@ -2,7 +2,6 @@
 
 source 'https://rubygems.org'
 
-gemspec
 ruby '~> 3.2'
 gem 'bcrypt'
 # gem 'debase', git: 'https://github.com/ruby-debug/debase.git', tag: 'v0.2.5.beta2'

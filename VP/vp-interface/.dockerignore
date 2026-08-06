@@ -1,0 +1,27 @@
+# Never needed at runtime, and each can be large enough to slow down the
+# build-context upload and/or bloat the image if a local checkout happens
+# to have them present at build time.
+.git
+.github
+.yardoc
+.ruby-lsp
+Gemfile.lock.BAK
+launch.json
+
+# Virtuoso's own runtime data (LDP server), never part of this image -
+# can be 100+MB locally and has nothing to do with the VP app itself.
+database/
+
+# Local-only secrets/config; docker-compose.yml passes real values through
+# environment variables instead.
+.env
+
+# Runtime-generated cache state - baking in whatever happens to exist in a
+# developer's local checkout at build time (a stale or half-populated
+# cache, or a stuck refresh lock) would ship as if it were fresh. Leaves
+# cache/servicetypes.json and cache/*.marsh alone - those are deliberately
+# git-tracked pre-warmed seeds, not build-time artifacts.
+cache/WCREFRESHING
+cache/REFRESHING
+cache/keywords.json
+cache/ontology_annotations.json

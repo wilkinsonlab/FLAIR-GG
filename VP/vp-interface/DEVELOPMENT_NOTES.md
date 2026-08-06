@@ -119,6 +119,13 @@ above describe how it got there. Kept as history, not a live TODO list.
 - DataService health/liveness monitoring, and eventually one MCP tool per
   registered data service so an AI UI could execute any of them directly
   (partially started - see above).
+- **Word-cloud exclude/stopword list** (2026-08-06): now that the 0.3.6
+  cache fix lets a full refresh actually complete, generic ontology-level
+  terms like "Protein" or "Location" are dominating the cloud over more
+  genuinely informative tags - a domain-specific stopword list (excluded
+  in `VP#verbose_annotations`/`Wordcloud`, before frequencies are
+  counted) would fix this. Not started; needs an actual candidate word
+  list from real output first.
 - **Better OpenAPI interface-definition support** (2026-08-06, from a
   conversation about `ServiceCollection#collect_similar_services`'s
   DCAT-endpoint-vs-OpenAPI-path matching, since 0.3.8 switched a mismatch
