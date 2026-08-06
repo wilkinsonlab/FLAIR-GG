@@ -10,6 +10,32 @@ This file starts now (2026-08-06); earlier history (the MCP endpoint's
 the RSpec foundation, etc.) predates it and isn't backfilled — see git log
 and `DEVELOPMENT_NOTES.md` for that history.
 
+## [1.2.0] - 2026-08-06
+
+### Fixed
+
+- Word-cloud/service-type-label refresh was slow at scale: `ontology_annotations(uri:)`
+  re-resolved every distinct annotation URI via a live external HTTP call
+  (EBI, Ontobee, NCBO, ...) on every single refresh, even though the
+  underlying SPARQL queries already `SELECT DISTINCT` and an ontology
+  term's label is effectively permanent. Added a process-wide cache
+  (`OntologyAnnotationCache`, backed by `./cache/ontology_annotations.json`,
+  same thaw/freeze pattern as the existing keyword/service-type caches) so
+  only genuinely new URIs pay the network cost - a cold cache behaves
+  exactly as before, every subsequent refresh is fast.
+
+### Changed
+
+- Merged the `fdp-index-sparql` branch into `main` now that the
+  linkeddata.systems/CESVIMA server migration is complete: the RSpec
+  foundation (89 examples), the routes.rb/lib business-logic extraction,
+  the generated OpenAPI doc, the SPARQL-injection fix, and the full MCP
+  tool refactor from 1.1.0 below. Two DESCRIPTION improvements that had
+  been made independently on `main` (sparql_query's contact/curator-lookup
+  example and web-search-fallback guidance; keyword_search's pointer to
+  sparql_query for anything beyond a simple keyword match) were ported
+  forward into the merged per-file tool structure rather than lost.
+
 ## [1.1.0] - 2026-08-06
 
 ### Added

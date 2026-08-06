@@ -15,6 +15,21 @@ def freeze_keywords(words:)
   f.close
 end
 
+def thaw_ontology_annotations
+  return {} unless File.exist?('./cache/ontology_annotations.json')
+
+  f = File.open('./cache/ontology_annotations.json', 'r')
+  cached = f.read
+  f.close
+  JSON.parse(cached)
+end
+
+def freeze_ontology_annotations(cache:)
+  f = open('./cache/ontology_annotations.json', 'w')
+  f.puts cache.to_json
+  f.close
+end
+
 def thaw_servicetypes
   warn 'thawing service type cache'
   kwf = File.open('./cache/servicetypes.json', 'r')

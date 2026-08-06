@@ -86,20 +86,27 @@ host that serves `/search/sparql`, these are genuinely different things) and
   O(n²) bug got fixed opportunistically even though word cloud itself is
   low priority.
 
+This branch has since been merged into `main` (2026-08-06) - the sections
+above describe how it got there. Kept as history, not a live TODO list.
+
 ## Known, deliberately deferred issues (not urgent, don't fix without asking)
 
-- **Word cloud is slow on refresh** (`GET /wordcloud/force-refresh`):
-  `VP#verbose_annotations` calls `ontology_annotations(uri:)` once per
-  annotation row (thousands of rows against the FDP Index's larger
-  dataset), each doing a live external HTTP call to an ontology-lookup
-  service. The FDP Index exposes a `GET /label?iri=&lang=` endpoint
-  (cached labels) that would likely be faster/more reliable per call, but
-  it's still one call per URI, so it wouldn't fully fix the N+1 shape.
-  Explicitly flagged as very low priority ("eye candy").
-- **Not yet deployed anywhere**: this whole branch is local-only. Before
-  shipping, production's `docker-compose.yml` needs the same edits as this
-  branch's (drop `network_mode: host`, update `FDPSPARQL`, add
-  `FDPINDEX_API_TOKEN`), and the image needs rebuilding/pushing.
+- ~~Word cloud is slow on refresh~~ **Fixed 2026-08-06**: the underlying
+  SPARQL queries already `SELECT DISTINCT`, so within one run each
+  annotation URI was only ever resolved once - the actual slowness was a
+  full refresh re-resolving every one of those (thousands of, and growing
+  toward hundreds-of-providers-scale) distinct URIs from scratch every
+  time via a live external HTTP call (`ontology_annotations(uri:)` in
+  `lib/metadata_functions.rb`), even though an ontology term's label is
+  effectively permanent. Fixed with a process-wide cache backed by
+  `./cache/ontology_annotations.json` (`OntologyAnnotationCache`, same
+  thaw/freeze pattern as the keyword/service-type caches in
+  `lib/cache.rb`) - a cold cache behaves exactly as before, but every
+  subsequent refresh only pays the network cost for genuinely new URIs.
+  A previously-considered alternative (swap to the FDP Index's own
+  `/label` endpoint for cached lookups) is now superseded - it would only
+  have addressed per-call latency, not the repeated-work-across-refreshes
+  shape that was the real problem.
 
 ## Ideas logged for (much) later, not started
 

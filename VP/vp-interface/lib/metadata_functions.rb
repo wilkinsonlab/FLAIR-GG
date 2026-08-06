@@ -99,7 +99,45 @@ def resolve_url_to_rdf(url:, accept: 'text/turtle')
   graph
 end
 
-def ontology_annotations(uri:) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+# Resolving one URI can mean a live HTTP call out to an external ontology
+# registry (EBI, Ontobee, NCBO, ...) - see the branches in
+# #resolve_ontology_annotation below. The word-cloud/service-type SPARQL
+# queries already SELECT DISTINCT, so within a single run each URI is only
+# ever looked up once anyway - the real slowness is that a FULL REFRESH
+# re-resolves every one of those (potentially thousands of, and growing
+# toward hundreds-of-providers scale) distinct URIs from scratch every time,
+# even though an ontology term's label is effectively permanent. This process
+# -wide cache, backed by ./cache/ontology_annotations.json (the same
+# thaw/freeze pattern as the keyword and service-type caches in
+# lib/cache.rb), means only URIs genuinely never seen before pay the network
+# cost - a cold cache behaves exactly as before, but every subsequent
+# refresh is fast. The FDP Index itself uses the same local-cache approach
+# for its own /label endpoint, for the same reason.
+module OntologyAnnotationCache
+  def self.data
+    @data ||= thaw_ontology_annotations
+  end
+
+  def self.fetch(uri)
+    data[uri]
+  end
+
+  def self.store(uri, term)
+    data[uri] = term
+    freeze_ontology_annotations(cache: data)
+  end
+end
+
+def ontology_annotations(uri:)
+  cached = OntologyAnnotationCache.fetch(uri)
+  return cached if cached
+
+  term = resolve_ontology_annotation(uri: uri)
+  OntologyAnnotationCache.store(uri, term) if term
+  term
+end
+
+def resolve_ontology_annotation(uri:) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
   # THE ONES WE CAN'T HANDLE ARE:
   # <https://bioregistry.io/api/reference/sio:SIO_001052 - doesn't generate usable URLs from bioregistry
 
