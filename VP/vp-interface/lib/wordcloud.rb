@@ -10,7 +10,7 @@ class Wordcloud
       @words = thaw_keywords
     else
       begin
-        f = open('./cache/WCREFRESHING', 'w')  # multiple browser calls are a problem!
+        f = open('./cache/WCREFRESHING', 'w') # multiple browser calls are a problem!
         f.puts 'WCREFRESHING'
         f.close
       rescue StandardError
@@ -28,13 +28,14 @@ class Wordcloud
     end
   end
 
+  def self.refreshing?
+    File.exist?('./cache/WCREFRESHING')
+  end
+
   def count_words
     warn 'counting keywords'
-    freqs = {}
-    @words.each do |w|
-      freq = @words.count(w)
-      freqs[w] = freq
-    end
+    freqs = Hash.new(0)
+    @words.each { |w| freqs[w] += 1 }
     warn freqs
     freqs
   end

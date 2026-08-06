@@ -1,0 +1,109 @@
+module McpTools
+  # [EXPERIMENTAL] MCP tool: runs a read-only SPARQL 1.1 SELECT query directly
+  # against the FDP Index. Thin wrapper around {VP.execute_raw_sparql}, which
+  # enforces the SELECT-only safety net (see +lib/common_queries.rb+).
+  class SparqlQuery
+    NAME = 'sparql_query'.freeze
+
+    DESCRIPTION = <<~DESCRIPTION.freeze
+      [EXPERIMENTAL] Executes a read-only SPARQL 1.1 SELECT query directly
+      against the FDP Index, the same live network of FAIR Data Points that
+      keyword_search searches. Use this for anything keyword_search can't
+      answer - counting, grouping, filtering on dates or specific properties,
+      contact/curator lookups, or combining several conditions in one query.
+      SELECT only: no ASK, CONSTRUCT, DESCRIBE, or updates. Results come back
+      as JSON rows, one object per SPARQL result row, string-valued. A LIMIT
+      is added automatically (default 100) if you don't include one.
+
+      IMPORTANT for "who do I contact" / curator / ownership questions: run
+      Example 4 below BEFORE giving up or searching the web. If it returns no
+      contact for a resource, that means the DCAT record genuinely has none
+      registered - it is not a tool failure. In that case, tell the user the
+      record has no contact on file, then proactively do a normal web search
+      for the owning institution's name (returned by this query) to find an
+      official contact page - do not ask the user's permission first, and do
+      not stop at "the record doesn't have this." Clearly label anything found
+      via web search as unverified/external, separate from the authoritative
+      DCAT data.
+
+      Key namespaces:
+        PREFIX fdp: <https://w3id.org/fdp/fdp-o#>
+        PREFIX ejp: <https://w3id.org/ejp-rd/vocabulary#>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+
+      A resource is publicly discoverable only if it has:
+        ?resource ejp:vpConnection ejp:VPDiscoverable .
+
+      Example 1 - list discoverable FAIR Data Points with their titles:
+        PREFIX fdp: <https://w3id.org/fdp/fdp-o#>
+        PREFIX ejp: <https://w3id.org/ejp-rd/vocabulary#>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        SELECT ?resource ?title WHERE {
+          ?resource a fdp:FAIRDataPoint ;
+            dcterms:title ?title ;
+            ejp:vpConnection ejp:VPDiscoverable .
+        }
+
+      Example 2 - keyword search over title/description/keyword fields:
+        PREFIX dc: <http://purl.org/dc/terms/>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        SELECT DISTINCT ?resource ?kw WHERE {
+          VALUES ?searchfields { dc:title dc:description dc:keyword dcat:keyword }
+          ?resource ?searchfields ?kw .
+          FILTER(CONTAINS(LCASE(str(?kw)), LCASE("wheat")))
+        }
+
+      Example 3 - count data services of a given ontology type:
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX dcterms: <http://purl.org/dc/terms/>
+        SELECT (COUNT(?s) AS ?count) WHERE {
+          ?s a dcat:DataService ;
+            dcterms:type <http://edamontology.org/operation_3436> .
+        }
+
+      Example 4 - contact/curator lookup for banks matching a keyword (combine
+      with Example 2's FILTER to scope to a topic, as shown here for "wheat"):
+        PREFIX fdp: <https://w3id.org/fdp/fdp-o#>
+        PREFIX dc: <http://purl.org/dc/terms/>
+        PREFIX dcat: <http://www.w3.org/ns/dcat#>
+        PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+        SELECT DISTINCT ?resource ?title ?contact WHERE {
+          VALUES ?searchfields { dc:title dc:description dc:keyword dcat:keyword }
+          ?resource ?searchfields ?kw ;
+                    dc:title ?title .
+          FILTER(CONTAINS(LCASE(str(?kw)), LCASE("wheat")))
+          OPTIONAL {
+            ?resource dcat:contactPoint ?c .
+            ?c vcard:url ?contact .
+          }
+        }
+    DESCRIPTION
+
+    INPUT_SCHEMA = {
+      type: 'object',
+      properties: {
+        query: {
+          type: 'string',
+          description: 'A read-only SPARQL 1.1 SELECT query (see tool description for namespaces and examples)'
+        }
+      },
+      required: ['query']
+    }.freeze
+
+    # Runs the tool.
+    #
+    # @param arguments [Hash] must contain a +query+ string
+    # @return [Array<Hash>] MCP +content+ array, a single +text+ block
+    #   whose text is the JSON-serialized array of result rows
+    # @raise [ArgumentError, SPARQL::Client::ClientError, SPARQL::Client::ServerError]
+    #   on a malformed, non-SELECT, or failing query - left to the caller
+    #   (the MCP dispatcher) to turn into a JSON-RPC error
+    def self.call(arguments)
+      rows = VP.execute_raw_sparql(query: arguments['query'])
+      [{ type: 'text', text: rows.to_json }]
+    end
+  end
+end

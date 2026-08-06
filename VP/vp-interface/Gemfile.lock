@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    vp-interface (1)
+    vp-interface (1.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -63,6 +63,9 @@ GEM
     commonmarker (2.8.1-x86_64-linux-musl)
     concurrent-ruby (1.3.6)
     connection_pool (2.5.5)
+    crack (1.0.1)
+      bigdecimal
+      rexml
     crass (1.0.6)
     csv (3.3.5)
     daemons (1.4.1)
@@ -129,6 +132,7 @@ GEM
       tilt
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
+    hashdiff (1.2.1)
     htmlentities (4.4.2)
     http-accept (1.7.0)
     http-cookie (1.1.6)
@@ -444,7 +448,6 @@ GEM
       net-http-persistent (~> 4.0, >= 4.0.2)
       rdf (~> 3.3)
     stringio (3.2.0)
-    swagger-blocks (3.0.0)
     sxp (2.0.0)
       matrix (~> 0.4)
       rdf (~> 3.3)
@@ -464,6 +467,10 @@ GEM
     unicode-types (1.11.0)
     uri (1.1.1)
     useragent (0.16.11)
+    webmock (3.26.2)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     xml-simple (1.1.9)
       rexml
     xpath (3.2.0)
@@ -519,10 +526,10 @@ DEPENDENCIES
   sinatra (~> 2.2)
   sinatra-cross_origin (~> 0.4.0)
   sinatra-respond_to
-  swagger-blocks (~> 3.0)
   tempfile
   thin (~> 1.8)
   vp-interface!
+  webmock
   xml-simple
 
 CHECKSUMS
@@ -548,6 +555,7 @@ CHECKSUMS
   commonmarker (2.8.1-x86_64-linux-musl) sha256=9b6305ce47e0d444b77dabf1762bf76085c2f7963b63c25c02ec36edcf06c785
   concurrent-ruby (1.3.6) sha256=6b56837e1e7e5292f9864f34b69c5a2cbc75c0cf5338f1ce9903d10fa762d5ab
   connection_pool (2.5.5) sha256=e54ff92855753df1fd7c59fa04a398833355f27dd14c074f8c83a05f72a716ad
+  crack (1.0.1) sha256=ff4a10390cd31d66440b7524eb1841874db86201d5b70032028553130b6d4c7e
   crass (1.0.6) sha256=dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
   csv (3.3.5) sha256=6e5134ac3383ef728b7f02725d9872934f523cb40b961479f69cf3afa6c8e73f
   daemons (1.4.1) sha256=8fc76d76faec669feb5e455d72f35bd4c46dc6735e28c420afb822fac1fa9a1d
@@ -581,6 +589,7 @@ CHECKSUMS
   guard (2.20.1) sha256=ab9cd7873854e6b76080c0589f781ff3e390e441bdda20165804df54f977015a
   haml (6.4.0) sha256=b2e20652be52ac9a3be328e8ff411ad007e82fc4e78e1a5cdefad537a697cf6a
   hamster (3.0.0) sha256=5951e3a3ffd15ba854a976ac36ebae9469966f726034ffed0dccdb6d12d434d8
+  hashdiff (1.2.1) sha256=9c079dbc513dfc8833ab59c0c2d8f230fa28499cc5efb4b8dd276cf931457cd1
   htmlentities (4.4.2) sha256=bbafbdf69f2eca9262be4efef7e43e6a1de54c95eb600f26984f71d2fe96c5c3
   http-accept (1.7.0) sha256=c626860682bfbb3b46462f8c39cd470fd7b0584f61b3cc9df5b2e9eb9972a126
   http-cookie (1.1.6) sha256=ba4b82be64de61dc281243dac70e3c382c45142f20268ed9276a3670c93feaa9
@@ -690,7 +699,6 @@ CHECKSUMS
   sparql (3.3.2) sha256=20d73a62801fd6d03c834ca5012c11aaf6594ef536f554e92fd94bf9b3ed64dc
   sparql-client (3.3.0) sha256=71225eefad48dc2baab6b7008df8a9bcfffa833e5f25387dbe87ff52a5cad64e
   stringio (3.2.0) sha256=c37cb2e58b4ffbd33fe5cd948c05934af997b36e0b6ca6fdf43afa234cf222e1
-  swagger-blocks (3.0.0) sha256=130938b62daf6faad3d00f6c60ebae20411619871f478cc14a265f127579cc2f
   sxp (2.0.0) sha256=79971bbab54a82fe4a861332475eb8c1f33142d70f2b7e830dacbd9082824721
   tempfile (0.3.1) sha256=0bb53ab646744e505eb3102147e22ae130a626a15563e882428c1ec973fed76a
   temple (0.10.4) sha256=b7a1e94b6f09038ab0b6e4fe0126996055da2c38bec53a8a336f075748fff72c
@@ -703,7 +711,8 @@ CHECKSUMS
   unicode-types (1.11.0) sha256=81d1201273260fa89b85471e7eebb93a51bb4e5f078a525508dcae7835d176f9
   uri (1.1.1) sha256=379fa58d27ffb1387eaada68c749d1426738bd0f654d812fcc07e7568f5c57c6
   useragent (0.16.11) sha256=700e6413ad4bb954bb63547fa098dddf7b0ebe75b40cc6f93b8d54255b173844
-  vp-interface (1)
+  vp-interface (1.1.0)
+  webmock (3.26.2) sha256=774556f2ea6371846cca68c01769b2eac0d134492d21f6d0ab5dd643965a4c90
   xml-simple (1.1.9) sha256=d21131e519c86f1a5bc2b6d2d57d46e6998e47f18ed249b25cad86433dbd695d
   xpath (3.2.0) sha256=6dfda79d91bb3b949b947ecc5919f042ef2f399b904013eb3ef6d20dd3a4082e
   yaml-ld (0.0.3) sha256=2934e06ef651337bf4c5d78e6a22007e0c46f1215c19dc024816c1fa82b971d1

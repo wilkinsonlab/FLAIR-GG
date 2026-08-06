@@ -6,7 +6,11 @@ Metrics/MethodLength:
 
 Metrics/ClassLength:
   Enabled: false
-  
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
 Metrics/ParameterLists:
   Enabled: false
 

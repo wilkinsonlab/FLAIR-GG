@@ -21,7 +21,7 @@
 =begin
 
 class ServiceCollection  @servicecollection
-  attr_accessor :vpgraph, :servicetype, :allservices, :warnings, :escapedtype
+  attr_accessor :endpoint, :servicetype, :allservices, :warnings, :escapedtype
 class Service  (from allservices)
   attr_accessor :contact, :title, :openapi, :endpoint, :apiobject, :base, :paths,  :escapedendpoint
   retrieve_parameters:  params[param.name] = param  # responds to "in", "name", "description", "schema.example", "schema.type"

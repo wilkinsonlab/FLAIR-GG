@@ -91,7 +91,14 @@ class VP
 
   def ontology_search_shell(term:)
     warn 'in ontology search shell'
-    ontology_search(uri: term)
+    ontology_search(uri: normalize_ontology_term(term))
+  end
+
+  # Accepts either a full HTTP URI or a prefixed CURIE (e.g. +edam:format_3790+)
+  # and strips any non-HTTP prefix, since the search only matches full URIs.
+  def normalize_ontology_term(term)
+    term = term.to_s.strip
+    term =~ /^http/ ? term : term.gsub(/\S+:/, '')
   end
 
   def keyword_search(keyword: '')
@@ -159,6 +166,12 @@ class VP
     services
   end
 
+  # Invalidates the service-type cache and rebuilds it from the live network.
+  def refresh_service_types
+    FileUtils.rm_f('./cache/servicetypes.json')
+    collect_data_services
+  end
+
   def retrieve_sevices(termuri:)
     # termuri  the URI of the service type
     contenttype = guess_best_content_type(termuri: termuri)
@@ -172,6 +185,17 @@ class VP
   def guess_best_content_type(termuri:)
     mapping = { 'http://edamontology.org/format_3790' => 'text/csv' }
     mapping[termuri] || '*/*'
+  end
+
+  # Turns a service name/URI into the filename-safe label used both to name
+  # the uploaded Jupyter notebook and (via #notebook_url) to link to it.
+  def build_service_label(name)
+    name.to_s.downcase.gsub(/\s+/, '_')
+  end
+
+  # URL of the FLAIR-GG-Analytics JupyterLab notebook for a given service label.
+  def notebook_url(servicelabel)
+    "https://wilkinsonlab.github.io/FLAIR-GG-Analytics/lab/index.html?path=FLAIR-GG%2F#{servicelabel}.ipynb"
   end
   # 28b2cb8a656a0b9fdbd385d6e86e691f9ccff2f4c8605026c5bfbb2b1d36b4b5
 
