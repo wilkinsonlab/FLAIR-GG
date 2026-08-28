@@ -37,7 +37,8 @@ class VPRoutes < Sinatra::Base
   ].freeze
 
   # +tools/list+ result entries, derived from {MCP_TOOL_CLASSES} so the
-  # metadata is never hand-duplicated here.
+  # metadata is never hand-duplicated here.  Values are set in the tool code in ./lib/mcp_tools/*.rb,
+  # so the tool's own description and input schema are always correct and up-to-date.
   MCP_TOOLS = MCP_TOOL_CLASSES.map do |tool_class|
     {
       name: tool_class::NAME,
@@ -86,10 +87,10 @@ class VPRoutes < Sinatra::Base
     case method_name
     when 'initialize'
       halt mcp_result(id, {
-                         protocolVersion: MCP_PROTOCOL_VERSION,
-                         capabilities: { tools: {} },
-                         serverInfo: { name: 'flair-gg-vp-server', version: '1.0.0' }
-                       }.to_json)
+        protocolVersion: MCP_PROTOCOL_VERSION,
+        capabilities: { tools: {} },
+        serverInfo: { name: 'flair-gg-vp-server', version: '1.0.0' }
+      }.to_json)
     when 'notifications/initialized'
       halt 202, ''
     when 'tools/list'
