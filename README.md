@@ -3,6 +3,14 @@ Code for the FLAIR-GG
 
 Read the full documentation for [FLAIR-GG](https://wilkinsonlab.github.io/FLAIR-GG/)
 
+## Joining the network
+
+To run your own FLAIR-GG node, follow the [FLAIR-in-a-Box](./FLAIR-in-a-box/) instructions. FLAIR-in-a-Box is
+a FLAIR-GG installation of the [Sextans Suite](https://github.com/wilkinsonlab/Sextans-Suite): Sextans Sight
+publishes your metadata, and (optionally) Sextans Fix with the FLAIR-GG data model publishes your data. The
+data model - the [CSV templates](./SemanticModel/CSV/) and [YARRRML mappings](./SemanticModel/YARRRML/) - lives
+in this repository's [SemanticModel](./SemanticModel/) folder.
+
 
 <h3>Funding</h3>
 

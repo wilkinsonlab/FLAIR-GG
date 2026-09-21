@@ -3,6 +3,15 @@
 
 # CSV Templates for FLAIR-GG
 
+There are three CSV files, and **their filenames are fixed**: `admin.csv`, `germplasm.csv` and `location.csv`.
+Each is optional - if you do not provide a file, that type of data is simply not published (for example, leave
+out `location.csv` if your collection locations are sensitive). Put the files in the `data` folder of your
+Sextans Fix installation (see the [FLAIR-in-a-Box instructions](../../FLAIR-in-a-box/)).
+
+Dates must be ISO 8601 (`YYYY-MM-DD`, e.g. `2025-01-01`, **not** `2025/01/01`); a file with invalid values
+is rejected and nothing is loaded.
+
+
   
 
   
@@ -213,3 +222,50 @@ We require the use of [World Flora Online](https://www.worldfloraonline.org) as 
 **iucn_endangerment_category**: National IUCN threat status assessment. Choose one of the terms in this link: https://rs.gbif.org/vocabulary/iucn/threat_status.xml
 -Data type: URI (A URL)
 -Example: http://rs.gbif.org/vocabulary/iucn/threat_status/CR
+
+
+## Administrative model:
+
+- filename: admin.csv
+
+- yarrrml: admin_yarrrml.pre-yaml
+
+An example file is provided: [admin.csv](./admin.csv).
+
+**bgvid**: Short identifier for your collection/bank. Combined with `uniqid` to name the collection record.
+- Data type: String
+- Example: bgv123
+
+**uniqid**: Unique ID for the accession; use the same value as in the corresponding rows of `location.csv` and `germplasm.csv`.
+- Example: 1234567
+
+**org_name**: Name of the organization that holds the collection.
+- Data type: String
+- Example: UPM BGV
+
+**org_id**: A persistent URI identifying the organization (for example its home page).
+- Data type: URI (A URL)
+- Example: http://www.bancodegermoplasma.upm.es/
+
+**member_unique_id**: Identifier of the person who is responsible for the accession within the organization.
+- Example: 163483
+
+**member_name**: Name of that person.
+- Data type: String
+- Example: Santiago Moreno
+
+**member_role**: URI of the role that person plays.
+- Data type: URI (A URL)
+- Example: http://semanticscience.org/resource/SIO_000886
+
+**collection_comment**: Free-text comment about the collection.
+- Data type: String
+- Example: interesting collection
+
+**collecting_institute_code**: Code of the institute that collected the accession.
+- Data type: String
+- Example: 1234
+
+**holder_institute_code**: Code of the institute that currently holds the accession.
+- Data type: String
+- Example: 1234

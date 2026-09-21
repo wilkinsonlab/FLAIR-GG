@@ -42,7 +42,7 @@ data = {
   "config" : {
     "source_name" : "source_cde_test",
     "configuration" : "csv",    
-    "csv_name" : "administrative.csv",
+    "csv_name" : "admin.csv",
     "basicURI" : "this"
     }
 }

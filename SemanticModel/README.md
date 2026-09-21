@@ -21,5 +21,5 @@ The FLAIR-GG Semantic Model is broken into 3 parts:
 ## Administrative
 
 
-[YARRRML Here](./YARRRML/administrative_yarrrml.pre-yaml)
+[YARRRML Here](./YARRRML/admin_yarrrml.pre-yaml)
 <img src="./Images/Administrative%20Data%20Model.png"/>

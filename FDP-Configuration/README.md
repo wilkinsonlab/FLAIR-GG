@@ -1,9 +1,9 @@
 # FDP-Configuration
-A record of the process for configuring the Reference Implementation of the FAIR Data Point (the one that is included in FLAIR-in-a-box) for use on the FLAIR-GG Virtual Platform
+A record of the process for configuring the Reference Implementation of the FAIR Data Point (the one that is installed by Sextans Sight, as described in FLAIR-in-a-Box) for use on the FLAIR-GG Virtual Platform
 
 ## Tutorial for running FLAIR in a Box (FiaB)
 
-If you don't yet have a FAIR Data Point, you could consider installing one using the [FLAIR in a Box (FiaB) installer here](../FLAIR-in-a-box/INSTALLER/)
+If you don't yet have a FAIR Data Point, you could consider installing one using [FLAIR-in-a-Box](../FLAIR-in-a-box/), which uses the Sextans Sight installer
 
 Now continue with the configuration below...
 
@@ -14,9 +14,9 @@ NOTE: It is a good idea to set a default license (cc-by-4 is the default for FDP
 
 To do this: 
 
-* Go to your FiaB folder.  
+* Go to your Sextans Sight folder (e.g. `ACME-Sextans-Sight`).  
 * Go into the ./fdp subfolder
-* edit the "application-xxxx.yml" file (xxx is the prefix name you used when you ran the FiaB installer)
+* edit the "application-xxxx.yml" file (xxx is the prefix name you used when you ran the installer)
 * add the following lines to the bottom of that file:
   
 ```
@@ -29,12 +29,12 @@ ping:
     interval: PT120H
 ```
 
-* now shut-down and restart your FiaB using docker-compose
+* now shut-down and restart your Sextans Sight using docker-compose
 
 
 # Navigating the FDP configuration menu
 
-* first, you need to be logged-in (default user:  albert.einstein@example.com, pass: password)
+* first, you need to be logged-in (as the administrator account you created when you installed; the default `albert.einstein@example.com` account should already have been replaced - see the Sextans Sight documentation)
 * The drop-down menu (top right) looks like this:
 
 ![](./images/menu.png)

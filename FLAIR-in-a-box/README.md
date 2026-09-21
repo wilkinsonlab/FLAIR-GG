@@ -1,45 +1,43 @@
 # FLAIR-in-a-Box Quick Start!
 ---
 
-FLAIR-in-a-box (Fiab) is the easiest way for you to join the FLAIR-GG network!
+FLAIR-in-a-Box is the easiest way for you to join the FLAIR-GG network!
 
-It will automatically install all components required for full participation (even if you decide not to use them!)
+FLAIR-in-a-Box is built on the [Sextans Suite](https://github.com/wilkinsonlab/Sextans-Suite), a general-purpose,
+security-hardened installer for FAIR data servers. There is nothing FLAIR-specific to install: you install the
+standard Sextans components and, for the data component, choose the **FLAIR-GG** data model.
 
-There are two components - Metadata and Data.  Only the Metadata layer is required.  
+There are two components - Metadata and Data.  **Only the Metadata component (Sextans Sight) is required.**
 
-To install the Metadata layer, cd into the "MetadataLayer" folder, and run the `install-sextans-sight.sh` installation script.  Answer the questions to set up your custom installation.  After that, you can then decide if you want to offer more than just a general description of your database.
-
-To install the Data Layer:  .... TBD - this layer is beign rewritten at this time for additional security.
-
-
+| Component | Sextans name | What it does | Required? |
+| --- | --- | --- | --- |
+| Metadata | **Sextans Sight** | A FAIR Data Point (plus its database) that describes your collection. This is what the FLAIR-GG Virtual Platform indexes. | Yes |
+| Data | **Sextans Fix** | Transforms your germplasm CSV files into RDF using the FLAIR-GG semantic model and stores it in a private triple store. | Only if you want to offer more than a general description of your database |
 
 ## CONTENTS
 
-- [Installation requirements](#requirements)
+- [Requirements](#requirements)
 - [Downloading](#downloading)
-- [Installing from scratch](#installing)
-- [Testing your installation](#testing)
-- [Using your FLAIR-in-a-Box](#using)
-- [Using your FLAIR-in-a-Box](#understanding)
-- [Customizing your FLAIR-in-a-Box](#customizing)
+- [Installing the Metadata component (Sextans Sight)](#sight)
+- [Installing the Data component (Sextans Fix with the FLAIR-GG model)](#fix)
+- [Preparing and transforming your data](#using)
 - [Connecting to the FLAIR-GG Virtual Platform](#connecting)
+- [Customizing your installation](#customizing)
 
 <a name="requirements"></a>
 
 ## Requirements
 
-To use the FLAIR-in-a-box solution you `must` meet the following requirements.
+**User requirements (person who is deploying this solution)**
 
-**User requirements (Person who is deploying this solution)**
+- Basic knowledge about Docker
+- Basic GitHub knowledge
+- (optional) Awareness of the [FLAIR-GG semantic model](../SemanticModel/) if you plan to create FAIR data from your germplasm bank data
 
-- Basic knowledge about Docker​
-- Basic GitHub knowledge​
-- (optional) Awareness of the [FLAIR-GG semantic model](../../SemanticModel/) if you plan to create FAIR data from your Germplasm bank data
+**System requirements (machine where this solution is being deployed)**
 
-**System requirements​ (Machine where this solution is being deployed)**
-
-- Docker engine ​
-- Docker-compose application​
+- Docker engine
+- Docker-compose application
 
 ---
 
@@ -47,248 +45,138 @@ To use the FLAIR-in-a-box solution you `must` meet the following requirements.
 
 ## Downloading
 
-#### FAIR-in-a-box
-
-To get the FAIR in a box code clone this repository to your machine.
+Clone the Sextans Suite repository to your machine.
 
 ```sh
-git clone https://github.com/wilkinsonlab/FLAIR-GG
+git clone https://github.com/wilkinsonlab/Sextans-Suite.git
 ```
 
 ---
 
+<a name="sight"></a>
 
+## Installing the Metadata component (Sextans Sight)
 
-## Installing
-
-<a name="installing"></a>
-
-Once you have completed the "Downloading" section of this tutorial, you can run `install-sextans-sight.sh` in the `./FLAIR-in-a-box/MetadataLayer` folder
-
-```
+```sh
+cd Sextans-Suite/Sextans/Sight-install
 bash ./install-sextans-sight.sh
 ```
 
-### How to answer the installation questions
+The installer asks a few questions (an installation prefix, your permanent address, ports, and a password for
+the database). **The [Sextans Sight documentation](https://github.com/wilkinsonlab/Sextans-Suite/tree/main/Sextans/Sight-install)
+explains each question, the folder the installer creates, how to start it, how to secure it, and how to
+brand it** - please read it, it is short.
 
-If you are installing for testing purposes, you can simply use a localhost address and port.  In this case, the port in youir "permanent address (e.g. http://localhost:7070) should match the port that you answer for the FDP Port in the second question.
+Some notes that are specific to FLAIR-GG:
 
-If you are installing for production, you will need a permanent address and have your web server set up to proxy your SSL to the Docker image.  You can regisger a permanent identifier using, for example, [W3ID](https://github.com/perma-id/w3id)).  You will be asked for that address, as well as ports for your FAIR Data Point, GraphDB, and a "installation prefix" - a label for all of your components (e.g. "myflair").  The FDP port is where your proxy should point to.
-
-The installation prefix is simply a short-name for your database.  NO SPACES, and better as lower-case letters.  For example:
-   - crampdb
-   - euronmd
-   - dpp
-   - htad
-   - crag
-   - ACME  <---- this will be used for the rest of the tutorial
-
-This prefix is used to isolate one installation of FLAIR-in-a-box from another, if you are hosting multiple FAIR data points on the same server.
-
-After about a minute, the installer will send a message to the screen asking you to check that the installation was successful. This message will last for 10 minutes, giving you enough time to explore the links in the message. After 10 minutes, the services will all automatically shut down. You can stop the installer by `CTRL-C` at any time.
-
-### Find the folder with your final server config... Ready-To-Go!
-
-The installer will create a folder containing all of your server configuration files.  You can copy this folder anywhere on your system, e.g. to keep your servers all in one folder outside of your GitHub copy of FiaB.
-
-The folder will be called "prefix-ready-to-go"  (e.g. "ACME-ready-to-go").  Inside that folder is a customized docker-compose file (docker-compose-ACME.yml) for your deployment.  So for example, you would issue the commands:
-
-```
-
-cp -r ACME-ready-to-go ~/SERVERS/
-cd ~/SERVERS/ACME-ready-to-go
-docker-compose -f docker-compose-ACME.yml up
-
-```
-
-Your FAIR Data Point is now running at whatever port you selected for the FDP (default 7070)
-
+- If you are only testing, use a `localhost` address and port. Everything will work, but you cannot register a
+  `localhost` server with the VP Index.
+- For production you need a permanent address (for example a [W3ID](https://github.com/perma-id/w3id) redirect)
+  and a web server that proxies your SSL to the FAIR Data Point port you chose.
+- The installation prefix is a short name for your database. NO SPACES, and better as lower-case letters (e.g.
+  `crampdb`, `euronmd`, `dpp`, `htad`, `crag`, `ACME`). We use **ACME** in the examples below.
+- **Change the default FAIR Data Point administrator account immediately** (see the Sight documentation). If you
+  don't, you will be locked out.
+- Sextans Sight ships with configuration for the ERDERA project. **For FLAIR-GG, configure your FAIR Data Point
+  using the schemas and instructions in [FDP-Configuration](../FDP-Configuration/)** instead.
 
 ---
-<a name="testing"></a>
 
-## Testing your installation
+<a name="fix"></a>
 
-- If the **GraphDB** deployment is successful then you can access GraphDB by visiting the following URL.
+## Installing the Data component (Sextans Fix with the FLAIR-GG model)
 
-**Note:** If you deploy the `FLAIR in a box` solution in your laptop then check only for **local deployment** url.
+Skip this section if you only want to publish a general description of your database.
 
-| Service name | Local deployment                                | Production deployment |
-| ------------ | ----------------------------------------------- | --------------------- |
-| GraphDB      | [http://localhost:7200](http://localhost:7200/) | http://SERVER-IP:7200 |
+```sh
+cd Sextans-Suite/Sextans/Fix-install
+bash ./install-sextans-fix.sh
+```
 
-By default the GraphDB service is secured so you need credentials to login to the graphDB. Please find the default graphDB's credentials in the table below.
+When the installer asks **"CARE-SM-2 or FLAIR-GG?"**, answer **FLAIR-GG**. (You can skip the question by running
+`DATA_MODEL=FLAIR-GG bash ./install-sextans-fix.sh`.)
 
-| Username | Password |
-| -------- | -------- |
-| `admin`  | `root`   |
+Your data is stored in a private triple store (Virtuoso) that is **not** exposed to the internet, and its
+anonymous SPARQL access is switched off. The
+[Sextans Fix documentation](https://github.com/wilkinsonlab/Sextans-Suite/tree/main/Sextans/Fix-install) describes
+the installer questions (a prefix, the trigger port, and the database password), how to run the server, and how to
+query your data.
 
-- If the **FAIR Data Point** deployment is successful then you can access the FAIR Data Point by visiting the following URL.
+**Before you transform any data, set your base URI.** Open the `.env` file in the `ACME-Sextans-Fix` folder the
+installer created and change this line to the base for all URLs that will identify your data:
 
-| Service name    | Local deployment                               | Production deployment |
-| --------------- | ---------------------------------------------- | --------------------- |
-| FAIR Data Point | [http://localhost:7070](http://localhost:7070) | http://SERVER-IP:7070 |
+```
+baseURI=http://my.domain.org/data/
+```
 
-**Note:** If you deploy the `FLAIR in a box` solution in your laptop then check only for **local deployment** url.
-
-In order to add content to the FAIR Data Point you need credentials with write access. Please find the default FAIR Data Point's credentials in the table below.
-
-| Username                      | Password   |
-| ----------------------------- | ---------- |
-| `albert.einstein@example.com` | `password` |
+Every record in your transformed data is given a URL that starts with this value, so it should be an address
+that you control (ideally one that will resolve). The installer only puts a placeholder here, and
+**does not ask you for it**.
 
 ---
 
 <a name="using"></a>
 
-# Using FLAIR-in-a-box for data transformation
+## Preparing and transforming your data
 
-## NOTE THAT THIS INFORMATION IS OUTDATED WHILE WE RECODE THE DATA LAYER - STAY TUNED!
+The transformation has two steps:
 
-NOTE: The folders "metadata" and "bootstrap" are no longer needed. ALL ACTIVITIES FROM NOW ON HAPPEN INSIDE OF THE ACME-ready-to-go FOLDER, and this folder can be moved anywhere on your system.
+1. **You create the CSV file(s)** from your own database. This is the one step only you can do.
+2. **You trigger the transformation.** Each CSV is mapped to RDF by the FLAIR-GG mapping for that file, and the
+   result is loaded into your triple store.
 
-In the folder ./ACME-ready-to-go there is a docker-compose-ACME.yml file, and two directories.
+#### Step 1: Create your CSV files
 
-the folder structure is:
+There are three files, and **their names are fixed**:
 
-```
-.--
-  | docker-compose-ACME.yml
-  | /data
-  ---
-    | /triples
+| File | Contains | Column definitions |
+| --- | --- | --- |
+| `admin.csv` | Who collected the material, who holds it, and the collection | [Administrative model](../SemanticModel/CSV/#administrative-model) |
+| `germplasm.csv` | Species, taxon, phenotype, threat status, etc. | [Germplasm model](../SemanticModel/CSV/#germplasm-model) |
+| `location.csv` | The site of collection | [Location model](../SemanticModel/CSV/#location-model) |
 
-```
+**If you do not wish to expose certain types of data (e.g. if collection location is sensitive) simply do not
+provide that CSV file.** A type with no CSV file is not published.
 
-- The /data folder is where you will place your administrative, location, and germplasm CSV files [Here are the instructions for how to create these CSV files](../../SemanticModel/CSV/).
-- The /data folder will also contain the [YARRRML Templates](../../SemanticModel/) that will be applied to the final CSV.
-- *NOTA BENE*:  Please execute `chmod a+w ./data/triples` prior to executing a transformation.  The transformation tool in this container runs with very limited permissions, and cannot write to a folder that is mounted with default permissions.
-- *NOTA BENE*:  The YARRRML templates contains a placeholder for your installation's base URI.  This is passed as an environment variable `baseURI`, which appears in the flair-box-daemon clause of your docker-compose-ACME.yml file:
+The [column definitions and example files](../SemanticModel/CSV/) describe every column. In particular, **dates
+must be ISO 8601 (`2024-01-01`, not `2024/01/01`)**.
 
-```
-  flair-box-daemon: 
-    image: markw/flair-box-daemon:0.0.6
-    container_name: flair-box-daemon
-    environment:
-      GraphDB_User: ${GraphDB_User}
-      GraphDB_Pass: ${GraphDB_Pass}
- -->  baseURI: ${baseURI}
-      GRAPHDB_REPONAME: ${GRAPHDB_REPONAME}
-```
+Place the files in the `data` folder of your Fix installation (`Sextans-Fix/data/`, inside the
+`ACME-Sextans-Fix` folder the installer created).
 
-If you set baseURI to be "http://my.domain.org/"   then all 'local' URLs in your resulting transformed data will use that as their prefix.  YOU CANNOT DO DATA TRANSFORMATIONS UNTIL THAT ENVIRONMENT VARIABLE IS SET!
+You do **not** need to supply the YARRRML mapping templates. The transformation service fetches the current
+FLAIR-GG mappings itself, and fills in your base URI, so that all 'local' URLs in your data use your own
+domain (for example `http://my.domain.org/`).
 
-#### Preparing input data
+#### Step 2: Trigger the transformation
 
-The FLAIR-in-a-box Transformation process has two steps:
+Request the trigger port you chose during installation (no parameters are needed or accepted):
 
-1) CSV file(s) are created by the data owner (`you must do this!`)
-2) By calling the "RDFization Trigger" port, Each CSV file is processed by its associated YARRRML template, and RDF is output into the `./data/triples` folder
-  
-
-*NOTA BENE* the filenames MUST NOT BE CHANGED!  The files are called `administrative.csv`, and `administrative_yarrrml.pre-yaml` (and similarly for "germplasm" and "location"!!  YOU CANNOT CHANGE THESE NAMES!  **If you do not wish to expose certain types of data (e.g. if collection location is sensitive) you simply do not provide the CSV file for location.**
-
-#### Configuring configuration and data folders
-
-**Step 1:** Folder structure
-
-Make sure the following folder structure, relative to where you plan to keep your pre and post-transformed data, is available:
-
-```
-        ./ACME-ready-to-go/data/
-        ./ACME-ready-to-go/data/administrative.csv
-        ./ACME-ready-to-go/data/location.csv
-        ./ACME-ready-to-go/data/germplasm.csv
-        ./ACME-ready-to-go/data/administrative_yarrrml.pre-yaml
-        ./ACME-ready-to-go/data/location_yarrrml.pre-yaml
-        ./ACME-ready-to-go/data/germplasm_yarrrml.pre-yaml
-        ./ACME-ready-to-go/data/triples   (Remember to `chmod a+w` this folder!)
+```sh
+curl http://localhost:<trigger-port>/
 ```
 
-**Step 2:** Edit the .env file
+The daemon maps each CSV and loads the result into your triple store.
 
-the .env file will create the values for the environment variables in the docker-compose file. The first of these `baseURI` is the base for all URLs that represent your transformed data. This should be set to something like:
+- Each run **replaces** what was loaded before: FLAIR-in-a-Box takes snapshots, it does not make incremental
+  updates. Removing a CSV file and triggering again removes that type's data.
+- **Your data must be valid.** If the transformation produces invalid RDF (the usual cause is a date that is not
+  ISO 8601), the daemon stops with an error that lists the offending values. **Nothing is cleared or uploaded**, so
+  your existing data is untouched: correct your export and trigger again.
 
-`http://my.database.org/my_germplasm_data/`
+#### Looking at your data
 
-this will result in a Triple that looks like this:
+Virtuoso's anonymous SPARQL access is disabled on purpose, so Virtuoso Conductor's SPARQL box will show no
+results even though your data is there. Query it with `/sparql-auth`, ISQL, or `curl --digest` as described in
+the Sextans documentation.
 
-`<http://my.database.org/my_rd_data/sample_123345_asdssaewe#ID> <sio:has-value> <"123345">`
-
-optimally, these URLs will resolve... but this is your responsibility - we cannot automate this.
-
-
-**Step 3:** Input CSV files
-
-Put appropriately generated CSV files into the `ACME-ready-to-go/data`. 
-
-If you are unsure which columns to fill for each data type, see the [glossary](../../SemanticModel/CSV/)
-
-
-**Step 4:** Input YARRRML templates
-
-The `YARRRML` template is standardized
-
-
-**Step 5:** Executing transformations
-
-Call the url: http://localhost:4567/administrative (or whatever 'trigger' port number you selected when you answered the installation questions) to trigger the transformation of each CSV file; the URL above would trigger transformation of the administrative.csv data, and the same holds for 'germplasm' and 'location'.  The resulting RDF will be auto-loaded into graphDB (*NOTA BENE* this will over-write what is currrently loaded!  i.e. the FLAIR-in-a-Box pipeline can only be used to take snapshots, NOT incremental updates!)
-
-
-<a name="understanding"></a>
-
-# Understanding your FLAIR in a box installation
-
-## Software used in FLAIR in a box
-
-**Triple store:**
-To store the `rdf` documents generated by the `FLAIR in a box` solution we need to have a triplestore that stores these documents. In the `FLAIR in a box` solution we use the free version of [GraphDB](https://graphdb.ontotext.com) as a triplestore.
-
-**FAIR Data Point:**
-To describe the content of your resource we need a `metadata provider` component. For the `FLAIR in a box` solution we use `FAIR Data Point` software that provides a description (metadata) of your resource. To learn more about the FAIR Data Point please visit this [link](https://fairdatapoint.readthedocs.io/en/latest/)
-
-**RDFization:**
-FLAIR-GG has created a customized version of the yarrrml-rmlmapper docker image from [RMLio](https://github.com/RMLio/yarrrml-rmlmapper-docker).  This allows rmlmapper to run as a server that takes arguments.
-
-
-# Customization of your installation
-<a name="customizing"></a>
-
-## Update username and password for the GraphDB
-
-- Go to http://localhost:7200 (or wherever you set the GraphDB port) and login with the default username and password ("admin"/"root").
-- Enter the "settings" for the admin account, and update the password. Note that this account will have access to both the metadata and the data (!!) so make the password strong!
-- at the terminal, shut down the system (docker-compose down)
-- go to the ./ACME-ready-to-go/fdp folder and edit the file "application-ACME.yml"
-- in the repository settings, update the username and password to whatever you selected above
-- now go back to the ACME-ready-to-go folder and bring the system back up. Your FDP database is now protected with the new password.
-
-
-## Create a "safe" users for the administrative, location, and germplasm databases
-
-- Go to http://localhost:7200 (or whatever you set the GraphDB port to during installation) and login with the administrator username and password
-- Enter the "settings" and "users".
-- Create a new user and password, giving them read/write permission ONLY on the FDP database, and read-only permission on all other databases.
-- in the FAIR-ready-to-go folder, update the `.env` file with this new limited-permissions user
-- docker-compose down and up to restart the server
-- Consider closing the GraphDB external port in the docker-compose, or limiting it to localhost... there's no need for GraphDB to be exposed!
-
-
-## Update the colors and logo
-
-- go to the `ACME-ready-to-go/fdp` folder
-- add your preferred logo file into the ./assets subfolder
-- edit the ./variables.scss to point to that new logo file, and select its display size (or keep the default)
-- to change the default colors, edit the first two lines to select the primary and secondary colors (the horizontal bar on the default http://localhost:7070 homepage shows the primary color on the left and the secondary color on the right)
-- if you have a preferred favicon, replace the one in that folder with your preferred one.
-- now go back to the ACME-ready-to-go folder and bring the docker-compose back up. Your FDP client will now be customized with your preferred icons and colors
-
+---
 
 <a name="connecting"></a>
 
-## Connect to the FLAIR-GG Virtual Platform
+## Connecting to the FLAIR-GG Virtual Platform
 
-__Full instructions for modifying your default FLAIR-in-a-box to match the requirements for the FLAIR-GG Virtual Platform [can be found here](../../FDP-Configuration/)__  
+__Full instructions for configuring your FAIR Data Point to match the requirements of the FLAIR-GG Virtual Platform [can be found here](../FDP-Configuration/)__
 
 To connect to the [FLAIR-GG Virtual Platform](https://vp.bgv.cbgp.upm.es), you first need to register yourself in the [VP Index](https://index.bgv.cbgp.upm.es), which is accomplished by adding the indexer "ping" function to your FAIR Data Point.  To do this:
 
@@ -302,7 +190,21 @@ Once you have done this, your site will be indexed in the VP Index on the next "
 If you want to force re-indexing, you can shut-down (docker-compose down) and restart your FDP.  Alternatively, you can force a re-indexing by making the following `curl` command:
 
 ```
-curl -X POST https://index.bgv.cbgp.upm.es/ -H "Content-Type: application/json" -d
-{"clientUrl": "https://my.fdp.address.here/}
+curl -X POST https://index.bgv.cbgp.upm.es/ -H "Content-Type: application/json" -d '{"clientUrl": "https://my.fdp.address.here/"}'
 ```
 
+---
+
+<a name="customizing"></a>
+
+## Customizing your installation
+
+Passwords, securing the ports, and changing the colors and logo of your FAIR Data Point are all part of standard
+Sextans, and are documented in the
+[Sextans Sight](https://github.com/wilkinsonlab/Sextans-Suite/tree/main/Sextans/Sight-install) and
+[Sextans Fix](https://github.com/wilkinsonlab/Sextans-Suite/tree/main/Sextans/Fix-install) documentation.
+
+## Existing FLAIR-in-a-Box (GraphDB) installations
+
+Installations made with earlier versions of FLAIR-in-a-Box continue to work and are not affected. This document
+applies to new installations.
