@@ -10,7 +10,7 @@ data = {
     "iucn": "http://iucn.org/terms/",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "sio": "http://semanticscience.org/resource/SIO_",
-    "this" : "http://my_example.com/"},
+    "this" : "|||baseURI|||"},
 
   "triplets" : [
     ["this:$(uniqid)#Accession_number", "rdf:type", "fao:0000089", "iri"], #accession number

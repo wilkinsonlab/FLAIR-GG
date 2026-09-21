@@ -11,7 +11,7 @@ data = {
     "org" : "https://www.w3.org/ns/org#",
     "fao" : "https://w3id.org/fao-ipgr/multi-passport-descriptor.owl#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",  
-    "this" : "http://my_example.com/"},
+    "this" : "|||baseURI|||"},
     
 
   "triplets" : [

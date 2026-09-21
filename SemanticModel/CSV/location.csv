@@ -1,2 +1,2 @@
 uniqid,accession_number,national_catalogue_code,acquisition_time,collecting_time,soil_type,latitude,longitude,coordinate_uncertainty,geodetic_datum,maximum_elevation,minimum_elevation,terrain_inclination,country_name,country_2letter_code,first_admin_subdivision,second_admin_subdivision,third_admin_subdivision,fourth_admin_subdivision,locality_description
-87654,483,NC059118,2024/01/01,2024/01/01,00002262,-121.17,-41.098,30,WGS84,20,12,12º,Spain,ES,Comunidad de Madrid,Madrid,Madrid,Ciudad Universitaria,En la rotonda de la facultad de Agrónomos
+87654,483,NC059118,2024-01-01,2024-01-01,00002262,-121.17,-41.098,30,WGS84,20,12,12º,Spain,ES,Comunidad de Madrid,Madrid,Madrid,Ciudad Universitaria,En la rotonda de la facultad de Agrónomos

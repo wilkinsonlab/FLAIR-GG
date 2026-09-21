@@ -49,11 +49,11 @@
 
 **acquisition_time**: The date when the germplasm accession was acquired by the institution. ISO 8601 (YYYY-MM-DD) formatted date.
 -Data type: Date (ISO 8601 (YYYY-MM-DD) formatted)
--Example: 2025/01/01
+-Example: 2025-01-01
 
 **collecting_time**: The date when the germplasm was collected from its source location. ISO 8601 (YYYY-MM-DD) formatted date.
 -Data type: Date (ISO 8601 (YYYY-MM-DD) formatted)
--Example: 2025/01/01
+-Example: 2025-01-01
   
 
   
