@@ -9,11 +9,11 @@ def process_and_upload_output(results: )  # results[provider] = csv/json
     begin
         resp = RestClient::Request.execute(
             method: :put,
-            url: "https://bgv.cbgp.upm.es/DAV/home/LDP/FLAIR/#{key}",
+            url: "#{VPConfig::LDP_HOST}/DAV/home/LDP/FLAIR/#{key}",
             content_type: :json,
-            payload: results.to_json, 
-            user: "ldp",
-            password: "ldp"
+            payload: results.to_json,
+            user: VPConfig::LDP_USERNAME,
+            password: VPConfig::LDP_PASSWORD
         )
     rescue
         return nil

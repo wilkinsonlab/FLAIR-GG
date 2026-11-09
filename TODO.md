@@ -25,6 +25,14 @@ things noticed along the way, so they don't get lost. Newest decisions first wit
   references in each mapping), ISO 8601 dates, numeric fields numeric, `uniqid` unique, no empty required
   values. Shape: a small service like CARE-SM's `caresm` (POST -> check/prepare `/data`), started via its own
   compose profile.
+- **Automate FLAIR-GG's FDP configuration, as ERDERA's already is.** Sextans Sight installs identically for
+  every project. The domain-specific FDP set-up happens *afterwards*, against the running FDP. For rare
+  diseases this is a one-shot script, `Sextans/FDP_Configs/ERDERA_Base/run-erdera-configuration.sh` (uploads
+  SHACL schemas, creates resource definitions, wires them to Catalog/Distribution). For FLAIR-GG it is still a
+  manual click-through tutorial in [`FDP-Configuration/README.md`](FDP-Configuration/README.md) (SHACL in
+  `FDP-Configuration/shacl/`, two Data Service resource definitions under Distribution and Catalog). The two
+  are structurally almost the same, so a `FDP_Configs/FLAIR_Base/` (or a script here reusing ERDERA_Base's
+  code) is the natural next step. Could also apply the `FDP-Configuration/branding/` files.
 - **Untested edge: CSV chunking.** Sextans' mapper splits each CSV into 200-row chunks and maps each chunk
   separately. A mapping that joins across rows would break. FLAIR's mappings don't appear to; confirm with real
   data.

@@ -13,6 +13,10 @@ class VPConfig
 
   FDPINDEX_API_TOKEN = ENV['FDPINDEX_API_TOKEN'].freeze
 
+  LDP_HOST = ENV['LDP_HOST'].freeze
+  LDP_USERNAME = ENV['LDP_USERNAME'].freeze
+  LDP_PASSWORD = ENV['LDP_PASSWORD'].freeze
+
   FDPSITES = []
   HOMEPAGE = ENV['HOMEPAGE'] || 'https://wilkinsonlab.github.io/FLAIR-GG/'
   ACKNOWLEDGEMENT = ENV['ACKNOWLEDGEMENT'] || 'Proyecto TED2021-130788B-I00 financiado por MCIN/AEI /10.13039/501100011033 y por la Unión Europea NextGeneration EU/PRTR'

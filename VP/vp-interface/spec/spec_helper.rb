@@ -7,6 +7,9 @@ ENV['RACK_ENV'] = 'test'
 ENV['FDPINDEX'] ||= 'http://fdpindex.test'
 ENV['FDPSPARQL'] ||= 'http://fdpindex.test/search/sparql'
 ENV['FDPINDEX_API_TOKEN'] ||= 'test-token'
+ENV['LDP_HOST'] ||= 'http://ldp.test'
+ENV['LDP_USERNAME'] ||= 'test-ldp-user'
+ENV['LDP_PASSWORD'] ||= 'test-ldp-password'
 
 # `require 'webmock/rspec'` only *enables* WebMock's HTTP interception via an
 # RSpec before(:each) hook, which hasn't fired yet at file-load time - but
