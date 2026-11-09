@@ -1,0 +1,139 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@id": "https://wilkinsonlab.github.io/FLAIR-GG/",
+      "@type": "AboutPage",
+      "name": "FLAIR-GG · Connecting Germplasm Resources",
+      "url": "https://wilkinsonlab.github.io/FLAIR-GG/",
+      "inLanguage": "en",
+      "about": { "@id": "https://wilkinsonlab.github.io/FLAIR-GG/#project" },
+      "author": [
+        { "@id": "https://orcid.org/0000-0002-6595-8987" },
+        { "@id": "https://orcid.org/0000-0001-6960-357X" },
+        { "@id": "https://orcid.org/0000-0001-5613-9704" }
+      ],
+      "publisher": { "@id": "https://ror.org/04mfzb702" },
+      "license": "https://spdx.org/licenses/MIT",
+      "dateModified": "2026-11-09",
+      "encoding": {
+        "@type": "MediaObject",
+        "contentUrl": "https://wilkinsonlab.github.io/FLAIR-GG/metadata.jsonld",
+        "encodingFormat": "application/ld+json"
+      }
+    },
+    {
+      "@id": "https://wilkinsonlab.github.io/FLAIR-GG/#project",
+      "@type": "ResearchProject",
+      "name": "FLAIR-GG",
+      "alternateName": "FLAIR-GG: Connecting Germplasm Resources",
+      "description": "FLAIR-GG is a federated network of FAIR plant germplasm banks and related biodiversity resources. Each member publishes DCAT metadata from its own FAIR Data Point; the FLAIR-GG FDP Index harvests them, and the FLAIR-GG Virtual Platform federates search, data services and analysis across the network, including through a Model Context Protocol (MCP) server for AI assistants.",
+      "url": "https://wilkinsonlab.github.io/FLAIR-GG/",
+      "logo": "https://wilkinsonlab.github.io/FLAIR-GG/VP/images/flair-gg-logo.png",
+      "sameAs": [ "https://github.com/wilkinsonlab/FLAIR-GG" ],
+      "keywords": [
+        "FAIR data", "germplasm", "plant genetic resources", "seed banks", "DCAT", "FAIR Data Point",
+        "federated query", "linked data", "RDF", "SPARQL", "Multi-Crop Passport Descriptors",
+        "Model Context Protocol"
+      ],
+      "parentOrganization": [
+        { "@id": "https://ror.org/03n6nwv02" },
+        { "@id": "https://ror.org/04mfzb702" }
+      ],
+      "member": [
+        {
+          "@type": "OrganizationRole",
+          "roleName": "Principal Investigator",
+          "member": { "@id": "https://orcid.org/0000-0002-6595-8987" }
+        },
+        {
+          "@type": "OrganizationRole",
+          "roleName": "Principal Investigator",
+          "member": { "@id": "https://orcid.org/0000-0001-6960-357X" }
+        },
+        { "@id": "https://orcid.org/0000-0001-5613-9704" },
+        { "@type": "Organization", "name": "César Gómez Campo Banco de Germoplasma Vegetal de la UPM (BGV-UPM)", "url": "https://bgv.linkeddata.systems" },
+        { "@type": "Organization", "name": "Banco de Germoplasma del Jardín Botánico de Olarizu", "url": "https://jbo.linkeddata.systems" },
+        { "@type": "Organization", "name": "Banco de Germoplasma del Jardín Botánico de Castilla-La Mancha", "url": "https://jbclm.linkeddata.systems" },
+        { "@type": "Organization", "name": "Banco de Germoplasma de la Universidad de Salamanca", "url": "https://bgusal.linkeddata.systems" },
+        { "@type": "Organization", "name": "Banco de Germoplasma del Jardí Botànic de Sóller", "url": "https://jbs.linkeddata.systems" },
+        { "@type": "Organization", "name": "Banco de Germoplasma de la Universidad Rey Juan Carlos", "url": "https://urjc.linkeddata.systems" }
+      ],
+      "funding": [
+        {
+          "@type": "MonetaryGrant",
+          "identifier": "TED2021-130788B-I00",
+          "name": "Proyecto TED2021-130788B-I00",
+          "description": "Financed by MCIN/AEI/10.13039/501100011033 and by the European Union NextGenerationEU/PRTR.",
+          "funder": [
+            { "@id": "https://ror.org/003x0zc53" },
+            { "@type": "Organization", "name": "European Union NextGenerationEU / Plan de Recuperación, Transformación y Resiliencia" }
+          ]
+        },
+        {
+          "@type": "MonetaryGrant",
+          "name": "Severo Ochoa Program for Centres of Excellence in R&D 2022-2025",
+          "description": "Supports the FLAIR-GG computational infrastructure; awarded to the Center for Plant Biotechnology and Genomics (CBGP UPM-INIA/CSIC).",
+          "funder": { "@id": "https://ror.org/003x0zc53" },
+          "recipient": { "@id": "https://ror.org/04mfzb702" }
+        }
+      ],
+      "subjectOf": { "@id": "https://doi.org/10.1038/s41597-024-04243-7" }
+    },
+    {
+      "@id": "https://w3id.org/flair-gg",
+      "@type": "WebApplication",
+      "name": "FLAIR-GG Virtual Platform",
+      "url": "https://w3id.org/flair-gg",
+      "applicationCategory": "Research data discovery and federated analysis",
+      "operatingSystem": "Web",
+      "isAccessibleForFree": true,
+      "provider": { "@id": "https://wilkinsonlab.github.io/FLAIR-GG/#project" },
+      "featureList": [
+        "Network-wide keyword and ontology-term search over FAIR Data Point metadata",
+        "Federated execution of data services across every registered provider",
+        "Hand-off of results to FLAIR-GG Analytics Jupyter notebooks",
+        "Model Context Protocol (MCP) server at https://vp.linkeddata.systems/flair-gg-vp-server/mcp"
+      ]
+    },
+    {
+      "@id": "https://doi.org/10.1038/s41597-024-04243-7",
+      "@type": "ScholarlyArticle",
+      "name": "The FLAIR-GG federated network of FAIR germplasm data resources",
+      "identifier": "https://doi.org/10.1038/s41597-024-04243-7",
+      "datePublished": "2024-12-18",
+      "isPartOf": { "@type": "PublicationVolume", "volumeNumber": "11", "isPartOf": { "@type": "Periodical", "name": "Scientific Data" } },
+      "pagination": "1386",
+      "author": [
+        { "@id": "https://orcid.org/0000-0001-5613-9704" },
+        { "@type": "Person", "name": "Elena Aguayo Jara" },
+        { "@type": "Person", "name": "Evrykleia Sofia Verykaki" },
+        { "@type": "Person", "name": "Germán Pastor del Olmo" },
+        { "@id": "https://orcid.org/0000-0002-6595-8987" },
+        { "@type": "Person", "name": "Elena Torres" },
+        { "@id": "https://orcid.org/0000-0001-6960-357X" }
+      ]
+    },
+    {
+      "@id": "https://orcid.org/0000-0002-6595-8987",
+      "@type": "Person",
+      "name": "Santiago Moreno Vázquez",
+      "affiliation": { "@id": "https://ror.org/03n6nwv02" }
+    },
+    {
+      "@id": "https://orcid.org/0000-0001-6960-357X",
+      "@type": "Person",
+      "name": "Mark D. Wilkinson",
+      "affiliation": [ { "@id": "https://ror.org/04mfzb702" }, { "@id": "https://ror.org/03n6nwv02" } ]
+    },
+    {
+      "@id": "https://orcid.org/0000-0001-5613-9704",
+      "@type": "Person",
+      "name": "Alberto Cámara Ballesteros",
+      "affiliation": { "@id": "https://ror.org/04mfzb702" }
+    },
+    { "@id": "https://ror.org/03n6nwv02", "@type": "Organization", "name": "Universidad Politécnica de Madrid" },
+    { "@id": "https://ror.org/04mfzb702", "@type": "ResearchOrganization", "name": "Centre for Plant Biotechnology and Genomics (CBGP UPM-INIA/CSIC)" },
+    { "@id": "https://ror.org/003x0zc53", "@type": "GovernmentOrganization", "name": "Agencia Estatal de Investigación" }
+  ]
+}

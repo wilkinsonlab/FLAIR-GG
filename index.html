@@ -1,210 +1,744 @@
-<HEAD>
-  <title>FLAIR-GG Network and Virtual Platform</title>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FLAIR-GG · Connecting Germplasm Resources</title>
+  <meta name="description" content="FLAIR-GG is a FAIR network of Spanish plant germplasm banks, federated through the FLAIR-GG Virtual Platform and ready for AI agents via the Model Context Protocol." />
+  <meta property="og:title" content="FLAIR-GG · Connecting Germplasm Resources" />
+  <meta property="og:description" content="A FAIR network of Spanish plant germplasm banks, searchable as one through the FLAIR-GG Virtual Platform." />
+  <meta property="og:image" content="./VP/images/flair-gg-logo.png" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f8a47'/%3E%3Cellipse cx='16' cy='10' rx='6' ry='3.6' fill='none' stroke='white' stroke-width='2'/%3E%3Cellipse cx='9.5' cy='21' rx='3.6' ry='6' fill='none' stroke='white' stroke-width='2' transform='rotate(-25 9.5 21)'/%3E%3Cellipse cx='22.5' cy='21' rx='3.6' ry='6' fill='none' stroke='white' stroke-width='2' transform='rotate(25 22.5 21)'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/site.css" />
 
-  <link rel="stylesheet" type="text/css" href="./flexbox.css" />
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900" rel="stylesheet">
+  <!-- FAIR Signposting (https://signposting.org/FAIR/), HTML <link> form, since GitHub Pages cannot send HTTP Link headers -->
+  <link rel="canonical" href="https://wilkinsonlab.github.io/FLAIR-GG/" />
+  <link rel="type" href="https://schema.org/AboutPage" />
+  <link rel="author" href="https://orcid.org/0000-0002-6595-8987" />
+  <link rel="author" href="https://orcid.org/0000-0001-6960-357X" />
+  <link rel="author" href="https://orcid.org/0000-0001-5613-9704" />
+  <link rel="describedby" href="https://wilkinsonlab.github.io/FLAIR-GG/metadata.jsonld" type="application/ld+json" />
+  <link rel="license" href="https://spdx.org/licenses/MIT" />
 
-</HEAD>
+  <!-- Embedded copy of ./metadata.jsonld (keep the two in sync) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@id": "https://wilkinsonlab.github.io/FLAIR-GG/",
+      "@type": "AboutPage",
+      "name": "FLAIR-GG · Connecting Germplasm Resources",
+      "url": "https://wilkinsonlab.github.io/FLAIR-GG/",
+      "inLanguage": "en",
+      "about": { "@id": "https://wilkinsonlab.github.io/FLAIR-GG/#project" },
+      "author": [
+        { "@id": "https://orcid.org/0000-0002-6595-8987" },
+        { "@id": "https://orcid.org/0000-0001-6960-357X" },
+        { "@id": "https://orcid.org/0000-0001-5613-9704" }
+      ],
+      "publisher": { "@id": "https://ror.org/04mfzb702" },
+      "license": "https://spdx.org/licenses/MIT",
+      "dateModified": "2026-11-09",
+      "encoding": {
+        "@type": "MediaObject",
+        "contentUrl": "https://wilkinsonlab.github.io/FLAIR-GG/metadata.jsonld",
+        "encodingFormat": "application/ld+json"
+      }
+    },
+    {
+      "@id": "https://wilkinsonlab.github.io/FLAIR-GG/#project",
+      "@type": "ResearchProject",
+      "name": "FLAIR-GG",
+      "alternateName": "FLAIR-GG: Connecting Germplasm Resources",
+      "description": "FLAIR-GG is a federated network of FAIR plant germplasm banks and related biodiversity resources. Each member publishes DCAT metadata from its own FAIR Data Point; the FLAIR-GG FDP Index harvests them, and the FLAIR-GG Virtual Platform federates search, data services and analysis across the network, including through a Model Context Protocol (MCP) server for AI assistants.",
+      "url": "https://wilkinsonlab.github.io/FLAIR-GG/",
+      "logo": "https://wilkinsonlab.github.io/FLAIR-GG/VP/images/flair-gg-logo.png",
+      "sameAs": [ "https://github.com/wilkinsonlab/FLAIR-GG" ],
+      "keywords": [
+        "FAIR data", "germplasm", "plant genetic resources", "seed banks", "DCAT", "FAIR Data Point",
+        "federated query", "linked data", "RDF", "SPARQL", "Multi-Crop Passport Descriptors",
+        "Model Context Protocol"
+      ],
+      "parentOrganization": [
+        { "@id": "https://ror.org/03n6nwv02" },
+        { "@id": "https://ror.org/04mfzb702" }
+      ],
+      "member": [
+        {
+          "@type": "OrganizationRole",
+          "roleName": "Principal Investigator",
+          "member": { "@id": "https://orcid.org/0000-0002-6595-8987" }
+        },
+        {
+          "@type": "OrganizationRole",
+          "roleName": "Principal Investigator",
+          "member": { "@id": "https://orcid.org/0000-0001-6960-357X" }
+        },
+        { "@id": "https://orcid.org/0000-0001-5613-9704" },
+        { "@type": "Organization", "name": "César Gómez Campo Banco de Germoplasma Vegetal de la UPM (BGV-UPM)", "url": "https://bgv.linkeddata.systems" },
+        { "@type": "Organization", "name": "Banco de Germoplasma del Jardín Botánico de Olarizu", "url": "https://jbo.linkeddata.systems" },
+        { "@type": "Organization", "name": "Banco de Germoplasma del Jardín Botánico de Castilla-La Mancha", "url": "https://jbclm.linkeddata.systems" },
+        { "@type": "Organization", "name": "Banco de Germoplasma de la Universidad de Salamanca", "url": "https://bgusal.linkeddata.systems" },
+        { "@type": "Organization", "name": "Banco de Germoplasma del Jardí Botànic de Sóller", "url": "https://jbs.linkeddata.systems" },
+        { "@type": "Organization", "name": "Banco de Germoplasma de la Universidad Rey Juan Carlos", "url": "https://urjc.linkeddata.systems" }
+      ],
+      "funding": [
+        {
+          "@type": "MonetaryGrant",
+          "identifier": "TED2021-130788B-I00",
+          "name": "Proyecto TED2021-130788B-I00",
+          "description": "Financed by MCIN/AEI/10.13039/501100011033 and by the European Union NextGenerationEU/PRTR.",
+          "funder": [
+            { "@id": "https://ror.org/003x0zc53" },
+            { "@type": "Organization", "name": "European Union NextGenerationEU / Plan de Recuperación, Transformación y Resiliencia" }
+          ]
+        },
+        {
+          "@type": "MonetaryGrant",
+          "name": "Severo Ochoa Program for Centres of Excellence in R&D 2022-2025",
+          "description": "Supports the FLAIR-GG computational infrastructure; awarded to the Center for Plant Biotechnology and Genomics (CBGP UPM-INIA/CSIC).",
+          "funder": { "@id": "https://ror.org/003x0zc53" },
+          "recipient": { "@id": "https://ror.org/04mfzb702" }
+        }
+      ],
+      "subjectOf": { "@id": "https://doi.org/10.1038/s41597-024-04243-7" }
+    },
+    {
+      "@id": "https://w3id.org/flair-gg",
+      "@type": "WebApplication",
+      "name": "FLAIR-GG Virtual Platform",
+      "url": "https://w3id.org/flair-gg",
+      "applicationCategory": "Research data discovery and federated analysis",
+      "operatingSystem": "Web",
+      "isAccessibleForFree": true,
+      "provider": { "@id": "https://wilkinsonlab.github.io/FLAIR-GG/#project" },
+      "featureList": [
+        "Network-wide keyword and ontology-term search over FAIR Data Point metadata",
+        "Federated execution of data services across every registered provider",
+        "Hand-off of results to FLAIR-GG Analytics Jupyter notebooks",
+        "Model Context Protocol (MCP) server at https://vp.linkeddata.systems/flair-gg-vp-server/mcp"
+      ]
+    },
+    {
+      "@id": "https://doi.org/10.1038/s41597-024-04243-7",
+      "@type": "ScholarlyArticle",
+      "name": "The FLAIR-GG federated network of FAIR germplasm data resources",
+      "identifier": "https://doi.org/10.1038/s41597-024-04243-7",
+      "datePublished": "2024-12-18",
+      "isPartOf": { "@type": "PublicationVolume", "volumeNumber": "11", "isPartOf": { "@type": "Periodical", "name": "Scientific Data" } },
+      "pagination": "1386",
+      "author": [
+        { "@id": "https://orcid.org/0000-0001-5613-9704" },
+        { "@type": "Person", "name": "Elena Aguayo Jara" },
+        { "@type": "Person", "name": "Evrykleia Sofia Verykaki" },
+        { "@type": "Person", "name": "Germán Pastor del Olmo" },
+        { "@id": "https://orcid.org/0000-0002-6595-8987" },
+        { "@type": "Person", "name": "Elena Torres" },
+        { "@id": "https://orcid.org/0000-0001-6960-357X" }
+      ]
+    },
+    {
+      "@id": "https://orcid.org/0000-0002-6595-8987",
+      "@type": "Person",
+      "name": "Santiago Moreno Vázquez",
+      "affiliation": { "@id": "https://ror.org/03n6nwv02" }
+    },
+    {
+      "@id": "https://orcid.org/0000-0001-6960-357X",
+      "@type": "Person",
+      "name": "Mark D. Wilkinson",
+      "affiliation": [ { "@id": "https://ror.org/04mfzb702" }, { "@id": "https://ror.org/03n6nwv02" } ]
+    },
+    {
+      "@id": "https://orcid.org/0000-0001-5613-9704",
+      "@type": "Person",
+      "name": "Alberto Cámara Ballesteros",
+      "affiliation": { "@id": "https://ror.org/04mfzb702" }
+    },
+    { "@id": "https://ror.org/03n6nwv02", "@type": "Organization", "name": "Universidad Politécnica de Madrid" },
+    { "@id": "https://ror.org/04mfzb702", "@type": "ResearchOrganization", "name": "Centre for Plant Biotechnology and Genomics (CBGP UPM-INIA/CSIC)" },
+    { "@id": "https://ror.org/003x0zc53", "@type": "GovernmentOrganization", "name": "Agencia Estatal de Investigación" }
+  ]
+}
+  </script>
+</head>
 
 <body>
-  <header class="c-header">
-    <br />
-    <img width="500" src="./VP/images/flair-gg-logo.png" />
-    <br />
-    <br />
-    <br />
-    <h1>FLAIR-GG and the FLAIR-GG Virtual Platform</h1>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="FLAIR-GG home"><img src="./VP/images/flair-gg-logo.png" alt="FLAIR-GG: Connecting Germplasm Resources" /></a>
+      <nav class="nav" aria-label="Main">
+        <a href="#network">Network</a>
+        <a href="#how">How it works</a>
+        <a href="#platform">Virtual Platform</a>
+        <a href="#ai">AI &amp; MCP</a>
+        <a href="#docs">Documentation</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-primary btn-sm" href="#join">Join the network</a>
+    </div>
   </header>
 
-  <section class="c-posts">
+  <main id="top">
 
-    <article class="c-posts__item">
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <div class="eyebrow">FAIR plant genetic resources</div>
+          <h1>Spain's germplasm banks, <em class="nw">searchable as one.</em></h1>
+          <p class="lede">
+            FLAIR-GG connects plant germplasm banks and related biodiversity resources into a single
+            <a href="https://www.go-fair.org/fair-principles/">FAIR</a> network. Each bank keeps its own data
+            and its own systems. Together, the network can be searched, queried and analysed as a whole,
+            by researchers and by AI assistants.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://vp.linkeddata.systems">Explore the Virtual Platform <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="#join">Bring your bank on board</a>
+          </div>
+        </div>
 
-      <h2>General Documentation</h2>
-      <p>The FLAIR-GG Project aims to <a href="https://www.go-fair.org/fair-principles/">FAIRify</a> the <br /><a
-          href="http://www.bancodegermoplasma.upm.es/">
-          Banco de Germoplasma Vegetal de la Universidad Politécnica de Madrid (BGV-UPM)</a> <br />and to interlink it with
-        other Germplasm resources throughout Spain and the world.
-      </p>
-      <p>This will be accomplished using a variety of technologies for <br />modelling and transforming relational data
-        from the BGV-UPM into FAIR formats <br />such as ontologically grounded RDF</p>
-      <p>All germplasm and other third-party resources are federated via a shared portal <br />
-        called the <a href="https://vp.bgv.cbgp.upm.es">"Virtual Platform" (VP)</a>, where<br />
-        it will be possible to execute federated queries and analytics over all participants <br />
-        in the FLAIR-GG network</p>
-    </article>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 520 460" role="img">
+            <!-- spokes: live banks -->
+            <line class="net-line live" x1="260" y1="230" x2="260" y2="80" />
+            <line class="net-line live" x1="260" y1="230" x2="348" y2="109" />
+            <line class="net-line live" x1="260" y1="230" x2="403" y2="184" />
+            <line class="net-line live" x1="260" y1="230" x2="403" y2="276" />
+            <line class="net-line live" x1="260" y1="230" x2="348" y2="351" />
+            <line class="net-line live" x1="260" y1="230" x2="260" y2="380" />
+            <!-- spokes: onboarding banks -->
+            <line class="net-line pending" x1="260" y1="230" x2="172" y2="351" />
+            <line class="net-line pending" x1="260" y1="230" x2="117" y2="276" />
+            <line class="net-line pending" x1="260" y1="230" x2="117" y2="184" />
+            <line class="net-line pending" x1="260" y1="230" x2="172" y2="109" />
+            <!-- ring between neighbours -->
+            <path d="M260 80 L348 109 L403 184 L403 276 L348 351 L260 380" fill="none" stroke="#1f8a47" stroke-opacity=".18" stroke-width="1.2" />
+            <path d="M260 380 L172 351 L117 276 L117 184 L172 109 L260 80" fill="none" stroke="#75807a" stroke-opacity=".22" stroke-width="1.2" stroke-dasharray="2 5" />
 
+            <!-- hub -->
+            <circle class="hub-ring" cx="260" cy="230" r="46" />
+            <circle cx="260" cy="230" r="46" fill="#123d24" />
+            <text x="260" y="226" text-anchor="middle" style="font:600 13px Inter, sans-serif; fill:#fff">Virtual</text>
+            <text x="260" y="243" text-anchor="middle" style="font:600 13px Inter, sans-serif; fill:#fff">Platform</text>
 
+            <!-- live nodes -->
+            <g>
+              <circle class="net-node" cx="260" cy="80" r="13" /><circle class="net-dot" cx="260" cy="80" r="5" />
+              <circle class="net-node" cx="348" cy="109" r="13" /><circle class="net-dot" cx="348" cy="109" r="5" />
+              <circle class="net-node" cx="403" cy="184" r="13" /><circle class="net-dot" cx="403" cy="184" r="5" />
+              <circle class="net-node" cx="403" cy="276" r="13" /><circle class="net-dot" cx="403" cy="276" r="5" />
+              <circle class="net-node" cx="348" cy="351" r="13" /><circle class="net-dot" cx="348" cy="351" r="5" />
+              <circle class="net-node" cx="260" cy="380" r="13" /><circle class="net-dot" cx="260" cy="380" r="5" />
+            </g>
+            <!-- onboarding nodes -->
+            <g>
+              <circle class="net-node pending" cx="172" cy="351" r="11" />
+              <circle class="net-node pending" cx="117" cy="276" r="11" />
+              <circle class="net-node pending" cx="117" cy="184" r="11" />
+              <circle class="net-node pending" cx="172" cy="109" r="11" />
+            </g>
 
+            <!-- labels -->
+            <text class="net-label" x="260" y="56" text-anchor="middle">BGV-UPM</text>
+            <text class="net-label" x="368" y="98">JB Olarizu</text>
+            <text class="net-label" x="424" y="179">U. Salamanca</text>
+            <text class="net-label" x="424" y="281">JB Sóller</text>
+            <text class="net-label" x="366" y="370">URJC</text>
+            <text class="net-label" x="260" y="412" text-anchor="middle">JB Castilla-La Mancha</text>
+            <text class="net-label muted" x="96" y="226" text-anchor="end">+4 banks</text>
+            <text class="net-label muted" x="96" y="242" text-anchor="end">onboarding</text>
+          </svg>
+        </div>
+      </div>
+    </section>
 
-    <article class="c-posts__item">
-      <h2>How to join the FLAIR-GG Network</h2>
-      <p> FLAIR-GG is still an emergent initiative, seeking early-adopters.</p>
-      <p>We have created <a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/Onboarding">ONBOARDING</a>
-        documentation to help you get started. We are here to help!</p>
-      <br />
-      Please contact either <a href="mailto:alberto.camara.ballesteros@alumnos.upm.es">Alberto</a> (Spanish/English)
-      or <a href="mailto:mark.wilkinson@upm.es">Mark</a> (English)
-      <br />and we will walk you through the steps. (it's easier than it seems!)
-      </p>
-      <p>To run your own node, follow the <a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/FLAIR-in-a-box">FLAIR-in-a-Box</a>
-        instructions: install Sextans Sight (your metadata) and, optionally, Sextans Fix with the FLAIR-GG data model
-        (your data).</p>
-      <p>We are even able to (temporarily) host your FAIR endpoint, to let you explore membership <br/>with minimal commitment or effort</p>
-    </article>
+    <!-- ================= STATS ================= -->
+    <section class="stats" aria-label="The network in numbers">
+      <div class="wrap">
+        <div class="stat"><div class="num">10</div><div class="lbl">germplasm banks in the network: 6 live, 4 onboarding</div></div>
+        <div class="stat"><div class="num">~20<small>%</small></div><div class="lbl">of Spain's plant germplasm banks already participate</div></div>
+        <div class="stat"><div class="num">34</div><div class="lbl">registered data services, queryable across every provider at once</div></div>
+        <div class="stat"><div class="num">0</div><div class="lbl">changes required to a bank's existing database</div></div>
+      </div>
+    </section>
 
+    <!-- ================= ABOUT ================= -->
+    <section class="block" id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">What is FLAIR-GG?</div>
+          <h2>One network for genetic resources, with each bank's data kept at its source.</h2>
+          <p>
+            FLAIR-GG began by making the
+            <a href="http://www.bancodegermoplasma.upm.es/">César Gómez Campo Banco de Germoplasma Vegetal (BGV-UPM)</a>
+            FAIR. It now links germplasm collections across Spain with the wider ecosystem of taxonomic,
+            conservation and molecular resources. Data never has to be pooled centrally: every member
+            publishes its own standards-based description, and the network does the rest.
+          </p>
+        </div>
 
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+            <h3>Findable by design</h3>
+            <p>Every bank describes itself, its collections and its services in <strong>DCAT</strong>, published from its own
+              FAIR Data Point. A central index harvests these descriptions, so a new member becomes searchable as soon as it registers.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+            <h3>A shared data model</h3>
+            <p>Passport data is expressed with an ontology based on the FAO <strong>Multi-Crop Passport Descriptors</strong>.
+              Banks export plain CSV from whatever system they already use, and the toolkit turns it into linked data.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/><path d="m6 7 4 3M18 7l-4 3M6 17l4-3M18 17l-4-3"/></svg></div>
+            <h3>Federated, not centralised</h3>
+            <p>Because every bank uses the same model, one query can go to all sites at once. Each bank stays the
+              authoritative, up-to-date source for its own records and decides what it shares.</p>
+          </div>
+        </div>
 
+        <div class="cite">
+          <div class="cite-lbl">Cite FLAIR-GG</div>
+          <p>Cámara Ballesteros, A., Aguayo Jara, E., Verykaki, E. S., Pastor del Olmo, G., Moreno Vázquez, S., Torres, E. &amp; Wilkinson, M. D.
+            <strong>The FLAIR-GG federated network of FAIR germplasm data resources.</strong> <em>Scientific Data</em> 11, 1386 (2024).
+            <a href="https://doi.org/10.1038/s41597-024-04243-7">doi:10.1038/s41597-024-04243-7</a></p>
+        </div>
+      </div>
+    </section>
 
-    <article class="c-posts__item">
+    <!-- ================= NETWORK ================= -->
+    <section class="block alt" id="network">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">The network</div>
+          <h2>A growing national network of germplasm banks.</h2>
+          <p>
+            Ten germplasm banks have joined FLAIR-GG, about one in five of Spain's plant germplasm banks.
+            Six already publish live FAIR endpoints, and four more are setting theirs up now.
+          </p>
+        </div>
 
-      <h2>Component Documentation</h2>
-      <p>
-      <ul>
-        <li><a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/FLAIR-in-a-box">FLAIR-in-a-Box!</a>
-          (installation instructions: a FLAIR-GG installation of the
-          <a href="https://github.com/wilkinsonlab/Sextans-Suite">Sextans Suite</a>)
-        </li>
-        <li><a href="https://github.com/FAIRDataTeam/FAIRDataPoint">The FAIR Data Point (automatically installed by
-            FLAIR-in-a-Box)</a></li>
-        <li><a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/SemanticModel/CSV">Preparing your CSV files
-            (<code>admin.csv</code>, <code>germplasm.csv</code>, <code>location.csv</code>)</a></li>
-        <li><a href="./SemanticModel/index.html">FLAIR-GG Semantic Model</a></li>
-        <li><a href="./TransformationPipeline/index.html">Template-based transformation pipeline</a></li>
-        <li><a href="./VP/index.html">Virtual Platform</a></li>
-        <li><a
-            href="https://wilkinsonlab.github.io/multi-crop-passport-descriptor-ontology/multi-passport-descriptor.owl">FAO
-            Multi Passport Descriptor Ontology</a></li>
-        <li><a href="./Proxy/index.html">Use our FDP Proxy to import your DCAT-formatted datsets</a></li>
-      </ul>
-      </p>
-    </article>
+        <div class="members">
+          <a class="member" href="https://bgv.linkeddata.systems"><i class="pin"></i><div><strong>César Gómez Campo Banco de Germoplasma Vegetal</strong><span>Universidad Politécnica de Madrid</span></div></a>
+          <a class="member" href="https://jbo.linkeddata.systems"><i class="pin"></i><div><strong>Banco de Germoplasma del Jardín Botánico de Olarizu</strong><span>Vitoria-Gasteiz</span></div></a>
+          <a class="member" href="https://jbclm.linkeddata.systems"><i class="pin"></i><div><strong>Banco de Germoplasma del Jardín Botánico de Castilla-La Mancha</strong><span>Albacete</span></div></a>
+          <a class="member" href="https://bgusal.linkeddata.systems"><i class="pin"></i><div><strong>Banco de Germoplasma de la Universidad de Salamanca</strong><span>Salamanca</span></div></a>
+          <a class="member" href="https://jbs.linkeddata.systems"><i class="pin"></i><div><strong>Banco de Germoplasma del Jardí Botànic de Sóller</strong><span>Mallorca</span></div></a>
+          <a class="member" href="https://urjc.linkeddata.systems"><i class="pin"></i><div><strong>Banco de Germoplasma de la Universidad Rey Juan Carlos</strong><span>Madrid</span></div></a>
+          <div class="member pending"><i class="pin"></i><div><strong>Four more banks onboarding</strong><span>Endpoints being prepared now</span></div></div>
+        </div>
 
+        <div class="subhead">Connected third-party resources</div>
+        <div class="resources">
+          <div class="resource"><strong>World Flora Online</strong><span>Taxonomic backbone for reconciling names across collections</span></div>
+          <div class="resource"><strong>IUCN Red List</strong><span>Endangerment category of every species held across the network</span></div>
+          <div class="resource"><strong>Driada</strong><span>Legal protection status of Spanish flora</span></div>
+          <div class="resource"><strong>ENA</strong><span>Sequence retrieval from the European Nucleotide Archive</span></div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ================= HOW IT WORKS ================= -->
+    <section class="block" id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">How it works</div>
+          <h2>From a spreadsheet export to a federated query, in four steps.</h2>
+          <p>No bank needs a database expert or a new system. The pieces below are packaged together as
+            <a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/FLAIR-in-a-box">FLAIR-in-a-Box</a>,
+            built on the open-source <a href="https://github.com/wilkinsonlab/Sextans-Suite">Sextans Suite</a>.</p>
+        </div>
 
+        <div class="steps">
+          <div class="step">
+            <div class="n"></div>
+            <h3>Describe</h3>
+            <p>Publish who you are and what you hold as DCAT metadata in your own FAIR Data Point (<em>Sextans Sight</em>).
+              Or simply put a DCAT file on your website and let our proxy import it.</p>
+            <span class="tag">Metadata</span>
+          </div>
+          <div class="step">
+            <div class="n"></div>
+            <h3>Publish</h3>
+            <p>Export <code>admin.csv</code>, <code>germplasm.csv</code> and <code>location.csv</code> from your
+              existing system. <em>Sextans Fix</em> maps them onto the FLAIR-GG model as RDF.</p>
+            <span class="tag">Optional · data</span>
+          </div>
+          <div class="step">
+            <div class="n"></div>
+            <h3>Index</h3>
+            <p>The FLAIR-GG FDP Index harvests every member's metadata and keeps track of which data services each
+              one offers, as members come, go or move.</p>
+            <span class="tag">Automatic</span>
+          </div>
+          <div class="step">
+            <div class="n"></div>
+            <h3>Query &amp; analyse</h3>
+            <p>The Virtual Platform searches the whole network, runs data services against every provider at once,
+              and passes the results to ready-made analysis notebooks.</p>
+            <span class="tag">Virtual Platform</span>
+          </div>
+        </div>
 
-    <article class="c-posts__item">
+        <div class="standards">
+          <span class="lbl">Built entirely on open standards:</span>
+          <span class="chip">FAIR Principles</span>
+          <span class="chip">W3C DCAT</span>
+          <span class="chip">FAIR Data Point</span>
+          <span class="chip">RDF &amp; SPARQL</span>
+          <span class="chip">FAO Multi-Crop Passport Descriptors</span>
+          <span class="chip">YARRRML / RML</span>
+          <span class="chip">OpenAPI</span>
+          <span class="chip">Model Context Protocol</span>
+        </div>
+      </div>
+    </section>
 
-      <h2>OpenAPI Interfaces for BGV-UPM services</h2>
-      <p>
-      <ul>
-        <li><a href="./VP/interfaces/administrative-sparql.yaml">Administrative SPARQL endpoint descriptor</a></li>
-        <li><a href="./VP/interfaces/location-sparql.yaml">Location SPARQL endpoint descriptor</a></li>
-        <li><a href="./VP/interfaces/fdp-sparql.yaml">FAIR Data Point SPARQL endpoint descriptor</a></li>
-      </ul>
+    <!-- ================= VIRTUAL PLATFORM ================= -->
+    <section class="block alt" id="platform">
+      <div class="wrap split">
+        <div>
+          <div class="eyebrow">The Virtual Platform</div>
+          <h2>Ask the whole network a question, then analyse the answers.</h2>
+          <p style="margin-top:16px;color:var(--ink-2);font-size:1.1rem">
+            The <a href="https://vp.linkeddata.systems">FLAIR-GG Virtual Platform (VP)</a> is the shared portal on top of the network.
+            It works only from the live index, so anything a member publishes appears without central curation.
+          </p>
+          <div class="cta-row" style="margin-top:28px">
+            <a class="btn btn-primary" href="https://vp.linkeddata.systems">Open the VP <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="https://wilkinsonlab.github.io/FLAIR-GG-Analytics/">Analysis notebooks</a>
+          </div>
+        </div>
+        <ul class="feature-list">
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+            <div><strong>Network-wide search</strong><span>Keyword and ontology-term search across every bank's catalogues, datasets and services.</span></div></li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+            <div><strong>Federated data services</strong><span>Run one service type, for example collecting-site coordinates by species or IUCN categorisation, against every provider in a single call.</span></div></li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+            <div><strong>Results straight into analysis</strong><span>Service results open in the <a href="https://wilkinsonlab.github.io/FLAIR-GG-Analytics/">FLAIR-GG Analytics</a> Jupyter notebooks, which run in the browser with nothing to install.</span></div></li>
+          <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+            <div><strong>Built for scale</strong><span>Tested with 3,700 datasets, more than the number of germplasm banks on Earth.</span></div></li>
+        </ul>
+      </div>
+    </section>
 
-      </p>
-    </article>
+    <!-- ================= AI / MCP ================= -->
+    <section class="block dark" id="ai">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">AI-ready infrastructure</div>
+          <h2>AI assistants can query the network directly.</h2>
+          <p>
+            The Virtual Platform runs a <strong>Model Context Protocol (MCP)</strong> server, the open standard that lets
+            AI assistants such as Claude call external tools. A researcher can ask a question in plain language. The assistant
+            then queries the live FLAIR-GG network itself and answers from authoritative, up-to-date records,
+            not from what it remembers.
+          </p>
+        </div>
 
+        <figure class="diagram" aria-label="Architecture of the FLAIR-GG MCP server">
+          <svg viewBox="0 0 960 360">
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#8fb39b" />
+              </marker>
+            </defs>
 
+            <!-- frame -->
+            <rect class="d-frame" x="418" y="16" width="344" height="328" rx="14" />
+            <text class="d-cap" x="434" y="38">FLAIR-GG VIRTUAL PLATFORM · /mcp</text>
 
+            <!-- edges -->
+            <path class="d-edge" d="M150 178 L176 178" marker-end="url(#ah)" />
+            <path class="d-edge" d="M352 178 L426 178" marker-start="url(#ah)" marker-end="url(#ah)" />
+            <text class="d-lbl" x="385" y="168" text-anchor="middle">JSON-RPC</text>
+            <path class="d-edge" d="M552 166 L586 86" marker-end="url(#ah)" />
+            <path class="d-edge" d="M552 178 L586 178" marker-end="url(#ah)" />
+            <path class="d-edge" d="M552 190 L586 274" marker-end="url(#ah)" />
+            <path class="d-edge" d="M742 72 L798 118" marker-end="url(#ah)" />
+            <path class="d-edge" d="M742 178 L798 150" marker-end="url(#ah)" />
+            <path class="d-edge dash" d="M700 262 C 740 230, 790 210, 838 180" marker-end="url(#ah)" />
+            <text class="d-lbl" x="728" y="236" text-anchor="end">find providers</text>
+            <path class="d-edge" d="M742 290 L806 247" marker-end="url(#ah)" />
+            <path class="d-edge" d="M742 292 L806 289" marker-end="url(#ah)" />
+            <path class="d-edge" d="M742 296 L806 331" marker-end="url(#ah)" />
 
+            <!-- researcher -->
+            <rect class="d-box ext" x="16" y="148" width="134" height="60" rx="12" />
+            <text class="d-t dark" x="83" y="174" text-anchor="middle">Researcher</text>
+            <text class="d-s dark" x="83" y="192" text-anchor="middle">asks in plain language</text>
 
-    <article class="c-posts__item">
+            <!-- assistant -->
+            <rect class="d-box ext" x="180" y="140" width="172" height="76" rx="12" />
+            <text class="d-t dark" x="266" y="170" text-anchor="middle">AI assistant</text>
+            <text class="d-s dark" x="266" y="188" text-anchor="middle">any MCP client</text>
+            <text class="d-s dark" x="266" y="203" text-anchor="middle">(Claude, agents, IDEs…)</text>
 
-      <h2>Frequently Asked <a href="./FAQ.html">Questions</a></h2>
-      <p>
-      <ul>
-        <li><a href="./FAQ.html#Database">Do I need to change my database or existing seedbank infrastructure? (NO!)</a>
-        </li>
+            <!-- router -->
+            <rect class="d-box hi" x="430" y="148" width="122" height="60" rx="12" />
+            <text class="d-t" x="491" y="174" text-anchor="middle">Tool router</text>
+            <text class="d-s" x="491" y="192" text-anchor="middle">tools/list · tools/call</text>
 
-        <li><a href="./FAQ.html#ThirdParty">In the area of germplasm conservation and use, which external <br/>suppliers of
-          information could we connect under the FAIR principles.</a>
-        </li>
+            <!-- tools -->
+            <rect class="d-box" x="590" y="50" width="152" height="44" rx="10" />
+            <text class="d-m" x="666" y="77" text-anchor="middle">keyword_search</text>
+            <rect class="d-box" x="590" y="156" width="152" height="44" rx="10" />
+            <text class="d-m" x="666" y="183" text-anchor="middle">sparql_query</text>
+            <rect class="d-box" x="590" y="262" width="152" height="60" rx="10" />
+            <text class="d-t" x="666" y="286" text-anchor="middle" style="font-size:13px">service-type tools</text>
+            <text class="d-s" x="666" y="304" text-anchor="middle">e.g. IUCN status</text>
 
-        <li><a href="./FAQ.html#Model">What's a shared data model?</a>
-        </li>
+            <!-- index -->
+            <path d="M802 104 a68 12 0 0 1 136 0 v58 a68 12 0 0 1 -136 0 z" fill="#2b6a43" stroke="#8ee0a9" stroke-width="1.2" />
+            <ellipse cx="870" cy="104" rx="68" ry="12" fill="#357a4f" stroke="#8ee0a9" stroke-width="1.2" />
+            <text class="d-t" x="870" y="140" text-anchor="middle">FDP Index</text>
+            <text class="d-s" x="870" y="157" text-anchor="middle">live network metadata</text>
 
-        <li><a href="./FAQ.html#Reusability">Could you give me an example to see the differences between <br/>the terms
-          "reusability" and "interoperatibility"?</a>
-        </li>
+            <!-- providers -->
+            <rect class="d-box prov" x="810" y="230" width="128" height="34" rx="9" />
+            <text class="d-s" x="874" y="251" text-anchor="middle" style="fill:#f1cf8e">Bank A</text>
+            <rect class="d-box prov" x="810" y="272" width="128" height="34" rx="9" />
+            <text class="d-s" x="874" y="293" text-anchor="middle" style="fill:#f1cf8e">Bank B</text>
+            <rect class="d-box prov" x="810" y="314" width="128" height="34" rx="9" />
+            <text class="d-s" x="874" y="335" text-anchor="middle" style="fill:#f1cf8e">Bank N</text>
+          </svg>
+        </figure>
 
-        <li><a href="./FAQ.html#Hackers">Increased findability and accessibility are not also increasing <br/>findability
-            and accessibility by hackers?</a>
-        </li>
+        <div class="tools">
+          <div class="tool">
+            <div class="name">keyword_search</div>
+            <p>Finds catalogues, datasets and services anywhere in the network whose metadata mentions a term, using the
+              same search that drives the VP's own interface.</p>
+          </div>
+          <div class="tool">
+            <div class="name">sparql_query <span class="badge">Experimental</span></div>
+            <p>Read-only SPARQL over the FDP Index for questions a keyword can't answer: counting, grouping, filtering,
+              and "who curates this collection, and how do I contact them?"</p>
+          </div>
+          <div class="tool">
+            <div class="name">iucn_endangerment_status</div>
+            <p>Runs the IUCN Red List categorisation service against every live provider and returns each provider's
+              results, so the assistant can compare conservation status across banks.</p>
+          </div>
+        </div>
 
-        <li><a href="./FAQ.html#Taxonomies">How is it possible to enable interoperability of seed banks <br/>
-          databases under different taxonomies?</a>
-        </li>
+        <div class="ask">
+          <div>
+            <h3 style="margin-bottom:16px">Questions researchers can simply ask</h3>
+            <div class="quotes">
+              <div class="quote">Which banks in the network hold wheat material, and who should I contact at each?</div>
+              <div class="quote">Summarise the IUCN categories of the species conserved across the network, broken down by bank.</div>
+              <div class="quote">How many data services of each type does the network offer, and which banks provide them?</div>
+            </div>
+          </div>
+          <div>
+            <h3 style="margin-bottom:16px">Designed to grow with the network</h3>
+            <ul class="design-notes">
+              <li><strong>One tool per service type.</strong> Every provider of a given service type implements the same interface,
+                so one tool covers them all, and adding a provider requires no change to the tool.</li>
+              <li><strong>Providers are discovered live.</strong> Tools find their providers through the VP's own service discovery
+                each time they run, so new and relocated banks are picked up automatically.</li>
+              <li><strong>Grounded in curated analyses.</strong> Each service-type tool points the assistant to the reference Jupyter
+                notebook for that data, so it reproduces the established analysis instead of inventing its own.</li>
+              <li><strong>Native to the platform.</strong> The protocol is implemented directly in the VP's own codebase, with each
+                tool defined in a single file. Adding a tool is a small, reviewable change.</li>
+            </ul>
+          </div>
+        </div>
 
-        <li><a href="./FAQ.html#Updates">Does a germplasm bank need a database expert to update information <br/>on its
-            metadata and data?</a>
-        </li>
+        <div class="endpoint">
+          <span class="lbl">MCP endpoint</span>
+          <code id="mcp-url">https://vp.linkeddata.systems/flair-gg-vp-server/mcp</code>
+          <button class="copy-btn" type="button" id="copy-mcp">Copy</button>
+          <a class="more" href="https://vp.linkeddata.systems/flair-gg-vp-server/mcp">Browse the tool catalogue →</a>
+        </div>
+      </div>
+    </section>
 
-        <li><a href="./FAQ.html#InSitu">Is the FLAIR-GG platform open to in-situ conservation information?</a>
-        </li>
+    <!-- ================= JOIN ================= -->
+    <section class="block" id="join">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Join the network</div>
+          <h2>Choose how far you want to go. We'll help with every step.</h2>
+          <p>
+            Joining never requires changes to your database or existing infrastructure. Start with a
+            simple description of your bank and add more whenever you're ready. The
+            <a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/Onboarding">onboarding guides</a>
+            are available in English and Spanish.
+          </p>
+        </div>
 
-        <li><a href="./FAQ.html#Size">Is there a limitation of the number of germplasm banks that could <br/>
-          be integrated in the FLAIR-GG platform?</a>
-        </li>
+        <div class="paths">
+          <div class="card path">
+            <div class="level">Start here</div>
+            <h3>Describe your bank</h3>
+            <p>Fill in our metadata template, or publish a DCAT description on your existing website. The FLAIR-GG proxy
+              imports it and your bank becomes discoverable across the network.</p>
+            <div class="links">
+              <a href="./Proxy/index.html">FDP Proxy →</a>
+              <a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/Onboarding">Metadata template →</a>
+            </div>
+          </div>
+          <div class="card path featured">
+            <div class="level">Full member</div>
+            <h3>Run your own node</h3>
+            <p>Install FLAIR-in-a-Box: Sextans Sight serves your metadata, and Sextans Fix (optional) publishes your germplasm
+              data from CSV exports using the FLAIR-GG data model.</p>
+            <div class="links">
+              <a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/FLAIR-in-a-box">FLAIR-in-a-Box →</a>
+              <a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/SemanticModel/CSV">CSV formats →</a>
+            </div>
+          </div>
+          <div class="card path">
+            <div class="level">Try it out</div>
+            <h3>Let us host it</h3>
+            <p>Not ready to run infrastructure? We can host your FAIR endpoint temporarily, so you can see the benefits of
+              membership before you commit any effort.</p>
+            <div class="links">
+              <a href="mailto:mark.wilkinson@upm.es?subject=FLAIR-GG%20hosted%20endpoint">Ask about hosting →</a>
+            </div>
+          </div>
+        </div>
 
-        <li><a href="./FAQ.html#Responsibility">Who is responsible for updating the metadata and data? <br/>
-          or How can I update the metadata and data?</a>
-        </li>
-        <li><a href="./FAQ.html#Reusability">If my bank is not following the FAIR principles, <br/>
-          could it still benefit from the FAIR accesibility and reusability of data from others <br/>
-          (FAIR germplasm banks, FAIR suppliers of georreferenced information, FAIR public <br/>
-          administrative institutions, etc)?</a>
+        <div class="contact">
+          <p><strong>Talk to us.</strong> We'll walk you through it. It's easier than it looks.</p>
+          <div class="people">
+            <a class="btn btn-ghost btn-sm" href="mailto:alberto.camara.ballesteros@alumnos.upm.es">Alberto · Español / English</a>
+            <a class="btn btn-ghost btn-sm" href="mailto:mark.wilkinson@upm.es">Mark · English</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ================= DOCS ================= -->
+    <section class="block alt" id="docs">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Documentation</div>
+          <h2>Everything is open.</h2>
+          <p>All FLAIR-GG code, models and configuration are open source on
+            <a href="https://github.com/wilkinsonlab/FLAIR-GG">GitHub</a>.</p>
+        </div>
 
-      </ul>
+        <div class="docs">
+          <div class="card">
+            <h3>Install &amp; onboard</h3>
+            <ul class="doclist">
+              <li><a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/FLAIR-in-a-box"><span>FLAIR-in-a-Box<small>Installing a FLAIR-GG node with the Sextans Suite</small></span></a></li>
+              <li><a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/Onboarding"><span>Onboarding guides<small>DCAT metadata, in English and Spanish</small></span></a></li>
+              <li><a href="https://github.com/FAIRDataTeam/FAIRDataPoint"><span>FAIR Data Point<small>Installed automatically by FLAIR-in-a-Box</small></span></a></li>
+              <li><a href="./Proxy/index.html"><span>FDP Proxy<small>Import an existing DCAT description</small></span></a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Data model</h3>
+            <ul class="doclist">
+              <li><a href="./SemanticModel/index.html"><span>FLAIR-GG Semantic Model</span></a></li>
+              <li><a href="https://github.com/wilkinsonlab/FLAIR-GG/tree/main/SemanticModel/CSV"><span>Preparing your CSV files<small><code>admin.csv</code> · <code>germplasm.csv</code> · <code>location.csv</code></small></span></a></li>
+              <li><a href="./TransformationPipeline/index.html"><span>Template-based transformation pipeline</span></a></li>
+              <li><a href="https://wilkinsonlab.github.io/multi-crop-passport-descriptor-ontology/multi-passport-descriptor.owl"><span>FAO Multi-Crop Passport Descriptor Ontology</span></a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Platform &amp; interfaces</h3>
+            <ul class="doclist">
+              <li><a href="./VP/index.html"><span>Virtual Platform</span></a></li>
+              <li><a href="https://vp.linkeddata.systems/flair-gg-vp-server/mcp"><span>MCP tool catalogue</span></a></li>
+              <li><a href="https://wilkinsonlab.github.io/FLAIR-GG-Analytics/"><span>FLAIR-GG Analytics notebooks</span></a></li>
+              <li><a href="./VP/interfaces/administrative-sparql.yaml"><span>OpenAPI: administrative SPARQL</span></a></li>
+              <li><a href="./VP/interfaces/location-sparql.yaml"><span>OpenAPI: location SPARQL</span></a></li>
+              <li><a href="./VP/interfaces/fdp-sparql.yaml"><span>OpenAPI: FAIR Data Point SPARQL</span></a></li>
+              <li><a href="https://bgv.cbgp.upm.es/swagger"><span>Swagger UI interface tester</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      </p>
-    </article>
+    <!-- ================= FAQ ================= -->
+    <section class="block" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Frequently asked questions</div>
+          <h2>Common questions from germplasm banks.</h2>
+          <p>Read all the answers on the <a href="./FAQ.html">FAQ page</a>.</p>
+        </div>
+        <div class="faq">
+          <a href="./FAQ.html#Database">Do I need to change my database or existing seed-bank infrastructure? <em>No.</em></a>
+          <a href="./FAQ.html#Updates">Does a germplasm bank need a database expert to update its metadata and data?</a>
+          <a href="./FAQ.html#Responsibility">Who is responsible for updating the metadata and data, and how is it done?</a>
+          <a href="./FAQ.html#Hackers">Doesn't greater findability and accessibility also make data easier for hackers to find?</a>
+          <a href="./FAQ.html#Model">What is a shared data model?</a>
+          <a href="./FAQ.html#Taxonomies">How can seed-bank databases that use different taxonomies interoperate?</a>
+          <a href="./FAQ.html#ThirdParty">Which external information suppliers can be connected under the FAIR principles?</a>
+          <a href="./FAQ.html#InSitu">Is the FLAIR-GG platform open to in-situ conservation information?</a>
+          <a href="./FAQ.html#Size">Is there a limit to the number of germplasm banks that can join?</a>
+          <a href="./FAQ.html#Reusability">What is the difference between "reusability" and "interoperability"?</a>
+          <a href="./FAQ.html#Resuability">If my bank isn't FAIR yet, can it still benefit from FAIR data published by others?</a>
+        </div>
+      </div>
+    </section>
 
+  </main>
 
-
-    <article class="c-posts__item">
-
-      <h2>Swagger tester for interfaces</h2>
-      <p>
-      <ul>
-        <li><a href="https://bgv.cbgp.upm.es/swagger">Swagger-UI</a></li>
-      </ul>
-
-      </p>
-    </article>
-
-  </section>
-
-
-
-
-  <footer class="c-footer">
-    <h3>Privacy Policy</h3>
-    Our privacy policy is available <a href="./VP/privacy.html">HERE</a>
-    <br />
-    <br />
-
-    <h3>Funding</h3>
-
-    <b>TED2021-130788B-I00</b>
-    <br />
-    Proyecto TED2021-130788B-I00 financed by
-    <br />
-    MCIN/AEI /10.13039/501100011033 and by the European Union Next Generation EU/ PRTR.
-    <br />
-    <img width="300" src="./VP/images/ted-logo.png" />
-    <br />
-    <br />
-    <br />
-    The FLAIR-GG computational infrastructure is supported by the
-    <br />"Severo Ochoa Program for Centres of Excellence in R&D 2022-2025" from the
-    Agencia Estatal de Investigación of Spain, awarded to the
-    <br />Center for Plant Biotechnology and Genomics (CBGP UPM-INIA/CSIC).
-    <br />
-    <br />
-    <br />
-    <br />
-    <b>Principal Investigators:</b>
-    <br />
-    <br />
-    Moreno Vazquez, Santiago<br />
-    UPM grupo: Biodiversidad y conservación de recursos fitogenéticos
-    <br /><br />
-    Wilkinson, Mark Denis <br />
-    CBGP UPM-INIA/CSIC. <br />
-    UPM grupo: Abordajes Multidisciplinares en la Interfaz Planta-Microorganismo<br />
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <h4>Funding</h4>
+          <div class="funder-logo"><img src="./VP/images/ted-logo.png" alt="Ministerio de Ciencia e Innovación; Financiado por la Unión Europea NextGenerationEU; Plan de Recuperación, Transformación y Resiliencia; Agencia Estatal de Investigación" /></div>
+          <p>Proyecto <strong style="color:#fff">TED2021-130788B-I00</strong>, financed by MCIN/AEI/10.13039/501100011033 and by the
+            European Union NextGenerationEU/PRTR.</p>
+          <p>The FLAIR-GG computational infrastructure is supported by the "Severo Ochoa Program for Centres of Excellence in R&amp;D
+            2022–2025" from the Agencia Estatal de Investigación of Spain, awarded to the Center for Plant Biotechnology and Genomics
+            (CBGP UPM-INIA/CSIC).</p>
+        </div>
+        <div>
+          <h4>Principal investigators</h4>
+          <div class="pi"><strong>Santiago Moreno Vázquez</strong>UPM group: Biodiversidad y conservación de recursos fitogenéticos</div>
+          <div class="pi"><strong>Mark Denis Wilkinson</strong>CBGP UPM-INIA/CSIC · UPM group: Abordajes Multidisciplinares en la Interfaz Planta-Microorganismo</div>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <p><a href="https://vp.linkeddata.systems">Virtual Platform</a></p>
+          <p><a href="https://wilkinsonlab.github.io/FLAIR-GG-Analytics/">Analytics notebooks</a></p>
+          <p><a href="https://github.com/wilkinsonlab/FLAIR-GG">Source code on GitHub</a></p>
+          <p><a href="./FAQ.html">FAQ</a></p>
+          <p><a href="./VP/privacy.html">Privacy policy</a></p>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>FLAIR-GG · Connecting Germplasm Resources</span>
+        <span>Universidad Politécnica de Madrid · CBGP UPM-INIA/CSIC</span>
+      </div>
+    </div>
   </footer>
 
+  <script>
+    (function () {
+      var btn = document.getElementById('copy-mcp');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var text = document.getElementById('mcp-url').textContent.trim();
+        var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, function () { });
+          }
+        } catch (e) { }
+      });
+    })();
+  </script>
 </body>
+</html>
