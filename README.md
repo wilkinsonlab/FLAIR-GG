@@ -11,6 +11,10 @@ publishes your metadata, and (optionally) Sextans Fix with the FLAIR-GG data mod
 data model - the [CSV templates](./SemanticModel/CSV/) and [YARRRML mappings](./SemanticModel/YARRRML/) - lives
 in this repository's [SemanticModel](./SemanticModel/) folder.
 
+[`FLAIR-box-daemon/`](./FLAIR-box-daemon/) and [`yarrrml-rml-mapper-flair/`](./yarrrml-rml-mapper-flair/) are
+**legacy** components of the original GraphDB-based FLAIR-in-a-Box. They are kept only for the existing
+installations. Open work is tracked in [TODO.md](./TODO.md).
+
 
 <h3>Funding</h3>
 

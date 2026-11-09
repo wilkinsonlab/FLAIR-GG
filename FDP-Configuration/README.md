@@ -8,6 +8,16 @@ If you don't yet have a FAIR Data Point, you could consider installing one using
 Now continue with the configuration below...
 
 
+## FLAIR-GG branding for the FDP web client
+
+[`branding/fdp-client/`](./branding/fdp-client/) holds the FLAIR-GG look for the FAIR Data Point web client:
+`variables.scss` (green colour theme and logo settings), `assets/logo.png` and `favicon.ico`. To use them, copy
+them over the corresponding files of your Sextans Sight installation's FDP client, following the logo and colour
+customisation steps in the
+[Sextans Sight documentation](https://github.com/wilkinsonlab/Sextans-Suite/tree/main/Sextans/Sight-install),
+and restart Sight.
+
+
 ## Setting the default license
 
 NOTE: It is a good idea to set a default license (cc-by-4 is the default for FDP), and other defaults for the FDP.

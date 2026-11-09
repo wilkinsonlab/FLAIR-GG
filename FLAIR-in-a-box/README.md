@@ -7,6 +7,11 @@ FLAIR-in-a-Box is built on the [Sextans Suite](https://github.com/wilkinsonlab/S
 security-hardened installer for FAIR data servers. There is nothing FLAIR-specific to install: you install the
 standard Sextans components and, for the data component, choose the **FLAIR-GG** data model.
 
+> **Status (November 2026):** the Metadata component (Sextans Sight) can be installed today. The FLAIR-GG data
+> model option for the Data component (Sextans Fix) is finished and tested but **not yet in a released Sextans
+> version**. Until it is, the released Fix installer offers only its default model. If you want to publish your
+> germplasm data now, [contact us](mailto:mark.wilkinson@upm.es) and we will set it up with you.
+
 There are two components - Metadata and Data.  **Only the Metadata component (Sextans Sight) is required.**
 
 | Component | Sextans name | What it does | Required? |
@@ -203,8 +208,21 @@ Passwords, securing the ports, and changing the colors and logo of your FAIR Dat
 Sextans, and are documented in the
 [Sextans Sight](https://github.com/wilkinsonlab/Sextans-Suite/tree/main/Sextans/Sight-install) and
 [Sextans Fix](https://github.com/wilkinsonlab/Sextans-Suite/tree/main/Sextans/Fix-install) documentation.
+The FLAIR-GG colours, logo and favicon for the FAIR Data Point web client are in
+[`FDP-Configuration/branding/fdp-client/`](../FDP-Configuration/branding/fdp-client/).
 
 ## Existing FLAIR-in-a-Box (GraphDB) installations
 
-Installations made with earlier versions of FLAIR-in-a-Box continue to work and are not affected. This document
-applies to new installations.
+Installations made with earlier versions of FLAIR-in-a-Box (GraphDB plus the
+[`flair-box-daemon`](../FLAIR-box-daemon/)) keep working and are not being migrated. Their installer has been
+removed from this repository. It is preserved at the git tag
+[`legacy-graphdb-installer`](https://github.com/wilkinsonlab/FLAIR-GG/tree/legacy-graphdb-installer/FLAIR-in-a-box/DEPRECATED_INSTALLER).
+
+**One change does reach them.** The `flair-box-daemon` pulls the YARRRML mappings from this repository's `main`
+branch on every run. Since November 2026 those mappings use the `|||baseURI|||` placeholder (previously every
+record was created under `http://my_example.com/`). From its next run, a legacy installation therefore mints its
+records under the `baseURI` in its `.env` file. Check that value before the next run. It should be a URL your
+institution controls, such as `https://<your-bank>.linkeddata.systems/data/`, not an example value.
+
+The Google Sheets option (`ADMIN_SHEET`, `GERMPLASM_SHEET`, `LOCATION_SHEET`) exists only in the legacy daemon.
+New Sextans installations read CSV files from their `data/` folder.
