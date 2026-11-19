@@ -13,7 +13,13 @@ class VPConfig
 
   FDPINDEX_API_TOKEN = ENV['FDPINDEX_API_TOKEN'].freeze
 
-  LDP_HOST = ENV['LDP_HOST'].freeze
+  # LDP_HOST is the LDP server's public base URL. It is the base of the result
+  # URLs users and notebooks see. LDP_INTERNAL_HOST (optional, e.g.
+  # http://ldp:8890) is where the VP actually PUTs results when the LDP server
+  # runs in the same docker-compose stack. That keeps uploads off the public
+  # internet (Cloudflare) entirely. Leave it unset to upload to LDP_HOST as before.
+  LDP_HOST = ENV['LDP_HOST'].to_s.sub(%r{/+\s*$}, '').freeze
+  LDP_INTERNAL_HOST = (ENV['LDP_INTERNAL_HOST'].to_s.strip.empty? ? nil : ENV['LDP_INTERNAL_HOST'].strip.sub(%r{/+$}, '')).freeze
   LDP_USERNAME = ENV['LDP_USERNAME'].freeze
   LDP_PASSWORD = ENV['LDP_PASSWORD'].freeze
 

@@ -1,6 +1,6 @@
 services:
   flair-gg-vp-server:
-    image: markw/flair-gg-vp-server:0.3.9
+    image: markw/flair-gg-vp-server:0.3.11
     restart: always
  #   container_name: "flair-gg-vp-server-bgv"
     hostname: "flairgg"
@@ -15,6 +15,8 @@ services:
       - FDPSPARQL=https://index.linkeddata.systems/search/sparql
       - FDPINDEX_API_TOKEN=${FDPINDEX_API_TOKEN}
       - LDP_HOST=${LDP_HOST}
+      # optional: upload to the ldp service below directly, e.g. http://ldp:8890
+      - LDP_INTERNAL_HOST=${LDP_INTERNAL_HOST:-}
       - LDP_USERNAME=${LDP_USERNAME}
       - LDP_PASSWORD=${LDP_PASSWORD}
 

@@ -18,6 +18,49 @@ together below as `0.3.6`, incrementing from the last real image tag
 (`0.3.5`), with `VERSION`, the gemspec, and `docker-compose.yml`'s image
 tag now all aligned to this one number going forward.
 
+## [0.3.11] - 2026-11-19
+
+### Added
+
+- `lib/http_retry.rb` (`HttpRetry.with_retries`): outbound calls to data
+  services (`Service.execute_get`/`execute_post`) and the LDP results upload
+  now retry brief network failures, up to 3 tries with 1 s / 2 s pauses.
+  Connect-phase failures (TLS-handshake reset, connect timeout, refused, DNS)
+  and Cloudflare 521/522/523 are retried for any method. Failures where the
+  request may already have reached the service (reset mid-response,
+  502/503/504/520/524) are retried only for GET/PUT, never POST. Read timeouts
+  are never retried: that would push a browser request past Cloudflare's
+  100 s limit. The connect timeout is now 15 s (RestClient's default is 60 s).
+  Prompted by intermittent failures between the VP host and Cloudflare on
+  2026-11-19. Re-submitting the same query gave, at random, an
+  `Errno::ECONNRESET ... SSL_connect` application error, a Cloudflare timeout,
+  or "CACHING SERVER IS DOWN". A probe from the host showed about 6% of TLS
+  handshakes to Cloudflare-fronted hosts reset a few ms after the TCP connect,
+  plus occasional 15 s stalls. Non-Cloudflare hosts were unaffected.
+- Optional `LDP_INTERNAL_HOST` (e.g. `http://ldp:8890`): when the LDP server
+  runs in the same compose stack, the VP uploads results to it directly
+  instead of out through Cloudflare and back in. The upload carries the public
+  `Host` header, so Virtuoso treats it like a proxied request. The returned
+  `Location` is rewritten onto `LDP_HOST`, so users, notebooks and the JSON
+  API still get public URLs. Unset = uploads go to `LDP_HOST` exactly as before.
+
+### Changed
+
+- A failed LDP upload now logs its cause instead of silently returning nil.
+- If Virtuoso accepts an upload but sends no `Location` header, the uploaded
+  URL is returned. Before, this showed "CACHING SERVER IS DOWN" although the
+  results were stored.
+
+## [0.3.10] - 2026-09-18 (recorded retroactively)
+
+### Changed
+
+- The LDP results-upload target and credentials come from `LDP_HOST`,
+  `LDP_USERNAME` and `LDP_PASSWORD`, instead of being hard-coded to
+  `bgv.cbgp.upm.es` with default credentials. The image was built and tagged
+  `0.3.10`, but `VERSION`, the gemspec and `docker-compose.yml` were not
+  bumped at the time (they stayed at `0.3.9`).
+
 ## [0.3.9] - 2026-08-06
 
 ### Changed
@@ -157,47 +200,3 @@ tag now all aligned to this one number going forward.
   and web-search-fallback guidance; keyword_search's pointer to
   sparql_query for anything beyond a simple keyword match) were ported
   forward into the merged per-file tool structure rather than lost.
-
-- `GET /flair-gg-vp-server/mcp` — human-readable rendering of the MCP tool
-  catalogue (same data as `tools/list`, no JSON-RPC envelope), so the tools
-  available at this endpoint can be read in a browser, or shared as a
-  plain link, without an MCP client or a read of the source code.
-- `lib/mcp_tools/` — MCP tool metadata (name, description, input schema)
-  and implementation now live one file per tool in this folder, rather
-  than being embedded in `app/controllers/mcp_routes.rb`. The router only
-  knows how to list `MCP_TOOL_CLASSES` and dispatch a call to whichever
-  tool was named.
-- `iucn_endangerment_status` MCP tool — executes a raw `GET` against every
-  live `IUCN_categorization` data service currently discoverable in the
-  FLAIR-GG VP network. Providers are found via the VP's own
-  service-discovery search (`VP#retrieve_sevices`), not a hand-written
-  SPARQL query, so newly added or relocated providers are picked up
-  automatically. Deliberately skips the LDP-upload/notebook wiring the
-  human UI and ComfyUI workflow integration use — an MCP caller gets the
-  raw provider responses back directly. One provider failing (e.g. a
-  mid-migration host) surfaces as `{"error": "..."}` for that provider's
-  key; it doesn't sink the whole call.
-- `lib/mcp_tools/raw_service_type_call.rb` — reusable base class behind
-  `iucn_endangerment_status`, for any future "one MCP tool per DCAT
-  service type" tool whose interface takes no parameters (a fixed lookup,
-  per the FLAIR-GG convention that every provider under the same `dc:type`
-  implements the same interface). Also builds each tool's `DESCRIPTION`
-  from a `summary:` plus an optional `reference_notebook_filename:`,
-  appending a pointer to that FLAIR-GG-Analytics notebook's **raw**
-  (fetchable-as-JSON) GitHub URL — not `VP#notebook_url`'s JupyterLite
-  viewer link, which is an HTML app an LLM can't read as content — so a
-  tool-calling LLM has a documented reference implementation to consult
-  for how this kind of data is normally analyzed (categorized, plotted,
-  etc.), without the tool itself returning any notebook content.
-- `lib/mcp_tools/README.md` — contributor guide for adding a new MCP tool,
-  covering both shapes (plain standalone tool vs. `RawServiceTypeCall`
-  subclass), how to find a service type's `SERVICE_TYPE_URI`, and a
-  load-order gotcha specific to this folder's `require_rel` usage. Linked
-  from the main `README.md`.
-
-### Changed
-
-- `mcp_call_tool`'s error handling generalized from a per-tool exception
-  whitelist to one `rescue StandardError` at the dispatch level, now that
-  tool implementations are decoupled from the router — a new tool doesn't
-  need the router to know which exception classes it might raise.

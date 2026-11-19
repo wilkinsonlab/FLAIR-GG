@@ -4,6 +4,7 @@ require 'openapi3_parser'
 require 'cgi'
 require 'rest-client'
 require 'json'
+require_relative 'http_retry'
 
 class ServiceCollection
   attr_accessor :endpoint, :servicetype, :servicelabel, :allservices, :warnings, :escapedtype
@@ -251,16 +252,20 @@ class Service
     warn "POSTING: #{body}"
     # example data for beacon {"meta":{"apiVersion":"v0.2"},"query":{"filters":[{"id":["ordo:Orphanet_730"]}]}}
     begin
-      result = RestClient::Request.execute(
-        method: :post,
-        url: endpoint,
-        payload: body['_request_body'],
-        headers: {
-          content_type: :json,
-          accept: accept
-          # "auth-key" => ""
-        }
-      )
+      # idempotent: false - only retried if the request never reached the service
+      result = HttpRetry.with_retries(label: "POST #{endpoint}", idempotent: false) do
+        RestClient::Request.execute(
+          method: :post,
+          url: endpoint,
+          payload: body['_request_body'],
+          open_timeout: HttpRetry::OPEN_TIMEOUT,
+          headers: {
+            content_type: :json,
+            accept: accept
+            # "auth-key" => ""
+          }
+        )
+      end
     rescue StandardError => e
       warn "couldn't execute POST service at #{endpoint}\n #{e.inspect}"
       result = nil
@@ -275,19 +280,19 @@ class Service
       cleaned[key] = val
     end
 
-    # begin
-    RestClient::Request.execute(
-      method: :get,
-      url: endpoint,
-      headers: {
-        params: cleaned,
-        accept: accept
-        # "auth-key" => ""
-      }
-    )
-    # rescue  => e
-    #  warn "couldn't execute GET service at #{endpoint}\n #{e.inspect}"
-    #  result = nil
-    # end
+    # Still raises once retries are used up: callers decide how to report a failed
+    # provider (the MCP tools turn it into a per-provider {"error": ...}).
+    HttpRetry.with_retries(label: "GET #{endpoint}") do
+      RestClient::Request.execute(
+        method: :get,
+        url: endpoint,
+        open_timeout: HttpRetry::OPEN_TIMEOUT,
+        headers: {
+          params: cleaned,
+          accept: accept
+          # "auth-key" => ""
+        }
+      )
+    end
   end
 end

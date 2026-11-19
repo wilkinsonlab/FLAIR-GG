@@ -89,6 +89,102 @@ host that serves `/search/sparql`, these are genuinely different things) and
 This branch has since been merged into `main` (2026-08-06) - the sections
 above describe how it got there. Kept as history, not a live TODO list.
 
+## Outbound HTTP: retries and the LDP upload (0.3.11)
+
+Every service execution makes outbound HTTPS calls: one to each selected
+data service, then one `PUT` of the combined results to the LDP server.
+In the production set-up, both kinds of call can cross Cloudflare.
+Since November 2026, a small share of those calls has failed intermittently,
+in a "fails once, works on reload" pattern (see "Operational notes" below).
+0.3.11 makes the VP itself tolerate this:
+
+- **`lib/http_retry.rb` (`HttpRetry.with_retries`)** wraps
+  `Service.execute_get`, `Service.execute_post` and the LDP upload. There
+  are up to 3 tries in total, with 1 s and 2 s pauses. What is retried
+  depends on whether the failed request could already have reached the
+  service:
+  - *Nothing was sent:* the connect timed out, was refused or failed DNS,
+    the TLS handshake was reset, or Cloudflare returned 521/522/523.
+    Retried for every method, POST included.
+  - *It may have been sent:* the connection was reset mid-response, or a
+    gateway returned 502/503/504/520/524. Retried only for GET and PUT.
+    A POST is never sent twice.
+  - *Read timeouts are never retried.* A slow service would just be slow
+    again, and the repeat would push the user's request past Cloudflare's
+    100 s limit.
+  - The connect timeout is 15 s (RestClient's default is 60 s), so a dead
+    host fails fast enough to leave room for a retry.
+  - Each retry is logged as an `HttpRetry:` line in the container log.
+
+  `execute_get` still raises once its retries are used up, as before.
+  Callers decide how to report a failed provider (the MCP tools turn it
+  into a per-provider `{"error": ...}`). Making the HTML page show a
+  per-provider error instead of an application-error page is a separate,
+  not-yet-done change.
+- **`LDP_INTERNAL_HOST`.** When the LDP server is the `ldp` service in
+  this same compose stack, set `LDP_INTERNAL_HOST=http://ldp:8890` (in
+  `.env`). The VP then uploads results directly over the compose network
+  instead of out through Cloudflare and back into the same machine:
+  - The upload sends the public `Host` header (taken from `LDP_HOST`), so
+    Virtuoso handles it exactly like a request arriving through the proxy.
+  - Virtuoso's `Location` answer is rewritten onto `LDP_HOST`, so users,
+    notebooks and the JSON API still get public URLs.
+  - Before relying on it, check that the VP container can resolve the
+    service: `docker exec <vp-container> getent hosts ldp`.
+- A failed upload now logs why. An upload that succeeds without a
+  `Location` header now returns the uploaded URL, instead of showing
+  "CACHING SERVER IS DOWN".
+
+## Operational notes: the LDP server behind the reverse proxy
+
+The production LDP server is the `ldp` service (Virtuoso) in this compose
+stack. A lighttpd reverse proxy on the host publishes it, and Cloudflare
+sits in front of that. Lessons from November 2026:
+
+- **CORS is lighttpd's job, and lighttpd needs `mod_setenv` for it.** The
+  analysis notebooks run in the browser (JupyterLite on
+  `wilkinsonlab.github.io`) and fetch results from the LDP server cross-site.
+  Without an `Access-Control-Allow-Origin` header the browser discards the
+  response, and Pyodide's `requests` reports `<Response [0]>`. A plain
+  browser tab or `curl` still loads the URL fine, which makes this
+  confusing. The proxy's `setenv.add-response-header` lines do nothing
+  unless `mod_setenv` is loaded. lighttpd only warns about it
+  (`lighttpd -tt` prints "unknown config-key: setenv.add-response-header
+  (ignored)"). Load it in the proxy's site config:
+  `server.modules += ( "mod_setenv", "mod_proxy" )`. To check:
+  `curl -sI -H 'Origin: https://wilkinsonlab.github.io' <result URL> | grep -i access-control`.
+- **Keep Virtuoso's ports bound to localhost.** Publish them in compose as
+  `127.0.0.1:<port>:1111` and `127.0.0.1:<port>:8890`. lighttpd reaches the
+  HTTP port locally. Admin access is through an SSH tunnel to the HTTP port,
+  using a local port that's free on your own machine: another local
+  Virtuoso may already hold the usual one, and the browser then silently
+  reaches the wrong server. Don't use the admin account for the VP's uploads.
+- **The Conductor login doesn't work through the public proxy URL.** The
+  correct password gets "Invalid credentials". Reaching Virtuoso directly
+  (the SSH tunnel) works. Not investigated further; use the tunnel. The
+  login form posts `md5(nonce + password)` computed by `js/md5.js`. If that
+  script fails to load, the browser posts the plain password instead and
+  Virtuoso rejects it.
+- **Intermittent failures through Cloudflare (under investigation,
+  Nov 2026).**
+  - Symptoms: about 14% of requests to the project's `*.linkeddata.systems`
+    hosts, measured from outside, stall at Cloudflare (522, or no bytes for
+    15 s+). Users experience it as "the first attempt fails, the reload
+    works", in the VP, the Conductor and the notebooks alike. From the host
+    itself, a few percent of outgoing TLS handshakes to Cloudflare-fronted
+    sites are also reset a few milliseconds after connecting.
+  - Ruled out so far: the server's load and kernel connection tracking,
+    Cloudflare Tunnel (not used; Cloudflare connects to the origin directly,
+    SSL mode "Full"), an IPv6 origin record (there is none), and Cloudflare
+    platform incidents. lighttpd's error log shows no TLS errors from
+    Cloudflare addresses.
+  - The next step is a packet capture on port 443 during tagged probe
+    requests, to see whether the failing requests ever reach the host. If
+    they don't, the cause is upstream (e.g. a network firewall) and needs
+    the network operators.
+  - Until it's solved, reloading works. The notebooks benefit from a small
+    retry loop around their `requests.get`.
+
 ## Known, deliberately deferred issues (not urgent, don't fix without asking)
 
 - ~~Stale `IUCN_categories` shallot query on the five migrated germplasm-bank
