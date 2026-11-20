@@ -165,25 +165,48 @@ sits in front of that. Lessons from November 2026:
   login form posts `md5(nonce + password)` computed by `js/md5.js`. If that
   script fails to load, the browser posts the plain password instead and
   Virtuoso rejects it.
-- **Intermittent failures through Cloudflare (under investigation,
-  Nov 2026).**
-  - Symptoms: about 14% of requests to the project's `*.linkeddata.systems`
-    hosts, measured from outside, stall at Cloudflare (522, or no bytes for
-    15 s+). Users experience it as "the first attempt fails, the reload
-    works", in the VP, the Conductor and the notebooks alike. From the host
-    itself, a few percent of outgoing TLS handshakes to Cloudflare-fronted
-    sites are also reset a few milliseconds after connecting.
-  - Ruled out so far: the server's load and kernel connection tracking,
-    Cloudflare Tunnel (not used; Cloudflare connects to the origin directly,
-    SSL mode "Full"), an IPv6 origin record (there is none), and Cloudflare
-    platform incidents. lighttpd's error log shows no TLS errors from
-    Cloudflare addresses.
-  - The next step is a packet capture on port 443 during tagged probe
-    requests, to see whether the failing requests ever reach the host. If
-    they don't, the cause is upstream (e.g. a network firewall) and needs
-    the network operators.
-  - Until it's solved, reloading works. The notebooks benefit from a small
-    retry loop around their `requests.get`.
+- **Intermittent failures through Cloudflare (Nov 2026; still open on
+  2026-11-20).** This is what prompted the 0.3.11 retry changes above.
+  - **Symptoms.** 15-33% of requests to the project's `*.linkeddata.systems`
+    hosts, measured from outside, got a Cloudflare 522 after about 19.5 s.
+    Users experienced it as "the first attempt fails, the reload works", in
+    the VP, the Conductor and the notebooks alike. In the other direction,
+    some of the server's own outgoing HTTPS connections to Cloudflare-fronted
+    sites were reset right after the first TLS message. The VP saw these as
+    `Errno::ECONNRESET ... SSL_connect`.
+  - **Ruled out:**
+    - the server's load and kernel connection tracking
+    - Cloudflare Tunnel (not used; Cloudflare connects to the origin
+      directly, SSL mode "Full")
+    - an IPv6 origin record (there is none)
+    - Cloudflare platform incidents
+    - lighttpd and Virtuoso: no errors at those times.
+  - **What a packet capture showed (2026-11-19, 30 min, 24 tagged requests,
+    8 of them 522s).**
+    - For every failed request, no connection attempt reached the server's
+      network interface during the 20 s window, retries included.
+    - Every attempt that did arrive was answered in under 0.1 ms.
+    - The connection attempts "from Cloudflare" (five addresses in four
+      Cloudflare ranges) and the replies "from Cloudflare" on the server's
+      own outgoing connections all carried one shared TCP timestamp clock,
+      ticking at 100 Hz. Separate Cloudflare machines can't share a clock.
+    - So a TCP-terminating firewall, IPS or proxy in the hosting network
+      handles the server's traffic in both directions. It sometimes drops
+      new connections. The reset right after the TLS hello suggests it
+      inspects the TLS server name.
+  - **Likely cause:** that device's lookup or inspection failing when its
+    cache is cold, which would explain "first attempt fails, the retry
+    works". This is a hypothesis; only the hosting network's operators can
+    confirm it. The server is a Xen VM, so the device sits outside it.
+  - **The fix is outside this server:** ask the hosting network's operators
+    to check their firewall/IPS policy for traffic between the server and
+    Cloudflare's ranges. Until then, retries get through. The VP does this
+    from 0.3.11, and the notebooks need a small retry loop around their
+    `requests.get`.
+  - **To re-measure,** from any machine outside the hosting network, repeat
+    `curl -s -o /dev/null -w '%{http_code} %{time_total}\n'` against a
+    `*.linkeddata.systems` URL a few dozen times, a few seconds apart. Any
+    522 after about 19 s is this problem.
 
 ## Known, deliberately deferred issues (not urgent, don't fix without asking)
 
